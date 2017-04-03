@@ -19,44 +19,69 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Robot/joint"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Joint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Joint/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Joint/Type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/ChildOf"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/ParentOf"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/limit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/axis"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/defaults"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Joint/reuse"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Link">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Link/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/inertial"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/visuals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/collision"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/defaults"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/axis"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/limit"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/ParentOf"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Link/reuse"/>
     </genClasses>
-    <genClasses ecoreClass="uRDF.ecore#//Limit"/>
-    <genClasses ecoreClass="uRDF.ecore#//Axis"/>
+    <genClasses ecoreClass="uRDF.ecore#//Limit">
+      <genOperations ecoreOperation="uRDF.ecore#//Limit/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Axis">
+      <genOperations ecoreOperation="uRDF.ecore#//Axis/reuse"/>
+    </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Collision">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Collision/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Collision/geometry"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Collision/origin"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Collision/reuse"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Inertial">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Inertial/origin"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Inertial/mass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Inertial/inertia"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Inertial/reuse"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Visuals">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Visuals/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Visuals/material"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Visuals/origin"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Visuals/geometry"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Visuals/reuse"/>
     </genClasses>
-    <genClasses ecoreClass="uRDF.ecore#//Origin"/>
-    <genClasses ecoreClass="uRDF.ecore#//Mass"/>
-    <genClasses ecoreClass="uRDF.ecore#//Inertia"/>
-    <genClasses ecoreClass="uRDF.ecore#//Material"/>
-    <genClasses ecoreClass="uRDF.ecore#//Geometry"/>
+    <genClasses ecoreClass="uRDF.ecore#//Origin">
+      <genOperations ecoreOperation="uRDF.ecore#//Origin/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Mass">
+      <genOperations ecoreOperation="uRDF.ecore#//Mass/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Inertia">
+      <genOperations ecoreOperation="uRDF.ecore#//Inertia/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Material">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Material/defaults"/>
+      <genOperations ecoreOperation="uRDF.ecore#//Material/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Geometry">
+      <genOperations ecoreOperation="uRDF.ecore#//Geometry/reuse"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//NamedElement"/>
+    <genClasses ecoreClass="uRDF.ecore#//Defaults">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Defaults/xyz"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Defaults/rpy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Defaults/color"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

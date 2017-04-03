@@ -2,17 +2,17 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uRDF" nsURI="http://www.example.org/uRDF" nsPrefix="uRDF">
   <eClassifiers xsi:type="ecore:EClass" name="URDFModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="robot" upperBound="-1"
-        eType="#//Robot" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Robot">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="link" upperBound="-1" eType="#//Link"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="robot" lowerBound="1" eType="#//Robot"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Robot" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="link" lowerBound="1" upperBound="-1"
+        eType="#//Link" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="joint" upperBound="-1"
         eType="#//Joint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Joint">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Joint" eSuperTypes="#//NamedElement">
+    <eOperations name="reuse"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//JointType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ChildOf" lowerBound="1"
         eType="#//Link"/>
@@ -20,15 +20,17 @@
         eType="#//Link"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="limit" eType="#//Limit"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="axis" eType="#//Axis"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaults" eType="#//Defaults"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Link">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//NamedElement">
+    <eOperations name="reuse"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inertial" upperBound="-1"
         eType="#//Inertial" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="visuals" upperBound="-1"
         eType="#//Visuals" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collision" upperBound="-1"
         eType="#//Collision" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaults" eType="#//Defaults"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JointType">
     <eLiterals name="Revolute"/>
@@ -36,16 +38,21 @@
     <eLiterals name="Fixed" value="2"/>
     <eLiterals name="Prismatic" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Limit"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Axis"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Collision">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Limit">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Axis">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Collision" eSuperTypes="#//NamedElement">
+    <eOperations name="reuse"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" lowerBound="1"
         eType="#//Geometry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Inertial">
+    <eOperations name="reuse"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" upperBound="-1"
         eType="#//Origin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mass" upperBound="-1" eType="#//Mass"
@@ -54,6 +61,7 @@
         eType="#//Inertia" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Visuals">
+    <eOperations name="reuse"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="material" eType="#//Material"
         containment="true"/>
@@ -62,9 +70,26 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" lowerBound="1"
         eType="#//Geometry" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Origin"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mass"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Inertia"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Material"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Geometry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Origin">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mass">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Inertia">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Material">
+    <eOperations name="reuse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaults" eType="#//Defaults"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Geometry">
+    <eOperations name="reuse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Defaults">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xyz" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rpy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>
