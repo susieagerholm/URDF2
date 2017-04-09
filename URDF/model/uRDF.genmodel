@@ -105,5 +105,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/k_position"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/k_velocity"/>
     </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//NumericValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumericValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Expression"/>
+    <genClasses ecoreClass="uRDF.ecore#//Operator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Operator/Op"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Constant"/>
   </genPackages>
 </genmodel:GenModel>

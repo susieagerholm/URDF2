@@ -143,4 +143,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="k_velocity" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericValue" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Op" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Expression"/>
 </ecore:EPackage>
