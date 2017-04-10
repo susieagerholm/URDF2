@@ -45,7 +45,7 @@
     <eLiterals name="Fixed" value="2"/>
     <eLiterals name="Prismatic" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Limit" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Limit" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lower" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Upper" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
@@ -99,28 +99,28 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mass" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Inertia" eSuperTypes="#//NamedElement #//Default"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EReference" name="robot" upperBound="-1"
         eType="#//Robot"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Color" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"
         defaultValueLiteral="Red"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReUse" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//Default #//NamedElement #//Material"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//NamedElement #//Default #//Geometry"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Cylinder" eSuperTypes="#//NamedElement #//Default #//Geometry"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Mesh" eSuperTypes="#//NamedElement #//Default #//Geometry"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Sphere" eSuperTypes="#//Geometry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement #//Material"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//NamedElement #//Geometry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cylinder" eSuperTypes="#//NamedElement #//Geometry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mesh" eSuperTypes="#//NamedElement #//Geometry"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sphere" eSuperTypes="#//NamedElement #//Geometry"/>
   <eClassifiers xsi:type="ecore:EClass" name="Texture" eSuperTypes="#//NamedElement #//Material"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Callibration" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Callibration" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Rising" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Falling" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Dynamics" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Dynamics" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Friction" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Damping" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
@@ -133,7 +133,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="OffSet" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SafetyController" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="SafetyController" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SoftLowerLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="SoftUpperLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uRDF="http://www.example.org/uRDF" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ecore:nsPrefix="uRDF" ecore:package="uRDF" targetNamespace="http://www.example.org/uRDF">
+  <xsd:element ecore:ignore="true" name="URDFModel" type="uRDF:URDFModel"/>
+  <xsd:element ecore:ignore="true" name="Robot" type="uRDF:Robot"/>
+  <xsd:element ecore:ignore="true" name="Joint" type="uRDF:Joint"/>
+  <xsd:element ecore:ignore="true" name="Link" type="uRDF:Link"/>
+  <xsd:element ecore:ignore="true" name="Limit" type="uRDF:Limit"/>
+  <xsd:element ecore:ignore="true" name="Axis" type="uRDF:Axis"/>
+  <xsd:element ecore:ignore="true" name="Collision" type="uRDF:Collision"/>
+  <xsd:element ecore:ignore="true" name="Inertial" type="uRDF:Inertial"/>
+  <xsd:element ecore:ignore="true" name="Visual" type="uRDF:Visual"/>
+  <xsd:element ecore:ignore="true" name="Origin" type="uRDF:Origin"/>
+  <xsd:element ecore:ignore="true" name="Mass" type="uRDF:Mass"/>
+  <xsd:element ecore:ignore="true" name="Inertia" type="uRDF:Inertia"/>
+  <xsd:element ecore:ignore="true" name="Material" type="uRDF:Material"/>
+  <xsd:element ecore:ignore="true" name="Geometry" type="uRDF:Geometry"/>
+  <xsd:element ecore:ignore="true" name="NamedElement" type="uRDF:NamedElement"/>
+  <xsd:element ecore:ignore="true" name="Default" type="uRDF:Default"/>
+  <xsd:element ecore:ignore="true" name="ReUse" type="uRDF:ReUse"/>
+  <xsd:element ecore:ignore="true" name="Color" type="uRDF:Color"/>
+  <xsd:element ecore:ignore="true" name="Box" type="uRDF:Box"/>
+  <xsd:element ecore:ignore="true" name="Cylinder" type="uRDF:Cylinder"/>
+  <xsd:element ecore:ignore="true" name="Mesh" type="uRDF:Mesh"/>
+  <xsd:element ecore:ignore="true" name="Sphere" type="uRDF:Sphere"/>
+  <xsd:element ecore:ignore="true" name="Texture" type="uRDF:Texture"/>
+  <xsd:element ecore:ignore="true" name="Callibration" type="uRDF:Callibration"/>
+  <xsd:element ecore:ignore="true" name="Dynamics" type="uRDF:Dynamics"/>
+  <xsd:element ecore:ignore="true" name="Mimic" type="uRDF:Mimic"/>
+  <xsd:element ecore:ignore="true" name="SafetyController" type="uRDF:SafetyController"/>
+  <xsd:element ecore:ignore="true" name="NumericValue" type="uRDF:NumericValue"/>
+  <xsd:element ecore:ignore="true" name="Expression" type="uRDF:Expression"/>
+  <xsd:element ecore:ignore="true" name="Operator" type="uRDF:Operator"/>
+  <xsd:element ecore:ignore="true" name="Constant" type="uRDF:Constant"/>
+  <xsd:complexType name="URDFModel">
+    <xsd:sequence>
+      <xsd:element ecore:resolveProxies="true" name="robot" type="uRDF:Robot"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Robot">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" name="link" type="uRDF:Link"/>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="joint" type="uRDF:Joint"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:ReUse" name="Joint">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="limit" type="uRDF:Limit"/>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="axis" type="uRDF:Axis"/>
+          <xsd:element ecore:resolveProxies="true" name="origin" type="uRDF:Origin"/>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="callibration" type="uRDF:Callibration"/>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="dynamics" type="uRDF:Dynamics"/>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="mimic" type="uRDF:Mimic"/>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="safetycontroller" type="uRDF:SafetyController"/>
+        </xsd:sequence>
+        <xsd:attribute ecore:name="Type" ecore:unsettable="false" name="Type" type="uRDF:JointType"/>
+        <xsd:attribute ecore:name="ChildOf" ecore:reference="uRDF:Link" name="ChildOf" use="required">
+          <xsd:simpleType>
+            <xsd:list itemType="xsd:anyURI"/>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute ecore:name="ParentOf" ecore:reference="uRDF:Link" name="ParentOf" type="xsd:anyURI" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:ReUse" name="Link">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="inertial" type="uRDF:Inertial"/>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="visuals" type="uRDF:Visual"/>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="collision" type="uRDF:Collision"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:simpleType name="JointType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Revolute"/>
+      <xsd:enumeration value="Continous"/>
+      <xsd:enumeration value="Fixed"/>
+      <xsd:enumeration value="Prismatic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="Limit">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute default="0" ecore:name="Lower" ecore:unsettable="false" name="Lower" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="Upper" ecore:unsettable="false" name="Upper" type="xsd:int"/>
+        <xsd:attribute ecore:name="Effort" ecore:unsettable="false" name="Effort" type="xsd:int"/>
+        <xsd:attribute ecore:name="Velocity" ecore:unsettable="false" name="Velocity" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default" name="Axis">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute default="0" ecore:unsettable="false" name="x" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:unsettable="false" name="y" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:unsettable="false" name="z" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:ReUse" name="Collision">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" name="geometry" type="uRDF:Geometry"/>
+          <xsd:element ecore:resolveProxies="true" name="origin" type="uRDF:Origin"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:ReUse" name="Inertial">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" name="origin" type="uRDF:Origin"/>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="mass" type="uRDF:Mass"/>
+          <xsd:element ecore:resolveProxies="true" maxOccurs="unbounded" minOccurs="0" name="inertia" type="uRDF:Inertia"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:ReUse" name="Visual">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:sequence>
+          <xsd:element ecore:resolveProxies="true" minOccurs="0" name="material" type="uRDF:Material"/>
+          <xsd:element ecore:resolveProxies="true" name="origin" type="uRDF:Origin"/>
+          <xsd:element ecore:resolveProxies="true" name="geometry" type="uRDF:Geometry"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:NamedElement uRDF:ReUse" name="Origin">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Default">
+        <xsd:attribute default="0" ecore:unsettable="false" name="x" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:unsettable="false" name="y" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:unsettable="false" name="z" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="Roll" ecore:unsettable="false" name="Roll" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="Pitch" ecore:unsettable="false" name="Pitch" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="Yaw" ecore:unsettable="false" name="Yaw" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default" name="Mass">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default" name="Inertia">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Material">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute ecore:reference="uRDF:Robot" name="robot">
+          <xsd:simpleType>
+            <xsd:list itemType="xsd:anyURI"/>
+          </xsd:simpleType>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Geometry">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType abstract="true" name="NamedElement"/>
+  <xsd:complexType abstract="true" name="Default">
+    <xsd:attribute default="Red" ecore:name="Color" ecore:unsettable="false" name="Color" type="xsd:string"/>
+  </xsd:complexType>
+  <xsd:complexType abstract="true" name="ReUse"/>
+  <xsd:complexType ecore:implements="uRDF:NamedElement uRDF:Material" name="Color">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Default"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default uRDF:Geometry" name="Box">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default uRDF:Geometry" name="Cylinder">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Default uRDF:Geometry" name="Mesh">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:NamedElement uRDF:Default" name="Sphere">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Geometry"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType ecore:implements="uRDF:Material" name="Texture">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Callibration">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute ecore:name="Rising" name="Rising" type="xsd:string"/>
+        <xsd:attribute ecore:name="Falling" name="Falling" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Dynamics">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute default="0" ecore:name="Friction" ecore:unsettable="false" name="Friction" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="Damping" ecore:unsettable="false" name="Damping" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Mimic">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute ecore:name="Joint" name="Joint" type="xsd:string"/>
+        <xsd:attribute default="1" ecore:name="Multiplier" ecore:unsettable="false" name="Multiplier" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="OffSet" ecore:unsettable="false" name="OffSet" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SafetyController">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:NamedElement">
+        <xsd:attribute default="0" ecore:name="SoftLowerLimit" ecore:unsettable="false" name="SoftLowerLimit" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="SoftUpperLimit" ecore:unsettable="false" name="SoftUpperLimit" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="k_position" ecore:unsettable="false" name="k_position" type="xsd:int"/>
+        <xsd:attribute default="0" ecore:name="k_velocity" ecore:unsettable="false" name="k_velocity" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="NumericValue">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Expression">
+        <xsd:attribute ecore:unsettable="false" name="value" type="xsd:float"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Expression"/>
+  <xsd:complexType name="Operator">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Expression">
+        <xsd:attribute ecore:name="Op" name="Op" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Constant">
+    <xsd:complexContent>
+      <xsd:extension base="uRDF:Expression"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>
