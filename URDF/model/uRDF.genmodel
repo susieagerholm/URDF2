@@ -74,9 +74,7 @@
     <genClasses ecoreClass="uRDF.ecore#//Material"/>
     <genClasses ecoreClass="uRDF.ecore#//Geometry"/>
     <genClasses ecoreClass="uRDF.ecore#//NamedElement"/>
-    <genClasses ecoreClass="uRDF.ecore#//Default">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Default/Color"/>
-    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Default"/>
     <genClasses ecoreClass="uRDF.ecore#//ReUse"/>
     <genClasses ecoreClass="uRDF.ecore#//Color"/>
     <genClasses ecoreClass="uRDF.ecore#//Box"/>

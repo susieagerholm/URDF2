@@ -102,10 +102,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Color" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"
-        defaultValueLiteral="Red"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReUse" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement #//Material"/>
   <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//NamedElement #//Geometry"/>
