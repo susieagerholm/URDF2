@@ -71,9 +71,7 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Mass"/>
     <genClasses ecoreClass="uRDF.ecore#//Inertia"/>
-    <genClasses ecoreClass="uRDF.ecore#//Material">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Material/robot"/>
-    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Material"/>
     <genClasses ecoreClass="uRDF.ecore#//Geometry"/>
     <genClasses ecoreClass="uRDF.ecore#//NamedElement"/>
     <genClasses ecoreClass="uRDF.ecore#//Default">

@@ -99,10 +99,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mass" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Inertia" eSuperTypes="#//NamedElement #//Default"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="robot" upperBound="-1"
-        eType="#//Robot"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true">
