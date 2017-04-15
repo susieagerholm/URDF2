@@ -1,0 +1,175 @@
+
+grammar org.xtext.urdf.Dsl with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate domainmodel "http://itu.dk/uRDF" as uRDF
+
+/*
+ * Todo: 
+ * Expressions
+ * Defaults
+ * ReUse
+ * Constants
+ */
+
+
+
+Robot returns uRDF::Robot:
+		'RobotName' ':' name=STRING
+		'link'  link+=Link ("," link+=Link)*  
+		('joint' joint+=Joint (joint+=Joint)* )?
+;
+
+Material returns uRDF::Material:
+	Material_Impl | Color | Texture;
+
+Geometry returns uRDF::Geometry:
+	Geometry_Impl | Box | Cylinder | Mesh | Sphere;
+
+Link returns uRDF::Link:
+	{uRDF::Link}
+		('inertial' inertial+=Inertial (inertial+=Inertial)* )?
+		('visuals' visuals+=Visual (visuals+=Visual)* )?
+		('collision' collision+=Collision (collision+=Collision)*)?
+;
+
+Joint returns uRDF::Joint:
+		('Type' Type=JointType)?
+		'ChildOf' '(' ChildOf+=[uRDF::Link|STRING] (ChildOf+=[uRDF::Link|STRING])* ')' 
+		'ParentOf' ParentOf=[uRDF::Link|STRING]
+		('limit' limit=Limit)?
+		('axis' axis=Axis)?
+		'origin' origin=Origin
+		('callibration' callibration=Callibration)?
+		('dynamics' dynamics=Dynamics)?
+		('mimic' mimic=Mimic)?
+		('safetycontroller' safetycontroller=SafetyController)?
+;
+
+Inertial returns uRDF::Inertial:
+		'origin' origin=Origin
+		('mass' mass+=Mass ( "," mass+=Mass)*)?
+		('inertia' inertia+=Inertia (inertia+=Inertia)*)?
+;
+
+Visual returns uRDF::Visual:
+		('material' material=Material)?
+		'origin' origin=Origin
+		'geometry' geometry=Geometry
+;
+
+Collision returns uRDF::Collision:
+		'geometry' geometry=Geometry
+		'origin' origin=Origin
+;
+
+Origin returns uRDF::Origin:
+	{uRDF::Origin}
+		('x' x=INT)?
+		('y' y=INT)?
+		('z' z=INT)?
+		('Roll' Roll=INT)?
+		('Pitch' Pitch=INT)?
+		('Yaw' Yaw=INT)?
+;
+
+Mass returns uRDF::Mass:
+	{uRDF::Mass}
+	'Mass'
+	;
+
+Inertia returns uRDF::Inertia:
+	{uRDF::Inertia}
+	'Inertia'
+	;
+
+
+Material_Impl returns uRDF::Material:
+	{uRDF::Material}
+	'Material'
+	;
+
+Geometry_Impl returns uRDF::Geometry:
+	{uRDF::Geometry}
+	'Geometry'
+	;
+
+Color returns uRDF::Color:
+	{uRDF::Color}
+	'Color'
+	;
+
+Texture returns uRDF::Texture:
+	{uRDF::Texture}
+	'Texture'
+	;
+
+Box returns uRDF::Box:
+	{uRDF::Box}
+	'Box'
+	;
+
+Cylinder returns uRDF::Cylinder:
+	{uRDF::Cylinder}
+	'Cylinder'
+	;
+
+Mesh returns uRDF::Mesh:
+	{uRDF::Mesh}
+	'Mesh'
+	;
+
+Sphere returns uRDF::Sphere:
+	{uRDF::Sphere}
+	'Sphere'
+	;
+
+enum JointType returns uRDF::JointType:
+				Revolute = 'Revolute' | Continous = 'Continous' | Fixed = 'Fixed' | Prismatic = 'Prismatic';
+
+Limit returns uRDF::Limit:
+	{uRDF::Limit}
+		('Lower' Lower=INT)?
+		('Upper' Upper=INT)?
+		('Effort' Effort=INT)?
+		('Velocity' Velocity=INT)?
+;
+
+Axis returns uRDF::Axis:
+	{uRDF::Axis}
+		('x' x=INT)?
+		('y' y=INT)?
+		('z' z=INT)?
+;
+
+Callibration returns uRDF::Callibration:
+	{uRDF::Callibration}
+		('Rising' Rising=STRING)?
+		('Falling' Falling=STRING)?
+;
+
+Dynamics returns uRDF::Dynamics:
+	{uRDF::Dynamics}
+		('Friction' Friction=INT)?
+		('Damping' Damping=INT)?
+;
+
+Mimic returns uRDF::Mimic:
+	{uRDF::Mimic}
+		('Joint' Joint=STRING)?
+		('Multiplier' Multiplier=INT)?
+		('OffSet' OffSet=INT)?
+;
+
+SafetyController returns uRDF::SafetyController:
+	{uRDF::SafetyController}
+		('SoftLowerLimit' SoftLowerLimit=INT)?
+		('SoftUpperLimit' SoftUpperLimit=INT)?
+		('k_position' k_position=INT)?
+		('k_velocity' k_velocity=INT)?
+;
+
+NL:
+	('\n' | '\r')+
+;
+
