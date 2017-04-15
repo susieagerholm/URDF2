@@ -28,4 +28,3 @@ Export-Package: org.xtext.urdf.parser.antlr,
  org.xtext.urdf.domainmodel.impl,
  org.xtext.urdf.serializer,
  org.xtext.urdf.generator
-Import-Package: org.apache.log4j
