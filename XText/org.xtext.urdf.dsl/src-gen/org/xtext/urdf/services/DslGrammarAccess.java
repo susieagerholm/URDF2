@@ -48,7 +48,13 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cJointAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
 		private final RuleCall cJointJointParserRuleCall_6_2_0 = (RuleCall)cJointAssignment_6_2.eContents().get(0);
 		
-		//Robot uRDF::Robot:
+		/// *
+		// * Todo: 
+		// * Expressions
+		// * Defaults
+		// * ReUse
+		// * Constants
+		// * / Robot uRDF::Robot:
 		//	'RobotName' ':' name=STRING
 		//	'link' link+=Link ("," link+=Link)* ('joint' joint+=Joint joint+=Joint*)?
 		@Override public ParserRule getRule() { return rule; }
@@ -1460,7 +1466,13 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//Robot uRDF::Robot:
+	/// *
+	// * Todo: 
+	// * Expressions
+	// * Defaults
+	// * ReUse
+	// * Constants
+	// * / Robot uRDF::Robot:
 	//	'RobotName' ':' name=STRING
 	//	'link' link+=Link ("," link+=Link)* ('joint' joint+=Joint joint+=Joint*)?
 	public RobotElements getRobotAccess() {
