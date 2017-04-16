@@ -5,6 +5,7 @@ import scala.collection.JavaConversions._
 import java.io.File
 import java.io.PrintWriter
 import uRDF.URDFModel
+import java.lang.Boolean
 
 package org.xtext.urdf.generator
 {
@@ -15,14 +16,10 @@ package org.xtext.urdf.generator
  
     def generateURDF (robot: Robot, filename: String) : String = 
     {
-           var test :Map[String,String] = Map();
-//           test = test + ("RobotName" -> "R2D2"); 
-//           test = test + ("LinkName" -> "Arm");
-//           
-//           val tt = new XMLGen(test).toXML().toString();
+           val urdf = new XMLGen().toXML(robot).toString();
            
-           writeToFile("c:\\temp\\"+filename, "dummy");
-           return "dummy";
+           writeToFile("c:\\temp\\"+filename, urdf);
+           return "";
     }
 
     def writeToFile(p: String, s: String): Unit = {
