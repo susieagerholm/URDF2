@@ -2,6 +2,8 @@
 <viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style" xmi:id="_ocaAABGGEee8R90IkkWy1Q" selectedViews="_oedOcBGGEee8R90IkkWy1Q _Ic6fABihEee3SeVpKf98Dw _IdPPIBihEee3SeVpKf98Dw _Id1FABihEee3SeVpKf98Dw" version="11.0.1.201608181000">
   <semanticResources>uRDF.ecore</semanticResources>
   <semanticResources>uRDF.genmodel</semanticResources>
+  <semanticResources>../URDFModel.xmi</semanticResources>
+  <semanticResources>../Joint.xmi</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_oedOcBGGEee8R90IkkWy1Q">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
     <ownedRepresentations xmi:type="diagram:DSemanticDiagram" xmi:id="_gqro8BkBEeerEZjUIGohgw" name="uRDF_V2">
@@ -250,6 +252,10 @@
           <children xmi:type="notation:Node" xmi:id="_gqrpnRkBEeerEZjUIGohgw" type="2003" element="_gqrraxkBEeerEZjUIGohgw">
             <children xmi:type="notation:Node" xmi:id="_gqrpnhkBEeerEZjUIGohgw" type="5007"/>
             <children xmi:type="notation:Node" xmi:id="_gqrpnxkBEeerEZjUIGohgw" type="7004">
+              <children xmi:type="notation:Node" xmi:id="_oRhooCNAEeee4dJ2pG43GA" type="3010" element="_oQr7ICNAEeee4dJ2pG43GA">
+                <styles xmi:type="notation:FontStyle" xmi:id="_oRhooSNAEeee4dJ2pG43GA" fontColor="2697711" fontName="Segoe UI" fontHeight="8"/>
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_oRhooiNAEeee4dJ2pG43GA"/>
+              </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_gqrpoBkBEeerEZjUIGohgw"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_gqrpoRkBEeerEZjUIGohgw"/>
             </children>
@@ -1735,7 +1741,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_gqrrCRkBEeerEZjUIGohgw" name="[1..*] ChildOf" sourceNode="_gqrq6RkBEeerEZjUIGohgw" targetNode="_gqrq7xkBEeerEZjUIGohgw">
+      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_gqrrCRkBEeerEZjUIGohgw" name="[1..1] ChildOf" sourceNode="_gqrq6RkBEeerEZjUIGohgw" targetNode="_gqrq7xkBEeerEZjUIGohgw">
         <target xmi:type="ecore:EReference" href="uRDF.ecore#//Joint/ChildOf"/>
         <semanticElements xmi:type="ecore:EReference" href="uRDF.ecore#//Joint/ChildOf"/>
         <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_gqrrChkBEeerEZjUIGohgw" description="_gqro9hkBEeerEZjUIGohgw" routingStyle="manhattan" strokeColor="0,0,0">
@@ -2099,11 +2105,19 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_gqrrbBkBEeerEZjUIGohgw" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" borderSize="1" borderSizeComputationExpression="1" borderColor="125,125,125" backgroundStyle="Liquid" foregroundColor="228,228,228">
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_u-WtACNAEeee4dJ2pG43GA" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" borderSize="1" borderSizeComputationExpression="1" borderColor="125,125,125" backgroundStyle="Liquid" foregroundColor="228,228,228">
           <labelFormat>italic</labelFormat>
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_oQr7ICNAEeee4dJ2pG43GA" name="name : EString" tooltipText="">
+          <target xmi:type="ecore:EAttribute" href="uRDF.ecore#//NamedElement/name"/>
+          <semanticElements xmi:type="ecore:EAttribute" href="uRDF.ecore#//NamedElement/name"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_u-dasCNAEeee4dJ2pG43GA" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+        </ownedElements>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_gqrreRkBEeerEZjUIGohgw" sourceNode="_gqrq4xkBEeerEZjUIGohgw" targetNode="_gqrraxkBEeerEZjUIGohgw">
         <target xmi:type="ecore:EClass" href="uRDF.ecore#//Robot"/>

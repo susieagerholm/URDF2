@@ -73,7 +73,9 @@
     <genClasses ecoreClass="uRDF.ecore#//Inertia"/>
     <genClasses ecoreClass="uRDF.ecore#//Material"/>
     <genClasses ecoreClass="uRDF.ecore#//Geometry"/>
-    <genClasses ecoreClass="uRDF.ecore#//NamedElement"/>
+    <genClasses ecoreClass="uRDF.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NamedElement/name"/>
+    </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Default"/>
     <genClasses ecoreClass="uRDF.ecore#//ReUse"/>
     <genClasses ecoreClass="uRDF.ecore#//Color"/>

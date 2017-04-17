@@ -14,7 +14,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Joint" eSuperTypes="#//NamedElement #//ReUse">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//JointType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ChildOf" lowerBound="1"
-        upperBound="-1" eType="#//Link"/>
+        eType="#//Link"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ParentOf" lowerBound="1"
         eType="#//Link"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="limit" eType="#//Limit"
@@ -101,7 +101,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Inertia" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReUse" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement #//Material"/>
