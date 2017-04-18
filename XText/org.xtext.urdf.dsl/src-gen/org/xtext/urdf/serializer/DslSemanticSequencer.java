@@ -267,6 +267,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
+	 *         name=ID 
 	 *         Type=JointType? 
 	 *         ChildOf+=[Link|STRING] 
 	 *         ChildOf+=[Link|STRING]* 
@@ -302,7 +303,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Link returns Link
 	 *
 	 * Constraint:
-	 *     ((inertial+=Inertial inertial+=Inertial*)? (visuals+=Visual visuals+=Visual*)? (collision+=Collision collision+=Collision*)?)
+	 *     (name=ID (inertial+=Inertial inertial+=Inertial*)? (visuals+=Visual visuals+=Visual*)? (collision+=Collision collision+=Collision*)?)
 	 */
 	protected void sequence_Link(ISerializationContext context, Link semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

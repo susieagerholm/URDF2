@@ -38,6 +38,7 @@ import org.xtext.urdf.domainmodel.SafetyController;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.domainmodel.impl.JointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.JointImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.JointImpl#getChildOf <em>Child Of</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.JointImpl#getParentOf <em>Parent Of</em>}</li>
@@ -54,6 +55,26 @@ import org.xtext.urdf.domainmodel.SafetyController;
  */
 public class JointImpl extends MinimalEObjectImpl.Container implements Joint
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -183,6 +204,29 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
   protected EClass eStaticClass()
   {
     return DomainmodelPackage.Literals.JOINT;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.JOINT__NAME, oldName, name));
   }
 
   /**
@@ -639,6 +683,8 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
   {
     switch (featureID)
     {
+      case DomainmodelPackage.JOINT__NAME:
+        return getName();
       case DomainmodelPackage.JOINT__TYPE:
         return getType();
       case DomainmodelPackage.JOINT__CHILD_OF:
@@ -675,6 +721,9 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
   {
     switch (featureID)
     {
+      case DomainmodelPackage.JOINT__NAME:
+        setName((String)newValue);
+        return;
       case DomainmodelPackage.JOINT__TYPE:
         setType((JointType)newValue);
         return;
@@ -720,6 +769,9 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
   {
     switch (featureID)
     {
+      case DomainmodelPackage.JOINT__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case DomainmodelPackage.JOINT__TYPE:
         setType(TYPE_EDEFAULT);
         return;
@@ -764,6 +816,8 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
   {
     switch (featureID)
     {
+      case DomainmodelPackage.JOINT__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case DomainmodelPackage.JOINT__TYPE:
         return type != TYPE_EDEFAULT;
       case DomainmodelPackage.JOINT__CHILD_OF:
@@ -799,7 +853,9 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (Type: ");
+    result.append(" (name: ");
+    result.append(name);
+    result.append(", Type: ");
     result.append(type);
     result.append(')');
     return result.toString();

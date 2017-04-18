@@ -12,6 +12,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.IFormatter;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -24,6 +27,7 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
@@ -43,7 +47,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
-import org.xtext.urdf.formatting.DslFormatter;
+import org.xtext.urdf.formatting2.DslFormatter;
 import org.xtext.urdf.generator.DslGenerator;
 import org.xtext.urdf.parser.antlr.DslAntlrTokenFileProvider;
 import org.xtext.urdf.parser.antlr.DslParser;
@@ -195,6 +199,16 @@ public abstract class AbstractDslRuntimeModule extends DefaultRuntimeModule {
 		return DslGenerator.class;
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public Class<? extends IFormatter2> bindIFormatter2() {
+		return DslFormatter.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public void configureFormatterPreferences(Binder binder) {
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment2
 	public Class<? extends IValueConverterService> bindIValueConverterService() {
 		return Ecore2XtextTerminalConverters.class;
@@ -202,7 +216,7 @@ public abstract class AbstractDslRuntimeModule extends DefaultRuntimeModule {
 	
 	// contributed by org.eclipse.xtext.generator.formatting.FormatterFragment
 	public Class<? extends IFormatter> bindIFormatter() {
-		return DslFormatter.class;
+		return org.xtext.urdf.formatting.DslFormatter.class;
 	}
 	
 }

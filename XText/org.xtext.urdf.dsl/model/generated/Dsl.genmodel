@@ -20,11 +20,13 @@
     <genClasses ecoreClass="Dsl.ecore#//Material"/>
     <genClasses ecoreClass="Dsl.ecore#//Geometry"/>
     <genClasses ecoreClass="Dsl.ecore#//Link">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Link/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/inertial"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/visuals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/collision"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Joint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/Type"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ChildOf"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ParentOf"/>

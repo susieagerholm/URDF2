@@ -153,13 +153,22 @@ public interface DomainmodelPackage extends EPackage
   int LINK = 3;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LINK__NAME = 0;
+
+  /**
    * The feature id for the '<em><b>Inertial</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LINK__INERTIAL = 0;
+  int LINK__INERTIAL = 1;
 
   /**
    * The feature id for the '<em><b>Visuals</b></em>' containment reference list.
@@ -168,7 +177,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LINK__VISUALS = 1;
+  int LINK__VISUALS = 2;
 
   /**
    * The feature id for the '<em><b>Collision</b></em>' containment reference list.
@@ -177,7 +186,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LINK__COLLISION = 2;
+  int LINK__COLLISION = 3;
 
   /**
    * The number of structural features of the '<em>Link</em>' class.
@@ -186,7 +195,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int LINK_FEATURE_COUNT = 3;
+  int LINK_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.xtext.urdf.domainmodel.impl.JointImpl <em>Joint</em>}' class.
@@ -199,13 +208,22 @@ public interface DomainmodelPackage extends EPackage
   int JOINT = 4;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int JOINT__NAME = 0;
+
+  /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int JOINT__TYPE = 0;
+  int JOINT__TYPE = 1;
 
   /**
    * The feature id for the '<em><b>Child Of</b></em>' reference list.
@@ -214,7 +232,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__CHILD_OF = 1;
+  int JOINT__CHILD_OF = 2;
 
   /**
    * The feature id for the '<em><b>Parent Of</b></em>' reference.
@@ -223,7 +241,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__PARENT_OF = 2;
+  int JOINT__PARENT_OF = 3;
 
   /**
    * The feature id for the '<em><b>Limit</b></em>' containment reference.
@@ -232,7 +250,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__LIMIT = 3;
+  int JOINT__LIMIT = 4;
 
   /**
    * The feature id for the '<em><b>Axis</b></em>' containment reference.
@@ -241,7 +259,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__AXIS = 4;
+  int JOINT__AXIS = 5;
 
   /**
    * The feature id for the '<em><b>Origin</b></em>' containment reference.
@@ -250,7 +268,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__ORIGIN = 5;
+  int JOINT__ORIGIN = 6;
 
   /**
    * The feature id for the '<em><b>Callibration</b></em>' containment reference.
@@ -259,7 +277,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__CALLIBRATION = 6;
+  int JOINT__CALLIBRATION = 7;
 
   /**
    * The feature id for the '<em><b>Dynamics</b></em>' containment reference.
@@ -268,7 +286,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__DYNAMICS = 7;
+  int JOINT__DYNAMICS = 8;
 
   /**
    * The feature id for the '<em><b>Mimic</b></em>' containment reference.
@@ -277,7 +295,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__MIMIC = 8;
+  int JOINT__MIMIC = 9;
 
   /**
    * The feature id for the '<em><b>Safetycontroller</b></em>' containment reference.
@@ -286,7 +304,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT__SAFETYCONTROLLER = 9;
+  int JOINT__SAFETYCONTROLLER = 10;
 
   /**
    * The number of structural features of the '<em>Joint</em>' class.
@@ -295,7 +313,7 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    * @ordered
    */
-  int JOINT_FEATURE_COUNT = 10;
+  int JOINT_FEATURE_COUNT = 11;
 
   /**
    * The meta object id for the '{@link org.xtext.urdf.domainmodel.impl.InertialImpl <em>Inertial</em>}' class.
@@ -1012,6 +1030,17 @@ public interface DomainmodelPackage extends EPackage
   EClass getLink();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.urdf.domainmodel.Link#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.urdf.domainmodel.Link#getName()
+   * @see #getLink()
+   * @generated
+   */
+  EAttribute getLink_Name();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.xtext.urdf.domainmodel.Link#getInertial <em>Inertial</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1053,6 +1082,17 @@ public interface DomainmodelPackage extends EPackage
    * @generated
    */
   EClass getJoint();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.urdf.domainmodel.Joint#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.urdf.domainmodel.Joint#getName()
+   * @see #getJoint()
+   * @generated
+   */
+  EAttribute getJoint_Name();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.urdf.domainmodel.Joint#getType <em>Type</em>}'.
@@ -1794,6 +1834,14 @@ public interface DomainmodelPackage extends EPackage
     EClass LINK = eINSTANCE.getLink();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LINK__NAME = eINSTANCE.getLink_Name();
+
+    /**
      * The meta object literal for the '<em><b>Inertial</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1826,6 +1874,14 @@ public interface DomainmodelPackage extends EPackage
      * @generated
      */
     EClass JOINT = eINSTANCE.getJoint();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute JOINT__NAME = eINSTANCE.getJoint_Name();
 
     /**
      * The meta object literal for the '<em><b>Type</b></em>' attribute feature.

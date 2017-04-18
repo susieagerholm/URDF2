@@ -352,9 +352,9 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLink_Inertial()
+  public EAttribute getLink_Name()
   {
-    return (EReference)linkEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)linkEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -362,7 +362,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLink_Visuals()
+  public EReference getLink_Inertial()
   {
     return (EReference)linkEClass.getEStructuralFeatures().get(1);
   }
@@ -372,9 +372,19 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLink_Collision()
+  public EReference getLink_Visuals()
   {
     return (EReference)linkEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getLink_Collision()
+  {
+    return (EReference)linkEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -392,7 +402,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getJoint_Type()
+  public EAttribute getJoint_Name()
   {
     return (EAttribute)jointEClass.getEStructuralFeatures().get(0);
   }
@@ -402,9 +412,9 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_ChildOf()
+  public EAttribute getJoint_Type()
   {
-    return (EReference)jointEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)jointEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -412,7 +422,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_ParentOf()
+  public EReference getJoint_ChildOf()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(2);
   }
@@ -422,7 +432,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Limit()
+  public EReference getJoint_ParentOf()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(3);
   }
@@ -432,7 +442,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Axis()
+  public EReference getJoint_Limit()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(4);
   }
@@ -442,7 +452,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Origin()
+  public EReference getJoint_Axis()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(5);
   }
@@ -452,7 +462,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Callibration()
+  public EReference getJoint_Origin()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(6);
   }
@@ -462,7 +472,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Dynamics()
+  public EReference getJoint_Callibration()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(7);
   }
@@ -472,7 +482,7 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Mimic()
+  public EReference getJoint_Dynamics()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(8);
   }
@@ -482,9 +492,19 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getJoint_Safetycontroller()
+  public EReference getJoint_Mimic()
   {
     return (EReference)jointEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getJoint_Safetycontroller()
+  {
+    return (EReference)jointEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -1037,11 +1057,13 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     geometryEClass = createEClass(GEOMETRY);
 
     linkEClass = createEClass(LINK);
+    createEAttribute(linkEClass, LINK__NAME);
     createEReference(linkEClass, LINK__INERTIAL);
     createEReference(linkEClass, LINK__VISUALS);
     createEReference(linkEClass, LINK__COLLISION);
 
     jointEClass = createEClass(JOINT);
+    createEAttribute(jointEClass, JOINT__NAME);
     createEAttribute(jointEClass, JOINT__TYPE);
     createEReference(jointEClass, JOINT__CHILD_OF);
     createEReference(jointEClass, JOINT__PARENT_OF);
@@ -1172,11 +1194,13 @@ public class DomainmodelPackageImpl extends EPackageImpl implements DomainmodelP
     initEClass(geometryEClass, Geometry.class, "Geometry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLink_Name(), ecorePackage.getEString(), "name", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLink_Inertial(), this.getInertial(), null, "inertial", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLink_Visuals(), this.getVisual(), null, "visuals", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getLink_Collision(), this.getCollision(), null, "collision", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(jointEClass, Joint.class, "Joint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getJoint_Name(), ecorePackage.getEString(), "name", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getJoint_Type(), this.getJointType(), "Type", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getJoint_ChildOf(), this.getLink(), null, "ChildOf", null, 0, -1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getJoint_ParentOf(), this.getLink(), null, "ParentOf", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -11,7 +11,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="joint" upperBound="-1"
         eType="#//Joint" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Joint" eSuperTypes="#//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Joint" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//JointType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ChildOf" lowerBound="1"
         eType="#//Link"/>
@@ -31,7 +31,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="safetycontroller" eType="#//SafetyController"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inertial" upperBound="-1"
         eType="#//Inertial" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="visuals" upperBound="-1"
@@ -61,13 +61,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="z" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Collision" eSuperTypes="#//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Collision" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" lowerBound="1"
         eType="#//Geometry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Inertial" eSuperTypes="#//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Inertial" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
         eType="#//Origin" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mass" upperBound="-1" eType="#//Mass"
@@ -75,7 +75,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="inertia" upperBound="-1"
         eType="#//Inertia" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Visual" eSuperTypes="#//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Visual" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="material" eType="#//Material"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1"
@@ -83,7 +83,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" lowerBound="1"
         eType="#//Geometry" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Origin" eSuperTypes="#//Default #//NamedElement #//ReUse">
+  <eClassifiers xsi:type="ecore:EClass" name="Origin" eSuperTypes="#//Default #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Int"
@@ -102,10 +102,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID"
         iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true" eSuperTypes="#//ReUse"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReUse" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement #//Material"/>
   <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//NamedElement #//Geometry"/>

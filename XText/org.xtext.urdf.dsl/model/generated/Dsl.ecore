@@ -11,6 +11,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Material"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry"/>
   <eClassifiers xsi:type="ecore:EClass" name="Link">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inertial" upperBound="-1"
         eType="#//Inertial" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="visuals" upperBound="-1"
@@ -19,6 +20,7 @@
         eType="#//Collision" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Joint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//JointType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ChildOf" unique="false"
         upperBound="-1" eType="#//Link"/>

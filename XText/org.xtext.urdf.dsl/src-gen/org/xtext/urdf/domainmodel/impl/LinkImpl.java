@@ -5,6 +5,7 @@ package org.xtext.urdf.domainmodel.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,6 +13,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -31,6 +33,7 @@ import org.xtext.urdf.domainmodel.Visual;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.domainmodel.impl.LinkImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.LinkImpl#getInertial <em>Inertial</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.LinkImpl#getVisuals <em>Visuals</em>}</li>
  *   <li>{@link org.xtext.urdf.domainmodel.impl.LinkImpl#getCollision <em>Collision</em>}</li>
@@ -40,6 +43,26 @@ import org.xtext.urdf.domainmodel.Visual;
  */
 public class LinkImpl extends MinimalEObjectImpl.Container implements Link
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getInertial() <em>Inertial</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -89,6 +112,29 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
   protected EClass eStaticClass()
   {
     return DomainmodelPackage.Literals.LINK;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.LINK__NAME, oldName, name));
   }
 
   /**
@@ -163,6 +209,8 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
   {
     switch (featureID)
     {
+      case DomainmodelPackage.LINK__NAME:
+        return getName();
       case DomainmodelPackage.LINK__INERTIAL:
         return getInertial();
       case DomainmodelPackage.LINK__VISUALS:
@@ -184,6 +232,9 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
   {
     switch (featureID)
     {
+      case DomainmodelPackage.LINK__NAME:
+        setName((String)newValue);
+        return;
       case DomainmodelPackage.LINK__INERTIAL:
         getInertial().clear();
         getInertial().addAll((Collection<? extends Inertial>)newValue);
@@ -210,6 +261,9 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
   {
     switch (featureID)
     {
+      case DomainmodelPackage.LINK__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case DomainmodelPackage.LINK__INERTIAL:
         getInertial().clear();
         return;
@@ -233,6 +287,8 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
   {
     switch (featureID)
     {
+      case DomainmodelPackage.LINK__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case DomainmodelPackage.LINK__INERTIAL:
         return inertial != null && !inertial.isEmpty();
       case DomainmodelPackage.LINK__VISUALS:
@@ -241,6 +297,23 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link
         return collision != null && !collision.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //LinkImpl

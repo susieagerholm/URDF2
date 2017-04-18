@@ -81,15 +81,11 @@ ruleRobot returns [EObject current=null]
 		{
 			newLeafNode(otherlv_0, grammarAccess.getRobotAccess().getRobotNameKeyword_0());
 		}
-		otherlv_1=':'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getRobotAccess().getColonKeyword_1());
-		}
 		(
 			(
-				lv_name_2_0=RULE_STRING
+				lv_name_1_0=RULE_STRING
 				{
-					newLeafNode(lv_name_2_0, grammarAccess.getRobotAccess().getNameSTRINGTerminalRuleCall_2_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getRobotAccess().getNameSTRINGTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -98,21 +94,17 @@ ruleRobot returns [EObject current=null]
 					setWithLastConsumed(
 						$current,
 						"name",
-						lv_name_2_0,
+						lv_name_1_0,
 						"org.eclipse.xtext.common.Terminals.STRING");
 				}
 			)
 		)
-		otherlv_3='link'
-		{
-			newLeafNode(otherlv_3, grammarAccess.getRobotAccess().getLinkKeyword_3());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getRobotAccess().getLinkLinkParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getRobotAccess().getLinkLinkParserRuleCall_2_0());
 				}
-				lv_link_4_0=ruleLink
+				lv_link_2_0=ruleLink
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getRobotRule());
@@ -120,23 +112,23 @@ ruleRobot returns [EObject current=null]
 					add(
 						$current,
 						"link",
-						lv_link_4_0,
+						lv_link_2_0,
 						"org.xtext.urdf.Dsl.Link");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_5=','
+			otherlv_3=','
 			{
-				newLeafNode(otherlv_5, grammarAccess.getRobotAccess().getCommaKeyword_5_0());
+				newLeafNode(otherlv_3, grammarAccess.getRobotAccess().getCommaKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getRobotAccess().getLinkLinkParserRuleCall_5_1_0());
+						newCompositeNode(grammarAccess.getRobotAccess().getLinkLinkParserRuleCall_3_1_0());
 					}
-					lv_link_6_0=ruleLink
+					lv_link_4_0=ruleLink
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getRobotRule());
@@ -144,7 +136,7 @@ ruleRobot returns [EObject current=null]
 						add(
 							$current,
 							"link",
-							lv_link_6_0,
+							lv_link_4_0,
 							"org.xtext.urdf.Dsl.Link");
 						afterParserOrEnumRuleCall();
 					}
@@ -152,16 +144,12 @@ ruleRobot returns [EObject current=null]
 			)
 		)*
 		(
-			otherlv_7='joint'
-			{
-				newLeafNode(otherlv_7, grammarAccess.getRobotAccess().getJointKeyword_6_0());
-			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getRobotAccess().getJointJointParserRuleCall_6_1_0());
+						newCompositeNode(grammarAccess.getRobotAccess().getJointJointParserRuleCall_4_0_0());
 					}
-					lv_joint_8_0=ruleJoint
+					lv_joint_5_0=ruleJoint
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getRobotRule());
@@ -169,7 +157,7 @@ ruleRobot returns [EObject current=null]
 						add(
 							$current,
 							"joint",
-							lv_joint_8_0,
+							lv_joint_5_0,
 							"org.xtext.urdf.Dsl.Joint");
 						afterParserOrEnumRuleCall();
 					}
@@ -178,9 +166,9 @@ ruleRobot returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getRobotAccess().getJointJointParserRuleCall_6_2_0());
+						newCompositeNode(grammarAccess.getRobotAccess().getJointJointParserRuleCall_4_1_0());
 					}
-					lv_joint_9_0=ruleJoint
+					lv_joint_6_0=ruleJoint
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getRobotRule());
@@ -188,7 +176,7 @@ ruleRobot returns [EObject current=null]
 						add(
 							$current,
 							"joint",
-							lv_joint_9_0,
+							lv_joint_6_0,
 							"org.xtext.urdf.Dsl.Joint");
 						afterParserOrEnumRuleCall();
 					}
@@ -329,17 +317,39 @@ ruleLink returns [EObject current=null]
 					$current);
 			}
 		)
+		otherlv_1='Link'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getLinkAccess().getLinkKeyword_1());
+		}
 		(
-			otherlv_1='inertial'
+			(
+				lv_name_2_0=RULE_ID
+				{
+					newLeafNode(lv_name_2_0, grammarAccess.getLinkAccess().getNameIDTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getLinkRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_2_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			otherlv_3='inertial'
 			{
-				newLeafNode(otherlv_1, grammarAccess.getLinkAccess().getInertialKeyword_1_0());
+				newLeafNode(otherlv_3, grammarAccess.getLinkAccess().getInertialKeyword_3_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getInertialInertialParserRuleCall_1_1_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getInertialInertialParserRuleCall_3_1_0());
 					}
-					lv_inertial_2_0=ruleInertial
+					lv_inertial_4_0=ruleInertial
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -347,7 +357,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"inertial",
-							lv_inertial_2_0,
+							lv_inertial_4_0,
 							"org.xtext.urdf.Dsl.Inertial");
 						afterParserOrEnumRuleCall();
 					}
@@ -356,9 +366,9 @@ ruleLink returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getInertialInertialParserRuleCall_1_2_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getInertialInertialParserRuleCall_3_2_0());
 					}
-					lv_inertial_3_0=ruleInertial
+					lv_inertial_5_0=ruleInertial
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -366,7 +376,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"inertial",
-							lv_inertial_3_0,
+							lv_inertial_5_0,
 							"org.xtext.urdf.Dsl.Inertial");
 						afterParserOrEnumRuleCall();
 					}
@@ -374,16 +384,16 @@ ruleLink returns [EObject current=null]
 			)*
 		)?
 		(
-			otherlv_4='visuals'
+			otherlv_6='visuals'
 			{
-				newLeafNode(otherlv_4, grammarAccess.getLinkAccess().getVisualsKeyword_2_0());
+				newLeafNode(otherlv_6, grammarAccess.getLinkAccess().getVisualsKeyword_4_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getVisualsVisualParserRuleCall_2_1_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getVisualsVisualParserRuleCall_4_1_0());
 					}
-					lv_visuals_5_0=ruleVisual
+					lv_visuals_7_0=ruleVisual
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -391,7 +401,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"visuals",
-							lv_visuals_5_0,
+							lv_visuals_7_0,
 							"org.xtext.urdf.Dsl.Visual");
 						afterParserOrEnumRuleCall();
 					}
@@ -400,9 +410,9 @@ ruleLink returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getVisualsVisualParserRuleCall_2_2_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getVisualsVisualParserRuleCall_4_2_0());
 					}
-					lv_visuals_6_0=ruleVisual
+					lv_visuals_8_0=ruleVisual
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -410,7 +420,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"visuals",
-							lv_visuals_6_0,
+							lv_visuals_8_0,
 							"org.xtext.urdf.Dsl.Visual");
 						afterParserOrEnumRuleCall();
 					}
@@ -418,16 +428,16 @@ ruleLink returns [EObject current=null]
 			)*
 		)?
 		(
-			otherlv_7='collision'
+			otherlv_9='collision'
 			{
-				newLeafNode(otherlv_7, grammarAccess.getLinkAccess().getCollisionKeyword_3_0());
+				newLeafNode(otherlv_9, grammarAccess.getLinkAccess().getCollisionKeyword_5_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getCollisionCollisionParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getCollisionCollisionParserRuleCall_5_1_0());
 					}
-					lv_collision_8_0=ruleCollision
+					lv_collision_10_0=ruleCollision
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -435,7 +445,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"collision",
-							lv_collision_8_0,
+							lv_collision_10_0,
 							"org.xtext.urdf.Dsl.Collision");
 						afterParserOrEnumRuleCall();
 					}
@@ -444,9 +454,9 @@ ruleLink returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getLinkAccess().getCollisionCollisionParserRuleCall_3_2_0());
+						newCompositeNode(grammarAccess.getLinkAccess().getCollisionCollisionParserRuleCall_5_2_0());
 					}
-					lv_collision_9_0=ruleCollision
+					lv_collision_11_0=ruleCollision
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getLinkRule());
@@ -454,7 +464,7 @@ ruleLink returns [EObject current=null]
 						add(
 							$current,
 							"collision",
-							lv_collision_9_0,
+							lv_collision_11_0,
 							"org.xtext.urdf.Dsl.Collision");
 						afterParserOrEnumRuleCall();
 					}
@@ -480,17 +490,39 @@ ruleJoint returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='Joint'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getJointAccess().getJointKeyword_0());
+		}
 		(
-			otherlv_0='Type'
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getJointAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getJointRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			otherlv_2='Type'
 			{
-				newLeafNode(otherlv_0, grammarAccess.getJointAccess().getTypeKeyword_0_0());
+				newLeafNode(otherlv_2, grammarAccess.getJointAccess().getTypeKeyword_2_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getTypeJointTypeEnumRuleCall_0_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getTypeJointTypeEnumRuleCall_2_1_0());
 					}
-					lv_Type_1_0=ruleJointType
+					lv_Type_3_0=ruleJointType
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -498,20 +530,20 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"Type",
-							lv_Type_1_0,
+							lv_Type_3_0,
 							"org.xtext.urdf.Dsl.JointType");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
-		otherlv_2='ChildOf'
+		otherlv_4='ChildOf'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getJointAccess().getChildOfKeyword_1());
+			newLeafNode(otherlv_4, grammarAccess.getJointAccess().getChildOfKeyword_3());
 		}
-		otherlv_3='('
+		otherlv_5='('
 		{
-			newLeafNode(otherlv_3, grammarAccess.getJointAccess().getLeftParenthesisKeyword_2());
+			newLeafNode(otherlv_5, grammarAccess.getJointAccess().getLeftParenthesisKeyword_4());
 		}
 		(
 			(
@@ -520,9 +552,9 @@ ruleJoint returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getJointRule());
 					}
 				}
-				otherlv_4=RULE_STRING
+				otherlv_6=RULE_STRING
 				{
-					newLeafNode(otherlv_4, grammarAccess.getJointAccess().getChildOfLinkCrossReference_3_0());
+					newLeafNode(otherlv_6, grammarAccess.getJointAccess().getChildOfLinkCrossReference_5_0());
 				}
 			)
 		)
@@ -533,19 +565,19 @@ ruleJoint returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getJointRule());
 					}
 				}
-				otherlv_5=RULE_STRING
+				otherlv_7=RULE_STRING
 				{
-					newLeafNode(otherlv_5, grammarAccess.getJointAccess().getChildOfLinkCrossReference_4_0());
+					newLeafNode(otherlv_7, grammarAccess.getJointAccess().getChildOfLinkCrossReference_6_0());
 				}
 			)
 		)*
-		otherlv_6=')'
+		otherlv_8=')'
 		{
-			newLeafNode(otherlv_6, grammarAccess.getJointAccess().getRightParenthesisKeyword_5());
+			newLeafNode(otherlv_8, grammarAccess.getJointAccess().getRightParenthesisKeyword_7());
 		}
-		otherlv_7='ParentOf'
+		otherlv_9='ParentOf'
 		{
-			newLeafNode(otherlv_7, grammarAccess.getJointAccess().getParentOfKeyword_6());
+			newLeafNode(otherlv_9, grammarAccess.getJointAccess().getParentOfKeyword_8());
 		}
 		(
 			(
@@ -554,23 +586,23 @@ ruleJoint returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getJointRule());
 					}
 				}
-				otherlv_8=RULE_STRING
+				otherlv_10=RULE_STRING
 				{
-					newLeafNode(otherlv_8, grammarAccess.getJointAccess().getParentOfLinkCrossReference_7_0());
+					newLeafNode(otherlv_10, grammarAccess.getJointAccess().getParentOfLinkCrossReference_9_0());
 				}
 			)
 		)
 		(
-			otherlv_9='limit'
+			otherlv_11='limit'
 			{
-				newLeafNode(otherlv_9, grammarAccess.getJointAccess().getLimitKeyword_8_0());
+				newLeafNode(otherlv_11, grammarAccess.getJointAccess().getLimitKeyword_10_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getLimitLimitParserRuleCall_8_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getLimitLimitParserRuleCall_10_1_0());
 					}
-					lv_limit_10_0=ruleLimit
+					lv_limit_12_0=ruleLimit
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -578,7 +610,7 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"limit",
-							lv_limit_10_0,
+							lv_limit_12_0,
 							"org.xtext.urdf.Dsl.Limit");
 						afterParserOrEnumRuleCall();
 					}
@@ -586,16 +618,16 @@ ruleJoint returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_11='axis'
+			otherlv_13='axis'
 			{
-				newLeafNode(otherlv_11, grammarAccess.getJointAccess().getAxisKeyword_9_0());
+				newLeafNode(otherlv_13, grammarAccess.getJointAccess().getAxisKeyword_11_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getAxisAxisParserRuleCall_9_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getAxisAxisParserRuleCall_11_1_0());
 					}
-					lv_axis_12_0=ruleAxis
+					lv_axis_14_0=ruleAxis
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -603,23 +635,23 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"axis",
-							lv_axis_12_0,
+							lv_axis_14_0,
 							"org.xtext.urdf.Dsl.Axis");
 						afterParserOrEnumRuleCall();
 					}
 				)
 			)
 		)?
-		otherlv_13='origin'
+		otherlv_15='origin'
 		{
-			newLeafNode(otherlv_13, grammarAccess.getJointAccess().getOriginKeyword_10());
+			newLeafNode(otherlv_15, grammarAccess.getJointAccess().getOriginKeyword_12());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getJointAccess().getOriginOriginParserRuleCall_11_0());
+					newCompositeNode(grammarAccess.getJointAccess().getOriginOriginParserRuleCall_13_0());
 				}
-				lv_origin_14_0=ruleOrigin
+				lv_origin_16_0=ruleOrigin
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -627,23 +659,23 @@ ruleJoint returns [EObject current=null]
 					set(
 						$current,
 						"origin",
-						lv_origin_14_0,
+						lv_origin_16_0,
 						"org.xtext.urdf.Dsl.Origin");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			otherlv_15='callibration'
+			otherlv_17='callibration'
 			{
-				newLeafNode(otherlv_15, grammarAccess.getJointAccess().getCallibrationKeyword_12_0());
+				newLeafNode(otherlv_17, grammarAccess.getJointAccess().getCallibrationKeyword_14_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getCallibrationCallibrationParserRuleCall_12_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getCallibrationCallibrationParserRuleCall_14_1_0());
 					}
-					lv_callibration_16_0=ruleCallibration
+					lv_callibration_18_0=ruleCallibration
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -651,7 +683,7 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"callibration",
-							lv_callibration_16_0,
+							lv_callibration_18_0,
 							"org.xtext.urdf.Dsl.Callibration");
 						afterParserOrEnumRuleCall();
 					}
@@ -659,16 +691,16 @@ ruleJoint returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_17='dynamics'
+			otherlv_19='dynamics'
 			{
-				newLeafNode(otherlv_17, grammarAccess.getJointAccess().getDynamicsKeyword_13_0());
+				newLeafNode(otherlv_19, grammarAccess.getJointAccess().getDynamicsKeyword_15_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getDynamicsDynamicsParserRuleCall_13_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getDynamicsDynamicsParserRuleCall_15_1_0());
 					}
-					lv_dynamics_18_0=ruleDynamics
+					lv_dynamics_20_0=ruleDynamics
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -676,7 +708,7 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"dynamics",
-							lv_dynamics_18_0,
+							lv_dynamics_20_0,
 							"org.xtext.urdf.Dsl.Dynamics");
 						afterParserOrEnumRuleCall();
 					}
@@ -684,16 +716,16 @@ ruleJoint returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_19='mimic'
+			otherlv_21='mimic'
 			{
-				newLeafNode(otherlv_19, grammarAccess.getJointAccess().getMimicKeyword_14_0());
+				newLeafNode(otherlv_21, grammarAccess.getJointAccess().getMimicKeyword_16_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getMimicMimicParserRuleCall_14_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getMimicMimicParserRuleCall_16_1_0());
 					}
-					lv_mimic_20_0=ruleMimic
+					lv_mimic_22_0=ruleMimic
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -701,7 +733,7 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"mimic",
-							lv_mimic_20_0,
+							lv_mimic_22_0,
 							"org.xtext.urdf.Dsl.Mimic");
 						afterParserOrEnumRuleCall();
 					}
@@ -709,16 +741,16 @@ ruleJoint returns [EObject current=null]
 			)
 		)?
 		(
-			otherlv_21='safetycontroller'
+			otherlv_23='safetycontroller'
 			{
-				newLeafNode(otherlv_21, grammarAccess.getJointAccess().getSafetycontrollerKeyword_15_0());
+				newLeafNode(otherlv_23, grammarAccess.getJointAccess().getSafetycontrollerKeyword_17_0());
 			}
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getJointAccess().getSafetycontrollerSafetyControllerParserRuleCall_15_1_0());
+						newCompositeNode(grammarAccess.getJointAccess().getSafetycontrollerSafetyControllerParserRuleCall_17_1_0());
 					}
-					lv_safetycontroller_22_0=ruleSafetyController
+					lv_safetycontroller_24_0=ruleSafetyController
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getJointRule());
@@ -726,7 +758,7 @@ ruleJoint returns [EObject current=null]
 						set(
 							$current,
 							"safetycontroller",
-							lv_safetycontroller_22_0,
+							lv_safetycontroller_24_0,
 							"org.xtext.urdf.Dsl.SafetyController");
 						afterParserOrEnumRuleCall();
 					}

@@ -28,7 +28,7 @@ Export-Package: org.xtext.urdf.parser.antlr,
  org.xtext.urdf.scoping,
  org.xtext.urdf.domainmodel.impl,
  org.xtext.urdf.serializer,
- org.xtext.urdf.generator
+ org.xtext.urdf.generator,
+ org.xtext.urdf.formatting2
 Import-Package: org.apache.log4j
-Bundle-ClassPath: scala-xml_2.11-1.0.2.jar,
- .
+Bundle-ClassPath: scala-xml_2.11-1.0.2.jar,.
