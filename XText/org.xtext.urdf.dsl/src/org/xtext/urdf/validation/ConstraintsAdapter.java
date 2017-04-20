@@ -1,7 +1,6 @@
 package org.xtext.urdf.validation;
 
-import org.xtext.urdf.domainmodel.*;
-
+import uRDF.Robot;
 
 public class ConstraintsAdapter
 {

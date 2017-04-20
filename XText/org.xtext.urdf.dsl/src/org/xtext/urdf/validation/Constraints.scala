@@ -1,5 +1,6 @@
-import org.xtext.urdf.domainmodel._
+
 import scala.collection.JavaConversions._
+import uRDF.Robot
 
 package org.xtext.urdf.validation
 {

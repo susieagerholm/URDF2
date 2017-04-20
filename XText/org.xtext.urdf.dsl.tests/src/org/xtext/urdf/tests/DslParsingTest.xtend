@@ -10,7 +10,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.xtext.urdf.domainmodel.Robot
+import uRDF.Robot
 
 @RunWith(XtextRunner)
 @InjectWith(DslInjectorProvider)

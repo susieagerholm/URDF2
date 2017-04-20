@@ -12,8 +12,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.xtext.urdf.domainmodel.Robot;
 import org.xtext.urdf.tests.DslInjectorProvider;
+import uRDF.Robot;
 
 @RunWith(XtextRunner.class)
 @InjectWith(DslInjectorProvider.class)

@@ -34,7 +34,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/inertial"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/visuals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/collision"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/ParentOf"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Limit">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/Lower"/>
@@ -111,5 +110,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Operator/Op"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Constant"/>
+    <genClasses ecoreClass="uRDF.ecore#//TestSync">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//TestSync/newAttribute"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

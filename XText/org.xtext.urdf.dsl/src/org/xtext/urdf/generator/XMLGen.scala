@@ -1,6 +1,8 @@
-import org.xtext.urdf.domainmodel.Robot
+
 
 package org.xtext.urdf.generator {
+
+import uRDF.Robot
 
 
 class XMLGen() {

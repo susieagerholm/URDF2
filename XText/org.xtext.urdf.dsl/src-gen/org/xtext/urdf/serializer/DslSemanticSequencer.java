@@ -14,31 +14,31 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
-import org.xtext.urdf.domainmodel.Axis;
-import org.xtext.urdf.domainmodel.Box;
-import org.xtext.urdf.domainmodel.Callibration;
-import org.xtext.urdf.domainmodel.Collision;
-import org.xtext.urdf.domainmodel.Color;
-import org.xtext.urdf.domainmodel.Cylinder;
-import org.xtext.urdf.domainmodel.DomainmodelPackage;
-import org.xtext.urdf.domainmodel.Dynamics;
-import org.xtext.urdf.domainmodel.Geometry;
-import org.xtext.urdf.domainmodel.Inertia;
-import org.xtext.urdf.domainmodel.Inertial;
-import org.xtext.urdf.domainmodel.Joint;
-import org.xtext.urdf.domainmodel.Limit;
-import org.xtext.urdf.domainmodel.Link;
-import org.xtext.urdf.domainmodel.Mass;
-import org.xtext.urdf.domainmodel.Material;
-import org.xtext.urdf.domainmodel.Mesh;
-import org.xtext.urdf.domainmodel.Mimic;
-import org.xtext.urdf.domainmodel.Origin;
-import org.xtext.urdf.domainmodel.Robot;
-import org.xtext.urdf.domainmodel.SafetyController;
-import org.xtext.urdf.domainmodel.Sphere;
-import org.xtext.urdf.domainmodel.Texture;
-import org.xtext.urdf.domainmodel.Visual;
 import org.xtext.urdf.services.DslGrammarAccess;
+import uRDF.Axis;
+import uRDF.Box;
+import uRDF.Callibration;
+import uRDF.Collision;
+import uRDF.Color;
+import uRDF.Cylinder;
+import uRDF.Dynamics;
+import uRDF.Geometry;
+import uRDF.Inertia;
+import uRDF.Inertial;
+import uRDF.Joint;
+import uRDF.Limit;
+import uRDF.Link;
+import uRDF.Mass;
+import uRDF.Material;
+import uRDF.Mesh;
+import uRDF.Mimic;
+import uRDF.Origin;
+import uRDF.Robot;
+import uRDF.SafetyController;
+import uRDF.Sphere;
+import uRDF.Texture;
+import uRDF.URDFPackage;
+import uRDF.Visual;
 
 @SuppressWarnings("all")
 public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -52,75 +52,75 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == DomainmodelPackage.eINSTANCE)
+		if (epackage == URDFPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case DomainmodelPackage.AXIS:
+			case URDFPackage.AXIS:
 				sequence_Axis(context, (Axis) semanticObject); 
 				return; 
-			case DomainmodelPackage.BOX:
+			case URDFPackage.BOX:
 				sequence_Box(context, (Box) semanticObject); 
 				return; 
-			case DomainmodelPackage.CALLIBRATION:
+			case URDFPackage.CALLIBRATION:
 				sequence_Callibration(context, (Callibration) semanticObject); 
 				return; 
-			case DomainmodelPackage.COLLISION:
+			case URDFPackage.COLLISION:
 				sequence_Collision(context, (Collision) semanticObject); 
 				return; 
-			case DomainmodelPackage.COLOR:
+			case URDFPackage.COLOR:
 				sequence_Color(context, (Color) semanticObject); 
 				return; 
-			case DomainmodelPackage.CYLINDER:
+			case URDFPackage.CYLINDER:
 				sequence_Cylinder(context, (Cylinder) semanticObject); 
 				return; 
-			case DomainmodelPackage.DYNAMICS:
+			case URDFPackage.DYNAMICS:
 				sequence_Dynamics(context, (Dynamics) semanticObject); 
 				return; 
-			case DomainmodelPackage.GEOMETRY:
+			case URDFPackage.GEOMETRY:
 				sequence_Geometry_Impl(context, (Geometry) semanticObject); 
 				return; 
-			case DomainmodelPackage.INERTIA:
+			case URDFPackage.INERTIA:
 				sequence_Inertia(context, (Inertia) semanticObject); 
 				return; 
-			case DomainmodelPackage.INERTIAL:
+			case URDFPackage.INERTIAL:
 				sequence_Inertial(context, (Inertial) semanticObject); 
 				return; 
-			case DomainmodelPackage.JOINT:
+			case URDFPackage.JOINT:
 				sequence_Joint(context, (Joint) semanticObject); 
 				return; 
-			case DomainmodelPackage.LIMIT:
+			case URDFPackage.LIMIT:
 				sequence_Limit(context, (Limit) semanticObject); 
 				return; 
-			case DomainmodelPackage.LINK:
+			case URDFPackage.LINK:
 				sequence_Link(context, (Link) semanticObject); 
 				return; 
-			case DomainmodelPackage.MASS:
+			case URDFPackage.MASS:
 				sequence_Mass(context, (Mass) semanticObject); 
 				return; 
-			case DomainmodelPackage.MATERIAL:
+			case URDFPackage.MATERIAL:
 				sequence_Material_Impl(context, (Material) semanticObject); 
 				return; 
-			case DomainmodelPackage.MESH:
+			case URDFPackage.MESH:
 				sequence_Mesh(context, (Mesh) semanticObject); 
 				return; 
-			case DomainmodelPackage.MIMIC:
+			case URDFPackage.MIMIC:
 				sequence_Mimic(context, (Mimic) semanticObject); 
 				return; 
-			case DomainmodelPackage.ORIGIN:
+			case URDFPackage.ORIGIN:
 				sequence_Origin(context, (Origin) semanticObject); 
 				return; 
-			case DomainmodelPackage.ROBOT:
+			case URDFPackage.ROBOT:
 				sequence_Robot(context, (Robot) semanticObject); 
 				return; 
-			case DomainmodelPackage.SAFETY_CONTROLLER:
+			case URDFPackage.SAFETY_CONTROLLER:
 				sequence_SafetyController(context, (SafetyController) semanticObject); 
 				return; 
-			case DomainmodelPackage.SPHERE:
+			case URDFPackage.SPHERE:
 				sequence_Sphere(context, (Sphere) semanticObject); 
 				return; 
-			case DomainmodelPackage.TEXTURE:
+			case URDFPackage.TEXTURE:
 				sequence_Texture(context, (Texture) semanticObject); 
 				return; 
-			case DomainmodelPackage.VISUAL:
+			case URDFPackage.VISUAL:
 				sequence_Visual(context, (Visual) semanticObject); 
 				return; 
 			}
@@ -174,10 +174,10 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_Collision(ISerializationContext context, Collision semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, DomainmodelPackage.Literals.COLLISION__GEOMETRY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DomainmodelPackage.Literals.COLLISION__GEOMETRY));
-			if (transientValues.isValueTransient(semanticObject, DomainmodelPackage.Literals.COLLISION__ORIGIN) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, DomainmodelPackage.Literals.COLLISION__ORIGIN));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.COLLISION__GEOMETRY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.COLLISION__GEOMETRY));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.COLLISION__ORIGIN) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.COLLISION__ORIGIN));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCollisionAccess().getGeometryGeometryParserRuleCall_1_0(), semanticObject.getGeometry());
@@ -269,8 +269,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     (
 	 *         name=ID 
 	 *         Type=JointType? 
-	 *         ChildOf+=[Link|STRING] 
-	 *         ChildOf+=[Link|STRING]* 
+	 *         ChildOf=[Link|STRING] 
 	 *         ParentOf=[Link|STRING] 
 	 *         limit=Limit? 
 	 *         axis=Axis? 

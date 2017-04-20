@@ -1,11 +1,9 @@
-import org.xtext.urdf.domainmodel.Robot;
-import org.xtext.urdf.domainmodel._;
-import scala.collection.JavaConversions._
-
 import java.io.File
 import java.io.PrintWriter
-import uRDF.URDFModel
-import java.lang.Boolean
+
+
+import org.xtext.urdf.generator.XMLGen
+import uRDF.Robot
 
 package org.xtext.urdf.generator
 {

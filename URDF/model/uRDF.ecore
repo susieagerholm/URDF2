@@ -148,4 +148,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Op" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TestSync">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="newAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID"
+        iD="true"/>
+  </eClassifiers>
 </ecore:EPackage>

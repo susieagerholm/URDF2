@@ -11,7 +11,6 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.common.TerminalsStandaloneSetup;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.xtext.urdf.domainmodel.DomainmodelPackage;
 
 @SuppressWarnings("all")
 public class DslStandaloneSetupGenerated implements ISetup {
@@ -30,9 +29,6 @@ public class DslStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://itu.dk/uRDF")) {
-			EPackage.Registry.INSTANCE.put("http://itu.dk/uRDF", DomainmodelPackage.eINSTANCE);
-		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		

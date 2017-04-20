@@ -268,58 +268,52 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cTypeJointTypeEnumRuleCall_2_1_0 = (RuleCall)cTypeAssignment_2_1.eContents().get(0);
 		private final Keyword cChildOfKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cChildOfAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cChildOfLinkCrossReference_5_0 = (CrossReference)cChildOfAssignment_5.eContents().get(0);
-		private final RuleCall cChildOfLinkSTRINGTerminalRuleCall_5_0_1 = (RuleCall)cChildOfLinkCrossReference_5_0.eContents().get(1);
-		private final Assignment cChildOfAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final CrossReference cChildOfLinkCrossReference_6_0 = (CrossReference)cChildOfAssignment_6.eContents().get(0);
-		private final RuleCall cChildOfLinkSTRINGTerminalRuleCall_6_0_1 = (RuleCall)cChildOfLinkCrossReference_6_0.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Keyword cParentOfKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cParentOfAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final CrossReference cParentOfLinkCrossReference_9_0 = (CrossReference)cParentOfAssignment_9.eContents().get(0);
-		private final RuleCall cParentOfLinkSTRINGTerminalRuleCall_9_0_1 = (RuleCall)cParentOfLinkCrossReference_9_0.eContents().get(1);
-		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
-		private final Keyword cLimitKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
-		private final Assignment cLimitAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
-		private final RuleCall cLimitLimitParserRuleCall_10_1_0 = (RuleCall)cLimitAssignment_10_1.eContents().get(0);
+		private final Assignment cChildOfAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cChildOfLinkCrossReference_4_0 = (CrossReference)cChildOfAssignment_4.eContents().get(0);
+		private final RuleCall cChildOfLinkSTRINGTerminalRuleCall_4_0_1 = (RuleCall)cChildOfLinkCrossReference_4_0.eContents().get(1);
+		private final Keyword cParentOfKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cParentOfAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final CrossReference cParentOfLinkCrossReference_6_0 = (CrossReference)cParentOfAssignment_6.eContents().get(0);
+		private final RuleCall cParentOfLinkSTRINGTerminalRuleCall_6_0_1 = (RuleCall)cParentOfLinkCrossReference_6_0.eContents().get(1);
+		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
+		private final Keyword cLimitKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
+		private final Assignment cLimitAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
+		private final RuleCall cLimitLimitParserRuleCall_7_1_0 = (RuleCall)cLimitAssignment_7_1.eContents().get(0);
+		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
+		private final Keyword cAxisKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cAxisAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cAxisAxisParserRuleCall_8_1_0 = (RuleCall)cAxisAssignment_8_1.eContents().get(0);
+		private final Keyword cOriginKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cOriginAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cOriginOriginParserRuleCall_10_0 = (RuleCall)cOriginAssignment_10.eContents().get(0);
 		private final Group cGroup_11 = (Group)cGroup.eContents().get(11);
-		private final Keyword cAxisKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
-		private final Assignment cAxisAssignment_11_1 = (Assignment)cGroup_11.eContents().get(1);
-		private final RuleCall cAxisAxisParserRuleCall_11_1_0 = (RuleCall)cAxisAssignment_11_1.eContents().get(0);
-		private final Keyword cOriginKeyword_12 = (Keyword)cGroup.eContents().get(12);
-		private final Assignment cOriginAssignment_13 = (Assignment)cGroup.eContents().get(13);
-		private final RuleCall cOriginOriginParserRuleCall_13_0 = (RuleCall)cOriginAssignment_13.eContents().get(0);
+		private final Keyword cCallibrationKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final Assignment cCallibrationAssignment_11_1 = (Assignment)cGroup_11.eContents().get(1);
+		private final RuleCall cCallibrationCallibrationParserRuleCall_11_1_0 = (RuleCall)cCallibrationAssignment_11_1.eContents().get(0);
+		private final Group cGroup_12 = (Group)cGroup.eContents().get(12);
+		private final Keyword cDynamicsKeyword_12_0 = (Keyword)cGroup_12.eContents().get(0);
+		private final Assignment cDynamicsAssignment_12_1 = (Assignment)cGroup_12.eContents().get(1);
+		private final RuleCall cDynamicsDynamicsParserRuleCall_12_1_0 = (RuleCall)cDynamicsAssignment_12_1.eContents().get(0);
+		private final Group cGroup_13 = (Group)cGroup.eContents().get(13);
+		private final Keyword cMimicKeyword_13_0 = (Keyword)cGroup_13.eContents().get(0);
+		private final Assignment cMimicAssignment_13_1 = (Assignment)cGroup_13.eContents().get(1);
+		private final RuleCall cMimicMimicParserRuleCall_13_1_0 = (RuleCall)cMimicAssignment_13_1.eContents().get(0);
 		private final Group cGroup_14 = (Group)cGroup.eContents().get(14);
-		private final Keyword cCallibrationKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
-		private final Assignment cCallibrationAssignment_14_1 = (Assignment)cGroup_14.eContents().get(1);
-		private final RuleCall cCallibrationCallibrationParserRuleCall_14_1_0 = (RuleCall)cCallibrationAssignment_14_1.eContents().get(0);
-		private final Group cGroup_15 = (Group)cGroup.eContents().get(15);
-		private final Keyword cDynamicsKeyword_15_0 = (Keyword)cGroup_15.eContents().get(0);
-		private final Assignment cDynamicsAssignment_15_1 = (Assignment)cGroup_15.eContents().get(1);
-		private final RuleCall cDynamicsDynamicsParserRuleCall_15_1_0 = (RuleCall)cDynamicsAssignment_15_1.eContents().get(0);
-		private final Group cGroup_16 = (Group)cGroup.eContents().get(16);
-		private final Keyword cMimicKeyword_16_0 = (Keyword)cGroup_16.eContents().get(0);
-		private final Assignment cMimicAssignment_16_1 = (Assignment)cGroup_16.eContents().get(1);
-		private final RuleCall cMimicMimicParserRuleCall_16_1_0 = (RuleCall)cMimicAssignment_16_1.eContents().get(0);
-		private final Group cGroup_17 = (Group)cGroup.eContents().get(17);
-		private final Keyword cSafetycontrollerKeyword_17_0 = (Keyword)cGroup_17.eContents().get(0);
-		private final Assignment cSafetycontrollerAssignment_17_1 = (Assignment)cGroup_17.eContents().get(1);
-		private final RuleCall cSafetycontrollerSafetyControllerParserRuleCall_17_1_0 = (RuleCall)cSafetycontrollerAssignment_17_1.eContents().get(0);
+		private final Keyword cSafetycontrollerKeyword_14_0 = (Keyword)cGroup_14.eContents().get(0);
+		private final Assignment cSafetycontrollerAssignment_14_1 = (Assignment)cGroup_14.eContents().get(1);
+		private final RuleCall cSafetycontrollerSafetyControllerParserRuleCall_14_1_0 = (RuleCall)cSafetycontrollerAssignment_14_1.eContents().get(0);
 		
 		//Joint uRDF::Joint:
 		//	'Joint' name=ID ('Type' Type=JointType)?
-		//	'ChildOf' '(' ChildOf+=[uRDF::Link|STRING] ChildOf+=[uRDF::Link|STRING]* ')'
+		//	'ChildOf' ChildOf=[uRDF::Link|STRING]
 		//	'ParentOf' ParentOf=[uRDF::Link|STRING] ('limit' limit=Limit)? ('axis' axis=Axis)?
 		//	'origin' origin=Origin ('callibration' callibration=Callibration)? ('dynamics' dynamics=Dynamics)? ('mimic'
 		//	mimic=Mimic)? ('safetycontroller' safetycontroller=SafetyController)?
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Joint' name=ID ('Type' Type=JointType)? 'ChildOf' '(' ChildOf+=[uRDF::Link|STRING] ChildOf+=[uRDF::Link|STRING]* ')'
-		//'ParentOf' ParentOf=[uRDF::Link|STRING] ('limit' limit=Limit)? ('axis' axis=Axis)? 'origin' origin=Origin
-		//('callibration' callibration=Callibration)? ('dynamics' dynamics=Dynamics)? ('mimic' mimic=Mimic)? ('safetycontroller'
-		//safetycontroller=SafetyController)?
+		//'Joint' name=ID ('Type' Type=JointType)? 'ChildOf' ChildOf=[uRDF::Link|STRING] 'ParentOf' ParentOf=[uRDF::Link|STRING]
+		//('limit' limit=Limit)? ('axis' axis=Axis)? 'origin' origin=Origin ('callibration' callibration=Callibration)?
+		//('dynamics' dynamics=Dynamics)? ('mimic' mimic=Mimic)? ('safetycontroller' safetycontroller=SafetyController)?
 		public Group getGroup() { return cGroup; }
 		
 		//'Joint'
@@ -346,122 +340,107 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//'ChildOf'
 		public Keyword getChildOfKeyword_3() { return cChildOfKeyword_3; }
 		
-		//'('
-		public Keyword getLeftParenthesisKeyword_4() { return cLeftParenthesisKeyword_4; }
-		
-		//ChildOf+=[uRDF::Link|STRING]
-		public Assignment getChildOfAssignment_5() { return cChildOfAssignment_5; }
+		//ChildOf=[uRDF::Link|STRING]
+		public Assignment getChildOfAssignment_4() { return cChildOfAssignment_4; }
 		
 		//[uRDF::Link|STRING]
-		public CrossReference getChildOfLinkCrossReference_5_0() { return cChildOfLinkCrossReference_5_0; }
+		public CrossReference getChildOfLinkCrossReference_4_0() { return cChildOfLinkCrossReference_4_0; }
 		
 		//STRING
-		public RuleCall getChildOfLinkSTRINGTerminalRuleCall_5_0_1() { return cChildOfLinkSTRINGTerminalRuleCall_5_0_1; }
-		
-		//ChildOf+=[uRDF::Link|STRING]*
-		public Assignment getChildOfAssignment_6() { return cChildOfAssignment_6; }
-		
-		//[uRDF::Link|STRING]
-		public CrossReference getChildOfLinkCrossReference_6_0() { return cChildOfLinkCrossReference_6_0; }
-		
-		//STRING
-		public RuleCall getChildOfLinkSTRINGTerminalRuleCall_6_0_1() { return cChildOfLinkSTRINGTerminalRuleCall_6_0_1; }
-		
-		//')'
-		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
+		public RuleCall getChildOfLinkSTRINGTerminalRuleCall_4_0_1() { return cChildOfLinkSTRINGTerminalRuleCall_4_0_1; }
 		
 		//'ParentOf'
-		public Keyword getParentOfKeyword_8() { return cParentOfKeyword_8; }
+		public Keyword getParentOfKeyword_5() { return cParentOfKeyword_5; }
 		
 		//ParentOf=[uRDF::Link|STRING]
-		public Assignment getParentOfAssignment_9() { return cParentOfAssignment_9; }
+		public Assignment getParentOfAssignment_6() { return cParentOfAssignment_6; }
 		
 		//[uRDF::Link|STRING]
-		public CrossReference getParentOfLinkCrossReference_9_0() { return cParentOfLinkCrossReference_9_0; }
+		public CrossReference getParentOfLinkCrossReference_6_0() { return cParentOfLinkCrossReference_6_0; }
 		
 		//STRING
-		public RuleCall getParentOfLinkSTRINGTerminalRuleCall_9_0_1() { return cParentOfLinkSTRINGTerminalRuleCall_9_0_1; }
+		public RuleCall getParentOfLinkSTRINGTerminalRuleCall_6_0_1() { return cParentOfLinkSTRINGTerminalRuleCall_6_0_1; }
 		
 		//('limit' limit=Limit)?
-		public Group getGroup_10() { return cGroup_10; }
+		public Group getGroup_7() { return cGroup_7; }
 		
 		//'limit'
-		public Keyword getLimitKeyword_10_0() { return cLimitKeyword_10_0; }
+		public Keyword getLimitKeyword_7_0() { return cLimitKeyword_7_0; }
 		
 		//limit=Limit
-		public Assignment getLimitAssignment_10_1() { return cLimitAssignment_10_1; }
+		public Assignment getLimitAssignment_7_1() { return cLimitAssignment_7_1; }
 		
 		//Limit
-		public RuleCall getLimitLimitParserRuleCall_10_1_0() { return cLimitLimitParserRuleCall_10_1_0; }
+		public RuleCall getLimitLimitParserRuleCall_7_1_0() { return cLimitLimitParserRuleCall_7_1_0; }
 		
 		//('axis' axis=Axis)?
-		public Group getGroup_11() { return cGroup_11; }
+		public Group getGroup_8() { return cGroup_8; }
 		
 		//'axis'
-		public Keyword getAxisKeyword_11_0() { return cAxisKeyword_11_0; }
+		public Keyword getAxisKeyword_8_0() { return cAxisKeyword_8_0; }
 		
 		//axis=Axis
-		public Assignment getAxisAssignment_11_1() { return cAxisAssignment_11_1; }
+		public Assignment getAxisAssignment_8_1() { return cAxisAssignment_8_1; }
 		
 		//Axis
-		public RuleCall getAxisAxisParserRuleCall_11_1_0() { return cAxisAxisParserRuleCall_11_1_0; }
+		public RuleCall getAxisAxisParserRuleCall_8_1_0() { return cAxisAxisParserRuleCall_8_1_0; }
 		
 		//'origin'
-		public Keyword getOriginKeyword_12() { return cOriginKeyword_12; }
+		public Keyword getOriginKeyword_9() { return cOriginKeyword_9; }
 		
 		//origin=Origin
-		public Assignment getOriginAssignment_13() { return cOriginAssignment_13; }
+		public Assignment getOriginAssignment_10() { return cOriginAssignment_10; }
 		
 		//Origin
-		public RuleCall getOriginOriginParserRuleCall_13_0() { return cOriginOriginParserRuleCall_13_0; }
+		public RuleCall getOriginOriginParserRuleCall_10_0() { return cOriginOriginParserRuleCall_10_0; }
 		
 		//('callibration' callibration=Callibration)?
-		public Group getGroup_14() { return cGroup_14; }
+		public Group getGroup_11() { return cGroup_11; }
 		
 		//'callibration'
-		public Keyword getCallibrationKeyword_14_0() { return cCallibrationKeyword_14_0; }
+		public Keyword getCallibrationKeyword_11_0() { return cCallibrationKeyword_11_0; }
 		
 		//callibration=Callibration
-		public Assignment getCallibrationAssignment_14_1() { return cCallibrationAssignment_14_1; }
+		public Assignment getCallibrationAssignment_11_1() { return cCallibrationAssignment_11_1; }
 		
 		//Callibration
-		public RuleCall getCallibrationCallibrationParserRuleCall_14_1_0() { return cCallibrationCallibrationParserRuleCall_14_1_0; }
+		public RuleCall getCallibrationCallibrationParserRuleCall_11_1_0() { return cCallibrationCallibrationParserRuleCall_11_1_0; }
 		
 		//('dynamics' dynamics=Dynamics)?
-		public Group getGroup_15() { return cGroup_15; }
+		public Group getGroup_12() { return cGroup_12; }
 		
 		//'dynamics'
-		public Keyword getDynamicsKeyword_15_0() { return cDynamicsKeyword_15_0; }
+		public Keyword getDynamicsKeyword_12_0() { return cDynamicsKeyword_12_0; }
 		
 		//dynamics=Dynamics
-		public Assignment getDynamicsAssignment_15_1() { return cDynamicsAssignment_15_1; }
+		public Assignment getDynamicsAssignment_12_1() { return cDynamicsAssignment_12_1; }
 		
 		//Dynamics
-		public RuleCall getDynamicsDynamicsParserRuleCall_15_1_0() { return cDynamicsDynamicsParserRuleCall_15_1_0; }
+		public RuleCall getDynamicsDynamicsParserRuleCall_12_1_0() { return cDynamicsDynamicsParserRuleCall_12_1_0; }
 		
 		//('mimic' mimic=Mimic)?
-		public Group getGroup_16() { return cGroup_16; }
+		public Group getGroup_13() { return cGroup_13; }
 		
 		//'mimic'
-		public Keyword getMimicKeyword_16_0() { return cMimicKeyword_16_0; }
+		public Keyword getMimicKeyword_13_0() { return cMimicKeyword_13_0; }
 		
 		//mimic=Mimic
-		public Assignment getMimicAssignment_16_1() { return cMimicAssignment_16_1; }
+		public Assignment getMimicAssignment_13_1() { return cMimicAssignment_13_1; }
 		
 		//Mimic
-		public RuleCall getMimicMimicParserRuleCall_16_1_0() { return cMimicMimicParserRuleCall_16_1_0; }
+		public RuleCall getMimicMimicParserRuleCall_13_1_0() { return cMimicMimicParserRuleCall_13_1_0; }
 		
 		//('safetycontroller' safetycontroller=SafetyController)?
-		public Group getGroup_17() { return cGroup_17; }
+		public Group getGroup_14() { return cGroup_14; }
 		
 		//'safetycontroller'
-		public Keyword getSafetycontrollerKeyword_17_0() { return cSafetycontrollerKeyword_17_0; }
+		public Keyword getSafetycontrollerKeyword_14_0() { return cSafetycontrollerKeyword_14_0; }
 		
 		//safetycontroller=SafetyController
-		public Assignment getSafetycontrollerAssignment_17_1() { return cSafetycontrollerAssignment_17_1; }
+		public Assignment getSafetycontrollerAssignment_14_1() { return cSafetycontrollerAssignment_14_1; }
 		
 		//SafetyController
-		public RuleCall getSafetycontrollerSafetyControllerParserRuleCall_17_1_0() { return cSafetycontrollerSafetyControllerParserRuleCall_17_1_0; }
+		public RuleCall getSafetycontrollerSafetyControllerParserRuleCall_14_1_0() { return cSafetycontrollerSafetyControllerParserRuleCall_14_1_0; }
 	}
 	public class InertialElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Inertial");
@@ -1530,7 +1509,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//Joint uRDF::Joint:
 	//	'Joint' name=ID ('Type' Type=JointType)?
-	//	'ChildOf' '(' ChildOf+=[uRDF::Link|STRING] ChildOf+=[uRDF::Link|STRING]* ')'
+	//	'ChildOf' ChildOf=[uRDF::Link|STRING]
 	//	'ParentOf' ParentOf=[uRDF::Link|STRING] ('limit' limit=Limit)? ('axis' axis=Axis)?
 	//	'origin' origin=Origin ('callibration' callibration=Callibration)? ('dynamics' dynamics=Dynamics)? ('mimic'
 	//	mimic=Mimic)? ('safetycontroller' safetycontroller=SafetyController)?

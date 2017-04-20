@@ -3,17 +3,15 @@
  */
 package org.xtext.urdf.formatting2
 
-import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
-import org.xtext.urdf.domainmodel.Joint
-import org.xtext.urdf.domainmodel.Link
-import org.xtext.urdf.domainmodel.Robot
-import org.xtext.urdf.services.DslGrammarAccess
+import uRDF.Joint
+import uRDF.Link
+import uRDF.Robot
 
 class DslFormatter extends AbstractFormatter2 {
 	
-	@Inject extension DslGrammarAccess
+
 
 	def dispatch void format(Robot robot, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc.

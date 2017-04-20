@@ -3,7 +3,6 @@
  */
 package org.xtext.urdf.formatting2;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -15,17 +14,12 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.xtext.urdf.domainmodel.Joint;
-import org.xtext.urdf.domainmodel.Link;
-import org.xtext.urdf.domainmodel.Robot;
-import org.xtext.urdf.services.DslGrammarAccess;
+import uRDF.Joint;
+import uRDF.Link;
+import uRDF.Robot;
 
 @SuppressWarnings("all")
 public class DslFormatter extends AbstractFormatter2 {
-  @Inject
-  @Extension
-  private DslGrammarAccess _dslGrammarAccess;
-  
   protected void _format(final Robot robot, @Extension final IFormattableDocument document) {
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.newLine();

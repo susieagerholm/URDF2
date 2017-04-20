@@ -4,8 +4,8 @@
 package org.xtext.urdf.validation
 
 import org.eclipse.xtext.validation.Check
-import org.xtext.urdf.domainmodel.Robot
-import org.xtext.urdf.domainmodel.DomainmodelPackage
+import uRDF.Robot
+import uRDF.URDFPackage
 
 /**
  * This class contains custom validation rules. 
@@ -24,9 +24,9 @@ class DslValidator extends AbstractDslValidator {
 		{
 			//Todo: implement this!
 			error("Joint relation not valid...", 
-        		DomainmodelPackage.Literals.ROBOT__JOINT)
+        		URDFPackage.Literals.ROBOT__JOINT)
 		} else {
-			info("Robot is valid",DomainmodelPackage.Literals.ROBOT__NAME);
+			info("Robot is valid",URDFPackage.Literals.ROBOT__LINK);
 		}
 		
 	}
