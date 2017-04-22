@@ -6,10 +6,10 @@
   <foreignModel>uRDF.ecore</foreignModel>
   <genPackages prefix="URDF" disposableProviderFactory="true" ecorePackage="uRDF.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="uRDF.ecore#//JointType">
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/Revolute"/>
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/Continous"/>
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/Fixed"/>
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/Prismatic"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/revolute"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/continous"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/fixed"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/prismatic"/>
     </genEnums>
     <genClasses ecoreClass="uRDF.ecore#//URDFModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//URDFModel/robot"/>
@@ -25,7 +25,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/limit"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/axis"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/origin"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/callibration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/calibration"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/dynamics"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/mimic"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Joint/safetycontroller"/>
@@ -36,10 +36,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Link/collision"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Limit">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/Lower"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/Upper"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/Effort"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/Velocity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/upper"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/effort"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Limit/velocity"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Axis">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Axis/x"/>
@@ -64,41 +64,70 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/z"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/Roll"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/Pitch"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/Yaw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/roll"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/pitch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Origin/yaw"/>
     </genClasses>
-    <genClasses ecoreClass="uRDF.ecore#//Mass"/>
-    <genClasses ecoreClass="uRDF.ecore#//Inertia"/>
+    <genClasses ecoreClass="uRDF.ecore#//Mass">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mass/massValueInKilograms"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Inertia">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/ixx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/ixy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/ixz"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/iyy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/iyz"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Inertia/izz"/>
+    </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Material"/>
     <genClasses ecoreClass="uRDF.ecore#//Geometry"/>
     <genClasses ecoreClass="uRDF.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NamedElement/name"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Default"/>
-    <genClasses ecoreClass="uRDF.ecore#//ReUse"/>
-    <genClasses ecoreClass="uRDF.ecore#//Color"/>
-    <genClasses ecoreClass="uRDF.ecore#//Box"/>
-    <genClasses ecoreClass="uRDF.ecore#//Cylinder"/>
-    <genClasses ecoreClass="uRDF.ecore#//Mesh"/>
-    <genClasses ecoreClass="uRDF.ecore#//Sphere"/>
-    <genClasses ecoreClass="uRDF.ecore#//Texture"/>
-    <genClasses ecoreClass="uRDF.ecore#//Callibration">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Callibration/Rising"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Callibration/Falling"/>
+    <genClasses ecoreClass="uRDF.ecore#//ReUseAble"/>
+    <genClasses ecoreClass="uRDF.ecore#//Color">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/red"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/green"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/blue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/alpha"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Box">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Box/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Box/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Box/width"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Cylinder">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Cylinder/radius"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Cylinder/length"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Mesh">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mesh/pathToFile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mesh/boxTest"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Mesh/box"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Sphere">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Sphere/radius"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Texture">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Texture/pathToFile"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Calibration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Calibration/rising"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Calibration/falling"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Dynamics">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Dynamics/Friction"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Dynamics/Damping"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Dynamics/friction"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Dynamics/damping"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Mimic">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mimic/Joint"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mimic/Multiplier"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mimic/OffSet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mimic/multiplier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mimic/offSet"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Mimic/mimics"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//SafetyController">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/SoftLowerLimit"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/SoftUpperLimit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/softLowerLimit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/softUpperLimit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/k_position"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//SafetyController/k_velocity"/>
     </genClasses>
@@ -107,11 +136,14 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Expression"/>
     <genClasses ecoreClass="uRDF.ecore#//Operator">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Operator/Op"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Operator/op"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Constant"/>
-    <genClasses ecoreClass="uRDF.ecore#//TestSync">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//TestSync/newAttribute"/>
+    <genClasses ecoreClass="uRDF.ecore#//NumConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumConstant/numValue"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//StringConstant">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//StringConstant/stringValue"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -16,64 +16,65 @@ import "http://www.example.org/uRDF" as uRDF
 
 
 Robot returns uRDF::Robot:
-		'RobotName' name=STRING
-		 link+=Link ("," link+=Link)*  
-		(joint+=Joint (joint+=Joint)* )?
+		'RobotName' name=ID
+		 link+=Link+  
+		 joint+=Joint* 
 ;
 
 Material returns uRDF::Material:
-	Material_Impl | Color | Texture;
+	Color | Texture;
 
 Geometry returns uRDF::Geometry:
-	Geometry_Impl | Box | Cylinder | Mesh | Sphere;
+	Box | Cylinder | Mesh | Sphere;
 
 Link returns uRDF::Link:
 	{uRDF::Link}
 		'Link' name=ID
-		('inertial' inertial+=Inertial (inertial+=Inertial)* )?
-		('visuals' visuals+=Visual (visuals+=Visual)* )?
-		('collision' collision+=Collision (collision+=Collision)*)?
+		inertial+=Inertial*
+		visuals+=Visual*
+		collision+=Collision*
 ;
 
 Joint returns uRDF::Joint:
 		'Joint' name=ID
-		('Type' Type=JointType)?
-		'ChildOf'  ChildOf=[uRDF::Link|STRING]
-		'ParentOf' ParentOf=[uRDF::Link|STRING]
-		('limit' limit=Limit)?
-		('axis' axis=Axis)?
-		'origin' origin=Origin
-		('callibration' callibration=Callibration)?
-		('dynamics' dynamics=Dynamics)?
-		('mimic' mimic=Mimic)?
-		('safetycontroller' safetycontroller=SafetyController)?
+		Type=JointType
+		 ChildOf=[uRDF::Link|STRING]
+		 ParentOf=[uRDF::Link|STRING]
+		(limit=Limit)?
+		(axis=Axis)?
+		 origin=Origin
+		(calibration=Calibration)?
+		(dynamics=Dynamics)?
+		(mimic=Mimic)?
+		(safetycontroller=SafetyController)?
 ;
 
 Inertial returns uRDF::Inertial:
-		'origin' origin=Origin
-		('mass' mass+=Mass ( "," mass+=Mass)*)?
-		('inertia' inertia+=Inertia (inertia+=Inertia)*)?
+		origin=Origin
+		mass=Mass
+		inertia=Inertia
 ;
 
 Visual returns uRDF::Visual:
-		('material' material=Material)?
-		'origin' origin=Origin
-		'geometry' geometry=Geometry
+		(material=Material)?
+		origin=Origin
+		geometry=Geometry
 ;
 
 Collision returns uRDF::Collision:
-		'geometry' geometry=Geometry
-		'origin' origin=Origin
+		geometry=Geometry
+		origin=Origin
 ;
 
 Origin returns uRDF::Origin:
 	{uRDF::Origin}
-		('x' x=INT)?
-		('y' y=INT)?
-		('z' z=INT)?
-		('Roll' Roll=INT)?
-		('Pitch' Pitch=INT)?
-		('Yaw' Yaw=INT)?
+	 'Origin'
+		(x=FLOAT)?
+		(y=FLOAT)?
+		(z=FLOAT)?
+		(roll=FLOAT)?
+		(pitch=FLOAT)?
+		(yaw=FLOAT)?
 ;
 
 Mass returns uRDF::Mass:
@@ -87,17 +88,8 @@ Inertia returns uRDF::Inertia:
 	;
 
 
-Material_Impl returns uRDF::Material:
-	{uRDF::Material}
-	'Material'
-	;
-
-Geometry_Impl returns uRDF::Geometry:
-	{uRDF::Geometry}
-	'Geometry'
-	;
-
 Color returns uRDF::Color:
+	/* RGBA values between 0 and 1 */
 	{uRDF::Color}
 	'Color'
 	;
@@ -128,49 +120,64 @@ Sphere returns uRDF::Sphere:
 	;
 
 enum JointType returns uRDF::JointType:
-				Revolute = 'Revolute' | Continous = 'Continous' | Fixed = 'Fixed' | Prismatic = 'Prismatic';
+				revolute = 'Revolute' | continous = 'Continous' | fixed = 'Fixed' | prismatic = 'Prismatic';
 
 Limit returns uRDF::Limit:
 	{uRDF::Limit}
-		('Lower' Lower=INT)?
-		('Upper' Upper=INT)?
-		('Effort' Effort=INT)?
-		('Velocity' Velocity=INT)?
+	 'Limit'
+		(lower=FLOAT)?
+		(upper=FLOAT)?
+		(effort=FLOAT)?
+		(velocity=FLOAT)?
 ;
 
 Axis returns uRDF::Axis:
+	/* Binary values */
 	{uRDF::Axis}
+		'Axis'
 		('x' x=INT)?
 		('y' y=INT)?
 		('z' z=INT)?
 ;
 
-Callibration returns uRDF::Callibration:
-	{uRDF::Callibration}
-		('Rising' Rising=STRING)?
-		('Falling' Falling=STRING)?
+Calibration returns uRDF::Calibration:
+	{uRDF::Calibration}
+	 'Calibration'
+	 	('Rising' rising=FLOAT)? 
+	 	('Falling' falling=FLOAT)? 
 ;
 
 Dynamics returns uRDF::Dynamics:
 	{uRDF::Dynamics}
-		('Friction' Friction=INT)?
-		('Damping' Damping=INT)?
+		'Dynamics'
+		('Friction' friction=FLOAT)?
+		('Damping' damping=FLOAT)?
 ;
 
 Mimic returns uRDF::Mimic:
 	{uRDF::Mimic}
-		('Joint' Joint=STRING)?
-		('Multiplier' Multiplier=INT)?
-		('OffSet' OffSet=INT)?
+		'Mimic'
+		('Multiplier' multiplier=FLOAT)?
+		('OffSet' offSet=FLOAT)?
 ;
 
 SafetyController returns uRDF::SafetyController:
 	{uRDF::SafetyController}
-		('SoftLowerLimit' SoftLowerLimit=INT)?
-		('SoftUpperLimit' SoftUpperLimit=INT)?
-		('k_position' k_position=INT)?
-		('k_velocity' k_velocity=INT)?
+		'SafetyController'
+		('SoftLowerLimit' softLowerLimit=FLOAT)?
+		('SoftUpperLimit' softUpperLimit=FLOAT)?
+		('k_position' k_position=FLOAT)?
+		('k_velocity' k_velocity=FLOAT)?
 ;
+
+FLOAT returns ecore::EFloat:
+	INT '.' INT
+;
+
+REFLECT:
+'reflect'	
+;
+
 
 NL:
 	('\n' | '\r')+
