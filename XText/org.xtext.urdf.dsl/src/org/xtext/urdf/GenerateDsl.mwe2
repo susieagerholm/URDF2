@@ -1,9 +1,12 @@
 module org.xtext.urdf.GenerateDsl
 
+import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
 var rootPath = ".."
+
+
 
 Workflow {
 	
@@ -29,6 +32,7 @@ Workflow {
 			}
 		}
 		language = StandardLanguage {
+		//	grammarUri = "Dsl2.xtext"
 			name = "org.xtext.urdf.Dsl"
 			fileExtensions = "urdf"
 			referencedResource = "platform:/resource/URDF/model/uRDF.genmodel"

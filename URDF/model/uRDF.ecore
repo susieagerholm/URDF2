@@ -111,7 +111,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="iyz" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="izz" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Material" eSuperTypes="#//NamedElement #//Default"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Material" abstract="true" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID"

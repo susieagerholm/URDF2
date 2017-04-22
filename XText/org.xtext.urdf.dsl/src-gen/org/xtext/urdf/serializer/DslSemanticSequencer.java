@@ -125,10 +125,25 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Axis returns Axis
 	 *
 	 * Constraint:
-	 *     (x=INT? y=INT? z=INT?)
+	 *     (name=ID x=INT y=INT z=INT)
 	 */
 	protected void sequence_Axis(ISerializationContext context, Axis semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.AXIS__X) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.AXIS__X));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.AXIS__Y) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.AXIS__Y));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.AXIS__Z) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.AXIS__Z));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAxisAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAxisAccess().getXINTTerminalRuleCall_3_0(), semanticObject.getX());
+		feeder.accept(grammarAccess.getAxisAccess().getYINTTerminalRuleCall_5_0(), semanticObject.getY());
+		feeder.accept(grammarAccess.getAxisAccess().getZINTTerminalRuleCall_7_0(), semanticObject.getZ());
+		feeder.finish();
 	}
 	
 	
@@ -138,7 +153,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Box returns Box
 	 *
 	 * Constraint:
-	 *     {Box}
+	 *     (name=ID height=FLOAT? length=FLOAT? width=FLOAT?)
 	 */
 	protected void sequence_Box(ISerializationContext context, Box semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -150,7 +165,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Calibration returns Calibration
 	 *
 	 * Constraint:
-	 *     (rising=FLOAT? falling=FLOAT?)
+	 *     (name=ID rising=FLOAT? falling=FLOAT?)
 	 */
 	protected void sequence_Calibration(ISerializationContext context, Calibration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -162,18 +177,21 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Collision returns Collision
 	 *
 	 * Constraint:
-	 *     (geometry=Geometry origin=Origin)
+	 *     (name=ID geometry=Geometry origin=Origin)
 	 */
 	protected void sequence_Collision(ISerializationContext context, Collision semanticObject) {
 		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
 			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.COLLISION__GEOMETRY) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.COLLISION__GEOMETRY));
 			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.COLLISION__ORIGIN) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.COLLISION__ORIGIN));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCollisionAccess().getGeometryGeometryParserRuleCall_0_0(), semanticObject.getGeometry());
-		feeder.accept(grammarAccess.getCollisionAccess().getOriginOriginParserRuleCall_1_0(), semanticObject.getOrigin());
+		feeder.accept(grammarAccess.getCollisionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCollisionAccess().getGeometryGeometryParserRuleCall_1_0(), semanticObject.getGeometry());
+		feeder.accept(grammarAccess.getCollisionAccess().getOriginOriginParserRuleCall_2_0(), semanticObject.getOrigin());
 		feeder.finish();
 	}
 	
@@ -184,7 +202,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Color returns Color
 	 *
 	 * Constraint:
-	 *     {Color}
+	 *     (name=ID red=FLOAT? green=FLOAT? blue=FLOAT? alpha=FLOAT?)
 	 */
 	protected void sequence_Color(ISerializationContext context, Color semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -197,7 +215,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Cylinder returns Cylinder
 	 *
 	 * Constraint:
-	 *     {Cylinder}
+	 *     (name=ID radius=FLOAT? length=FLOAT?)
 	 */
 	protected void sequence_Cylinder(ISerializationContext context, Cylinder semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -209,7 +227,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Dynamics returns Dynamics
 	 *
 	 * Constraint:
-	 *     (friction=FLOAT? damping=FLOAT?)
+	 *     (name=ID friction=FLOAT? damping=FLOAT?)
 	 */
 	protected void sequence_Dynamics(ISerializationContext context, Dynamics semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -221,10 +239,42 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Inertia returns Inertia
 	 *
 	 * Constraint:
-	 *     {Inertia}
+	 *     (
+	 *         name=ID 
+	 *         ixx=FLOAT 
+	 *         ixy=FLOAT 
+	 *         ixz=FLOAT 
+	 *         iyy=FLOAT 
+	 *         iyz=FLOAT 
+	 *         izz=FLOAT
+	 *     )
 	 */
 	protected void sequence_Inertia(ISerializationContext context, Inertia semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IXX) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IXX));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IXY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IXY));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IXZ) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IXZ));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IYY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IYY));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IYZ) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IYZ));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIA__IZZ) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIA__IZZ));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getInertiaAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getInertiaAccess().getIxxFLOATParserRuleCall_3_0(), semanticObject.getIxx());
+		feeder.accept(grammarAccess.getInertiaAccess().getIxyFLOATParserRuleCall_5_0(), semanticObject.getIxy());
+		feeder.accept(grammarAccess.getInertiaAccess().getIxzFLOATParserRuleCall_7_0(), semanticObject.getIxz());
+		feeder.accept(grammarAccess.getInertiaAccess().getIyyFLOATParserRuleCall_9_0(), semanticObject.getIyy());
+		feeder.accept(grammarAccess.getInertiaAccess().getIyzFLOATParserRuleCall_11_0(), semanticObject.getIyz());
+		feeder.accept(grammarAccess.getInertiaAccess().getIzzFLOATParserRuleCall_13_0(), semanticObject.getIzz());
+		feeder.finish();
 	}
 	
 	
@@ -233,10 +283,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Inertial returns Inertial
 	 *
 	 * Constraint:
-	 *     (origin=Origin mass=Mass inertia=Inertia)
+	 *     (name=ID origin=Origin mass=Mass inertia=Inertia)
 	 */
 	protected void sequence_Inertial(ISerializationContext context, Inertial semanticObject) {
 		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
 			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIAL__ORIGIN) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIAL__ORIGIN));
 			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.INERTIAL__MASS) == ValueTransient.YES)
@@ -245,9 +297,10 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.INERTIAL__INERTIA));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getInertialAccess().getOriginOriginParserRuleCall_0_0(), semanticObject.getOrigin());
-		feeder.accept(grammarAccess.getInertialAccess().getMassMassParserRuleCall_1_0(), semanticObject.getMass());
-		feeder.accept(grammarAccess.getInertialAccess().getInertiaInertiaParserRuleCall_2_0(), semanticObject.getInertia());
+		feeder.accept(grammarAccess.getInertialAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getInertialAccess().getOriginOriginParserRuleCall_1_0(), semanticObject.getOrigin());
+		feeder.accept(grammarAccess.getInertialAccess().getMassMassParserRuleCall_2_0(), semanticObject.getMass());
+		feeder.accept(grammarAccess.getInertialAccess().getInertiaInertiaParserRuleCall_3_0(), semanticObject.getInertia());
 		feeder.finish();
 	}
 	
@@ -281,10 +334,28 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Limit returns Limit
 	 *
 	 * Constraint:
-	 *     (lower=FLOAT? upper=FLOAT? effort=FLOAT? velocity=FLOAT?)
+	 *     (name=ID lower=FLOAT upper=FLOAT effort=FLOAT velocity=FLOAT)
 	 */
 	protected void sequence_Limit(ISerializationContext context, Limit semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.LIMIT__LOWER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.LIMIT__LOWER));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.LIMIT__UPPER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.LIMIT__UPPER));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.LIMIT__EFFORT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.LIMIT__EFFORT));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.LIMIT__VELOCITY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.LIMIT__VELOCITY));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLimitAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getLimitAccess().getLowerFLOATParserRuleCall_3_0(), semanticObject.getLower());
+		feeder.accept(grammarAccess.getLimitAccess().getUpperFLOATParserRuleCall_5_0(), semanticObject.getUpper());
+		feeder.accept(grammarAccess.getLimitAccess().getEffortFLOATParserRuleCall_7_0(), semanticObject.getEffort());
+		feeder.accept(grammarAccess.getLimitAccess().getVelocityFLOATParserRuleCall_9_0(), semanticObject.getVelocity());
+		feeder.finish();
 	}
 	
 	
@@ -305,10 +376,19 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mass returns Mass
 	 *
 	 * Constraint:
-	 *     {Mass}
+	 *     (name=ID massValueInKilograms=FLOAT)
 	 */
 	protected void sequence_Mass(ISerializationContext context, Mass semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.MASS__MASS_VALUE_IN_KILOGRAMS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.MASS__MASS_VALUE_IN_KILOGRAMS));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMassAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getMassAccess().getMassValueInKilogramsFLOATParserRuleCall_3_0(), semanticObject.getMassValueInKilograms());
+		feeder.finish();
 	}
 	
 	
@@ -318,7 +398,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mesh returns Mesh
 	 *
 	 * Constraint:
-	 *     {Mesh}
+	 *     (name=ID pathToFile=STRING? box=[Box|STRING]?)
 	 */
 	protected void sequence_Mesh(ISerializationContext context, Mesh semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -330,7 +410,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mimic returns Mimic
 	 *
 	 * Constraint:
-	 *     (multiplier=FLOAT? offSet=FLOAT?)
+	 *     (name=ID multiplier=FLOAT? offSet=FLOAT? mimics=[Joint|STRING]?)
 	 */
 	protected void sequence_Mimic(ISerializationContext context, Mimic semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -343,6 +423,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *
 	 * Constraint:
 	 *     (
+	 *         name=ID 
 	 *         x=FLOAT? 
 	 *         y=FLOAT? 
 	 *         z=FLOAT? 
@@ -373,7 +454,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SafetyController returns SafetyController
 	 *
 	 * Constraint:
-	 *     (softLowerLimit=FLOAT? softUpperLimit=FLOAT? k_position=FLOAT? k_velocity=FLOAT?)
+	 *     (name=ID softLowerLimit=FLOAT? softUpperLimit=FLOAT? k_position=FLOAT? k_velocity=FLOAT?)
 	 */
 	protected void sequence_SafetyController(ISerializationContext context, SafetyController semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -386,7 +467,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Sphere returns Sphere
 	 *
 	 * Constraint:
-	 *     {Sphere}
+	 *     (name=ID radius=FLOAT?)
 	 */
 	protected void sequence_Sphere(ISerializationContext context, Sphere semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -399,7 +480,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Texture returns Texture
 	 *
 	 * Constraint:
-	 *     {Texture}
+	 *     (name=ID pathToFile=STRING?)
 	 */
 	protected void sequence_Texture(ISerializationContext context, Texture semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,7 +492,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Visual returns Visual
 	 *
 	 * Constraint:
-	 *     (material=Material? origin=Origin geometry=Geometry)
+	 *     (name=ID material=Material? origin=Origin geometry=Geometry)
 	 */
 	protected void sequence_Visual(ISerializationContext context, Visual semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
