@@ -84,8 +84,9 @@
     <genClasses ecoreClass="uRDF.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NamedElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="uRDF.ecore#//Default"/>
-    <genClasses ecoreClass="uRDF.ecore#//ReUseAble"/>
+    <genClasses ecoreClass="uRDF.ecore#//ReUseAble">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//ReUseAble/reuseable"/>
+    </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Color">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/red"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Color/green"/>
@@ -133,9 +134,9 @@
     <genClasses ecoreClass="uRDF.ecore#//NumericValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumericValue/value"/>
     </genClasses>
-    <genClasses ecoreClass="uRDF.ecore#//Expression"/>
-    <genClasses ecoreClass="uRDF.ecore#//Operator">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Operator/op"/>
+    <genClasses ecoreClass="uRDF.ecore#//Numeric"/>
+    <genClasses ecoreClass="uRDF.ecore#//IntValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//IntValue/value"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Constant"/>
     <genClasses ecoreClass="uRDF.ecore#//NumConstant">
@@ -143,6 +144,11 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//StringConstant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//StringConstant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//ScientificValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//ScientificValue/base"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//ScientificValue/exp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//ScientificValue/negativeOperator"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
