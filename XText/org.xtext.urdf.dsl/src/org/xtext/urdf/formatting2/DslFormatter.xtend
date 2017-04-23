@@ -3,35 +3,43 @@
  */
 package org.xtext.urdf.formatting2
 
+import com.google.inject.Inject
+import com.google.common.base.Strings
+import org.xtext.urdf.services.DslGrammarAccess
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
+
+
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import uRDF.Joint
 import uRDF.Link
 import uRDF.Robot
+import uRDF.URDFPackage
+
+
+//@Inject extension DslGrammarAccess
 
 class DslFormatter extends AbstractFormatter2 {
 	
-
-
 	def dispatch void format(Robot robot, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc.
-		robot.append[newLine]
 		//prepend(ISemanticRegion semanticRegion, Procedures.Procedure1<IHiddenRegionFormatter> before) 
 		
-		robot.regionFor.keyword("Link").prepend[setSpace("    ")]
-		robot.regionFor.keyword("Joint").prepend[setSpace("    ")]
+		robot.regionFor.features(URDFPackage.Literals.NAMED_ELEMENT__NAME).head.append[newLine]
 		
+			
 		for (Link link : robot.getLink()) {
-			//link.format;
-			//link.append[setNewLines(1)]
-			//link.append[indent]			
+			link.regionFor.keyword("Link").prepend[space = Strings.repeat(" ", 6)] 
+			link.regionFor.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
+			link.format;
+						
 		}
 		for (Joint joint : robot.getJoint()) {
-			joint.append[setNewLines(1)]
+			
 		}
 		
 
-		robot.regionFor.keyword("ID").surround[oneSpace]
+		
 	}
 
 //	def dispatch void format(Link link, extension IFormattableDocument document) {
