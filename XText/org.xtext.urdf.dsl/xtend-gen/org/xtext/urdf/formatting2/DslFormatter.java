@@ -3,7 +3,9 @@
  */
 package org.xtext.urdf.formatting2;
 
+import com.google.common.base.Strings;
 import java.util.Arrays;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
@@ -13,46 +15,45 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import uRDF.Joint;
 import uRDF.Link;
 import uRDF.Robot;
+import uRDF.URDFPackage;
 
 @SuppressWarnings("all")
 public class DslFormatter extends AbstractFormatter2 {
   protected void _format(final Robot robot, @Extension final IFormattableDocument document) {
+    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(robot);
+    List<ISemanticRegion> _features = _regionFor.features(URDFPackage.Literals.NAMED_ELEMENT__NAME);
+    ISemanticRegion _head = IterableExtensions.<ISemanticRegion>head(_features);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
-    document.<Robot>append(robot, _function);
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(robot);
-    ISemanticRegion _keyword = _regionFor.keyword("Link");
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-      it.setSpace("    ");
-    };
-    document.prepend(_keyword, _function_1);
-    ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(robot);
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword("Joint");
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.setSpace("    ");
-    };
-    document.prepend(_keyword_1, _function_2);
+    document.append(_head, _function);
     EList<Link> _link = robot.getLink();
     for (final Link link : _link) {
+      {
+        ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(link);
+        ISemanticRegion _keyword = _regionFor_1.keyword("Link");
+        final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+          String _repeat = Strings.repeat(" ", 6);
+          it.setSpace(_repeat);
+        };
+        document.prepend(_keyword, _function_1);
+        ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(link);
+        ISemanticRegion _feature = _regionFor_2.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME);
+        final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
+        };
+        document.append(_feature, _function_2);
+        document.<Link>format(link);
+      }
     }
     EList<Joint> _joint = robot.getJoint();
     for (final Joint joint : _joint) {
-      final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-        it.setNewLines(1);
-      };
-      document.<Joint>append(joint, _function_3);
     }
-    ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(robot);
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword("ID");
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.oneSpace();
-    };
-    document.surround(_keyword_2, _function_4);
   }
   
   public void format(final Object robot, final IFormattableDocument document) {
