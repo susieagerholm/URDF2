@@ -2852,16 +2852,16 @@
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_wyElQBtcEeesQ_TrACFdDw" name="rising : Float = 0.0" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="uRDF.ecore#//Calibration/rising"/>
           <semanticElements xmi:type="ecore:EAttribute" href="uRDF.ecore#//Calibration/rising"/>
-          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_CAeoACgAEeeRPeq-EWUn9w" labelAlignment="LEFT" description="_n0rw8Cc4EeeparHoB3JxdQ">
-            <labelFormat>bold</labelFormat>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_gpbHQCgAEeeRPeq-EWUn9w" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_2V1IwBtcEeesQ_TrACFdDw" name="falling : Float = 0.0" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="uRDF.ecore#//Calibration/falling"/>
           <semanticElements xmi:type="ecore:EAttribute" href="uRDF.ecore#//Calibration/falling"/>
-          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_C39poCgAEeeRPeq-EWUn9w" labelAlignment="LEFT" description="_n0rw8Cc4EeeparHoB3JxdQ">
-            <labelFormat>bold</labelFormat>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_hdC8kCgAEeeRPeq-EWUn9w" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>

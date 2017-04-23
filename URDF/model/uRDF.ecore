@@ -154,10 +154,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Calibration" eSuperTypes="#//NamedElement #//Default">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rising" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="falling" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rising" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="falling" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dynamics" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="friction" lowerBound="1"
