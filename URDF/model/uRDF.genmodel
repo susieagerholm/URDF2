@@ -103,7 +103,6 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Mesh">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mesh/pathToFile"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Mesh/boxTest"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference uRDF.ecore#//Mesh/box"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Sphere">
@@ -140,10 +139,10 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Constant"/>
     <genClasses ecoreClass="uRDF.ecore#//NumConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumConstant/numValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumConstant/value"/>
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//StringConstant">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//StringConstant/stringValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//StringConstant/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

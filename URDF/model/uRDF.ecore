@@ -111,8 +111,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="iyz" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="izz" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Material" abstract="true" eSuperTypes="#//NamedElement #//Default"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Geometry" eSuperTypes="#//NamedElement #//Default"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Material" abstract="true" interface="true"
+      eSuperTypes="#//NamedElement #//Default"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Geometry" abstract="true" interface="true"
+      eSuperTypes="#//NamedElement #//Default"/>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID"
         iD="true"/>
@@ -120,34 +122,42 @@
   <eClassifiers xsi:type="ecore:EClass" name="Default" abstract="true" eSuperTypes="#//ReUseAble"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReUseAble" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement #//Material">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alpha" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alpha" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//NamedElement #//Geometry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cylinder" eSuperTypes="#//NamedElement #//Geometry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mesh" eSuperTypes="#//NamedElement #//Geometry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToFile" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boxTest" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToFile" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="box" eType="#//Box"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sphere" eSuperTypes="#//NamedElement #//Geometry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Texture" eSuperTypes="#//NamedElement #//Material">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToFile" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToFile" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Calibration" eSuperTypes="#//NamedElement #//Default">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rising" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="falling" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rising" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="falling" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dynamics" eSuperTypes="#//NamedElement #//Default">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="friction" lowerBound="1"
@@ -163,14 +173,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mimics" eType="#//Joint"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SafetyController" eSuperTypes="#//NamedElement #//Default">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="softLowerLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"
-        defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="softUpperLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"
-        defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="k_position" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"
-        defaultValueLiteral="0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="k_velocity" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"
-        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="softLowerLimit" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="softUpperLimit" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="k_position" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="k_velocity" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumericValue" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
@@ -182,9 +192,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Constant" abstract="true" interface="true"
       eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="NumConstant" eSuperTypes="#//Constant">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numValue" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Float"
+        defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringConstant" eSuperTypes="#//Constant">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringValue" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
   </eClassifiers>
 </ecore:EPackage>

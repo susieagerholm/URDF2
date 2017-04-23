@@ -16,6 +16,7 @@ import "http://www.example.org/uRDF" as uRDF
  * Defaults
  * ReUse
  * Constants
+ * x y z values - how to specify
  */
 
 
