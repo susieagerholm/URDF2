@@ -2,13 +2,7 @@
 grammar org.xtext.urdf.Dsl with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-
 import "http://www.example.org/uRDF" as uRDF
-
-
-
-
-
 
 /*
  * Todo: 
@@ -16,13 +10,17 @@ import "http://www.example.org/uRDF" as uRDF
  * Defaults
  * ReUse
  * Constants
- * x y z values - how to specify
+ * Topology of Link and Joint: How to specify?
+ * Origin xyz/rpy values + axis values - kill one of the definitions?
+ * Create ValueConverter (and possibly other stuff to parse reflect as negation of reused
+ * Create ValueConverter to convert scale values to Box
+ * Origin values should be ('-')? INT or FLOAT - get Numeric class from metamodel...
+ * Origin required should possibly be adjusted in metamodel?
+ * 
  */
 
-
-
 Robot returns uRDF::Robot:
-		'RobotName' name=ID
+		'Robot' name=ID
 		 link+=Link+  
 		 joint+=Joint* 
 ;
@@ -36,175 +34,162 @@ Geometry returns uRDF::Geometry:
 Link returns uRDF::Link:
 	{uRDF::Link}
 		'Link' name=ID
-		inertial+=Inertial*
 		visuals+=Visual*
-		collision+=Collision*
+		(inertial+=Inertial*)?
+		('Collision' collision+=Collision*)?
 ;
 
 Joint returns uRDF::Joint:
 		'Joint' name=ID
-		Type=JointType
-		 ChildOf=[uRDF::Link|STRING]
-		 ParentOf=[uRDF::Link|STRING]
-		(limit=Limit)?
-		(axis=Axis)?
-		 origin=Origin
-		(calibration=Calibration)?
-		(dynamics=Dynamics)?
-		(mimic=Mimic)?
-		(safetycontroller=SafetyController)?
+  		'Type' Type=JointType
+		'ChildOf' ChildOf=[uRDF::Link|STRING]
+		'ParentOf' ParentOf=[uRDF::Link|STRING]
+		('Limit' limit=Limit)?
+		('Axis' axis=Axis)?
+		('Origin' origin=Origin)?
+		('Calibration' calibration=Calibration)?
+		('Dynamics' dynamics=Dynamics)?
+		('Mimic' mimic=Mimic)?
+		('SafetyController' safetycontroller=SafetyController)?
 ;
 
 Inertial returns uRDF::Inertial:
-		name=ID
-		origin=Origin
-		mass=Mass
-		inertia=Inertia
+		'Inertial' (name=ID)?
+		'Inertia' inertia=Inertia
+		'Mass' mass=Mass
+		(origin=Origin)?
+		
 ;
 
 Visual returns uRDF::Visual:
-		name=ID
-		(material=Material)?
-		origin=Origin
-		geometry=Geometry
+		'Visual'(name=ID)? 
+		'Geometry' geometry=Geometry
+		(origin=Origin)?
+		('Material' material=Material)?
+		
 ;
 
 Collision returns uRDF::Collision:
 		name=ID
-		geometry=Geometry
-		origin=Origin
+		'Geometry' geometry=Geometry
+		('Origin' origin=Origin)?
 ;
 
 Origin returns uRDF::Origin:
-	 'Origin'
-	 name=ID
-	 	
-	 	('x' x=FLOAT)?
-		('y' y=FLOAT)?
-		('z' z=FLOAT)?
-		('roll' roll=FLOAT)?
-		('pitch' pitch=FLOAT)?
-		('yaw' yaw=FLOAT)?
-	 
+	 'Origin' (name=ID)?
+	 	'xyz' x=FLOAT y=FLOAT z=FLOAT //| 'x' x=FLOAT 'y' y=FLOAT 'z' z=FLOAT
+		('roll_pitch_yaw' roll=FLOAT pitch=FLOAT yaw=FLOAT)? // | 'roll' roll=FLOAT 'pitch' pitch=FLOAT 'yaw' yaw=FLOAT)?
 ;
 
 Mass returns uRDF::Mass:
-	name=ID
-	'Mass'
+	(name=ID)?
 	'massValueInKilograms' massValueInKilograms=FLOAT
 	;
 
 Inertia returns uRDF::Inertia:
-	name=ID
-	'Inertia'
-	'ixx' ixx=FLOAT
-	'ixy' ixy=FLOAT
-	'ixz' ixz=FLOAT
-	'iyy' iyy=FLOAT
-	'iyz' iyz=FLOAT
-	'izz' izz=FLOAT
+	(name=ID)?
+	'ixx' ixx=FLOAT 'ixy' ixy=FLOAT 'ixz' ixz=FLOAT 'iyy' iyy=FLOAT 'iyz' iyz=FLOAT 'izz' izz=FLOAT
 	;
 
 
 Color returns uRDF::Color:
-	/* RGBA values between 0 and 1 */
-	name=ID
-	'Color'
-		('red' red=FLOAT)?
-		('green' green=FLOAT)?
-		('blue' blue=FLOAT)?
-		('alpha' alpha=FLOAT)?	
+	/* RGBA values must be floats between 0 and 1 incl */
+	'Color' (name=ID)?
+		'red_green_blue_alpha' red=FLOAT green=FLOAT blue=FLOAT alpha=FLOAT | 'red' red=FLOAT 'green' green=FLOAT 'blue' blue=FLOAT 'alpha' alpha=FLOAT	
 	;
 
 Texture returns uRDF::Texture:
-	name=ID
-	'Texture'
-	('pathToFile' pathToFile=STRING)?
+	'Texture' (name=ID)?
+	'pathToFile' pathToFile=STRING
 	;
 
 Box returns uRDF::Box:
-	name=ID
-	'Box'
-	('height' height=FLOAT)?
-	('length' length=FLOAT)?
-	('width' width=FLOAT)?	
+	'Box' (name=ID)?
+	//Tjek spec: Hvilken rækkefølge listes dimensioner i?
+	'height_length_width' height=FLOAT length=FLOAT width=FLOAT | 'height' height=FLOAT 'length' length=FLOAT 'width' width=FLOAT	
 	;
 
 Cylinder returns uRDF::Cylinder:
-	name=ID
-	'Cylinder'
-	('radius' radius=FLOAT)?
-	('length' length=FLOAT)?	
+	'Cylinder' (name=ID)?
+	'radius' radius=FLOAT
+	'length' length=FLOAT	
 	;
 
 Mesh returns uRDF::Mesh:
-	name=ID
-	'Mesh'
-	('pathToFile' pathToFile=STRING)?
-	('box' box=[uRDF::Box|STRING])?
+	'Mesh' (name=ID)?
+	'pathToFile' pathToFile=STRING
+	//TODO: create ValueConverter to convert scale to Box
+	('scale' box=[uRDF::Box|STRING])?
 	;
 
 Sphere returns uRDF::Sphere:
-	name=ID
-	'Sphere'
-	('radius' radius=FLOAT)?	
+	'Sphere' (name=ID)?
+	'radius' radius=FLOAT	
 	;
 
 enum JointType returns uRDF::JointType:
 				revolute = 'Revolute' | continous = 'Continous' | fixed = 'Fixed' | prismatic = 'Prismatic';
 
 Limit returns uRDF::Limit:
-	name=ID
-	 'Limit'
-		 'lower' lower=FLOAT
-		 'upper' upper=FLOAT 
+	(name=ID)?
+		 ('lower' lower=FLOAT)?
+		 ('upper' upper=FLOAT)? 
 		 'effort' effort=FLOAT 
 		 'velocity' velocity=FLOAT 
 ;
 
 Axis returns uRDF::Axis:
 	/* Binary values */
-	name=ID
-		'Axis'
-		'x' x=INT
-		'y' y=INT
-		'z' z=INT
+	(name=ID)?
+	    //keyword aliases: 'xyz' or 'x', 'y', 'z'
+		'xyz' x=INT y=INT z=INT | 'x' x=INT 'y' y=INT 'z' z=INT
 ;
 
 Calibration returns uRDF::Calibration:
-	name=ID
-	 'Calibration'
+	//{uRDF::Calibration} is necessary because all content is optional - type may not be init, so we need to force it (Bettini)
+	{uRDF::Calibration}(name=ID)?
 	 	('rising' rising=FLOAT)? 
 	 	('falling' falling=FLOAT)? 
 ;
 
 Dynamics returns uRDF::Dynamics:
-	name=ID
-		'Dynamics'
+	//{uRDF::Dynamics} is necessary because all content is optional - type may not be init, so we need to force it (Bettini)
+	{uRDF::Dynamics}(name=ID)?
 		('friction' friction=FLOAT)?
 		('damping' damping=FLOAT)?
 ;
 
 Mimic returns uRDF::Mimic:
-	name=ID
-		'Mimic'
+	(name=ID)?
+	    'mimics' mimics=[uRDF::Joint|STRING]
 		('multiplier' multiplier=FLOAT)?
 		('offSet' offSet=FLOAT)?
-		('mimics' mimics=[uRDF::Joint|STRING])?
 ;
 
 SafetyController returns uRDF::SafetyController:
-	name=ID
-		'SafetyController'
+	(name=ID)?
 		('softLowerLimit' softLowerLimit=FLOAT)?
 		('softUpperLimit' softUpperLimit=FLOAT)?
 		('k_position' k_position=FLOAT)?
-		('k_velocity' k_velocity=FLOAT)?
+		'k_velocity' k_velocity=FLOAT
 ;
 
+//TOPOLOGY:
+	//('Link' name=ID ' -> ')+ 'Link' name=ID
+//;
+
+//datatypes...
 FLOAT returns ecore::EFloat: 
 	INT '.' INT
 ;
+
+NUMERIC:
+	('-')? INT | FLOAT
+;
+
+//SCIENTIFIC:
+	//base 'e' operator exponent 
+//; 
 
 REFLECT:
 'reflect'	
