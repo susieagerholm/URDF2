@@ -10,10 +10,6 @@
         eType="#//Link" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="joint" upperBound="-1"
         eType="#//Joint" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="links" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"
-        transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="joints" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"
-        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Joint" eSuperTypes="#//NamedElement #//ReUseAble">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" lowerBound="1" eType="#//JointType"/>

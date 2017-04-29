@@ -26,5 +26,11 @@ class DslParsingTest{
 		''')
 		Assert.assertNotNull(result)
 	}
+	
+	@Test 
+	def void initializeRobot() {
+		Assert.assertNotNull(TestAdapter.createTestUrdf)
+	}
+	
 
 }
