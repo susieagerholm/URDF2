@@ -6,6 +6,7 @@ package org.xtext.urdf.validation
 import org.eclipse.xtext.validation.Check
 import uRDF.Limit
 import uRDF.Robot
+import uRDF.URDFPackage
 
 /**
  * This class contains custom validation rules. 
@@ -21,6 +22,8 @@ class DslValidator extends AbstractDslValidator {
 		//robotContainsLink(robot)
 		
 		checkJointTypes(robot)
+		
+		//new ConstraintsAdapter().checkJointTypes(robot);
 //		if(!checkJointParentChildRelations(robot))
 //		{
 //			error("Parent child problem", URDFPackage.Literals.ROBOT__JOINT)
@@ -40,7 +43,7 @@ class DslValidator extends AbstractDslValidator {
 	}
 	
 	def checkJointTypes(Robot robot) {
-		robot.joint.filter[j | j.type.equals("Revolute") || j.type.equals("Prismatic")].forall[j | j.eContents.exists[x | x.class.equals(Limit)]]
+		robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null && j.axis != null]
 	}
 	
 }
