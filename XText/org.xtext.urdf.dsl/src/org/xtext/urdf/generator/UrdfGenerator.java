@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 import uRDF.Robot;
 
 
-public class ScalaGeneratorAdapter
+public class UrdfGenerator
 {
 	
 	public String getResourceName(Resource res)

@@ -4,7 +4,7 @@ package org.xtext.urdf.tests;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.xtext.urdf.generator.ScalaGeneratorAdapter;
+import org.xtext.urdf.generator.UrdfGenerator;
 
 import uRDF.Collision;
 import uRDF.Geometry;
@@ -77,7 +77,7 @@ public class TestAdapter {
 	public static void main(String[] args) {
 		Robot r = createTestUrdf();
 		try {
-			new ScalaGeneratorAdapter().generate(r);
+			new UrdfGenerator().generate(r);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

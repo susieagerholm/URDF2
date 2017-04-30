@@ -16,7 +16,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class DslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		val generator = new ScalaGeneratorAdapter()
+		val generator = new UrdfGenerator()
 		fsa.generateFile(generator.getResourceName(resource), generator.generateURDF(resource))
 	}
 }
