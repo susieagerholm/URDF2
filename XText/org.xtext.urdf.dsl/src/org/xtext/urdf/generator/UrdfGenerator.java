@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import uRDF.Link;
 import uRDF.Robot;
 
 
@@ -92,7 +93,6 @@ public class UrdfGenerator
 		 return temp;
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	public Element generateTag(Document doc, Element destination, EObject entry) throws Exception {
 	          String type = entry.getClass().getInterfaces()[0].getSimpleName();
@@ -108,8 +108,21 @@ public class UrdfGenerator
 	        		// ignore
 	        	 } else {
 	        		f.setAccessible(true);
-		        		if(f.getType().isAssignableFrom(EObject.class) || checkType(f, entry)!=null) {
-	        			generateTag(doc, tag, (EObject)f.get(entry));
+		        	if(f.getType().isAssignableFrom(EObject.class) || checkType(f, entry)!=null) {
+		        		 //A link tag does not know whether it is a parent or child link - therefore parent/child tags has to be handled while traversing the joint
+		        		if(type.equalsIgnoreCase("joint") && f.getType().isAssignableFrom(Link.class)) {
+		        			Element e = null;
+		        			if(f.getName().equalsIgnoreCase("childof")) {
+		        				e = doc.createElement("child");
+		        			} else if(f.getName().equalsIgnoreCase("parentof")) {
+		        				e = doc.createElement("parent");
+		        			}
+	        				Link cLink = (Link)f.get(entry);
+	        				e.setAttribute("link", cLink.getName());
+	        				tag.appendChild(e);
+		        		} else {
+		        			generateTag(doc, tag, (EObject)f.get(entry));
+		        		}
 	        		} else if (f.getType().isAssignableFrom(EList.class)) {
 	        			EList<EObject> list = (EList<EObject>)f.get(entry);
 	        			if(list != null) {

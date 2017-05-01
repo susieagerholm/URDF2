@@ -9,6 +9,8 @@ import org.xtext.urdf.generator.UrdfGenerator;
 import uRDF.Collision;
 import uRDF.Geometry;
 import uRDF.Joint;
+import uRDF.JointType;
+import uRDF.Limit;
 import uRDF.Link;
 import uRDF.Robot;
 import uRDF.URDFFactory;
@@ -33,9 +35,8 @@ public class TestAdapter {
 
 	   //Links
 	   LinkImpl link = (LinkImpl)eINSTANCE.createLink();
-	   link.eSet(URDFPackage.LINK__NAME, "URDFTestName");
-
-	   Link link2 = eINSTANCE.createLink();
+//	   link.eSet(URDFPackage.LINK__NAME, "URDFTestName");
+	   link.setName("URDFLink1Testname");
 	   
 	   Collision col1 = eINSTANCE.createCollision();
 	   col1.setName("TestCollision1");
@@ -48,7 +49,8 @@ public class TestAdapter {
 	   colList.add(col1);
 	   colList.add(col2);
 	   link.eSet(pkg.getLink_Collision(), colList);
-	   
+
+	   Link link2 = eINSTANCE.createLink();
 	   link2.setName("URDF2");
 	   EList<Link> linkList = new BasicEList<Link>();
 	   linkList.add(link);
@@ -59,8 +61,19 @@ public class TestAdapter {
 	   //Joints
 	   Joint joint = eINSTANCE.createJoint();
 	   joint.setName("Joint1");
+	   joint.setChildOf(link);
+	   joint.setType(JointType.FIXED);
+	   joint.setParentOf(link2);
+	   
+	   
 	   Joint joint2 = eINSTANCE.createJoint();
 	   joint2.setName("Joint2");
+	   joint2.setChildOf(link2);
+	   joint2.setType(JointType.REVOLUTE);
+	   Limit limit = eINSTANCE.createLimit();
+	   limit.setEffort("4");
+	   joint2.setLimit(limit);
+	   
 	   EList<Joint> jointList = new BasicEList<Joint>();
 	   jointList.add(joint);
 	   jointList.add(joint2);
