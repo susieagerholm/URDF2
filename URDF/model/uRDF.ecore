@@ -40,9 +40,9 @@
         eType="#//Collision" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JointType">
-    <eLiterals name="revolute"/>
+    <eLiterals name="fixed" literal="fixed"/>
     <eLiterals name="continous" value="1"/>
-    <eLiterals name="fixed" value="2"/>
+    <eLiterals name="revolute" value="2" literal="revolute"/>
     <eLiterals name="prismatic" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Limit" eSuperTypes="#//NamedElement #//ReUseAble">
