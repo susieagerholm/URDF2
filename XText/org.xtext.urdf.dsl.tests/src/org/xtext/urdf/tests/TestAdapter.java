@@ -4,8 +4,9 @@ package org.xtext.urdf.tests;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.xtext.urdf.generator.UrdfGenerator;
+import org.xtext.urdf.validation.DslValidator;
 
+import uRDF.Axis;
 import uRDF.Collision;
 import uRDF.Geometry;
 import uRDF.Joint;
@@ -74,6 +75,12 @@ public class TestAdapter {
 	   limit.setEffort("4");
 	   joint2.setLimit(limit);
 	   
+	   Axis axis = eINSTANCE.createAxis();
+	   axis.setX("1");
+	   joint2.setLimit(limit);
+	   joint2.setAxis(axis);
+	   
+	   
 	   EList<Joint> jointList = new BasicEList<Joint>();
 	   jointList.add(joint);
 	   jointList.add(joint2);
@@ -90,7 +97,8 @@ public class TestAdapter {
 	public static void main(String[] args) {
 		Robot r = createTestUrdf();
 		try {
-			new UrdfGenerator().generate(r);
+			System.out.println("Validation is: " + new DslValidator().checkJointTypesHaveRequiredLimitOrAxis(r));
+		//	new UrdfGenerator().generate(r);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

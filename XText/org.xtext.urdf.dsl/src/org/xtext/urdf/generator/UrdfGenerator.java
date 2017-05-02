@@ -109,7 +109,7 @@ public class UrdfGenerator
 	        	 } else {
 	        		f.setAccessible(true);
 		        	if(f.getType().isAssignableFrom(EObject.class) || checkType(f, entry)!=null) {
-		        		 //A link tag does not know whether it is a parent or child link - therefore parent/child tags has to be handled while traversing the joint
+		        		 //A link does not know whether it is a parent or child link - therefore parent/child tags has to be handled while traversing the joint
 		        		if(type.equalsIgnoreCase("joint") && f.getType().isAssignableFrom(Link.class)) {
 		        			Element e = null;
 		        			if(f.getName().equalsIgnoreCase("childof")) {
