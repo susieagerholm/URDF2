@@ -24,8 +24,7 @@ import "http://www.example.org/uRDF" as uRDF
 
 Robot returns uRDF::Robot:
 		'Robot' name=ID
-		 link+=Link+  
-		 joint+=Joint* 
+		 (link+=Link | joint+=Joint)* 
 ;
 
 Material returns uRDF::Material:
@@ -33,10 +32,14 @@ Material returns uRDF::Material:
 
 Geometry returns uRDF::Geometry:
 	Box | Cylinder | Mesh | Sphere;
+	
+/*Topology returns uRDF::Topology:
+	(('Link' link=[uRDF::Link|ID] | [Topology]) '->' 'Link' link1=[uRDF::Link|ID])*
+;*/	
 
 Link returns uRDF::Link:
 		'Link' name=ID
-		//er det ok at rækkefølgen er fixed for disse elementer: alle visuals skal defineres før inertial osv
+		//alle visuals skal defineres in order - ok?
 		visuals+=Visual*
 		inertial+=Inertial*
 		collision+=Collision*
@@ -49,7 +52,7 @@ Joint returns uRDF::Joint:
 		'ParentOf' ParentOf=[uRDF::Link|ID]
 		('Limit' limit=Limit)?
 		('Axis' axis=Axis)?
-		('Origin' origin=Origin)?
+		(origin=Origin)?
 		('Calibration' calibration=Calibration)?
 		('Dynamics' dynamics=Dynamics)?
 		('Mimic' mimic=Mimic)?
@@ -108,7 +111,7 @@ Texture returns uRDF::Texture:
 
 Box returns uRDF::Box:
 	'Box' (name=ID)?
-	//Tjek spec: Hvilken r�kkef�lge listes dimensioner i?
+	//Tjek spec: order listing of dimensions?
 	'height_length_width' height=MEASURE length=MEASURE width=MEASURE 
 ;
 
@@ -142,10 +145,10 @@ Limit returns uRDF::Limit:
 ;
 
 Axis returns uRDF::Axis:
-	/* Binary values */
+	/* Binary values - must be 0 or 1*/
 	(name=ID)?
 	    //keyword aliases: 'xyz' or 'x', 'y', 'z'
-		'xyz' x=INT y=INT z=INT 
+		'xyz' x=AXIS_VALUE y=AXIS_VALUE z=AXIS_VALUE 
 ;
 
 Calibration returns uRDF::Calibration:
@@ -177,12 +180,9 @@ SafetyController returns uRDF::SafetyController:
 		'k_velocity' k_velocity=SIGNED_NUMERIC
 ;
 
-//TOPOLOGY:
-	//('Link' name=ID ' -> ')+ 'Link' name=ID
-//;
-
 //datatypes...
 
+//skal vi droppe at Const kan indeholde STRING?
 ConstantImpl returns uRDF::Constant:
 	{uRDF::Constant} name=ID 
 	SIGNED_NUMERIC | STRING
@@ -193,7 +193,7 @@ FLOAT returns ecore::EFloat:
 ;
 
 SCIENTIFIC returns ecore::EBigDecimal:
-	FLOAT 'e' ('+' | '-') INT 
+	FLOAT 'e' ('+' | '-')? INT 
 ;
 
 SIGNED_NUMERIC:
@@ -204,6 +204,9 @@ MEASURE:
 	INT | FLOAT
 ;
  
+AXIS_VALUE returns ecore::EString: 
+	'0' | '1'
+; 
 
 REFLECT:
 'reflect'	
