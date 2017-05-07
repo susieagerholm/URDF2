@@ -23,8 +23,8 @@ import "http://www.example.org/uRDF" as uRDF
  */
 
 Robot returns uRDF::Robot:
-		'Robot' name=ID
-		 (link+=Link | joint+=Joint)* 
+	'Robot' name=ID
+	(link+=Link | joint+=Joint)* 
 ;
 
 Material returns uRDF::Material:
@@ -32,53 +32,50 @@ Material returns uRDF::Material:
 
 Geometry returns uRDF::Geometry:
 	Box | Cylinder | Mesh | Sphere;
-	
-/*Topology returns uRDF::Topology:
-	(('Link' link=[uRDF::Link|ID] | [Topology]) '->' 'Link' link1=[uRDF::Link|ID])*
-;*/	
+		
 
 Link returns uRDF::Link:
-		'Link' name=ID
-		//alle visuals skal defineres in order - ok?
-		visuals+=Visual*
-		inertial+=Inertial*
-		collision+=Collision*
+	'Link' name=ID
+	//alle visuals skal defineres in order - ok?
+	visuals+=Visual*
+	inertial+=Inertial*
+	collision+=Collision*
 ;
 
 Joint returns uRDF::Joint:
-		'Joint' name=ID
-  		'Type' Type=JointType
-		'ChildOf' ChildOf=[uRDF::Link|ID]
-		'ParentOf' ParentOf=[uRDF::Link|ID]
-		('Limit' limit=Limit)?
-		('Axis' axis=Axis)?
-		(origin=Origin)?
-		('Calibration' calibration=Calibration)?
-		('Dynamics' dynamics=Dynamics)?
-		('Mimic' mimic=Mimic)?
-		('SafetyController' safetycontroller=SafetyController)?
+	'Joint' name=ID
+  	'Type' Type=JointType
+	'ChildOf' ChildOf=[uRDF::Link|ID]
+	'ParentOf' ParentOf=[uRDF::Link|ID]
+	('Limit' limit=Limit)?
+	('Axis' axis=Axis)?
+	(origin=Origin)?
+	('Calibration' calibration=Calibration)?
+	('Dynamics' dynamics=Dynamics)?
+	('Mimic' mimic=Mimic)?
+	('SafetyController' safetycontroller=SafetyController)?
 ;
 
 Inertial returns uRDF::Inertial:
-		'Inertial' (name=ID)?
-		'Inertia' inertia=Inertia
-		'Mass' mass=Mass
-		(origin=Origin)?
+	'Inertial' (name=ID)?
+	inertia=Inertia
+	mass=Mass
+	(origin=Origin)?
 		
 ;
 
 Visual returns uRDF::Visual:
-		'Visual'(name=ID)? 
-		'Geometry' geometry=Geometry
-		(origin=Origin)?
-		('Material' material=Material)?
+	'Visual'(name=ID)? 
+	'Geometry' geometry=Geometry
+	(origin=Origin)?
+	('Material' material=Material)?
 		
 ;
 
 Collision returns uRDF::Collision:
-		'Collision' name=ID
-		'Geometry' geometry=Geometry
-		(origin=Origin)?
+	'Collision' name=ID
+	'Geometry' geometry=Geometry
+	(origin=Origin)?
 ;
 
 Origin returns uRDF::Origin:
@@ -88,12 +85,12 @@ Origin returns uRDF::Origin:
 ;
 
 Mass returns uRDF::Mass:
-	(name=ID)?
+	'Mass' (name=ID)?
 	'massValueInKilograms' massValueInKilograms=FLOAT
 	;
 
 Inertia returns uRDF::Inertia:
-	(name=ID)?
+	'Inertia' (name=ID)?
 	'ixx' ixx=SIGNED_NUMERIC 'ixy' ixy=SIGNED_NUMERIC 'ixz' ixz=SIGNED_NUMERIC 'iyy' iyy=SIGNED_NUMERIC 'iyz' iyz=SIGNED_NUMERIC 'izz' izz=SIGNED_NUMERIC
 	;
 
@@ -134,18 +131,18 @@ Sphere returns uRDF::Sphere:
 	;
 
 enum JointType returns uRDF::JointType:
-		revolute = 'Revolute' | continous = 'Continous' | fixed = 'Fixed' | prismatic = 'Prismatic';
+		fixed = 'Fixed' | revolute = 'Revolute' |  prismatic = 'Prismatic' | continuous = 'Continuous' ;
 
 Limit returns uRDF::Limit:
 	(name=ID)?
-		 ('lower' lower=SIGNED_NUMERIC)?
-		 ('upper' upper=SIGNED_NUMERIC)? 
 		 'effort' effort=SIGNED_NUMERIC 
 		 'velocity' velocity=SIGNED_NUMERIC 
+		 'lower' lower=(SIGNED_NUMERIC)?
+		 'upper' upper=(SIGNED_NUMERIC)? 
 ;
 
 Axis returns uRDF::Axis:
-	/* Binary values - must be 0 or 1*/
+	/* Binary values - must be 0 or 1. Digitsum must be 1*/
 	(name=ID)?
 	    //keyword aliases: 'xyz' or 'x', 'y', 'z'
 		'xyz' x=AXIS_VALUE y=AXIS_VALUE z=AXIS_VALUE 
@@ -196,17 +193,20 @@ SCIENTIFIC returns ecore::EBigDecimal:
 	FLOAT 'e' ('+' | '-')? INT 
 ;
 
+/*SCIENTIFIC returns ecore::EBigDecimal:
+    (INT ('.' (INT)?)? | '.' INT)
+    (('e' | 'E') ('+' | '-')? INT)?;*/
+
 SIGNED_NUMERIC:
-	('-')? INT | FLOAT | SCIENTIFIC
+	('-')? (INT | FLOAT | SCIENTIFIC)
 ;
 
 MEASURE:
 	INT | FLOAT
 ;
  
-AXIS_VALUE returns ecore::EString: 
-	'0' | '1'
-; 
+terminal AXIS_VALUE returns ecore::EInt: 
+	('0'..'1');
 
 REFLECT:
 'reflect'	
