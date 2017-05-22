@@ -13,3 +13,6 @@ https://www.eclipse.org/forums/index.php/m/1763845/#msg_1763845
 Validations:
 Decoration - only one decorator pr link/joint
 Reuse - only reuse joint of same type? 
+
+Update editor from AST?
+http://koehnlein.blogspot.dk/2010/06/semantic-model-access-in-xtext.html
