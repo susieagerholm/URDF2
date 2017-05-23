@@ -6,7 +6,9 @@ UIModule - Formatting on save
 https://www.eclipse.org/forums/index.php/t/282129/  
   
 RuntimeModule - bind IDerivedStateComputer for Topology and Decoration  
-https://www.eclipse.org/forums/index.php?t=rview&goto=1760288#msg_1760288
+https://www.eclipse.org/forums/index.php?t=rview&goto=1760288#msg_1760288  
+LinkingDiagnosticMessageProvider#getUnresolvedProxyMessage  
+IQualifiedNameProvider' to get the name from the object's node (see 'NodeModelUtils')
   
 Scope:
 CustomScopeProvider - DotExpressions for Reuse  
@@ -19,3 +21,5 @@ Reuse - only reuse joint of same type?
   
 Update editor from AST?  
 http://koehnlein.blogspot.dk/2010/06/semantic-model-access-in-xtext.html
+
+
