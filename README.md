@@ -3,7 +3,7 @@
 Bindings - to do:  
 
 UIModule - Formatting on save (https://www.eclipse.org/forums/index.php/t/282129/)  
-RuntimeModule - bind IDerivedStateComputer for Topology and Decoration 
+RuntimeModule - bind IDerivedStateComputer for Topology and Decoration  
 (https://www.eclipse.org/forums/index.php?t=rview&goto=1760288#msg_1760288)
 
 Scope:
