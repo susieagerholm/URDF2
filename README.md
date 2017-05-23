@@ -7,8 +7,36 @@ https://www.eclipse.org/forums/index.php/t/282129/
   
 RuntimeModule - bind IDerivedStateComputer for Topology and Decoration  
 https://www.eclipse.org/forums/index.php?t=rview&goto=1760288#msg_1760288  
-LinkingDiagnosticMessageProvider#getUnresolvedProxyMessage  
-IQualifiedNameProvider' to get the name from the object's node (see 'NodeModelUtils')
+disable warning by overriding LinkingDiagnosticMessageProvider#getUnresolvedProxyMessage  
+customize IQualifiedNameProvider to get the name from the object's node (see 'NodeModelUtils')   
+
+public class MyDslRuntimeModule extends org.xtext.example.mydsl.AbstractMyDslRuntimeModule {
+
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return MyDslNameProvider.class;
+	}
+	
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return MyDslResourceDescriptionStrategy.class;
+	}
+	
+	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class)
+		.annotatedWith(com.google.inject.name.Names.named(
+				org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
+				.to(MyDslImportedNamespaceAwareLocalScopeProvider.class);
+	}
+	
+}
+
+public class MyDslNameProvider extends DefaultDeclarativeQualifiedNameProvider {
+
+	public QualifiedName qualifiedName(DeclaredAttribute attr) {
+		return QualifiedName.create(attr.getName());
+	}
+	
+}
   
 Scope:
 CustomScopeProvider - DotExpressions for Reuse  
