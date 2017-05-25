@@ -76,7 +76,7 @@ public class TestAdapter {
 	   joint2.setLimit(limit);
 	   
 	   Axis axis = eINSTANCE.createAxis();
-	   axis.setX("1");
+	   axis.setX(1);
 	   joint2.setLimit(limit);
 	   joint2.setAxis(axis);
 	   

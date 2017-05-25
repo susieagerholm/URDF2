@@ -11,13 +11,16 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.urdf.services.DslGrammarAccess;
 import uRDF.Axis;
 import uRDF.Box;
 import uRDF.Calibration;
 import uRDF.Collision;
 import uRDF.Color;
+import uRDF.Constant;
 import uRDF.Cylinder;
 import uRDF.Dynamics;
 import uRDF.Inertia;
@@ -64,6 +67,9 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case URDFPackage.COLOR:
 				sequence_Color(context, (Color) semanticObject); 
+				return; 
+			case URDFPackage.CONSTANT:
+				sequence_ConstantImpl(context, (Constant) semanticObject); 
 				return; 
 			case URDFPackage.CYLINDER:
 				sequence_Cylinder(context, (Cylinder) semanticObject); 
@@ -123,7 +129,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Axis returns Axis
 	 *
 	 * Constraint:
-	 *     ((name=ID? x=INT y=INT z=INT) | (x=INT y=INT z=INT))
+	 *     (name=ID? x=AXIS_VALUE y=AXIS_VALUE z=AXIS_VALUE)
 	 */
 	protected void sequence_Axis(ISerializationContext context, Axis semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -136,7 +142,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Box returns Box
 	 *
 	 * Constraint:
-	 *     ((name=ID? height=FLOAT length=FLOAT width=FLOAT) | (height=FLOAT length=FLOAT width=FLOAT))
+	 *     (name=ID? height=MEASURE length=MEASURE width=MEASURE)
 	 */
 	protected void sequence_Box(ISerializationContext context, Box semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -148,7 +154,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Calibration returns Calibration
 	 *
 	 * Constraint:
-	 *     (name=ID? rising=FLOAT? falling=FLOAT?)
+	 *     (name=ID? rising=SIGNED_NUMERIC? falling=SIGNED_NUMERIC?)
 	 */
 	protected void sequence_Calibration(ISerializationContext context, Calibration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -173,10 +179,28 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Color returns Color
 	 *
 	 * Constraint:
-	 *     ((name=ID? red=FLOAT green=FLOAT blue=FLOAT alpha=FLOAT) | (red=FLOAT green=FLOAT blue=FLOAT alpha=FLOAT))
+	 *     (name=ID? red=FLOAT green=FLOAT blue=FLOAT alpha=FLOAT)
 	 */
 	protected void sequence_Color(ISerializationContext context, Color semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ConstantImpl returns Constant
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_ConstantImpl(ISerializationContext context, Constant semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, URDFPackage.Literals.NAMED_ELEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getConstantImplAccess().getNameIDTerminalRuleCall_0_1_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -186,7 +210,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Cylinder returns Cylinder
 	 *
 	 * Constraint:
-	 *     (name=ID? radius=FLOAT length=FLOAT)
+	 *     (name=ID? radius=MEASURE length=MEASURE)
 	 */
 	protected void sequence_Cylinder(ISerializationContext context, Cylinder semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -198,7 +222,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Dynamics returns Dynamics
 	 *
 	 * Constraint:
-	 *     (name=ID? friction=FLOAT? damping=FLOAT?)
+	 *     (name=ID? friction=SIGNED_NUMERIC? damping=SIGNED_NUMERIC?)
 	 */
 	protected void sequence_Dynamics(ISerializationContext context, Dynamics semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -212,12 +236,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         name=ID? 
-	 *         ixx=FLOAT 
-	 *         ixy=FLOAT 
-	 *         ixz=FLOAT 
-	 *         iyy=FLOAT 
-	 *         iyz=FLOAT 
-	 *         izz=FLOAT
+	 *         ixx=SIGNED_NUMERIC 
+	 *         ixy=SIGNED_NUMERIC 
+	 *         ixz=SIGNED_NUMERIC 
+	 *         iyy=SIGNED_NUMERIC 
+	 *         iyz=SIGNED_NUMERIC 
+	 *         izz=SIGNED_NUMERIC
 	 *     )
 	 */
 	protected void sequence_Inertia(ISerializationContext context, Inertia semanticObject) {
@@ -266,7 +290,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Limit returns Limit
 	 *
 	 * Constraint:
-	 *     (name=ID? lower=FLOAT? upper=FLOAT? effort=FLOAT velocity=FLOAT)
+	 *     (name=ID? effort=SIGNED_NUMERIC velocity=SIGNED_NUMERIC lower=SIGNED_NUMERIC? upper=SIGNED_NUMERIC?)
 	 */
 	protected void sequence_Limit(ISerializationContext context, Limit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -315,7 +339,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mimic returns Mimic
 	 *
 	 * Constraint:
-	 *     (name=ID? mimics=[Joint|STRING] multiplier=FLOAT? offSet=FLOAT?)
+	 *     (name=ID? mimics=[Joint|ID] multiplier=SIGNED_NUMERIC? offSet=SIGNED_NUMERIC?)
 	 */
 	protected void sequence_Mimic(ISerializationContext context, Mimic semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -327,7 +351,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Origin returns Origin
 	 *
 	 * Constraint:
-	 *     (name=ID? x=FLOAT y=FLOAT z=FLOAT (roll=FLOAT pitch=FLOAT yaw=FLOAT)?)
+	 *     (name=ID? x=SIGNED_NUMERIC y=SIGNED_NUMERIC z=SIGNED_NUMERIC (roll=SIGNED_NUMERIC pitch=SIGNED_NUMERIC yaw=SIGNED_NUMERIC)?)
 	 */
 	protected void sequence_Origin(ISerializationContext context, Origin semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -339,7 +363,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Robot returns Robot
 	 *
 	 * Constraint:
-	 *     (name=ID link+=Link+ joint+=Joint*)
+	 *     (name=ID (link+=Link | joint+=Joint)*)
 	 */
 	protected void sequence_Robot(ISerializationContext context, Robot semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -351,7 +375,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SafetyController returns SafetyController
 	 *
 	 * Constraint:
-	 *     (name=ID? softLowerLimit=FLOAT? softUpperLimit=FLOAT? k_position=FLOAT? k_velocity=FLOAT)
+	 *     (name=ID? softLowerLimit=SIGNED_NUMERIC? softUpperLimit=SIGNED_NUMERIC? k_position=SIGNED_NUMERIC? k_velocity=SIGNED_NUMERIC)
 	 */
 	protected void sequence_SafetyController(ISerializationContext context, SafetyController semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -364,7 +388,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Sphere returns Sphere
 	 *
 	 * Constraint:
-	 *     (name=ID? radius=FLOAT)
+	 *     (name=ID? radius=MEASURE)
 	 */
 	protected void sequence_Sphere(ISerializationContext context, Sphere semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

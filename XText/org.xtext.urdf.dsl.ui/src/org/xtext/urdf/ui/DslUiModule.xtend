@@ -4,10 +4,14 @@
 package org.xtext.urdf.ui
 
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
  */
 @FinalFieldsConstructor
 class DslUiModule extends AbstractDslUiModule {
+	def Class<? extends XtextDocumentProvider> bindDocumentProvider() {
+		URDFDocumentProvider;
+	}
 }
