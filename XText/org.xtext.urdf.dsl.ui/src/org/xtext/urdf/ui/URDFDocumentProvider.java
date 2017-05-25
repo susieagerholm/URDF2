@@ -12,6 +12,8 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 
+//Source: https://www.eclipse.org/forums/index.php/t/282129/
+
 public class URDFDocumentProvider extends XtextDocumentProvider{
 	private static final String XTEXT_FORMAT_ACTION_COMMAND_ID = "org.eclipse.xtext.ui.FormatAction";
 
