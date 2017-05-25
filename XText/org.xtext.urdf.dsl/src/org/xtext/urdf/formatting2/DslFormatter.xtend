@@ -3,19 +3,16 @@
  */
 package org.xtext.urdf.formatting2
 
-import com.google.inject.Inject
-import com.google.common.base.Strings
-import org.xtext.urdf.services.DslGrammarAccess
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion
-
-
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
+import uRDF.Axis
+import uRDF.Geometry
 import uRDF.Joint
+import uRDF.Limit
 import uRDF.Link
 import uRDF.Robot
 import uRDF.URDFPackage
-
+import uRDF.Visual
 
 //@Inject extension DslGrammarAccess
 
@@ -23,40 +20,56 @@ class DslFormatter extends AbstractFormatter2 {
 	
 	def dispatch void format(Robot robot, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc.
-		//prepend(ISemanticRegion semanticRegion, Procedures.Procedure1<IHiddenRegionFormatter> before) 
-		
-		robot.regionFor.features(URDFPackage.Literals.NAMED_ELEMENT__NAME).head.append[newLine]
-		
+		//add newline and no space after robot
+		//robot.prepend[setNewLines(1, 1, 2); noSpace]
+		robot.regionFor.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
+		robot.interior[indent]
 			
-		for (Link link : robot.getLink()) {
-			link.regionFor.keyword("Link").prepend[space = Strings.repeat(" ", 6)] 
-			link.regionFor.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
-			link.format;
-						
-		}
-		for (Joint joint : robot.getJoint()) {
-			
-		}
-		
-
-		
+		for (Link link : robot.getLink()) { link.format.prepend[setNewLines(1, 1, 2); noSpace] }
+		for (Joint joint : robot.getJoint()) { joint.format.prepend[setNewLines(1, 1, 2); noSpace] }	
 	}
-
-//	def dispatch void format(Link link, extension IFormattableDocument document) {
-//		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-//		for (Inertial inertial : link.getInertial()) {
-//			inertial.format;
-//			
-//		}
-//		for (Visual visuals : link.getVisuals()) {
-//			visuals.format;
-//			visuals.append[setNewLines(1)]
-//			
-//		}
-//		for (Collision collision : link.getCollision()) {
-//			collision.format;
-//		}
-//	}
+	
+	def dispatch void format(Link link, extension IFormattableDocument document) {
+    // TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+		link.interior[indent]
+		for(Visual visual : link.getVisuals()) {
+			visual.format.prepend[setNewLines(1, 1, 2); noSpace]
+		}
+    }
+    
+    def dispatch void format(Joint joint, extension IFormattableDocument document) {
+		joint.interior[indent]
+		joint.getChildOf().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getParentOf().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getLimit().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getAxis().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getOrigin().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getDynamics().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getCalibration().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getMimic().format.prepend[setNewLines(1, 1, 2); noSpace]
+		joint.getSafetycontroller().format.prepend[setNewLines(1, 1, 2); noSpace]
+	}
+	
+	def dispatch void format(Limit limit, extension IFormattableDocument document) {
+		limit.interior[indent]
+	}
+	
+	def dispatch void format(Axis axis, extension IFormattableDocument document) {
+		axis.interior[indent]
+	}
+	
+	def dispatch void format(Visual visual, extension IFormattableDocument document) {
+		//visual.format.prepend[setNewLines(1, 1, 2); noSpace]
+		visual.interior[indent]
+		visual.getGeometry().format.prepend[setNewLines(1, 1, 2); noSpace]
+		visual.getOrigin().format.prepend[setNewLines(1, 1, 2); noSpace]
+		visual.getMaterial().format.prepend[setNewLines(1, 1, 2); noSpace]
+	}
+	
+	def dispatch void format(Geometry geo, extension IFormattableDocument document) {
+		geo.interior[indent]
+		//geo.getShape().format.prepend[setNewLines(1, 1, 2); noSpace]
+    }
 	
 	// TODO: implement for Joint, Inertial, Visual, Collision
 }
