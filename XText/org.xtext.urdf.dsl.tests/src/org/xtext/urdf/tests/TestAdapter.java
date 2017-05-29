@@ -24,6 +24,7 @@ import uRDF.impl.URDFPackageImpl;
 
 public class TestAdapter {
 
+	
 	public static Robot createTestUrdf() 	{
 	   URDFFactory eINSTANCE = URDFFactoryImpl.init();
 	   URDFModel model = eINSTANCE.createURDFModel();
