@@ -23,6 +23,12 @@ class DslParsingTest{
 	@Inject extension ParseHelper<Robot>
 	//ParseHelper<Robot> parseHelper
 
+	/*
+	 * Are elements created as expected by their respective default constructor in grammar 
+	 * Are elements created as expected by Topology and iDerivedStateComputer
+	 * Are elements based on Reuse created as expected
+	 * Are Decorations created as expected
+	 */
 
 	@Test
 	def void loadModel() {
