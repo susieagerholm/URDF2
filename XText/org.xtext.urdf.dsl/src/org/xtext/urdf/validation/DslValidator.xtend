@@ -8,6 +8,7 @@ import uRDF.Limit
 import uRDF.Robot
 import uRDF.URDFPackage
 import uRDF.ReUseAble
+import uRDF.Axis
 
 /**
  * This class contains custom validation rules. 
@@ -16,13 +17,13 @@ import uRDF.ReUseAble
  */
 class DslValidator extends AbstractDslValidator {
 	
-
+	//Skal vi ikke droppe denne kontrol struktur - gaar ud fra den er til test formaal?
 	@Check
 	def checkURDFComplete(Robot robot)
 	{
 		//robotContainsLink(robot)
 		
-		checkJointTypesHaveRequiredLimitOrAxis(robot)
+		//checkJointTypesHaveRequiredLimitOrAxis(robot)
 //		if(!checkJointParentChildRelations(robot))
 //		{
 //			error("Parent child problem", URDFPackage.Literals.ROBOT__JOINT)
@@ -32,40 +33,65 @@ class DslValidator extends AbstractDslValidator {
 		
 	}
 	
-	//maybe this check should be integrated in the ancestor validation... 
-	def checkJointParentChildRelations (Robot robot) {
-      robot.getJoint.forall[j | j.getParentOf != j.getChildOf]
-    }
+	
     
+    //A Robot must contain at least one Link to be valid instance
+    @Check
 	def checkRobotContainsLink(Robot robot) {
-		robot.link.length > 0
+		if (robot.link.length < 1)
+		error("A Robot must contain at least one Link to be valid instance", 
+        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
-	def checkJointTypesHaveRequiredLimitOrAxis(Robot robot) {
-		robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null && j.axis != null]
-	}
-	
-	
-//	def checkJointTypesHaveRequiredLimit(Robot robot) {
-//		robot.joint.filter[j | j.type.equals("Revolute") || j.type.equals("Prismatic")].forall[j | j.eContents.exists[x | x.class.equals(Limit)]]
-//	}
-	
+	//A Link must be connected to a Joint in order to be part of graph (otherwise parser will report multiple roots)
 	@Check
-	def checkLinkIsConnectedToAnyJoint(Robot robot) {
-		//Er name nødv - og kan man gøre det fra Link kontekst...
-		if(!robot.link.forall[l |  
+	def checkLinkIsConnectedToAJoint(Robot robot) {
+		//if more than one link - must be attached to joint
+		if(robot.link.length > 1 && !robot.link.forall[l |  
 			robot.joint.map[parentOf.name].contains(l.name) || 
 			robot.joint.map[childOf.name].contains(l.name)
 		]) 
-		error("Link has to be referenced as parentOf or childOf to at least one Joint", 
+		error("A Link has to be referenced as parentOf and/or childOf at least one Joint", 
         		URDFPackage.Literals.ROBOT__LINK)
+	}
+	
+	// A Joint must not have the same Link as parent and child
+	//maybe this check should be integrated in the topologi instead... 
+	@Check
+	def checkJointParentChildRelations (Robot robot) {
+      robot.getJoint.forall[j | j.getParentOf != j.getChildOf]
+    }
+	
+	// A Joint of type revolute or prismatic must have Limit defined
+	@Check
+	def checkJointTypesHaveRequiredLimit(Robot robot) {
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null])
+		error("A Joint of type revolute or prismatic must have a Limit defined", 
+        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+	}
+	
+	// A Joint of type revolute or prismatic must have Axis defined
+	@Check
+	def checkJointTypesHaveRequiredAxis(Robot robot) {
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.axis != null])
+		error("A Joint of type revolute or prismatic must have an Axis defined", 
+        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+	}
+	
+	
+	//An Axis may have only one active vector...
+	@Check
+	def checkAxisSettingIsValidOnlyOneActiveVector(Axis axis) {
+		if(axis.x + axis.y + axis.z != 1)
+		error("Only one of the vectors of an Axis may be set to 1 (= active). The other two vectors must be set to 0", 
+        		URDFPackage.Literals.NAMED_ELEMENT__NAME)	
 	}
 	
 	@Check
 	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!!
-	def onlyPossibleToReuseIfNot(ReUseAble reuser) {
+	def onlyPossibleToReuseIfNotAlreadyReused(ReUseAble reuser) {
 		if(reuser.isReuseOf.isReuseOf != null) 
-			error("Not legal to reuse from instance, that is already made from reuse!", 
+			error("Not legal to reuse from instance, that is already made from reuse", 
         		URDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
 	
@@ -73,18 +99,7 @@ class DslValidator extends AbstractDslValidator {
 	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!! 
 	def onlyPossibleToReuseIfSameType(ReUseAble reuser) {
 		if(reuser.eClass != reuser.isReuseOf.eClass) 
-			error("Not legal to reuse from instance, that is already made from reuse!", 
+			error("Not legal to reuse from instance, that is not of the same type", 
         		URDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
-	
-	
-	//@Check
-	//Almost done but how to get list of attr values from axis?
-	/*def checkAxisVectorHasValidSettingWithOnlyOneTrue(Axis axis) {
-		//if(axis.eClass.EStructuralFeatures.fold(0, [ x , y | x + y ]) != 1)
-		//error("Only one axis may be set to 1 (= active). The other two axis must be set to 0.", 
-        		//URDFPackage.Literals.NAMED_ELEMENT__NAME)
-		
-	}*/	
-	
 }
