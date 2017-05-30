@@ -1,6 +1,8 @@
 # URDF
 
-Bindings - to do:  
+TODO
+
+Bindings:  
 
 UIModule - Formatting on save  
 https://www.eclipse.org/forums/index.php/t/282129/  
