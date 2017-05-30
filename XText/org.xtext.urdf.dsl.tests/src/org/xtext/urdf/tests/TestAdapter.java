@@ -97,8 +97,9 @@ public class TestAdapter {
 	
 	public static void main(String[] args) {
 		Robot r = createTestUrdf();
+		DslValidator dsl = new DslValidator();
 		try {
-			System.out.println("Validation is: " + new DslValidator().checkJointTypesHaveRequiredLimitOrAxis(r));
+			System.out.println("Validation is: " + dsl.checkURDFComplete(r));
 		//	new UrdfGenerator().generate(r);
 		} catch (Exception e) {
 			e.printStackTrace();
