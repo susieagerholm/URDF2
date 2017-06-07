@@ -6,10 +6,10 @@
   <foreignModel>uRDF.ecore</foreignModel>
   <genPackages prefix="URDF" disposableProviderFactory="true" ecorePackage="uRDF.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="uRDF.ecore#//JointType">
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/revolute"/>
-      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/continous"/>
       <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/fixed"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/revolute"/>
       <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/prismatic"/>
+      <genEnumLiterals ecoreEnumLiteral="uRDF.ecore#//JointType/continuous"/>
     </genEnums>
     <genClasses ecoreClass="uRDF.ecore#//URDFModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//URDFModel/robot"/>
@@ -133,6 +133,26 @@
     </genClasses>
     <genClasses ecoreClass="uRDF.ecore#//Constant">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//Constant/value"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Expression"/>
+    <genClasses ecoreClass="uRDF.ecore#//Subtraction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Subtraction/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Subtraction/left"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Addition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Addition/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Addition/left"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Multiplication">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Multiplication/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Multiplication/left"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//Division">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Division/right"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference uRDF.ecore#//Division/left"/>
+    </genClasses>
+    <genClasses ecoreClass="uRDF.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute uRDF.ecore#//NumberLiteral/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
