@@ -6,29 +6,29 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.xtext.urdf.validation.DslValidator;
 
-import uRDF.Axis;
-import uRDF.Collision;
-import uRDF.Geometry;
-import uRDF.Joint;
-import uRDF.JointType;
-import uRDF.Limit;
-import uRDF.Link;
-import uRDF.Robot;
-import uRDF.URDFFactory;
-import uRDF.URDFModel;
-import uRDF.URDFPackage;
-import uRDF.impl.LinkImpl;
-import uRDF.impl.RobotImpl;
-import uRDF.impl.URDFFactoryImpl;
-import uRDF.impl.URDFPackageImpl;
+import org.xtext.urdf.myURDF.Axis;
+import org.xtext.urdf.myURDF.Collision;
+import org.xtext.urdf.myURDF.Geometry;
+import org.xtext.urdf.myURDF.Joint;
+import org.xtext.urdf.myURDF.JointType;
+import org.xtext.urdf.myURDF.Limit;
+import org.xtext.urdf.myURDF.Link;
+import org.xtext.urdf.myURDF.Robot;
+import org.xtext.urdf.myURDF.MyURDFFactory;
+//import org.xtext.urdf.myURDF.MyURDFModel;
+import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.impl.LinkImpl;
+import org.xtext.urdf.myURDF.impl.RobotImpl;
+import org.xtext.urdf.myURDF.impl.MyURDFFactoryImpl;
+import org.xtext.urdf.myURDF.impl.MyURDFPackageImpl;
 
 public class TestAdapter {
 
 	
 	public static Robot createTestUrdf() 	{
-	   URDFFactory eINSTANCE = URDFFactoryImpl.init();
-	   URDFModel model = eINSTANCE.createURDFModel();
-	   URDFPackage pkg = URDFPackageImpl.init();
+	   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
+	   MyURDFModel model = eINSTANCE.createURDFModel();
+	   MyURDFPackage pkg = MyURDFPackageImpl.init();
 	   
 	   //Robot
 	   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();

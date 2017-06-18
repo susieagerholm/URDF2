@@ -5,14 +5,17 @@ package org.xtext.urdf.formatting2
 
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
-import uRDF.Axis
-import uRDF.Geometry
-import uRDF.Joint
-import uRDF.Limit
-import uRDF.Link
-import uRDF.Robot
-import uRDF.URDFPackage
-import uRDF.Visual
+import org.xtext.urdf.myURDF.Axis
+import org.xtext.urdf.myURDF.Geometry
+import org.xtext.urdf.myURDF.Joint
+import org.xtext.urdf.myURDF.Limit
+import org.xtext.urdf.myURDF.Link
+import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.MyURDFPackage
+import org.xtext.urdf.myURDF.Visual
+import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.Joint
+import org.xtext.urdf.myURDF.Link
 
 //@Inject extension DslGrammarAccess
 
@@ -22,7 +25,7 @@ class DslFormatter extends AbstractFormatter2 {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc.
 		//add newline and no space after robot
 		//robot.prepend[setNewLines(1, 1, 2); noSpace]
-		robot.regionFor.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
+		//robot.regionFor.feature(MyURDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
 		robot.interior[indent]
 			
 		for (Link link : robot.getLink()) { link.format.prepend[setNewLines(1, 1, 2); noSpace] }
@@ -32,9 +35,9 @@ class DslFormatter extends AbstractFormatter2 {
 	def dispatch void format(Link link, extension IFormattableDocument document) {
     // TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		link.interior[indent]
-		for(Visual visual : link.getVisuals()) {
+		/*for(Visual visual : link.getVisuals()) {
 			visual.format.prepend[setNewLines(1, 1, 2); noSpace]
-		}
+		}*/
     }
     
     def dispatch void format(Joint joint, extension IFormattableDocument document) {
@@ -43,11 +46,11 @@ class DslFormatter extends AbstractFormatter2 {
 		joint.getParentOf().format.prepend[setNewLines(1, 1, 2); noSpace]
 		//joint.getLimit().format.prepend[setNewLines(1, 1, 2); noSpace]
 		//joint.getAxis().format.prepend[setNewLines(1, 1, 2); noSpace]
-		joint.getOrigin().format.prepend[setNewLines(1, 1, 2); noSpace]
-		joint.getDynamics().format.prepend[setNewLines(1, 1, 2); noSpace]
-		joint.getCalibration().format.prepend[setNewLines(1, 1, 2); noSpace]
-		joint.getMimic().format.prepend[setNewLines(1, 1, 2); noSpace]
-		joint.getSafetycontroller().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getOrigin().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getDynamics().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getCalibration().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getMimic().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//joint.getSafetycontroller().format.prepend[setNewLines(1, 1, 2); noSpace]
 	}
 	
 	def dispatch void format(Limit limit, extension IFormattableDocument document) {
@@ -61,9 +64,9 @@ class DslFormatter extends AbstractFormatter2 {
 	def dispatch void format(Visual visual, extension IFormattableDocument document) {
 		//visual.format.prepend[setNewLines(1, 1, 2); noSpace]
 		visual.interior[indent]
-		visual.getGeometry().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//visual.getGeometry().format.prepend[setNewLines(1, 1, 2); noSpace]
 		visual.getOrigin().format.prepend[setNewLines(1, 1, 2); noSpace]
-		visual.getMaterial().format.prepend[setNewLines(1, 1, 2); noSpace]
+		//visual.getMaterial().format.prepend[setNewLines(1, 1, 2); noSpace]
 	}
 	
 	def dispatch void format(Geometry geo, extension IFormattableDocument document) {

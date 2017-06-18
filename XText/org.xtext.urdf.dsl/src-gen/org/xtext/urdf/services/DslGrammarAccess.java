@@ -1349,7 +1349,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cZAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cZURDFAttrINTParserRuleCall_7_0 = (RuleCall)cZAssignment_7.eContents().get(0);
 		
-		/// * Binary values must be 0 or 1 - digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
+		/// * Binary values must be 0 or 1 - 
+		// * digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
 		// Axis:
 		//	'Axis' name=ID? 'x' x=URDFAttrINT 'y' y=URDFAttrINT 'z' z=URDFAttrINT;
 		@Override public ParserRule getRule() { return rule; }
@@ -1613,7 +1614,9 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueSIGNED_NUMERICParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
-		//URDFAttrSignedNumeric:
+		/// *Constant:
+		//	
+		//;* / URDFAttrSignedNumeric:
 		//	value=SIGNED_NUMERIC;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -2254,7 +2257,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getLimitAccess().getRule();
 	}
 	
-	/// * Binary values must be 0 or 1 - digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
+	/// * Binary values must be 0 or 1 - 
+	// * digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
 	// Axis:
 	//	'Axis' name=ID? 'x' x=URDFAttrINT 'y' y=URDFAttrINT 'z' z=URDFAttrINT;
 	public AxisElements getAxisAccess() {
@@ -2307,7 +2311,9 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getSafetyControllerAccess().getRule();
 	}
 	
-	//URDFAttrSignedNumeric:
+	/// *Constant:
+	//	
+	//;* / URDFAttrSignedNumeric:
 	//	value=SIGNED_NUMERIC;
 	public URDFAttrSignedNumericElements getURDFAttrSignedNumericAccess() {
 		return pURDFAttrSignedNumeric;

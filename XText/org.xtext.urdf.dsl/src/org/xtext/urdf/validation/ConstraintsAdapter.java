@@ -3,7 +3,7 @@ package org.xtext.urdf.validation;
 import org.eclipse.emf.ecore.EReference;
 
 import scala.Tuple3;
-import uRDF.Robot;
+import org.xtext.urdf.myURDF.Robot;
 
 public class ConstraintsAdapter
 {

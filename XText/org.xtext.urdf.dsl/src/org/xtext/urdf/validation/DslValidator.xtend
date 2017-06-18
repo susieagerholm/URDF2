@@ -4,11 +4,11 @@
 package org.xtext.urdf.validation
 
 import org.eclipse.xtext.validation.Check
-import uRDF.Limit
-import uRDF.Robot
-import uRDF.URDFPackage
-import uRDF.ReUseAble
-import uRDF.Axis
+import org.xtext.urdf.myURDF.Limit
+import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.MyURDFPackage
+//import org.xtext.urdf.myURDF.ReUseAble
+import org.xtext.urdf.myURDF.Axis
 
 /**
  * This class contains custom validation rules. 
@@ -40,7 +40,7 @@ class DslValidator extends AbstractDslValidator {
 	def checkRobotContainsLink(Robot robot) {
 		if (robot.link.length < 1)
 		error("A Robot must contain at least one Link to be valid instance", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
 	//A Link must be connected to a Joint in order to be part of graph (otherwise parser will report multiple roots)
@@ -52,7 +52,7 @@ class DslValidator extends AbstractDslValidator {
 			robot.joint.map[childOf.name].contains(l.name)
 		]) 
 		error("A Link has to be referenced as parentOf and/or childOf at least one Joint", 
-        		URDFPackage.Literals.ROBOT__LINK)
+        		MyURDFPackage.Literals.ROBOT__LINK)
 	}
 	
 	// A Joint must not have the same Link as parent and child
@@ -67,7 +67,7 @@ class DslValidator extends AbstractDslValidator {
 	def checkJointTypesHaveRequiredLimit(Robot robot) {
 		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null])
 		error("A Joint of type revolute or prismatic must have a Limit defined", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
 	// A Joint of type revolute or prismatic must have Axis defined
@@ -75,7 +75,7 @@ class DslValidator extends AbstractDslValidator {
 	def checkJointTypesHaveRequiredAxis(Robot robot) {
 		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.axis != null])
 		error("A Joint of type revolute or prismatic must have an Axis defined", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
 	
@@ -84,7 +84,7 @@ class DslValidator extends AbstractDslValidator {
 	def checkAxisSettingIsValidOnlyOneActiveVector(Axis axis) {
 		if(axis.x + axis.y + axis.z != 1)
 		error("Only one of the vectors of an Axis may be set to 1 (= active). The other two vectors must be set to 0", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)	
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)	
 	}
 	
 	@Check
@@ -92,7 +92,7 @@ class DslValidator extends AbstractDslValidator {
 	def onlyPossibleToReuseIfNotAlreadyReused(ReUseAble reuser) {
 		if(reuser.isReuseOf.isReuseOf != null) 
 			error("Not legal to reuse from instance, that is already made from reuse", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
 	
 	@Check
@@ -100,6 +100,6 @@ class DslValidator extends AbstractDslValidator {
 	def onlyPossibleToReuseIfSameType(ReUseAble reuser) {
 		if(reuser.eClass != reuser.isReuseOf.eClass) 
 			error("Not legal to reuse from instance, that is not of the same type", 
-        		URDFPackage.Literals.NAMED_ELEMENT__NAME)
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
 }

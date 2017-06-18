@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import uRDF.Link;
-import uRDF.Robot;
+import org.xtext.urdf.myURDF.Link;
+import org.xtext.urdf.myURDF.Robot;
 
 
 public class UrdfGenerator
@@ -30,7 +30,7 @@ public class UrdfGenerator
 	
 	public String getResourceName(Resource res)
 	{
-		return ((uRDF.Robot)res.getContents().get(0)).getName() + ".xml";
+		return ((Robot)res.getContents().get(0)).getName() + ".xml";
 	}
 	
 	
@@ -38,7 +38,7 @@ public class UrdfGenerator
 	{
 		String urdf = "";
 		try {
-			urdf = generate((uRDF.Robot)res.getContents().get(0));	
+			urdf = generate((Robot)res.getContents().get(0));	
 			
 		} catch (Exception e) {
 			e.printStackTrace();

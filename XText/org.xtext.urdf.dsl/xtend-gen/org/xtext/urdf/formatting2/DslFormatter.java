@@ -9,56 +9,42 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import uRDF.Axis;
-import uRDF.Calibration;
-import uRDF.Dynamics;
-import uRDF.Geometry;
-import uRDF.Joint;
-import uRDF.Limit;
-import uRDF.Link;
-import uRDF.Material;
-import uRDF.Mimic;
-import uRDF.Origin;
-import uRDF.Robot;
-import uRDF.SafetyController;
-import uRDF.URDFPackage;
-import uRDF.Visual;
+import org.xtext.urdf.myURDF.Axis;
+import org.xtext.urdf.myURDF.Geometry;
+import org.xtext.urdf.myURDF.Joint;
+import org.xtext.urdf.myURDF.Limit;
+import org.xtext.urdf.myURDF.Link;
+import org.xtext.urdf.myURDF.Origin;
+import org.xtext.urdf.myURDF.Robot;
+import org.xtext.urdf.myURDF.Visual;
 
 @SuppressWarnings("all")
 public class DslFormatter extends AbstractFormatter2 {
   protected void _format(final Robot robot, @Extension final IFormattableDocument document) {
-    ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(robot);
-    ISemanticRegion _feature = _regionFor.feature(URDFPackage.Literals.NAMED_ELEMENT__NAME);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
-      it.newLine();
-    };
-    document.append(_feature, _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };
-    document.<Robot>interior(robot, _function_1);
+    document.<Robot>interior(robot, _function);
     EList<Link> _link = robot.getLink();
     for (final Link link : _link) {
       Link _format = document.<Link>format(link);
-      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.setNewLines(1, 1, 2);
         it.noSpace();
       };
-      document.<Link>prepend(_format, _function_2);
+      document.<Link>prepend(_format, _function_1);
     }
     EList<Joint> _joint = robot.getJoint();
     for (final Joint joint : _joint) {
       Joint _format_1 = document.<Joint>format(joint);
-      final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
         it.setNewLines(1, 1, 2);
         it.noSpace();
       };
-      document.<Joint>prepend(_format_1, _function_3);
+      document.<Joint>prepend(_format_1, _function_2);
     }
   }
   
@@ -67,15 +53,6 @@ public class DslFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<Link>interior(link, _function);
-    EList<Visual> _visuals = link.getVisuals();
-    for (final Visual visual : _visuals) {
-      Visual _format = document.<Visual>format(visual);
-      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
-        it.setNewLines(1, 1, 2);
-        it.noSpace();
-      };
-      document.<Visual>prepend(_format, _function_1);
-    }
   }
   
   protected void _format(final Joint joint, @Extension final IFormattableDocument document) {
@@ -97,41 +74,6 @@ public class DslFormatter extends AbstractFormatter2 {
       it.noSpace();
     };
     document.<Link>prepend(_format_1, _function_2);
-    Origin _origin = joint.getOrigin();
-    Origin _format_2 = document.<Origin>format(_origin);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Origin>prepend(_format_2, _function_3);
-    Dynamics _dynamics = joint.getDynamics();
-    Dynamics _format_3 = document.<Dynamics>format(_dynamics);
-    final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Dynamics>prepend(_format_3, _function_4);
-    Calibration _calibration = joint.getCalibration();
-    Calibration _format_4 = document.<Calibration>format(_calibration);
-    final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Calibration>prepend(_format_4, _function_5);
-    Mimic _mimic = joint.getMimic();
-    Mimic _format_5 = document.<Mimic>format(_mimic);
-    final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Mimic>prepend(_format_5, _function_6);
-    SafetyController _safetycontroller = joint.getSafetycontroller();
-    SafetyController _format_6 = document.<SafetyController>format(_safetycontroller);
-    final Procedure1<IHiddenRegionFormatter> _function_7 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<SafetyController>prepend(_format_6, _function_7);
   }
   
   protected void _format(final Limit limit, @Extension final IFormattableDocument document) {
@@ -153,27 +95,13 @@ public class DslFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<Visual>interior(visual, _function);
-    Geometry _geometry = visual.getGeometry();
-    Geometry _format = document.<Geometry>format(_geometry);
+    Origin _origin = visual.getOrigin();
+    Origin _format = document.<Origin>format(_origin);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.setNewLines(1, 1, 2);
       it.noSpace();
     };
-    document.<Geometry>prepend(_format, _function_1);
-    Origin _origin = visual.getOrigin();
-    Origin _format_1 = document.<Origin>format(_origin);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Origin>prepend(_format_1, _function_2);
-    Material _material = visual.getMaterial();
-    Material _format_2 = document.<Material>format(_material);
-    final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
-      it.setNewLines(1, 1, 2);
-      it.noSpace();
-    };
-    document.<Material>prepend(_format_2, _function_3);
+    document.<Origin>prepend(_format, _function_1);
   }
   
   protected void _format(final Geometry geo, @Extension final IFormattableDocument document) {

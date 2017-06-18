@@ -14,9 +14,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.xtext.urdf.myURDF.Joint;
 import org.xtext.urdf.tests.DslInjectorProvider;
 import org.xtext.urdf.tests.TestAdapter;
-import uRDF.Joint;
 import uRDF.Link;
 import uRDF.Robot;
 
@@ -50,24 +50,24 @@ public class DslParsingTest {
   
   @Test
   public void createLink() {
-    final Robot rob = TestAdapter.createTestUrdf();
-    EList<Link> _link = rob.getLink();
-    final Link myLink = _link.get(0);
+    final org.xtext.urdf.myURDF.Robot rob = TestAdapter.createTestUrdf();
+    EList<org.xtext.urdf.myURDF.Link> _link = rob.getLink();
+    final org.xtext.urdf.myURDF.Link myLink = _link.get(0);
     String _name = myLink.getName();
     Assert.assertEquals("URDFLink1Testname", _name);
   }
   
   @Test
   public void createJoint() {
-    final Robot roboto = TestAdapter.createTestUrdf();
+    final org.xtext.urdf.myURDF.Robot roboto = TestAdapter.createTestUrdf();
     EList<Joint> _joint = roboto.getJoint();
     final Joint myJoint = _joint.get(0);
     String _name = myJoint.getName();
     Assert.assertEquals("Joint1", _name);
-    Link _parentOf = myJoint.getParentOf();
+    org.xtext.urdf.myURDF.Link _parentOf = myJoint.getParentOf();
     String _name_1 = _parentOf.getName();
     Assert.assertEquals("URDF2", _name_1);
-    Link _childOf = myJoint.getChildOf();
+    org.xtext.urdf.myURDF.Link _childOf = myJoint.getChildOf();
     String _name_2 = _childOf.getName();
     Assert.assertEquals("URDFLink1Testname", _name_2);
   }

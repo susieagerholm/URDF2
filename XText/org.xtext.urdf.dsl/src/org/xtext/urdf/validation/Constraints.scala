@@ -1,8 +1,8 @@
 
 import scala.collection.JavaConversions._
-import uRDF.Robot
-import uRDF.Link
-import uRDF.URDFPackage
+import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.Link
+import org.xtext.urdf.myURDF.MyURDFPackage
 import org.eclipse.emf.ecore.EReference
 
 package org.xtext.urdf.validation
@@ -12,7 +12,7 @@ package org.xtext.urdf.validation
     
     def urdfComplete (robot :Robot) :(Boolean,String,EReference) = {
       var temp = robot.getJoint.iterator.toList.forall { j => j.getParentOf != j.getChildOf }
-      (temp,"Joint error",URDFPackage.Literals.ROBOT__JOINT)
+      (temp,"Joint error",MyURDFPackage.Literals.ROBOT__JOINT)
     }
     
     

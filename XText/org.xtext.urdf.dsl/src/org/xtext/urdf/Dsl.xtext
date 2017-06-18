@@ -207,8 +207,8 @@ Limit:
 	'upper' upper=(URDFAttrSignedNumeric)? 
 ;
 
-/* Binary values must be 0 or 1 - d
- * igitsum must be 1*/
+/* Binary values must be 0 or 1 - 
+ * digitsum must be 1*/
 //keyword aliases: 'xyz' or 'x', 'y', 'z'
 Axis:
 	'Axis' (name=ID)?
@@ -245,6 +245,10 @@ SafetyController:
 	('k_position' k_position=URDFAttrSignedNumeric)?
 	'k_velocity' k_velocity=URDFAttrSignedNumeric
 ;
+
+/*Constant:
+	
+;*/
 	
 URDFAttrSignedNumeric:
 	value = SIGNED_NUMERIC

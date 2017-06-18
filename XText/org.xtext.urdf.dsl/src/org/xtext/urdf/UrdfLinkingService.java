@@ -13,9 +13,9 @@ import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.nodemodel.INode;
 
-import uRDF.Link;
-import uRDF.URDFFactory;
-import uRDF.impl.URDFFactoryImpl;
+import org.xtext.urdf.myURDF.Link;
+import org.xtext.urdf.myURDF.MyURDFFactory;
+import org.xtext.urdf.myURDF.impl.MyURDFFactoryImpl;
 
 public class UrdfLinkingService extends DefaultLinkingService {
 	
@@ -36,7 +36,7 @@ public class UrdfLinkingService extends DefaultLinkingService {
 		Link link;
 
 		if (resource == null) {
-			URDFFactory eINSTANCE = URDFFactoryImpl.init();
+			MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
 			link = eINSTANCE.createLink();
 			link.setName(name);
 			resource = resourceSet.createResource(uri);
