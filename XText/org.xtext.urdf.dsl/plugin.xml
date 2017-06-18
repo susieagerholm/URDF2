@@ -5,6 +5,14 @@
 		<package 
 			uri = "http://itu.dk/uRDF"
 			class = "org.xtext.urdf.domainmodel.DomainmodelPackage"
-			genModel = "model/generated/Dsl.genmodel" />
+			genModel = "model/custom/Dsl.genmodel" />
 	</extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Dsl -->
+      <package
+            uri="http://www.itu.dk/uRDF"
+            class="org.xtext.urdf.myURDF.MyURDFPackage"
+            genModel="model/custom/Dsl.genmodel"/>
+   </extension>
+
 </plugin>

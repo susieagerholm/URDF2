@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package 
-			uri = "http://itu.dk/uRDF"
-			class = "org.xtext.urdf.domainmodel.DomainmodelPackage"
+			uri = "http://www.itu.dk/uRDF"
+			class = "org.xtext.urdf.myURDF.MyURDFPackage"
 			genModel = "model/generated/Dsl.genmodel" />
 	</extension>
 </plugin>

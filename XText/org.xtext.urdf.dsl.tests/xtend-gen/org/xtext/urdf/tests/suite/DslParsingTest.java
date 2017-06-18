@@ -28,6 +28,12 @@ public class DslParsingTest {
   @Extension
   private ParseHelper<Robot> _parseHelper;
   
+  /**
+   * Are elements created as expected by their respective default constructor in grammar
+   * Are elements created as expected by Topology and iDerivedStateComputer
+   * Are elements based on Reuse created as expected
+   * Are Decorations created as expected
+   */
   @Test
   public void loadModel() {
     try {

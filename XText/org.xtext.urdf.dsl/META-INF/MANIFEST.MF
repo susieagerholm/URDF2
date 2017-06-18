@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.xtext.urdf.dsl
 Bundle-Vendor: My Company
 Bundle-Version: 1.0.0.qualifier
-Bundle-SymbolicName: org.xtext.urdf.dsl; singleton:=true
+Bundle-SymbolicName: org.xtext.urdf2.dsl;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: URDF,
  org.eclipse.xtext,
@@ -24,8 +24,11 @@ Export-Package: org.xtext.urdf.parser.antlr,
  org.xtext.urdf.parser.antlr.internal,
  org.xtext.urdf,
  org.xtext.urdf.scoping,
-  org.xtext.urdf.serializer,
+ org.xtext.urdf.serializer,
  org.xtext.urdf.generator,
- org.xtext.urdf.formatting2
+ org.xtext.urdf.formatting2,
+ org.xtext.urdf.myURDF.impl,
+ org.xtext.urdf.myURDF.util,
+ org.xtext.urdf.myURDF
 Import-Package: org.apache.log4j
 Bundle-ClassPath: scala-xml_2.11-1.0.2.jar,.

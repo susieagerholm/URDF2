@@ -12,9 +12,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.tests.DslInjectorProvider;
-import org.xtext.urdf.tests.TestAdapter;
-import uRDF.Robot;
 
 @RunWith(XtextRunner.class)
 @InjectWith(DslInjectorProvider.class)
@@ -34,11 +33,5 @@ public class DslParsingTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Test
-  public void initializeRobot() {
-    Robot _createTestUrdf = TestAdapter.createTestUrdf();
-    Assert.assertNotNull(_createTestUrdf);
   }
 }

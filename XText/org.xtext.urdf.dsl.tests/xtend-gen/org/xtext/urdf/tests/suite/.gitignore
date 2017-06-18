@@ -2,3 +2,11 @@
 /.DslCodeGeneratorTest.java._trace
 /.DslFormatterTest.java._trace
 /.DslParsingTest.java._trace
+/.DslCodeGeneratorTest.xtendbin
+/.DslFormatterTest.xtendbin
+/.DslParsingTest.xtendbin
+/.DslValidationTest.xtendbin
+/DslCodeGeneratorTest.java
+/DslFormatterTest.java
+/DslParsingTest.java
+/DslValidationTest.java

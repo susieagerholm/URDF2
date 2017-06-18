@@ -26,35 +26,9 @@ public class DslSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getSIGNED_NUMERICRule())
-			return getSIGNED_NUMERICToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getSTRINGRule())
-			return getSTRINGToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
-	/**
-	 * SIGNED_NUMERIC:
-	 * 	('-')? (INT | FLOAT | SCIENTIFIC)
-	 * ;
-	 */
-	protected String getSIGNED_NUMERICToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "";
-	}
-	
-	/**
-	 * terminal STRING	: 
-	 * 			'"' ( '\\' .  | !('\\'|'"') )* '"' |
-	 * 			"'" ( '\\' .  | !('\\'|"'") )* "'"
-	 * 		;
-	 */
-	protected String getSTRINGToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "\"\"";
-	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
