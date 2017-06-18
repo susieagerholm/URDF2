@@ -24,6 +24,7 @@ import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.LinkDecorator;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.ReUseAble;
 import org.xtext.urdf.myURDF.Visual;
 
 /**
@@ -34,34 +35,13 @@ import org.xtext.urdf.myURDF.Visual;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getDecorator <em>Decorator</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class LinkImpl extends NamedElementImpl implements Link {
 	/**
 	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -70,7 +50,7 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected Link isReuseOf;
+	protected ReUseAble isReuseOf;
 
 	/**
 	 * The cached value of the '{@link #getDecorator() <em>Decorator</em>}' containment reference.
@@ -106,31 +86,10 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Link getIsReuseOf() {
+	public ReUseAble getIsReuseOf() {
 		if (isReuseOf != null && isReuseOf.eIsProxy()) {
 			InternalEObject oldIsReuseOf = (InternalEObject)isReuseOf;
-			isReuseOf = (Link)eResolveProxy(oldIsReuseOf);
+			isReuseOf = (ReUseAble)eResolveProxy(oldIsReuseOf);
 			if (isReuseOf != oldIsReuseOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.LINK__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -144,7 +103,7 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Link basicGetIsReuseOf() {
+	public ReUseAble basicGetIsReuseOf() {
 		return isReuseOf;
 	}
 
@@ -153,8 +112,8 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsReuseOf(Link newIsReuseOf) {
-		Link oldIsReuseOf = isReuseOf;
+	public void setIsReuseOf(ReUseAble newIsReuseOf) {
+		ReUseAble oldIsReuseOf = isReuseOf;
 		isReuseOf = newIsReuseOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -225,8 +184,6 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__NAME:
-				return getName();
 			case MyURDFPackage.LINK__IS_REUSE_OF:
 				if (resolve) return getIsReuseOf();
 				return basicGetIsReuseOf();
@@ -245,11 +202,8 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.LINK__IS_REUSE_OF:
-				setIsReuseOf((Link)newValue);
+				setIsReuseOf((ReUseAble)newValue);
 				return;
 			case MyURDFPackage.LINK__DECORATOR:
 				setDecorator((LinkDecorator)newValue);
@@ -266,11 +220,8 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.LINK__IS_REUSE_OF:
-				setIsReuseOf((Link)null);
+				setIsReuseOf((ReUseAble)null);
 				return;
 			case MyURDFPackage.LINK__DECORATOR:
 				setDecorator((LinkDecorator)null);
@@ -287,8 +238,6 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.LINK__IS_REUSE_OF:
 				return isReuseOf != null;
 			case MyURDFPackage.LINK__DECORATOR:
@@ -303,14 +252,30 @@ public class LinkImpl extends MinimalEObjectImpl.Container implements Link {
 	 * @generated
 	 */
 	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ReUseAble.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.LINK__IS_REUSE_OF: return MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ReUseAble.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF: return MyURDFPackage.LINK__IS_REUSE_OF;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //LinkImpl

@@ -26,12 +26,11 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getRising <em>Rising</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getFalling <em>Falling</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CalibrationImpl extends MinimalEObjectImpl.Container implements Calibration {
+public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	/**
 	 * The cached value of the '{@link #getRising() <em>Rising</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -53,26 +52,6 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 	protected URDFAttrSignedNumeric falling;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -89,27 +68,6 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.CALIBRATION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.CALIBRATION__NAME, oldName, name));
 	}
 
 	/**
@@ -226,8 +184,6 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 				return getRising();
 			case MyURDFPackage.CALIBRATION__FALLING:
 				return getFalling();
-			case MyURDFPackage.CALIBRATION__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -245,9 +201,6 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 				return;
 			case MyURDFPackage.CALIBRATION__FALLING:
 				setFalling((URDFAttrSignedNumeric)newValue);
-				return;
-			case MyURDFPackage.CALIBRATION__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -267,9 +220,6 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 			case MyURDFPackage.CALIBRATION__FALLING:
 				setFalling((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.CALIBRATION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -286,26 +236,8 @@ public class CalibrationImpl extends MinimalEObjectImpl.Container implements Cal
 				return rising != null;
 			case MyURDFPackage.CALIBRATION__FALLING:
 				return falling != null;
-			case MyURDFPackage.CALIBRATION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //CalibrationImpl

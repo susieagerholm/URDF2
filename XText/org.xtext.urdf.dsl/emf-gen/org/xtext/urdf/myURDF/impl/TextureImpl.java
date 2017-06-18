@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Texture;
 import org.xtext.urdf.myURDF.URDFAttrSTRING;
 
@@ -23,23 +24,13 @@ import org.xtext.urdf.myURDF.URDFAttrSTRING;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.TextureImpl#getPathToFile <em>Path To File</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.TextureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.TextureImpl#getPathToFile <em>Path To File</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TextureImpl extends MaterialImpl implements Texture {
-	/**
-	 * The cached value of the '{@link #getPathToFile() <em>Path To File</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPathToFile()
-	 * @generated
-	 * @ordered
-	 */
-	protected URDFAttrSTRING pathToFile;
-
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,6 +50,16 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPathToFile() <em>Path To File</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPathToFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrSTRING pathToFile;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -165,10 +166,10 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
-				return getPathToFile();
 			case MyURDFPackage.TEXTURE__NAME:
 				return getName();
+			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
+				return getPathToFile();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,11 +182,11 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
-				setPathToFile((URDFAttrSTRING)newValue);
-				return;
 			case MyURDFPackage.TEXTURE__NAME:
 				setName((String)newValue);
+				return;
+			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
+				setPathToFile((URDFAttrSTRING)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -199,11 +200,11 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
-				setPathToFile((URDFAttrSTRING)null);
-				return;
 			case MyURDFPackage.TEXTURE__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
+				setPathToFile((URDFAttrSTRING)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -217,12 +218,44 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
-				return pathToFile != null;
 			case MyURDFPackage.TEXTURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MyURDFPackage.TEXTURE__PATH_TO_FILE:
+				return pathToFile != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.TEXTURE__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.TEXTURE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

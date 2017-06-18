@@ -14,11 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Joint#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getChildOf <em>Child Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getParentOf <em>Parent Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Joint#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getDecorator <em>Decorator</em>}</li>
  * </ul>
  *
@@ -26,33 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Joint extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface Joint extends NamedElement, ReUseAble {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.xtext.urdf.myURDF.JointType}.
@@ -81,32 +53,6 @@ public interface Joint extends EObject {
 	 * @generated
 	 */
 	void setType(JointType value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Reuse Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Reuse Of</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Reuse Of</em>' reference.
-	 * @see #setIsReuseOf(Joint)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_IsReuseOf()
-	 * @model
-	 * @generated
-	 */
-	Joint getIsReuseOf();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getIsReuseOf <em>Is Reuse Of</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Reuse Of</em>' reference.
-	 * @see #getIsReuseOf()
-	 * @generated
-	 */
-	void setIsReuseOf(Joint value);
 
 	/**
 	 * Returns the value of the '<em><b>Decorator</b></em>' containment reference.

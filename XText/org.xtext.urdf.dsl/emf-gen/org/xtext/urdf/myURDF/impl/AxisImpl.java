@@ -27,12 +27,11 @@ import org.xtext.urdf.myURDF.URDFAttrINT;
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getX <em>X</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getY <em>Y</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getZ <em>Z</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
+public class AxisImpl extends NamedElementImpl implements Axis {
 	/**
 	 * The cached value of the '{@link #getX() <em>X</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -64,26 +63,6 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 	protected URDFAttrINT z;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -100,27 +79,6 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.AXIS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.AXIS__NAME, oldName, name));
 	}
 
 	/**
@@ -284,8 +242,6 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 				return getY();
 			case MyURDFPackage.AXIS__Z:
 				return getZ();
-			case MyURDFPackage.AXIS__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -306,9 +262,6 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 				return;
 			case MyURDFPackage.AXIS__Z:
 				setZ((URDFAttrINT)newValue);
-				return;
-			case MyURDFPackage.AXIS__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -331,9 +284,6 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 			case MyURDFPackage.AXIS__Z:
 				setZ((URDFAttrINT)null);
 				return;
-			case MyURDFPackage.AXIS__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -352,26 +302,8 @@ public class AxisImpl extends MinimalEObjectImpl.Container implements Axis {
 				return y != null;
 			case MyURDFPackage.AXIS__Z:
 				return z != null;
-			case MyURDFPackage.AXIS__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //AxisImpl

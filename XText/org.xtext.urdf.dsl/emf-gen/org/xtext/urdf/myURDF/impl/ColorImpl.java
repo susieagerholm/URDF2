@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.urdf.myURDF.Color;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrFloat;
 
 /**
@@ -23,16 +24,36 @@ import org.xtext.urdf.myURDF.URDFAttrFloat;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getRed <em>Red</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getGreen <em>Green</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getBlue <em>Blue</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getAlpha <em>Alpha</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.ColorImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ColorImpl extends MaterialImpl implements Color {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRed() <em>Red</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -72,26 +93,6 @@ public class ColorImpl extends MaterialImpl implements Color {
 	 * @ordered
 	 */
 	protected URDFAttrFloat alpha;
-
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -333,6 +334,8 @@ public class ColorImpl extends MaterialImpl implements Color {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.COLOR__NAME:
+				return getName();
 			case MyURDFPackage.COLOR__RED:
 				return getRed();
 			case MyURDFPackage.COLOR__GREEN:
@@ -341,8 +344,6 @@ public class ColorImpl extends MaterialImpl implements Color {
 				return getBlue();
 			case MyURDFPackage.COLOR__ALPHA:
 				return getAlpha();
-			case MyURDFPackage.COLOR__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -355,6 +356,9 @@ public class ColorImpl extends MaterialImpl implements Color {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.COLOR__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.COLOR__RED:
 				setRed((URDFAttrFloat)newValue);
 				return;
@@ -366,9 +370,6 @@ public class ColorImpl extends MaterialImpl implements Color {
 				return;
 			case MyURDFPackage.COLOR__ALPHA:
 				setAlpha((URDFAttrFloat)newValue);
-				return;
-			case MyURDFPackage.COLOR__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -382,6 +383,9 @@ public class ColorImpl extends MaterialImpl implements Color {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.COLOR__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.COLOR__RED:
 				setRed((URDFAttrFloat)null);
 				return;
@@ -393,9 +397,6 @@ public class ColorImpl extends MaterialImpl implements Color {
 				return;
 			case MyURDFPackage.COLOR__ALPHA:
 				setAlpha((URDFAttrFloat)null);
-				return;
-			case MyURDFPackage.COLOR__NAME:
-				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -409,6 +410,8 @@ public class ColorImpl extends MaterialImpl implements Color {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.COLOR__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.COLOR__RED:
 				return red != null;
 			case MyURDFPackage.COLOR__GREEN:
@@ -417,10 +420,40 @@ public class ColorImpl extends MaterialImpl implements Color {
 				return blue != null;
 			case MyURDFPackage.COLOR__ALPHA:
 				return alpha != null;
-			case MyURDFPackage.COLOR__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.COLOR__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.COLOR__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**

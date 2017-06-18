@@ -29,34 +29,13 @@ import org.xtext.urdf.myURDF.Origin;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getGeometry <em>Geometry</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getOrigin <em>Origin</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CollisionImpl extends MinimalEObjectImpl.Container implements Collision {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class CollisionImpl extends NamedElementImpl implements Collision {
 	/**
 	 * The cached value of the '{@link #getGeometry() <em>Geometry</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -94,27 +73,6 @@ public class CollisionImpl extends MinimalEObjectImpl.Container implements Colli
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.COLLISION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.COLLISION__NAME, oldName, name));
 	}
 
 	/**
@@ -196,8 +154,6 @@ public class CollisionImpl extends MinimalEObjectImpl.Container implements Colli
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__NAME:
-				return getName();
 			case MyURDFPackage.COLLISION__GEOMETRY:
 				return getGeometry();
 			case MyURDFPackage.COLLISION__ORIGIN:
@@ -215,9 +171,6 @@ public class CollisionImpl extends MinimalEObjectImpl.Container implements Colli
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.COLLISION__GEOMETRY:
 				getGeometry().clear();
 				getGeometry().addAll((Collection<? extends Geometry>)newValue);
@@ -237,9 +190,6 @@ public class CollisionImpl extends MinimalEObjectImpl.Container implements Colli
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.COLLISION__GEOMETRY:
 				getGeometry().clear();
 				return;
@@ -258,30 +208,12 @@ public class CollisionImpl extends MinimalEObjectImpl.Container implements Colli
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.COLLISION__GEOMETRY:
 				return geometry != null && !geometry.isEmpty();
 			case MyURDFPackage.COLLISION__ORIGIN:
 				return origin != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //CollisionImpl

@@ -22,7 +22,7 @@ package org.xtext.urdf.myURDF;
  * @model
  * @generated
  */
-public interface Box extends Geometry {
+public interface Box extends Geometry, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Height</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

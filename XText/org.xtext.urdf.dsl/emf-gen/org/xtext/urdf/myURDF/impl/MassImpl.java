@@ -24,33 +24,12 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.MassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.MassImpl#getMassValueInKilograms <em>Mass Value In Kilograms</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class MassImpl extends NamedElementImpl implements Mass {
 	/**
 	 * The cached value of the '{@link #getMassValueInKilograms() <em>Mass Value In Kilograms</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -78,27 +57,6 @@ public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.MASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__NAME, oldName, name));
 	}
 
 	/**
@@ -166,8 +124,6 @@ public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__NAME:
-				return getName();
 			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
 				return getMassValueInKilograms();
 		}
@@ -182,9 +138,6 @@ public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
 				setMassValueInKilograms((URDFAttrNumeric)newValue);
 				return;
@@ -200,9 +153,6 @@ public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
 				setMassValueInKilograms((URDFAttrNumeric)null);
 				return;
@@ -218,28 +168,10 @@ public class MassImpl extends MinimalEObjectImpl.Container implements Mass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
 				return massValueInKilograms != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //MassImpl

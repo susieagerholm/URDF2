@@ -16,40 +16,13 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.Calibration#getRising <em>Rising</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Calibration#getFalling <em>Falling</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Calibration#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getCalibration()
  * @model
  * @generated
  */
-public interface Calibration extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getCalibration_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Calibration#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface Calibration extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Rising</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -70,6 +70,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.ROBOT: {
 				Robot robot = (Robot)theEObject;
 				T result = caseRobot(robot);
+				if (result == null) result = caseNamedElement(robot);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -82,6 +83,8 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.LINK: {
 				Link link = (Link)theEObject;
 				T result = caseLink(link);
+				if (result == null) result = caseNamedElement(link);
+				if (result == null) result = caseReUseAble(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -100,6 +103,8 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.JOINT: {
 				Joint joint = (Joint)theEObject;
 				T result = caseJoint(joint);
+				if (result == null) result = caseNamedElement(joint);
+				if (result == null) result = caseReUseAble(joint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -112,18 +117,21 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.INERTIAL: {
 				Inertial inertial = (Inertial)theEObject;
 				T result = caseInertial(inertial);
+				if (result == null) result = caseNamedElement(inertial);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.INERTIA: {
 				Inertia inertia = (Inertia)theEObject;
 				T result = caseInertia(inertia);
+				if (result == null) result = caseNamedElement(inertia);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.VISUAL: {
 				Visual visual = (Visual)theEObject;
 				T result = caseVisual(visual);
+				if (result == null) result = caseNamedElement(visual);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -137,6 +145,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Box box = (Box)theEObject;
 				T result = caseBox(box);
 				if (result == null) result = caseGeometry(box);
+				if (result == null) result = caseNamedElement(box);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,24 +153,28 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Cylinder cylinder = (Cylinder)theEObject;
 				T result = caseCylinder(cylinder);
 				if (result == null) result = caseGeometry(cylinder);
+				if (result == null) result = caseNamedElement(cylinder);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.COLLISION: {
 				Collision collision = (Collision)theEObject;
 				T result = caseCollision(collision);
+				if (result == null) result = caseNamedElement(collision);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.ORIGIN: {
 				Origin origin = (Origin)theEObject;
 				T result = caseOrigin(origin);
+				if (result == null) result = caseNamedElement(origin);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.MASS: {
 				Mass mass = (Mass)theEObject;
 				T result = caseMass(mass);
+				if (result == null) result = caseNamedElement(mass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,6 +212,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Mesh mesh = (Mesh)theEObject;
 				T result = caseMesh(mesh);
 				if (result == null) result = caseGeometry(mesh);
+				if (result == null) result = caseNamedElement(mesh);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -206,6 +220,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Sphere sphere = (Sphere)theEObject;
 				T result = caseSphere(sphere);
 				if (result == null) result = caseGeometry(sphere);
+				if (result == null) result = caseNamedElement(sphere);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,6 +228,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Color color = (Color)theEObject;
 				T result = caseColor(color);
 				if (result == null) result = caseMaterial(color);
+				if (result == null) result = caseNamedElement(color);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -220,6 +236,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				Texture texture = (Texture)theEObject;
 				T result = caseTexture(texture);
 				if (result == null) result = caseMaterial(texture);
+				if (result == null) result = caseNamedElement(texture);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -232,12 +249,14 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.LIMIT: {
 				Limit limit = (Limit)theEObject;
 				T result = caseLimit(limit);
+				if (result == null) result = caseNamedElement(limit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.AXIS: {
 				Axis axis = (Axis)theEObject;
 				T result = caseAxis(axis);
+				if (result == null) result = caseNamedElement(axis);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,24 +269,39 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.CALIBRATION: {
 				Calibration calibration = (Calibration)theEObject;
 				T result = caseCalibration(calibration);
+				if (result == null) result = caseNamedElement(calibration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.DYNAMICS: {
 				Dynamics dynamics = (Dynamics)theEObject;
 				T result = caseDynamics(dynamics);
+				if (result == null) result = caseNamedElement(dynamics);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.SAFETY_CONTROLLER: {
 				SafetyController safetyController = (SafetyController)theEObject;
 				T result = caseSafetyController(safetyController);
+				if (result == null) result = caseNamedElement(safetyController);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.JOINT_DECO_REF: {
 				JointDecoRef jointDecoRef = (JointDecoRef)theEObject;
 				T result = caseJointDecoRef(jointDecoRef);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.RE_USE_ABLE: {
+				ReUseAble reUseAble = (ReUseAble)theEObject;
+				T result = caseReUseAble(reUseAble);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -767,6 +801,36 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseJointDecoRef(JointDecoRef object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Re Use Able</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Re Use Able</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReUseAble(ReUseAble object) {
 		return null;
 	}
 

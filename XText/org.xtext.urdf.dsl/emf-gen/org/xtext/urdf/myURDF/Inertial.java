@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Inertial#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertial#getInertia <em>Inertia</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertial#getMass <em>Mass</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertial#getOrigin <em>Origin</em>}</li>
@@ -24,33 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Inertial extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getInertial_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Inertial#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface Inertial extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Inertia</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

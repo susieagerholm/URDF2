@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.xtext.urdf.myURDF.Box;
 import org.xtext.urdf.myURDF.Mesh;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrSTRING;
 
 /**
@@ -24,6 +25,7 @@ import org.xtext.urdf.myURDF.URDFAttrSTRING;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getPathToFile <em>Path To File</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getDimension <em>Dimension</em>}</li>
  * </ul>
@@ -31,6 +33,26 @@ import org.xtext.urdf.myURDF.URDFAttrSTRING;
  * @generated
  */
 public class MeshImpl extends GeometryImpl implements Mesh {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getPathToFile() <em>Path To File</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -68,6 +90,27 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.MESH;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MESH__NAME, oldName, name));
 	}
 
 	/**
@@ -180,6 +223,8 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.MESH__NAME:
+				return getName();
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				return getPathToFile();
 			case MyURDFPackage.MESH__DIMENSION:
@@ -196,6 +241,9 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.MESH__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				setPathToFile((URDFAttrSTRING)newValue);
 				return;
@@ -214,6 +262,9 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.MESH__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				setPathToFile((URDFAttrSTRING)null);
 				return;
@@ -232,12 +283,62 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.MESH__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				return pathToFile != null;
 			case MyURDFPackage.MESH__DIMENSION:
 				return dimension != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.MESH__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.MESH__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MeshImpl

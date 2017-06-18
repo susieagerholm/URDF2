@@ -21,7 +21,7 @@ package org.xtext.urdf.myURDF;
  * @model
  * @generated
  */
-public interface Mesh extends Geometry {
+public interface Mesh extends Geometry, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Path To File</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

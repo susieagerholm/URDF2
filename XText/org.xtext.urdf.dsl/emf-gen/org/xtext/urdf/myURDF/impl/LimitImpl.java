@@ -28,12 +28,11 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getVelocity <em>Velocity</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getLower <em>Lower</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getUpper <em>Upper</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
+public class LimitImpl extends NamedElementImpl implements Limit {
 	/**
 	 * The cached value of the '{@link #getEffort() <em>Effort</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -75,26 +74,6 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 	protected URDFAttrSignedNumeric upper;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,27 +90,6 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.LIMIT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LIMIT__NAME, oldName, name));
 	}
 
 	/**
@@ -342,8 +300,6 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 				return getLower();
 			case MyURDFPackage.LIMIT__UPPER:
 				return getUpper();
-			case MyURDFPackage.LIMIT__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,9 +323,6 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 				return;
 			case MyURDFPackage.LIMIT__UPPER:
 				setUpper((URDFAttrSignedNumeric)newValue);
-				return;
-			case MyURDFPackage.LIMIT__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -395,9 +348,6 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 			case MyURDFPackage.LIMIT__UPPER:
 				setUpper((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.LIMIT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -418,26 +368,8 @@ public class LimitImpl extends MinimalEObjectImpl.Container implements Limit {
 				return lower != null;
 			case MyURDFPackage.LIMIT__UPPER:
 				return upper != null;
-			case MyURDFPackage.LIMIT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //LimitImpl

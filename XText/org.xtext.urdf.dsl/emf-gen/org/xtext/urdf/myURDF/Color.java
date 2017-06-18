@@ -17,14 +17,13 @@ package org.xtext.urdf.myURDF;
  *   <li>{@link org.xtext.urdf.myURDF.Color#getGreen <em>Green</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Color#getBlue <em>Blue</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Color#getAlpha <em>Alpha</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Color#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getColor()
  * @model
  * @generated
  */
-public interface Color extends Material {
+public interface Color extends Material, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Red</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -128,31 +127,5 @@ public interface Color extends Material {
 	 * @generated
 	 */
 	void setAlpha(URDFAttrFloat value);
-
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getColor_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Color#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
 
 } // Color

@@ -16,8 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Link#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Link#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Link#getDecorator <em>Decorator</em>}</li>
  * </ul>
  *
@@ -25,59 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Link extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Reuse Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Reuse Of</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Reuse Of</em>' reference.
-	 * @see #setIsReuseOf(Link)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_IsReuseOf()
-	 * @model
-	 * @generated
-	 */
-	Link getIsReuseOf();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getIsReuseOf <em>Is Reuse Of</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Reuse Of</em>' reference.
-	 * @see #getIsReuseOf()
-	 * @generated
-	 */
-	void setIsReuseOf(Link value);
-
+public interface Link extends NamedElement, ReUseAble {
 	/**
 	 * Returns the value of the '<em><b>Decorator</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

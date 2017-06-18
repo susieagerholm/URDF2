@@ -24,7 +24,6 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxx <em>Ixx</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxy <em>Ixy</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxz <em>Ixz</em>}</li>
@@ -35,27 +34,7 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  *
  * @generated
  */
-public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class InertiaImpl extends NamedElementImpl implements Inertia {
 	/**
 	 * The cached value of the '{@link #getIxx() <em>Ixx</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -133,27 +112,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.INERTIA;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.INERTIA__NAME, oldName, name));
 	}
 
 	/**
@@ -446,8 +404,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.INERTIA__NAME:
-				return getName();
 			case MyURDFPackage.INERTIA__IXX:
 				return getIxx();
 			case MyURDFPackage.INERTIA__IXY:
@@ -472,9 +428,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.INERTIA__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.INERTIA__IXX:
 				setIxx((URDFAttrSignedNumeric)newValue);
 				return;
@@ -505,9 +458,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.INERTIA__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.INERTIA__IXX:
 				setIxx((URDFAttrSignedNumeric)null);
 				return;
@@ -538,8 +488,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.INERTIA__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.INERTIA__IXX:
 				return ixx != null;
 			case MyURDFPackage.INERTIA__IXY:
@@ -554,22 +502,6 @@ public class InertiaImpl extends MinimalEObjectImpl.Container implements Inertia
 				return izz != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //InertiaImpl

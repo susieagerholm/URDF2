@@ -57,7 +57,7 @@ public class TestAdapter {
 	   EList<Link> linkList = new BasicEList<Link>();
 	   linkList.add(link);
 	   linkList.add(link2);
-	   robot.eSet(URDFPackage.ROBOT__LINK, linkList);
+	   robot.eSet(MyURDFPackage.ROBOT__LINK, linkList);
 	
 
 	   //Joints
@@ -85,7 +85,7 @@ public class TestAdapter {
 	   EList<Joint> jointList = new BasicEList<Joint>();
 	   jointList.add(joint);
 	   jointList.add(joint2);
-	   robot.eSet(URDFPackage.ROBOT__JOINT,jointList);
+	   robot.eSet(MyURDFPackage.ROBOT__JOINT,jointList);
 	   
 	   // assert (ConstraintsAdapter.urdfValid(robot));
 	   

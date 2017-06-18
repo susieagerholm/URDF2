@@ -20,7 +20,7 @@ package org.xtext.urdf.myURDF;
  * @model
  * @generated
  */
-public interface Sphere extends Geometry {
+public interface Sphere extends Geometry, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Radius</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

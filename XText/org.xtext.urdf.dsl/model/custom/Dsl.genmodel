@@ -13,7 +13,6 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//JointType/continuous"/>
     </genEnums>
     <genClasses ecoreClass="Dsl.ecore#//Robot">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Robot/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/topologies"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/link"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/joint"/>
@@ -25,8 +24,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/child"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Link">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Link/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/isReuseOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/decorator"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//LinkDecorator">
@@ -39,11 +36,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkRef/decorator"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Joint">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ChildOf"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ParentOf"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/Type"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/isReuseOf"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/decorator"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//JointRef">
@@ -53,13 +48,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/cont"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Inertial">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Inertial/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/inertia"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/mass"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/origin"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Inertia">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Inertia/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixx"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixy"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixz"/>
@@ -68,13 +61,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/izz"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Visual">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Visual/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/geometry"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/origin"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Geometry">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Geometry/name"/>
-    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Geometry"/>
     <genClasses ecoreClass="Dsl.ecore#//Box">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/height"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/width"/>
@@ -85,12 +75,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Cylinder/length"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Collision">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Collision/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/geometry"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/origin"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Origin">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Origin/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/z"/>
@@ -99,7 +87,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/yaw"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Mass">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Mass/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Mass/massValueInKilograms"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//URDFAttrSignedNumeric">
@@ -129,11 +116,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/green"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/blue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/alpha"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Color/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Texture">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Texture/pathToFile"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Texture/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Material"/>
     <genClasses ecoreClass="Dsl.ecore#//Limit">
@@ -141,13 +126,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/velocity"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/lower"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/upper"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Limit/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Axis">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/z"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Axis/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//JointDecorator">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/axis"/>
@@ -159,10 +142,8 @@
     <genClasses ecoreClass="Dsl.ecore#//Calibration">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Calibration/rising"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Calibration/falling"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Calibration/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Dynamics">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Dynamics/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Dynamics/friction"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Dynamics/damping"/>
     </genClasses>
@@ -171,11 +152,16 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/k_position"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/softUpperLimit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/softLowerLimit"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//SafetyController/name"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//JointDecoRef">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecoRef/decorator"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecoRef/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//ReUseAble">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//ReUseAble/isReuseOf"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

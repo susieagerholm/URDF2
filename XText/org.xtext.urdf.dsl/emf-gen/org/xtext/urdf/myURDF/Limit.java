@@ -18,40 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.urdf.myURDF.Limit#getVelocity <em>Velocity</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Limit#getLower <em>Lower</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Limit#getUpper <em>Upper</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Limit#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getLimit()
  * @model
  * @generated
  */
-public interface Limit extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLimit_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Limit#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface Limit extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Effort</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

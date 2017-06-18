@@ -4,11 +4,10 @@
 package org.xtext.urdf.validation
 
 import org.eclipse.xtext.validation.Check
-import org.xtext.urdf.myURDF.Limit
-import org.xtext.urdf.myURDF.Robot
-import org.xtext.urdf.myURDF.MyURDFPackage
-//import org.xtext.urdf.myURDF.ReUseAble
 import org.xtext.urdf.myURDF.Axis
+import org.xtext.urdf.myURDF.MyURDFPackage
+import org.xtext.urdf.myURDF.ReUseAble
+import org.xtext.urdf.myURDF.Robot
 
 /**
  * This class contains custom validation rules. 
@@ -65,7 +64,7 @@ class DslValidator extends AbstractDslValidator {
 	// A Joint of type revolute or prismatic must have Limit defined
 	@Check
 	def checkJointTypesHaveRequiredLimit(Robot robot) {
-		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null])
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.decorator.limit != null])
 		error("A Joint of type revolute or prismatic must have a Limit defined", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
@@ -73,7 +72,7 @@ class DslValidator extends AbstractDslValidator {
 	// A Joint of type revolute or prismatic must have Axis defined
 	@Check
 	def checkJointTypesHaveRequiredAxis(Robot robot) {
-		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.axis != null])
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.decorator.axis != null])
 		error("A Joint of type revolute or prismatic must have an Axis defined", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
@@ -82,7 +81,7 @@ class DslValidator extends AbstractDslValidator {
 	//An Axis may have only one active vector...
 	@Check
 	def checkAxisSettingIsValidOnlyOneActiveVector(Axis axis) {
-		if(axis.x + axis.y + axis.z != 1)
+		if(axis.x.value + axis.y.value + axis.z.value != 1)
 		error("Only one of the vectors of an Axis may be set to 1 (= active). The other two vectors must be set to 0", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)	
 	}

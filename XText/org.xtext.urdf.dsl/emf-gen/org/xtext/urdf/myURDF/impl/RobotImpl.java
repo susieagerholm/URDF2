@@ -34,7 +34,6 @@ import org.xtext.urdf.myURDF.Topology;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getTopologies <em>Topologies</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getLink <em>Link</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getJoint <em>Joint</em>}</li>
@@ -43,27 +42,7 @@ import org.xtext.urdf.myURDF.Topology;
  *
  * @generated
  */
-public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class RobotImpl extends NamedElementImpl implements Robot {
 	/**
 	 * The cached value of the '{@link #getTopologies() <em>Topologies</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -121,27 +100,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.ROBOT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.ROBOT__NAME, oldName, name));
 	}
 
 	/**
@@ -220,8 +178,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__NAME:
-				return getName();
 			case MyURDFPackage.ROBOT__TOPOLOGIES:
 				return getTopologies();
 			case MyURDFPackage.ROBOT__LINK:
@@ -243,9 +199,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.ROBOT__TOPOLOGIES:
 				getTopologies().clear();
 				getTopologies().addAll((Collection<? extends Topology>)newValue);
@@ -274,9 +227,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.ROBOT__TOPOLOGIES:
 				getTopologies().clear();
 				return;
@@ -301,8 +251,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.ROBOT__TOPOLOGIES:
 				return topologies != null && !topologies.isEmpty();
 			case MyURDFPackage.ROBOT__LINK:
@@ -313,22 +261,6 @@ public class RobotImpl extends MinimalEObjectImpl.Container implements Robot {
 				return linkrefs != null && !linkrefs.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //RobotImpl

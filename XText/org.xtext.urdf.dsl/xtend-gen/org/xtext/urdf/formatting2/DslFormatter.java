@@ -118,9 +118,6 @@ public class DslFormatter extends AbstractFormatter2 {
     } else if (axis instanceof Axis) {
       _format((Axis)axis, document);
       return;
-    } else if (axis instanceof Geometry) {
-      _format((Geometry)axis, document);
-      return;
     } else if (axis instanceof Joint) {
       _format((Joint)axis, document);
       return;
@@ -135,6 +132,9 @@ public class DslFormatter extends AbstractFormatter2 {
       return;
     } else if (axis instanceof Visual) {
       _format((Visual)axis, document);
+      return;
+    } else if (axis instanceof Geometry) {
+      _format((Geometry)axis, document);
       return;
     } else if (axis instanceof EObject) {
       _format((EObject)axis, document);

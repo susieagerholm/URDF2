@@ -18,40 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getK_position <em>Kposition</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getSoftLowerLimit <em>Soft Lower Limit</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getSafetyController()
  * @model
  * @generated
  */
-public interface SafetyController extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getSafetyController_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.SafetyController#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
+public interface SafetyController extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Soft Lower Limit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

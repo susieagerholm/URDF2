@@ -14,6 +14,7 @@ import org.xtext.urdf.myURDF.JointDecorator;
 import org.xtext.urdf.myURDF.JointType;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.ReUseAble;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,36 +24,25 @@ import org.xtext.urdf.myURDF.MyURDFPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getChildOf <em>Child Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getParentOf <em>Parent Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getDecorator <em>Decorator</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
+public class JointImpl extends NamedElementImpl implements Joint {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getIsReuseOf()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected ReUseAble isReuseOf;
 
 	/**
 	 * The cached value of the '{@link #getChildOf() <em>Child Of</em>}' reference.
@@ -95,16 +85,6 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	protected JointType type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsReuseOf()
-	 * @generated
-	 * @ordered
-	 */
-	protected Joint isReuseOf;
-
-	/**
 	 * The cached value of the '{@link #getDecorator() <em>Decorator</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -138,27 +118,6 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__NAME, oldName, name));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public JointType getType() {
 		return type;
 	}
@@ -180,10 +139,10 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Joint getIsReuseOf() {
+	public ReUseAble getIsReuseOf() {
 		if (isReuseOf != null && isReuseOf.eIsProxy()) {
 			InternalEObject oldIsReuseOf = (InternalEObject)isReuseOf;
-			isReuseOf = (Joint)eResolveProxy(oldIsReuseOf);
+			isReuseOf = (ReUseAble)eResolveProxy(oldIsReuseOf);
 			if (isReuseOf != oldIsReuseOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.JOINT__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -197,7 +156,7 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Joint basicGetIsReuseOf() {
+	public ReUseAble basicGetIsReuseOf() {
 		return isReuseOf;
 	}
 
@@ -206,8 +165,8 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsReuseOf(Joint newIsReuseOf) {
-		Joint oldIsReuseOf = isReuseOf;
+	public void setIsReuseOf(ReUseAble newIsReuseOf) {
+		ReUseAble oldIsReuseOf = isReuseOf;
 		isReuseOf = newIsReuseOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -354,8 +313,9 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.JOINT__NAME:
-				return getName();
+			case MyURDFPackage.JOINT__IS_REUSE_OF:
+				if (resolve) return getIsReuseOf();
+				return basicGetIsReuseOf();
 			case MyURDFPackage.JOINT__CHILD_OF:
 				if (resolve) return getChildOf();
 				return basicGetChildOf();
@@ -364,9 +324,6 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 				return basicGetParentOf();
 			case MyURDFPackage.JOINT__TYPE:
 				return getType();
-			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				if (resolve) return getIsReuseOf();
-				return basicGetIsReuseOf();
 			case MyURDFPackage.JOINT__DECORATOR:
 				return getDecorator();
 		}
@@ -381,8 +338,8 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.JOINT__NAME:
-				setName((String)newValue);
+			case MyURDFPackage.JOINT__IS_REUSE_OF:
+				setIsReuseOf((ReUseAble)newValue);
 				return;
 			case MyURDFPackage.JOINT__CHILD_OF:
 				setChildOf((Link)newValue);
@@ -392,9 +349,6 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 				return;
 			case MyURDFPackage.JOINT__TYPE:
 				setType((JointType)newValue);
-				return;
-			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				setIsReuseOf((Joint)newValue);
 				return;
 			case MyURDFPackage.JOINT__DECORATOR:
 				setDecorator((JointDecorator)newValue);
@@ -411,8 +365,8 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.JOINT__NAME:
-				setName(NAME_EDEFAULT);
+			case MyURDFPackage.JOINT__IS_REUSE_OF:
+				setIsReuseOf((ReUseAble)null);
 				return;
 			case MyURDFPackage.JOINT__CHILD_OF:
 				setChildOf((Link)null);
@@ -422,9 +376,6 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 				return;
 			case MyURDFPackage.JOINT__TYPE:
 				setType(TYPE_EDEFAULT);
-				return;
-			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				setIsReuseOf((Joint)null);
 				return;
 			case MyURDFPackage.JOINT__DECORATOR:
 				setDecorator((JointDecorator)null);
@@ -441,16 +392,14 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.JOINT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MyURDFPackage.JOINT__IS_REUSE_OF:
+				return isReuseOf != null;
 			case MyURDFPackage.JOINT__CHILD_OF:
 				return childOf != null;
 			case MyURDFPackage.JOINT__PARENT_OF:
 				return parentOf != null;
 			case MyURDFPackage.JOINT__TYPE:
 				return type != TYPE_EDEFAULT;
-			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				return isReuseOf != null;
 			case MyURDFPackage.JOINT__DECORATOR:
 				return decorator != null;
 		}
@@ -463,13 +412,43 @@ public class JointImpl extends MinimalEObjectImpl.Container implements Joint {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ReUseAble.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.JOINT__IS_REUSE_OF: return MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ReUseAble.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF: return MyURDFPackage.JOINT__IS_REUSE_OF;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", Type: ");
+		result.append(" (Type: ");
 		result.append(type);
 		result.append(')');
 		return result.toString();

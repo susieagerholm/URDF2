@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.urdf.myURDF.Cylinder;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrNumeric;
 
 /**
@@ -23,6 +24,7 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.CylinderImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CylinderImpl#getRadius <em>Radius</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CylinderImpl#getLength <em>Length</em>}</li>
  * </ul>
@@ -30,6 +32,26 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * @generated
  */
 public class CylinderImpl extends GeometryImpl implements Cylinder {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRadius() <em>Radius</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -67,6 +89,27 @@ public class CylinderImpl extends GeometryImpl implements Cylinder {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.CYLINDER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.CYLINDER__NAME, oldName, name));
 	}
 
 	/**
@@ -179,6 +222,8 @@ public class CylinderImpl extends GeometryImpl implements Cylinder {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.CYLINDER__NAME:
+				return getName();
 			case MyURDFPackage.CYLINDER__RADIUS:
 				return getRadius();
 			case MyURDFPackage.CYLINDER__LENGTH:
@@ -195,6 +240,9 @@ public class CylinderImpl extends GeometryImpl implements Cylinder {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.CYLINDER__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.CYLINDER__RADIUS:
 				setRadius((URDFAttrNumeric)newValue);
 				return;
@@ -213,6 +261,9 @@ public class CylinderImpl extends GeometryImpl implements Cylinder {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.CYLINDER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.CYLINDER__RADIUS:
 				setRadius((URDFAttrNumeric)null);
 				return;
@@ -231,12 +282,62 @@ public class CylinderImpl extends GeometryImpl implements Cylinder {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.CYLINDER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.CYLINDER__RADIUS:
 				return radius != null;
 			case MyURDFPackage.CYLINDER__LENGTH:
 				return length != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.CYLINDER__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.CYLINDER__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CylinderImpl

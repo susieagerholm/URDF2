@@ -28,12 +28,11 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getK_position <em>Kposition</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getSoftLowerLimit <em>Soft Lower Limit</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SafetyControllerImpl extends MinimalEObjectImpl.Container implements SafetyController {
+public class SafetyControllerImpl extends NamedElementImpl implements SafetyController {
 	/**
 	 * The cached value of the '{@link #getK_velocity() <em>Kvelocity</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -75,26 +74,6 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 	protected URDFAttrSignedNumeric softLowerLimit;
 
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -111,27 +90,6 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.SAFETY_CONTROLLER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.SAFETY_CONTROLLER__NAME, oldName, name));
 	}
 
 	/**
@@ -342,8 +300,6 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 				return getSoftUpperLimit();
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				return getSoftLowerLimit();
-			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
-				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -367,9 +323,6 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				setSoftLowerLimit((URDFAttrSignedNumeric)newValue);
-				return;
-			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
-				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -395,9 +348,6 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				setSoftLowerLimit((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -418,26 +368,8 @@ public class SafetyControllerImpl extends MinimalEObjectImpl.Container implement
 				return softUpperLimit != null;
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				return softLowerLimit != null;
-			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SafetyControllerImpl

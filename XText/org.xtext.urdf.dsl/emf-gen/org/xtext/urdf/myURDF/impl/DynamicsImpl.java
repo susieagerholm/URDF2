@@ -24,34 +24,13 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.DynamicsImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.DynamicsImpl#getFriction <em>Friction</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.DynamicsImpl#getDamping <em>Damping</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynamics {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
+public class DynamicsImpl extends NamedElementImpl implements Dynamics {
 	/**
 	 * The cached value of the '{@link #getFriction() <em>Friction</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -89,27 +68,6 @@ public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynami
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.DYNAMICS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.DYNAMICS__NAME, oldName, name));
 	}
 
 	/**
@@ -222,8 +180,6 @@ public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynami
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.DYNAMICS__NAME:
-				return getName();
 			case MyURDFPackage.DYNAMICS__FRICTION:
 				return getFriction();
 			case MyURDFPackage.DYNAMICS__DAMPING:
@@ -240,9 +196,6 @@ public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynami
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.DYNAMICS__NAME:
-				setName((String)newValue);
-				return;
 			case MyURDFPackage.DYNAMICS__FRICTION:
 				setFriction((URDFAttrSignedNumeric)newValue);
 				return;
@@ -261,9 +214,6 @@ public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynami
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.DYNAMICS__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case MyURDFPackage.DYNAMICS__FRICTION:
 				setFriction((URDFAttrSignedNumeric)null);
 				return;
@@ -282,30 +232,12 @@ public class DynamicsImpl extends MinimalEObjectImpl.Container implements Dynami
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.DYNAMICS__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.DYNAMICS__FRICTION:
 				return friction != null;
 			case MyURDFPackage.DYNAMICS__DAMPING:
 				return damping != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //DynamicsImpl

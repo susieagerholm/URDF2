@@ -201,6 +201,14 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 				return createJointDecoRefAdapter();
 			}
 			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseReUseAble(ReUseAble object) {
+				return createReUseAbleAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -679,6 +687,34 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJointDecoRefAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.ReUseAble <em>Re Use Able</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.ReUseAble
+	 * @generated
+	 */
+	public Adapter createReUseAbleAdapter() {
 		return null;
 	}
 
