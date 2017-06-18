@@ -5,25 +5,15 @@ package org.xtext.urdf.myURDF.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.xtext.urdf.myURDF.Axis;
-import org.xtext.urdf.myURDF.Calibration;
-import org.xtext.urdf.myURDF.Dynamics;
 import org.xtext.urdf.myURDF.Joint;
 import org.xtext.urdf.myURDF.JointDecorator;
 import org.xtext.urdf.myURDF.JointType;
-import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.Mimic;
 import org.xtext.urdf.myURDF.MyURDFPackage;
-import org.xtext.urdf.myURDF.Origin;
-import org.xtext.urdf.myURDF.SafetyController;
 
 /**
  * <!-- begin-user-doc -->

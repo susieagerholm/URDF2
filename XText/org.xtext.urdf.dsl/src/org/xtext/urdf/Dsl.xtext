@@ -207,7 +207,8 @@ Limit:
 	'upper' upper=(URDFAttrSignedNumeric)? 
 ;
 
-/* Binary values - must be 0 or 1. Digitsum must be 1*/
+/* Binary values must be 0 or 1 - d
+ * igitsum must be 1*/
 //keyword aliases: 'xyz' or 'x', 'y', 'z'
 Axis:
 	'Axis' (name=ID)?

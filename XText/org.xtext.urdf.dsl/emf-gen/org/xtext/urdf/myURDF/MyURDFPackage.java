@@ -717,22 +717,13 @@ public interface MyURDFPackage extends EPackage {
 	int GEOMETRY__NAME = 0;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEOMETRY__LENGTH = 1;
-
-	/**
 	 * The number of structural features of the '<em>Geometry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GEOMETRY_FEATURE_COUNT = 2;
+	int GEOMETRY_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ColorImpl <em>Color</em>}' class.
@@ -774,15 +765,6 @@ public interface MyURDFPackage extends EPackage {
 	int BOX__NAME = GEOMETRY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__LENGTH = GEOMETRY__LENGTH;
-
-	/**
 	 * The feature id for the '<em><b>Height</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -801,13 +783,22 @@ public interface MyURDFPackage extends EPackage {
 	int BOX__WIDTH = GEOMETRY_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Length</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__LENGTH = GEOMETRY_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Box</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOX_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 2;
+	int BOX_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.CylinderImpl <em>Cylinder</em>}' class.
@@ -829,15 +820,6 @@ public interface MyURDFPackage extends EPackage {
 	int CYLINDER__NAME = GEOMETRY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CYLINDER__LENGTH = GEOMETRY__LENGTH;
-
-	/**
 	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -847,13 +829,22 @@ public interface MyURDFPackage extends EPackage {
 	int CYLINDER__RADIUS = GEOMETRY_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Length</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYLINDER__LENGTH = GEOMETRY_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Cylinder</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYLINDER_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 1;
+	int CYLINDER_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1100,15 +1091,6 @@ public interface MyURDFPackage extends EPackage {
 	int MESH__NAME = GEOMETRY__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESH__LENGTH = GEOMETRY__LENGTH;
-
-	/**
 	 * The feature id for the '<em><b>Path To File</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1153,15 +1135,6 @@ public interface MyURDFPackage extends EPackage {
 	 * @ordered
 	 */
 	int SPHERE__NAME = GEOMETRY__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPHERE__LENGTH = GEOMETRY__LENGTH;
 
 	/**
 	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
@@ -1796,17 +1769,6 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getGeometry_Name();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Geometry#getLength <em>Length</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Length</em>'.
-	 * @see org.xtext.urdf.myURDF.Geometry#getLength()
-	 * @see #getGeometry()
-	 * @generated
-	 */
-	EReference getGeometry_Length();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Link <em>Link</em>}'.
@@ -2637,6 +2599,17 @@ public interface MyURDFPackage extends EPackage {
 	EReference getBox_Width();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Box#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Length</em>'.
+	 * @see org.xtext.urdf.myURDF.Box#getLength()
+	 * @see #getBox()
+	 * @generated
+	 */
+	EReference getBox_Length();
+
+	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Cylinder <em>Cylinder</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2656,6 +2629,17 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCylinder_Radius();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Cylinder#getLength <em>Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Length</em>'.
+	 * @see org.xtext.urdf.myURDF.Cylinder#getLength()
+	 * @see #getCylinder()
+	 * @generated
+	 */
+	EReference getCylinder_Length();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Mesh <em>Mesh</em>}'.
@@ -3220,14 +3204,6 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute GEOMETRY__NAME = eINSTANCE.getGeometry_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Length</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference GEOMETRY__LENGTH = eINSTANCE.getGeometry_Length();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.LinkImpl <em>Link</em>}' class.
@@ -3884,6 +3860,14 @@ public interface MyURDFPackage extends EPackage {
 		EReference BOX__WIDTH = eINSTANCE.getBox_Width();
 
 		/**
+		 * The meta object literal for the '<em><b>Length</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOX__LENGTH = eINSTANCE.getBox_Length();
+
+		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.CylinderImpl <em>Cylinder</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3900,6 +3884,14 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CYLINDER__RADIUS = eINSTANCE.getCylinder_Radius();
+
+		/**
+		 * The meta object literal for the '<em><b>Length</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CYLINDER__LENGTH = eINSTANCE.getCylinder_Length();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.MeshImpl <em>Mesh</em>}' class.

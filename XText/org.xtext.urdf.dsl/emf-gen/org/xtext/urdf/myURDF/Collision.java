@@ -62,7 +62,7 @@ public interface Collision extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Geometry</em>' containment reference list.
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getCollision_Geometry()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	EList<Geometry> getGeometry();

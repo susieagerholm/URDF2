@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.Geometry#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Geometry#getLength <em>Length</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getGeometry()
@@ -48,31 +47,5 @@ public interface Geometry extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Length</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Length</em>' containment reference.
-	 * @see #setLength(URDFAttrNumeric)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getGeometry_Length()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	URDFAttrNumeric getLength();
-
-	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Geometry#getLength <em>Length</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Length</em>' containment reference.
-	 * @see #getLength()
-	 * @generated
-	 */
-	void setLength(URDFAttrNumeric value);
 
 } // Geometry

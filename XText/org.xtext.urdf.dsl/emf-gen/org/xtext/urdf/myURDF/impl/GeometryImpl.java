@@ -25,7 +25,6 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.impl.GeometryImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.GeometryImpl#getLength <em>Length</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,16 +49,6 @@ public abstract class GeometryImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getLength() <em>Length</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLength()
-	 * @generated
-	 * @ordered
-	 */
-	protected URDFAttrNumeric length;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,70 +95,11 @@ public abstract class GeometryImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public URDFAttrNumeric getLength() {
-		return length;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetLength(URDFAttrNumeric newLength, NotificationChain msgs) {
-		URDFAttrNumeric oldLength = length;
-		length = newLength;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.GEOMETRY__LENGTH, oldLength, newLength);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLength(URDFAttrNumeric newLength) {
-		if (newLength != length) {
-			NotificationChain msgs = null;
-			if (length != null)
-				msgs = ((InternalEObject)length).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.GEOMETRY__LENGTH, null, msgs);
-			if (newLength != null)
-				msgs = ((InternalEObject)newLength).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.GEOMETRY__LENGTH, null, msgs);
-			msgs = basicSetLength(newLength, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.GEOMETRY__LENGTH, newLength, newLength));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case MyURDFPackage.GEOMETRY__LENGTH:
-				return basicSetLength(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MyURDFPackage.GEOMETRY__NAME:
 				return getName();
-			case MyURDFPackage.GEOMETRY__LENGTH:
-				return getLength();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -184,9 +114,6 @@ public abstract class GeometryImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case MyURDFPackage.GEOMETRY__NAME:
 				setName((String)newValue);
-				return;
-			case MyURDFPackage.GEOMETRY__LENGTH:
-				setLength((URDFAttrNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -203,9 +130,6 @@ public abstract class GeometryImpl extends MinimalEObjectImpl.Container implemen
 			case MyURDFPackage.GEOMETRY__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case MyURDFPackage.GEOMETRY__LENGTH:
-				setLength((URDFAttrNumeric)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -220,8 +144,6 @@ public abstract class GeometryImpl extends MinimalEObjectImpl.Container implemen
 		switch (featureID) {
 			case MyURDFPackage.GEOMETRY__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case MyURDFPackage.GEOMETRY__LENGTH:
-				return length != null;
 		}
 		return super.eIsSet(featureID);
 	}

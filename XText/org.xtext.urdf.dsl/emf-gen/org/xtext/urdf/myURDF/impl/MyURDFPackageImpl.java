@@ -481,15 +481,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeometry_Length() {
-		return (EReference)geometryEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getLink() {
 		return linkEClass;
 	}
@@ -1183,6 +1174,15 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBox_Length() {
+		return (EReference)boxEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCylinder() {
 		return cylinderEClass;
 	}
@@ -1194,6 +1194,15 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 */
 	public EReference getCylinder_Radius() {
 		return (EReference)cylinderEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCylinder_Length() {
+		return (EReference)cylinderEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1646,14 +1655,15 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 
 		geometryEClass = createEClass(GEOMETRY);
 		createEAttribute(geometryEClass, GEOMETRY__NAME);
-		createEReference(geometryEClass, GEOMETRY__LENGTH);
 
 		boxEClass = createEClass(BOX);
 		createEReference(boxEClass, BOX__HEIGHT);
 		createEReference(boxEClass, BOX__WIDTH);
+		createEReference(boxEClass, BOX__LENGTH);
 
 		cylinderEClass = createEClass(CYLINDER);
 		createEReference(cylinderEClass, CYLINDER__RADIUS);
+		createEReference(cylinderEClass, CYLINDER__LENGTH);
 
 		collisionEClass = createEClass(COLLISION);
 		createEAttribute(collisionEClass, COLLISION__NAME);
@@ -1854,18 +1864,19 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 
 		initEClass(geometryEClass, Geometry.class, "Geometry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGeometry_Name(), ecorePackage.getEString(), "name", null, 0, 1, Geometry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getGeometry_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Geometry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(boxEClass, Box.class, "Box", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBox_Height(), this.getURDFAttrNumeric(), null, "height", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBox_Width(), this.getURDFAttrNumeric(), null, "width", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBox_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(cylinderEClass, Cylinder.class, "Cylinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCylinder_Radius(), this.getURDFAttrNumeric(), null, "radius", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCylinder_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(collisionEClass, Collision.class, "Collision", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCollision_Name(), ecorePackage.getEString(), "name", null, 0, 1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollision_Geometry(), this.getGeometry(), null, "geometry", null, 0, -1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollision_Geometry(), this.getGeometry(), null, "geometry", null, 1, -1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollision_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(originEClass, Origin.class, "Origin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

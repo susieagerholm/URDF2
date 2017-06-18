@@ -25,6 +25,7 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getWidth <em>Width</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getLength <em>Length</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,6 +50,16 @@ public class BoxImpl extends GeometryImpl implements Box {
 	 * @ordered
 	 */
 	protected URDFAttrNumeric width;
+
+	/**
+	 * The cached value of the '{@link #getLength() <em>Length</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLength()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrNumeric length;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +171,49 @@ public class BoxImpl extends GeometryImpl implements Box {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public URDFAttrNumeric getLength() {
+		return length;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLength(URDFAttrNumeric newLength, NotificationChain msgs) {
+		URDFAttrNumeric oldLength = length;
+		length = newLength;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.BOX__LENGTH, oldLength, newLength);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLength(URDFAttrNumeric newLength) {
+		if (newLength != length) {
+			NotificationChain msgs = null;
+			if (length != null)
+				msgs = ((InternalEObject)length).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.BOX__LENGTH, null, msgs);
+			if (newLength != null)
+				msgs = ((InternalEObject)newLength).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.BOX__LENGTH, null, msgs);
+			msgs = basicSetLength(newLength, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.BOX__LENGTH, newLength, newLength));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -167,6 +221,8 @@ public class BoxImpl extends GeometryImpl implements Box {
 				return basicSetHeight(null, msgs);
 			case MyURDFPackage.BOX__WIDTH:
 				return basicSetWidth(null, msgs);
+			case MyURDFPackage.BOX__LENGTH:
+				return basicSetLength(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -183,6 +239,8 @@ public class BoxImpl extends GeometryImpl implements Box {
 				return getHeight();
 			case MyURDFPackage.BOX__WIDTH:
 				return getWidth();
+			case MyURDFPackage.BOX__LENGTH:
+				return getLength();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +258,9 @@ public class BoxImpl extends GeometryImpl implements Box {
 				return;
 			case MyURDFPackage.BOX__WIDTH:
 				setWidth((URDFAttrNumeric)newValue);
+				return;
+			case MyURDFPackage.BOX__LENGTH:
+				setLength((URDFAttrNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -219,6 +280,9 @@ public class BoxImpl extends GeometryImpl implements Box {
 			case MyURDFPackage.BOX__WIDTH:
 				setWidth((URDFAttrNumeric)null);
 				return;
+			case MyURDFPackage.BOX__LENGTH:
+				setLength((URDFAttrNumeric)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,6 +299,8 @@ public class BoxImpl extends GeometryImpl implements Box {
 				return height != null;
 			case MyURDFPackage.BOX__WIDTH:
 				return width != null;
+			case MyURDFPackage.BOX__LENGTH:
+				return length != null;
 		}
 		return super.eIsSet(featureID);
 	}

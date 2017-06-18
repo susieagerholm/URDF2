@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="myURDF" nsURI="http://www.itu.dk/uRDF" nsPrefix="myURDF">
-   <eClassifiers xsi:type="ecore:EClass" name="Robot">
+  <eClassifiers xsi:type="ecore:EClass" name="Robot">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="topologies" upperBound="-1"
         eType="#//Topology" containment="true"/>
@@ -95,17 +95,19 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Geometry" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="length" lowerBound="1"
-        eType="#//URDFAttrNumeric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Box" eSuperTypes="#//Geometry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="height" lowerBound="1"
         eType="#//URDFAttrNumeric" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="width" lowerBound="1" eType="#//URDFAttrNumeric"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="length" lowerBound="1"
+        eType="#//URDFAttrNumeric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Cylinder" eSuperTypes="#//Geometry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="radius" lowerBound="1"
+        eType="#//URDFAttrNumeric" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="length" lowerBound="1"
         eType="#//URDFAttrNumeric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Collision">
@@ -115,8 +117,8 @@
         <details key="name" value=""/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" upperBound="-1"
-        eType="#//Geometry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="geometry" lowerBound="1"
+        upperBound="-1" eType="#//Geometry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="#//Origin"
         containment="true"/>
   </eClassifiers>
@@ -247,4 +249,4 @@
         eType="#//JointDecorator" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//Joint"/>
   </eClassifiers>
-  </ecore:EPackage>
+</ecore:EPackage>

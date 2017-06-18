@@ -15,6 +15,7 @@ package org.xtext.urdf.myURDF;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.Box#getHeight <em>Height</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Box#getWidth <em>Width</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Box#getLength <em>Length</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getBox()
@@ -73,5 +74,31 @@ public interface Box extends Geometry {
 	 * @generated
 	 */
 	void setWidth(URDFAttrNumeric value);
+
+	/**
+	 * Returns the value of the '<em><b>Length</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Length</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Length</em>' containment reference.
+	 * @see #setLength(URDFAttrNumeric)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getBox_Length()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	URDFAttrNumeric getLength();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Box#getLength <em>Length</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Length</em>' containment reference.
+	 * @see #getLength()
+	 * @generated
+	 */
+	void setLength(URDFAttrNumeric value);
 
 } // Box
