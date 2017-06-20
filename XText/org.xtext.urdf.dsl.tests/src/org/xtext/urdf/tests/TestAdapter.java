@@ -27,13 +27,13 @@ public class TestAdapter {
 	
 	public static Robot createTestUrdf() 	{
 	   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
-	   MyURDFModel model = eINSTANCE.createURDFModel();
+	   //URDFModel model = eINSTANCE.createURDFModel();
 	   MyURDFPackage pkg = MyURDFPackageImpl.init();
 	   
 	   //Robot
 	   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();
 	   robot.setName("test");
-	   model.setRobot(robot);
+//	   model.setRobot(robot);
 
 	   //Links
 	   LinkImpl link = (LinkImpl)eINSTANCE.createLink();
@@ -45,12 +45,12 @@ public class TestAdapter {
 	   Collision col2 = eINSTANCE.createCollision();
 	   col2.setName("TestCollision2");
 	   Geometry geo = eINSTANCE.createBox();
-	   geo.setName("TestBox");
-	   col1.setGeometry(geo);
+//	   geo.setName("TestBox");
+//	   col1.setGeometry(geo);
 	   EList<EObject> colList = new BasicEList<EObject>();
 	   colList.add(col1);
 	   colList.add(col2);
-	   link.eSet(pkg.getLink_Collision(), colList);
+//	   link.eSet(pkg.getLink_Collision(), colList);
 
 	   Link link2 = eINSTANCE.createLink();
 	   link2.setName("URDF2");
@@ -73,13 +73,13 @@ public class TestAdapter {
 	   joint2.setChildOf(link2);
 	   joint2.setType(JointType.REVOLUTE);
 	   Limit limit = eINSTANCE.createLimit();
-	   limit.setEffort("4");
-	   joint2.setLimit(limit);
+//	   limit.setEffort("4");
+//	   joint2.setLimit(limit);
 	   
 	   Axis axis = eINSTANCE.createAxis();
-	   axis.setX(1);
-	   joint2.setLimit(limit);
-	   joint2.setAxis(axis);
+//	   axis.setX(1);
+//	   joint2.setLimit(limit);
+//	   joint2.setAxis(axis);
 	   
 	   
 	   EList<Joint> jointList = new BasicEList<Joint>();
