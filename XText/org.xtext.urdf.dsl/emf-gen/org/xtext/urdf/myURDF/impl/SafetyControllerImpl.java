@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.SafetyController;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
@@ -24,15 +25,36 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getK_velocity <em>Kvelocity</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getK_position <em>Kposition</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getSoftLowerLimit <em>Soft Lower Limit</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class SafetyControllerImpl extends NamedElementImpl implements SafetyController {
+public class SafetyControllerImpl extends ReUseAbleImpl implements SafetyController {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getK_velocity() <em>Kvelocity</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -54,16 +76,6 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	protected URDFAttrSignedNumeric k_position;
 
 	/**
-	 * The cached value of the '{@link #getSoftUpperLimit() <em>Soft Upper Limit</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSoftUpperLimit()
-	 * @generated
-	 * @ordered
-	 */
-	protected URDFAttrSignedNumeric softUpperLimit;
-
-	/**
 	 * The cached value of the '{@link #getSoftLowerLimit() <em>Soft Lower Limit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,6 +84,16 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	 * @ordered
 	 */
 	protected URDFAttrSignedNumeric softLowerLimit;
+
+	/**
+	 * The cached value of the '{@link #getSoftUpperLimit() <em>Soft Upper Limit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSoftUpperLimit()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrSignedNumeric softUpperLimit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -97,6 +119,27 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.SAFETY_CONTROLLER__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -104,10 +147,10 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 				return basicSetK_velocity(null, msgs);
 			case MyURDFPackage.SAFETY_CONTROLLER__KPOSITION:
 				return basicSetK_position(null, msgs);
-			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
-				return basicSetSoftUpperLimit(null, msgs);
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				return basicSetSoftLowerLimit(null, msgs);
+			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
+				return basicSetSoftUpperLimit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -292,14 +335,16 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
+				return getName();
 			case MyURDFPackage.SAFETY_CONTROLLER__KVELOCITY:
 				return getK_velocity();
 			case MyURDFPackage.SAFETY_CONTROLLER__KPOSITION:
 				return getK_position();
-			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
-				return getSoftUpperLimit();
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				return getSoftLowerLimit();
+			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
+				return getSoftUpperLimit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -312,17 +357,20 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__KVELOCITY:
 				setK_velocity((URDFAttrSignedNumeric)newValue);
 				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__KPOSITION:
 				setK_position((URDFAttrSignedNumeric)newValue);
 				return;
-			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
-				setSoftUpperLimit((URDFAttrSignedNumeric)newValue);
-				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				setSoftLowerLimit((URDFAttrSignedNumeric)newValue);
+				return;
+			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
+				setSoftUpperLimit((URDFAttrSignedNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -336,17 +384,20 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__KVELOCITY:
 				setK_velocity((URDFAttrSignedNumeric)null);
 				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__KPOSITION:
 				setK_position((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
-				setSoftUpperLimit((URDFAttrSignedNumeric)null);
-				return;
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				setSoftLowerLimit((URDFAttrSignedNumeric)null);
+				return;
+			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
+				setSoftUpperLimit((URDFAttrSignedNumeric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -360,16 +411,66 @@ public class SafetyControllerImpl extends NamedElementImpl implements SafetyCont
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.SAFETY_CONTROLLER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.SAFETY_CONTROLLER__KVELOCITY:
 				return k_velocity != null;
 			case MyURDFPackage.SAFETY_CONTROLLER__KPOSITION:
 				return k_position != null;
-			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
-				return softUpperLimit != null;
 			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_LOWER_LIMIT:
 				return softLowerLimit != null;
+			case MyURDFPackage.SAFETY_CONTROLLER__SOFT_UPPER_LIMIT:
+				return softUpperLimit != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.SAFETY_CONTROLLER__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.SAFETY_CONTROLLER__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //SafetyControllerImpl

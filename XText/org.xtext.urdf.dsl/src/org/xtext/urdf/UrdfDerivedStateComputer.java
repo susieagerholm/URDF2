@@ -10,8 +10,6 @@ import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.xtext.urdf.myURDF.Joint;
 import org.xtext.urdf.myURDF.JointType;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.LinkDecorator;
-import org.xtext.urdf.myURDF.LinkRef;
 import org.xtext.urdf.myURDF.MyURDFFactory;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.Topology;
@@ -43,7 +41,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 	
-	public void installLinkDecoration(DerivedStateAwareResource resource) {
+	/*public void installLinkDecoration(DerivedStateAwareResource resource) {
 		while(resource.getAllContents().hasNext()) {
 			Object obj = resource.getAllContents().next();
 			if(obj instanceof org.xtext.urdf.myURDF.Robot) {
@@ -56,7 +54,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 				}
 			}
 		}
-	}
+	}*/
 	
 	public void installTopology(DerivedStateAwareResource resource) {
 		TreeIterator<EObject> temp = resource.getAllContents();
@@ -82,7 +80,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 								break;
 							}
 
-							EList<Link> links = rob.getLink();
+							EList<Link> links = rob.getLinks();
 							boolean found = false;
 							boolean childFound = false;
 							for (Link l : links) {
@@ -97,23 +95,33 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 							if(!found) {
 								Link newLink = MyURDFFactory.eINSTANCE.createLink();
 								newLink.setName(getNodeText(topo, 1));
-								rob.getLink().add(newLink);
+								rob.getLinks().add(newLink);
 							}
 							
 							if(!childFound) {
 								Link newLink2 = MyURDFFactory.eINSTANCE.createLink();
 								newLink2.setName(getNodeText(topo.getChild(), 1));
-								rob.getLink().add(newLink2);
+								rob.getLinks().add(newLink2);
 							}
 							
 							Joint aJoint = MyURDFFactory.eINSTANCE.createJoint();
+							//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
+							//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
 							aJoint.setName(topo.getParent().getName() + "_" + getNodeText(topo.getChild(), 1));
+							//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
+							//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
 							aJoint.setChildOf(topo.getParent());
 							aJoint.setParentOf(topo.getChild().getParent());
-
+							
+							if (topo.getJoint().getRev() != null) aJoint.setType(JointType.REVOLUTE);
+							else if (topo.getJoint().getPris() != null) aJoint.setType(JointType.PRISMATIC);
+							else if (topo.getJoint().getCont() != null) aJoint.setType(JointType.CONTINUOUS);
+							else aJoint.setType(JointType.FIXED);
+							
 							rob.getJoint().add(aJoint);
 							
-							if (topo.getJoint().getRev() != null) {
+							//CHECK WHY TYPE IS NOT ADDED TO GENERATED JOiNT
+							/*if (topo.getJoint().getRev() != null) {
 								topo.getJoint().setRev(JointType.REVOLUTE.toString());
 							} else if(topo.getJoint().getPris() != null) {
 								topo.getJoint().setPris(JointType.PRISMATIC.toString());
@@ -121,7 +129,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 								topo.getJoint().setCont(JointType.CONTINUOUS.toString());
 							} else {
 								topo.getJoint().setFix(JointType.FIXED.toString());
-							}
+							}*/
 						}
 					}
 				}

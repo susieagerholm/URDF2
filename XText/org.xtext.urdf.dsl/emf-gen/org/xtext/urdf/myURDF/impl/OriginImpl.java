@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Origin;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
@@ -24,17 +25,38 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getX <em>X</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getY <em>Y</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getZ <em>Z</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getRoll <em>Roll</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getPitch <em>Pitch</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getYaw <em>Yaw</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getPitch <em>Pitch</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.OriginImpl#getRoll <em>Roll</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OriginImpl extends NamedElementImpl implements Origin {
+public class OriginImpl extends ReUseAbleImpl implements Origin {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getX() <em>X</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -66,14 +88,14 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	protected URDFAttrSignedNumeric z;
 
 	/**
-	 * The cached value of the '{@link #getRoll() <em>Roll</em>}' containment reference.
+	 * The cached value of the '{@link #getYaw() <em>Yaw</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRoll()
+	 * @see #getYaw()
 	 * @generated
 	 * @ordered
 	 */
-	protected URDFAttrSignedNumeric roll;
+	protected URDFAttrSignedNumeric yaw;
 
 	/**
 	 * The cached value of the '{@link #getPitch() <em>Pitch</em>}' containment reference.
@@ -86,14 +108,14 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	protected URDFAttrSignedNumeric pitch;
 
 	/**
-	 * The cached value of the '{@link #getYaw() <em>Yaw</em>}' containment reference.
+	 * The cached value of the '{@link #getRoll() <em>Roll</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getYaw()
+	 * @see #getRoll()
 	 * @generated
 	 * @ordered
 	 */
-	protected URDFAttrSignedNumeric yaw;
+	protected URDFAttrSignedNumeric roll;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,6 +134,27 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.ORIGIN;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.ORIGIN__NAME, oldName, name));
 	}
 
 	/**
@@ -386,12 +429,12 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 				return basicSetY(null, msgs);
 			case MyURDFPackage.ORIGIN__Z:
 				return basicSetZ(null, msgs);
-			case MyURDFPackage.ORIGIN__ROLL:
-				return basicSetRoll(null, msgs);
-			case MyURDFPackage.ORIGIN__PITCH:
-				return basicSetPitch(null, msgs);
 			case MyURDFPackage.ORIGIN__YAW:
 				return basicSetYaw(null, msgs);
+			case MyURDFPackage.ORIGIN__PITCH:
+				return basicSetPitch(null, msgs);
+			case MyURDFPackage.ORIGIN__ROLL:
+				return basicSetRoll(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -404,18 +447,20 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.ORIGIN__NAME:
+				return getName();
 			case MyURDFPackage.ORIGIN__X:
 				return getX();
 			case MyURDFPackage.ORIGIN__Y:
 				return getY();
 			case MyURDFPackage.ORIGIN__Z:
 				return getZ();
-			case MyURDFPackage.ORIGIN__ROLL:
-				return getRoll();
-			case MyURDFPackage.ORIGIN__PITCH:
-				return getPitch();
 			case MyURDFPackage.ORIGIN__YAW:
 				return getYaw();
+			case MyURDFPackage.ORIGIN__PITCH:
+				return getPitch();
+			case MyURDFPackage.ORIGIN__ROLL:
+				return getRoll();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -428,6 +473,9 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.ORIGIN__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.ORIGIN__X:
 				setX((URDFAttrSignedNumeric)newValue);
 				return;
@@ -437,14 +485,14 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 			case MyURDFPackage.ORIGIN__Z:
 				setZ((URDFAttrSignedNumeric)newValue);
 				return;
-			case MyURDFPackage.ORIGIN__ROLL:
-				setRoll((URDFAttrSignedNumeric)newValue);
+			case MyURDFPackage.ORIGIN__YAW:
+				setYaw((URDFAttrSignedNumeric)newValue);
 				return;
 			case MyURDFPackage.ORIGIN__PITCH:
 				setPitch((URDFAttrSignedNumeric)newValue);
 				return;
-			case MyURDFPackage.ORIGIN__YAW:
-				setYaw((URDFAttrSignedNumeric)newValue);
+			case MyURDFPackage.ORIGIN__ROLL:
+				setRoll((URDFAttrSignedNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -458,6 +506,9 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.ORIGIN__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.ORIGIN__X:
 				setX((URDFAttrSignedNumeric)null);
 				return;
@@ -467,14 +518,14 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 			case MyURDFPackage.ORIGIN__Z:
 				setZ((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.ORIGIN__ROLL:
-				setRoll((URDFAttrSignedNumeric)null);
+			case MyURDFPackage.ORIGIN__YAW:
+				setYaw((URDFAttrSignedNumeric)null);
 				return;
 			case MyURDFPackage.ORIGIN__PITCH:
 				setPitch((URDFAttrSignedNumeric)null);
 				return;
-			case MyURDFPackage.ORIGIN__YAW:
-				setYaw((URDFAttrSignedNumeric)null);
+			case MyURDFPackage.ORIGIN__ROLL:
+				setRoll((URDFAttrSignedNumeric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -488,20 +539,70 @@ public class OriginImpl extends NamedElementImpl implements Origin {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.ORIGIN__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.ORIGIN__X:
 				return x != null;
 			case MyURDFPackage.ORIGIN__Y:
 				return y != null;
 			case MyURDFPackage.ORIGIN__Z:
 				return z != null;
-			case MyURDFPackage.ORIGIN__ROLL:
-				return roll != null;
-			case MyURDFPackage.ORIGIN__PITCH:
-				return pitch != null;
 			case MyURDFPackage.ORIGIN__YAW:
 				return yaw != null;
+			case MyURDFPackage.ORIGIN__PITCH:
+				return pitch != null;
+			case MyURDFPackage.ORIGIN__ROLL:
+				return roll != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.ORIGIN__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.ORIGIN__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //OriginImpl

@@ -40,7 +40,6 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
-
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,7 +49,6 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getPathToFile() <em>Path To File</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -78,6 +76,27 @@ public class TextureImpl extends MaterialImpl implements Texture {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.TEXTURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.TEXTURE__NAME, oldName, name));
 	}
 
 	/**
@@ -121,27 +140,6 @@ public class TextureImpl extends MaterialImpl implements Texture {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.TEXTURE__PATH_TO_FILE, newPathToFile, newPathToFile));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.TEXTURE__NAME, oldName, name));
 	}
 
 	/**

@@ -17,16 +17,16 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.urdf.myURDF.Origin#getX <em>X</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Origin#getY <em>Y</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Origin#getZ <em>Z</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Origin#getRoll <em>Roll</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Origin#getPitch <em>Pitch</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Origin#getYaw <em>Yaw</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Origin#getPitch <em>Pitch</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Origin#getRoll <em>Roll</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getOrigin()
  * @model
  * @generated
  */
-public interface Origin extends NamedElement {
+public interface Origin extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>X</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -15,30 +15,67 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Visual#getGeometry <em>Geometry</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Visual#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Visual#getGeometry <em>Geometry</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Visual#getMaterial <em>Material</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getVisual()
  * @model
  * @generated
  */
-public interface Visual extends NamedElement {
+public interface Visual extends ReUseAble, NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Geometry</b></em>' containment reference list.
-	 * The list contents are of type {@link org.xtext.urdf.myURDF.Geometry}.
+	 * Returns the value of the '<em><b>Geometry</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Geometry</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Geometry</em>' containment reference list.
+	 * @return the value of the '<em>Geometry</em>' containment reference.
+	 * @see #setGeometry(Geometry)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getVisual_Geometry()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Geometry> getGeometry();
+	Geometry getGeometry();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Visual#getGeometry <em>Geometry</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Geometry</em>' containment reference.
+	 * @see #getGeometry()
+	 * @generated
+	 */
+	void setGeometry(Geometry value);
+
+	/**
+	 * Returns the value of the '<em><b>Material</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Material</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Material</em>' containment reference.
+	 * @see #setMaterial(Material)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getVisual_Material()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Material getMaterial();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Visual#getMaterial <em>Material</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Material</em>' containment reference.
+	 * @see #getMaterial()
+	 * @generated
+	 */
+	void setMaterial(Material value);
 
 	/**
 	 * Returns the value of the '<em><b>Origin</b></em>' containment reference.

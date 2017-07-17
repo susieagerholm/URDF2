@@ -23,7 +23,7 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  *
  * @generated
  */
-public abstract class GeometryImpl extends MinimalEObjectImpl.Container implements Geometry {
+public class GeometryImpl extends ReUseAbleImpl implements Geometry {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

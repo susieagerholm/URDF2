@@ -17,16 +17,16 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIxx <em>Ixx</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIxy <em>Ixy</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIxz <em>Ixz</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIzz <em>Izz</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIyy <em>Iyy</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIyz <em>Iyz</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Inertia#getIzz <em>Izz</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getInertia()
  * @model
  * @generated
  */
-public interface Inertia extends NamedElement {
+public interface Inertia extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Ixx</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

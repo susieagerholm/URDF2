@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.xtext.urdf.myURDF.Geometry;
 import org.xtext.urdf.myURDF.Material;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Origin;
 import org.xtext.urdf.myURDF.Visual;
 
@@ -30,22 +31,34 @@ import org.xtext.urdf.myURDF.Visual;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.VisualImpl#getGeometry <em>Geometry</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.VisualImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.VisualImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.VisualImpl#getGeometry <em>Geometry</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.VisualImpl#getMaterial <em>Material</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class VisualImpl extends NamedElementImpl implements Visual {
+public class VisualImpl extends ReUseAbleImpl implements Visual {
 	/**
-	 * The cached value of the '{@link #getGeometry() <em>Geometry</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGeometry()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Geometry> geometry;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
@@ -56,6 +69,26 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	 * @ordered
 	 */
 	protected Origin origin;
+
+	/**
+	 * The cached value of the '{@link #getGeometry() <em>Geometry</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeometry()
+	 * @generated
+	 * @ordered
+	 */
+	protected Geometry geometry;
+
+	/**
+	 * The cached value of the '{@link #getMaterial() <em>Material</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMaterial()
+	 * @generated
+	 * @ordered
+	 */
+	protected Material material;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,11 +114,106 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Geometry> getGeometry() {
-		if (geometry == null) {
-			geometry = new EObjectContainmentEList<Geometry>(Geometry.class, this, MyURDFPackage.VISUAL__GEOMETRY);
-		}
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.VISUAL__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Geometry getGeometry() {
 		return geometry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGeometry(Geometry newGeometry, NotificationChain msgs) {
+		Geometry oldGeometry = geometry;
+		geometry = newGeometry;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.VISUAL__GEOMETRY, oldGeometry, newGeometry);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeometry(Geometry newGeometry) {
+		if (newGeometry != geometry) {
+			NotificationChain msgs = null;
+			if (geometry != null)
+				msgs = ((InternalEObject)geometry).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.VISUAL__GEOMETRY, null, msgs);
+			if (newGeometry != null)
+				msgs = ((InternalEObject)newGeometry).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.VISUAL__GEOMETRY, null, msgs);
+			msgs = basicSetGeometry(newGeometry, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.VISUAL__GEOMETRY, newGeometry, newGeometry));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Material getMaterial() {
+		return material;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMaterial(Material newMaterial, NotificationChain msgs) {
+		Material oldMaterial = material;
+		material = newMaterial;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.VISUAL__MATERIAL, oldMaterial, newMaterial);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMaterial(Material newMaterial) {
+		if (newMaterial != material) {
+			NotificationChain msgs = null;
+			if (material != null)
+				msgs = ((InternalEObject)material).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.VISUAL__MATERIAL, null, msgs);
+			if (newMaterial != null)
+				msgs = ((InternalEObject)newMaterial).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.VISUAL__MATERIAL, null, msgs);
+			msgs = basicSetMaterial(newMaterial, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.VISUAL__MATERIAL, newMaterial, newMaterial));
 	}
 
 	/**
@@ -139,10 +267,12 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.VISUAL__GEOMETRY:
-				return ((InternalEList<?>)getGeometry()).basicRemove(otherEnd, msgs);
 			case MyURDFPackage.VISUAL__ORIGIN:
 				return basicSetOrigin(null, msgs);
+			case MyURDFPackage.VISUAL__GEOMETRY:
+				return basicSetGeometry(null, msgs);
+			case MyURDFPackage.VISUAL__MATERIAL:
+				return basicSetMaterial(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -155,10 +285,14 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.VISUAL__GEOMETRY:
-				return getGeometry();
+			case MyURDFPackage.VISUAL__NAME:
+				return getName();
 			case MyURDFPackage.VISUAL__ORIGIN:
 				return getOrigin();
+			case MyURDFPackage.VISUAL__GEOMETRY:
+				return getGeometry();
+			case MyURDFPackage.VISUAL__MATERIAL:
+				return getMaterial();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -172,12 +306,17 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.VISUAL__GEOMETRY:
-				getGeometry().clear();
-				getGeometry().addAll((Collection<? extends Geometry>)newValue);
+			case MyURDFPackage.VISUAL__NAME:
+				setName((String)newValue);
 				return;
 			case MyURDFPackage.VISUAL__ORIGIN:
 				setOrigin((Origin)newValue);
+				return;
+			case MyURDFPackage.VISUAL__GEOMETRY:
+				setGeometry((Geometry)newValue);
+				return;
+			case MyURDFPackage.VISUAL__MATERIAL:
+				setMaterial((Material)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -191,11 +330,17 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.VISUAL__GEOMETRY:
-				getGeometry().clear();
+			case MyURDFPackage.VISUAL__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case MyURDFPackage.VISUAL__ORIGIN:
 				setOrigin((Origin)null);
+				return;
+			case MyURDFPackage.VISUAL__GEOMETRY:
+				setGeometry((Geometry)null);
+				return;
+			case MyURDFPackage.VISUAL__MATERIAL:
+				setMaterial((Material)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -209,12 +354,64 @@ public class VisualImpl extends NamedElementImpl implements Visual {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.VISUAL__GEOMETRY:
-				return geometry != null && !geometry.isEmpty();
+			case MyURDFPackage.VISUAL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.VISUAL__ORIGIN:
 				return origin != null;
+			case MyURDFPackage.VISUAL__GEOMETRY:
+				return geometry != null;
+			case MyURDFPackage.VISUAL__MATERIAL:
+				return material != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.VISUAL__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.VISUAL__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //VisualImpl

@@ -22,9 +22,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.xtext.urdf.myURDF.Collision;
 import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.LinkDecorator;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.ReUseAble;
+import org.xtext.urdf.myURDF.Reuse;
 import org.xtext.urdf.myURDF.Visual;
 
 /**
@@ -35,13 +36,37 @@ import org.xtext.urdf.myURDF.Visual;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getDecorator <em>Decorator</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getReuse <em>Reuse</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getInertial <em>Inertial</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getVisual <em>Visual</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LinkImpl#getCollision <em>Collision</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class LinkImpl extends NamedElementImpl implements Link {
+public class LinkImpl extends ReUseAbleImpl implements Link {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -50,17 +75,47 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * @generated
 	 * @ordered
 	 */
-	protected ReUseAble isReuseOf;
+	protected Link isReuseOf;
 
 	/**
-	 * The cached value of the '{@link #getDecorator() <em>Decorator</em>}' containment reference.
+	 * The cached value of the '{@link #getReuse() <em>Reuse</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDecorator()
+	 * @see #getReuse()
 	 * @generated
 	 * @ordered
 	 */
-	protected LinkDecorator decorator;
+	protected Reuse reuse;
+
+	/**
+	 * The cached value of the '{@link #getInertial() <em>Inertial</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInertial()
+	 * @generated
+	 * @ordered
+	 */
+	protected Inertial inertial;
+
+	/**
+	 * The cached value of the '{@link #getVisual() <em>Visual</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisual()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Visual> visual;
+
+	/**
+	 * The cached value of the '{@link #getCollision() <em>Collision</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCollision()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Collision> collision;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -86,10 +141,31 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReUseAble getIsReuseOf() {
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Link getIsReuseOf() {
 		if (isReuseOf != null && isReuseOf.eIsProxy()) {
 			InternalEObject oldIsReuseOf = (InternalEObject)isReuseOf;
-			isReuseOf = (ReUseAble)eResolveProxy(oldIsReuseOf);
+			isReuseOf = (Link)eResolveProxy(oldIsReuseOf);
 			if (isReuseOf != oldIsReuseOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.LINK__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -103,7 +179,7 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReUseAble basicGetIsReuseOf() {
+	public Link basicGetIsReuseOf() {
 		return isReuseOf;
 	}
 
@@ -112,8 +188,8 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsReuseOf(ReUseAble newIsReuseOf) {
-		ReUseAble oldIsReuseOf = isReuseOf;
+	public void setIsReuseOf(Link newIsReuseOf) {
+		Link oldIsReuseOf = isReuseOf;
 		isReuseOf = newIsReuseOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -124,8 +200,8 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LinkDecorator getDecorator() {
-		return decorator;
+	public Reuse getReuse() {
+		return reuse;
 	}
 
 	/**
@@ -133,11 +209,11 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDecorator(LinkDecorator newDecorator, NotificationChain msgs) {
-		LinkDecorator oldDecorator = decorator;
-		decorator = newDecorator;
+	public NotificationChain basicSetReuse(Reuse newReuse, NotificationChain msgs) {
+		Reuse oldReuse = reuse;
+		reuse = newReuse;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__DECORATOR, oldDecorator, newDecorator);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__REUSE, oldReuse, newReuse);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -148,18 +224,85 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDecorator(LinkDecorator newDecorator) {
-		if (newDecorator != decorator) {
+	public void setReuse(Reuse newReuse) {
+		if (newReuse != reuse) {
 			NotificationChain msgs = null;
-			if (decorator != null)
-				msgs = ((InternalEObject)decorator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__DECORATOR, null, msgs);
-			if (newDecorator != null)
-				msgs = ((InternalEObject)newDecorator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__DECORATOR, null, msgs);
-			msgs = basicSetDecorator(newDecorator, msgs);
+			if (reuse != null)
+				msgs = ((InternalEObject)reuse).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__REUSE, null, msgs);
+			if (newReuse != null)
+				msgs = ((InternalEObject)newReuse).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__REUSE, null, msgs);
+			msgs = basicSetReuse(newReuse, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__DECORATOR, newDecorator, newDecorator));
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__REUSE, newReuse, newReuse));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Inertial getInertial() {
+		return inertial;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInertial(Inertial newInertial, NotificationChain msgs) {
+		Inertial oldInertial = inertial;
+		inertial = newInertial;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__INERTIAL, oldInertial, newInertial);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInertial(Inertial newInertial) {
+		if (newInertial != inertial) {
+			NotificationChain msgs = null;
+			if (inertial != null)
+				msgs = ((InternalEObject)inertial).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__INERTIAL, null, msgs);
+			if (newInertial != null)
+				msgs = ((InternalEObject)newInertial).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.LINK__INERTIAL, null, msgs);
+			msgs = basicSetInertial(newInertial, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LINK__INERTIAL, newInertial, newInertial));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Visual> getVisual() {
+		if (visual == null) {
+			visual = new EObjectContainmentEList<Visual>(Visual.class, this, MyURDFPackage.LINK__VISUAL);
+		}
+		return visual;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Collision> getCollision() {
+		if (collision == null) {
+			collision = new EObjectContainmentEList<Collision>(Collision.class, this, MyURDFPackage.LINK__COLLISION);
+		}
+		return collision;
 	}
 
 	/**
@@ -170,8 +313,14 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__DECORATOR:
-				return basicSetDecorator(null, msgs);
+			case MyURDFPackage.LINK__REUSE:
+				return basicSetReuse(null, msgs);
+			case MyURDFPackage.LINK__INERTIAL:
+				return basicSetInertial(null, msgs);
+			case MyURDFPackage.LINK__VISUAL:
+				return ((InternalEList<?>)getVisual()).basicRemove(otherEnd, msgs);
+			case MyURDFPackage.LINK__COLLISION:
+				return ((InternalEList<?>)getCollision()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,11 +333,19 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.LINK__NAME:
+				return getName();
 			case MyURDFPackage.LINK__IS_REUSE_OF:
 				if (resolve) return getIsReuseOf();
 				return basicGetIsReuseOf();
-			case MyURDFPackage.LINK__DECORATOR:
-				return getDecorator();
+			case MyURDFPackage.LINK__REUSE:
+				return getReuse();
+			case MyURDFPackage.LINK__INERTIAL:
+				return getInertial();
+			case MyURDFPackage.LINK__VISUAL:
+				return getVisual();
+			case MyURDFPackage.LINK__COLLISION:
+				return getCollision();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,11 +359,25 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)newValue);
+			case MyURDFPackage.LINK__NAME:
+				setName((String)newValue);
 				return;
-			case MyURDFPackage.LINK__DECORATOR:
-				setDecorator((LinkDecorator)newValue);
+			case MyURDFPackage.LINK__IS_REUSE_OF:
+				setIsReuseOf((Link)newValue);
+				return;
+			case MyURDFPackage.LINK__REUSE:
+				setReuse((Reuse)newValue);
+				return;
+			case MyURDFPackage.LINK__INERTIAL:
+				setInertial((Inertial)newValue);
+				return;
+			case MyURDFPackage.LINK__VISUAL:
+				getVisual().clear();
+				getVisual().addAll((Collection<? extends Visual>)newValue);
+				return;
+			case MyURDFPackage.LINK__COLLISION:
+				getCollision().clear();
+				getCollision().addAll((Collection<? extends Collision>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,11 +391,23 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.LINK__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)null);
+			case MyURDFPackage.LINK__NAME:
+				setName(NAME_EDEFAULT);
 				return;
-			case MyURDFPackage.LINK__DECORATOR:
-				setDecorator((LinkDecorator)null);
+			case MyURDFPackage.LINK__IS_REUSE_OF:
+				setIsReuseOf((Link)null);
+				return;
+			case MyURDFPackage.LINK__REUSE:
+				setReuse((Reuse)null);
+				return;
+			case MyURDFPackage.LINK__INERTIAL:
+				setInertial((Inertial)null);
+				return;
+			case MyURDFPackage.LINK__VISUAL:
+				getVisual().clear();
+				return;
+			case MyURDFPackage.LINK__COLLISION:
+				getCollision().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -238,10 +421,18 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.LINK__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.LINK__IS_REUSE_OF:
 				return isReuseOf != null;
-			case MyURDFPackage.LINK__DECORATOR:
-				return decorator != null;
+			case MyURDFPackage.LINK__REUSE:
+				return reuse != null;
+			case MyURDFPackage.LINK__INERTIAL:
+				return inertial != null;
+			case MyURDFPackage.LINK__VISUAL:
+				return visual != null && !visual.isEmpty();
+			case MyURDFPackage.LINK__COLLISION:
+				return collision != null && !collision.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -253,9 +444,9 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ReUseAble.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case MyURDFPackage.LINK__IS_REUSE_OF: return MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF;
+				case MyURDFPackage.LINK__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -269,13 +460,29 @@ public class LinkImpl extends NamedElementImpl implements Link {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ReUseAble.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF: return MyURDFPackage.LINK__IS_REUSE_OF;
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.LINK__NAME;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LinkImpl

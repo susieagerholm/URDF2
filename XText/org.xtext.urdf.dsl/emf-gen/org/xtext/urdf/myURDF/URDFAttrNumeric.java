@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface URDFAttrNumeric extends EObject {
+public interface URDFAttrNumeric extends ReUseAble {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public interface URDFAttrNumeric extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getURDFAttrNumeric_Value()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	String getValue();

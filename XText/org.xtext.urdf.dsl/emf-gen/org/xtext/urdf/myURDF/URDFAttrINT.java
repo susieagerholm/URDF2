@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface URDFAttrINT extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
@@ -34,7 +33,7 @@ public interface URDFAttrINT extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(int)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getURDFAttrINT_Value()
-	 * @model default="0" required="true"
+	 * @model
 	 * @generated
 	 */
 	int getValue();

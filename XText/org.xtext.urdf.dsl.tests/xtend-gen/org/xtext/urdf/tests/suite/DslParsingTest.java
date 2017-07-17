@@ -4,21 +4,14 @@
 package org.xtext.urdf.tests.suite;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.xtext.urdf.myURDF.Joint;
+import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.tests.DslInjectorProvider;
-import org.xtext.urdf.tests.TestAdapter;
-import uRDF.Link;
-import uRDF.Robot;
 
 @RunWith(XtextRunner.class)
 @InjectWith(DslInjectorProvider.class)
@@ -36,39 +29,29 @@ public class DslParsingTest {
    */
   @Test
   public void loadModel() {
-    try {
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Robot robo Link link1");
-      _builder.newLine();
-      final Robot result = this._parseHelper.parse(_builder);
-      EList<Link> _link = result.getLink();
-      Assert.assertNotNull(_link);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field link is undefined for the type Robot");
   }
   
   @Test
   public void createLink() {
-    final org.xtext.urdf.myURDF.Robot rob = TestAdapter.createTestUrdf();
-    EList<org.xtext.urdf.myURDF.Link> _link = rob.getLink();
-    final org.xtext.urdf.myURDF.Link myLink = _link.get(0);
-    String _name = myLink.getName();
-    Assert.assertEquals("URDFLink1Testname", _name);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field createTestUrdf is undefined for the type Class<TestAdapter>"
+      + "\nlink cannot be resolved"
+      + "\nget cannot be resolved"
+      + "\nname cannot be resolved");
   }
   
   @Test
   public void createJoint() {
-    final org.xtext.urdf.myURDF.Robot roboto = TestAdapter.createTestUrdf();
-    EList<Joint> _joint = roboto.getJoint();
-    final Joint myJoint = _joint.get(0);
-    String _name = myJoint.getName();
-    Assert.assertEquals("Joint1", _name);
-    org.xtext.urdf.myURDF.Link _parentOf = myJoint.getParentOf();
-    String _name_1 = _parentOf.getName();
-    Assert.assertEquals("URDF2", _name_1);
-    org.xtext.urdf.myURDF.Link _childOf = myJoint.getChildOf();
-    String _name_2 = _childOf.getName();
-    Assert.assertEquals("URDFLink1Testname", _name_2);
+    throw new Error("Unresolved compilation problems:"
+      + "\nThe method or field createTestUrdf is undefined for the type Class<TestAdapter>"
+      + "\njoint cannot be resolved"
+      + "\nget cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nparentOf cannot be resolved"
+      + "\nname cannot be resolved"
+      + "\nchildOf cannot be resolved"
+      + "\nname cannot be resolved");
   }
 }

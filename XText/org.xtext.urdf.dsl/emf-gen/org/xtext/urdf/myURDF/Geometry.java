@@ -12,9 +12,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getGeometry()
- * @model abstract="true"
+ * @model
  * @generated
  */
-public interface Geometry extends EObject {
+public interface Geometry extends ReUseAble {
 
 } // Geometry

@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Robot#getTopologies <em>Topologies</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Robot#getLink <em>Link</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Robot#getLinks <em>Links</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Robot#getJoint <em>Joint</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Robot#getLinkrefs <em>Linkrefs</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Robot#getTopologies <em>Topologies</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Robot#getAddto <em>Addto</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getRobot()
@@ -27,6 +27,22 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Robot extends NamedElement {
+	/**
+	 * Returns the value of the '<em><b>Links</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xtext.urdf.myURDF.Link}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Links</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Links</em>' containment reference list.
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getRobot_Links()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Link> getLinks();
+
 	/**
 	 * Returns the value of the '<em><b>Topologies</b></em>' containment reference list.
 	 * The list contents are of type {@link org.xtext.urdf.myURDF.Topology}.
@@ -44,20 +60,20 @@ public interface Robot extends NamedElement {
 	EList<Topology> getTopologies();
 
 	/**
-	 * Returns the value of the '<em><b>Link</b></em>' containment reference list.
-	 * The list contents are of type {@link org.xtext.urdf.myURDF.Link}.
+	 * Returns the value of the '<em><b>Addto</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xtext.urdf.myURDF.AddTo}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Link</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Addto</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Link</em>' containment reference list.
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getRobot_Link()
-	 * @model containment="true" required="true"
+	 * @return the value of the '<em>Addto</em>' containment reference list.
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getRobot_Addto()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Link> getLink();
+	EList<AddTo> getAddto();
 
 	/**
 	 * Returns the value of the '<em><b>Joint</b></em>' containment reference list.
@@ -74,21 +90,5 @@ public interface Robot extends NamedElement {
 	 * @generated
 	 */
 	EList<Joint> getJoint();
-
-	/**
-	 * Returns the value of the '<em><b>Linkrefs</b></em>' containment reference list.
-	 * The list contents are of type {@link org.xtext.urdf.myURDF.LinkRef}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Linkrefs</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Linkrefs</em>' containment reference list.
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getRobot_Linkrefs()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<LinkRef> getLinkrefs();
 
 } // Robot

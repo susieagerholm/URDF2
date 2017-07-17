@@ -16,38 +16,126 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Link#getDecorator <em>Decorator</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Link#getIsReuseOf <em>Is Reuse Of</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Link#getReuse <em>Reuse</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Link#getInertial <em>Inertial</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Link#getVisual <em>Visual</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Link#getCollision <em>Collision</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink()
  * @model
  * @generated
  */
-public interface Link extends NamedElement, ReUseAble {
+public interface Link extends ReUseAble, NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Decorator</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Is Reuse Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Decorator</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Is Reuse Of</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Decorator</em>' containment reference.
-	 * @see #setDecorator(LinkDecorator)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Decorator()
+	 * @return the value of the '<em>Is Reuse Of</em>' reference.
+	 * @see #setIsReuseOf(Link)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_IsReuseOf()
+	 * @model
+	 * @generated
+	 */
+	Link getIsReuseOf();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getIsReuseOf <em>Is Reuse Of</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Reuse Of</em>' reference.
+	 * @see #getIsReuseOf()
+	 * @generated
+	 */
+	void setIsReuseOf(Link value);
+
+	/**
+	 * Returns the value of the '<em><b>Reuse</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reuse</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reuse</em>' containment reference.
+	 * @see #setReuse(Reuse)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Reuse()
 	 * @model containment="true"
 	 * @generated
 	 */
-	LinkDecorator getDecorator();
+	Reuse getReuse();
 
 	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getDecorator <em>Decorator</em>}' containment reference.
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getReuse <em>Reuse</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Decorator</em>' containment reference.
-	 * @see #getDecorator()
+	 * @param value the new value of the '<em>Reuse</em>' containment reference.
+	 * @see #getReuse()
 	 * @generated
 	 */
-	void setDecorator(LinkDecorator value);
+	void setReuse(Reuse value);
+
+	/**
+	 * Returns the value of the '<em><b>Inertial</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inertial</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inertial</em>' containment reference.
+	 * @see #setInertial(Inertial)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Inertial()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Inertial getInertial();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Link#getInertial <em>Inertial</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inertial</em>' containment reference.
+	 * @see #getInertial()
+	 * @generated
+	 */
+	void setInertial(Inertial value);
+
+	/**
+	 * Returns the value of the '<em><b>Visual</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xtext.urdf.myURDF.Visual}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Visual</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Visual</em>' containment reference list.
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Visual()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Visual> getVisual();
+
+	/**
+	 * Returns the value of the '<em><b>Collision</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xtext.urdf.myURDF.Collision}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Collision</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Collision</em>' containment reference list.
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getLink_Collision()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Collision> getCollision();
 
 } // Link

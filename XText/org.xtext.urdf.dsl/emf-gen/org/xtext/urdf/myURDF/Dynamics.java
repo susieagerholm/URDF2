@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Dynamics extends NamedElement {
+public interface Dynamics extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Friction</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

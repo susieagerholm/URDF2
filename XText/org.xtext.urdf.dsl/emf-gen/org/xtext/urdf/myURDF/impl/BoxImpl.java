@@ -25,9 +25,9 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getLength <em>Length</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.BoxImpl#getHeight <em>Height</em>}</li>
  * </ul>
  *
  * @generated
@@ -54,16 +54,6 @@ public class BoxImpl extends GeometryImpl implements Box {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getHeight() <em>Height</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHeight()
-	 * @generated
-	 * @ordered
-	 */
-	protected URDFAttrNumeric height;
-
-	/**
 	 * The cached value of the '{@link #getWidth() <em>Width</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,6 +72,16 @@ public class BoxImpl extends GeometryImpl implements Box {
 	 * @ordered
 	 */
 	protected URDFAttrNumeric length;
+
+	/**
+	 * The cached value of the '{@link #getHeight() <em>Height</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHeight()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrNumeric height;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -260,12 +260,12 @@ public class BoxImpl extends GeometryImpl implements Box {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.BOX__HEIGHT:
-				return basicSetHeight(null, msgs);
 			case MyURDFPackage.BOX__WIDTH:
 				return basicSetWidth(null, msgs);
 			case MyURDFPackage.BOX__LENGTH:
 				return basicSetLength(null, msgs);
+			case MyURDFPackage.BOX__HEIGHT:
+				return basicSetHeight(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -280,12 +280,12 @@ public class BoxImpl extends GeometryImpl implements Box {
 		switch (featureID) {
 			case MyURDFPackage.BOX__NAME:
 				return getName();
-			case MyURDFPackage.BOX__HEIGHT:
-				return getHeight();
 			case MyURDFPackage.BOX__WIDTH:
 				return getWidth();
 			case MyURDFPackage.BOX__LENGTH:
 				return getLength();
+			case MyURDFPackage.BOX__HEIGHT:
+				return getHeight();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -301,14 +301,14 @@ public class BoxImpl extends GeometryImpl implements Box {
 			case MyURDFPackage.BOX__NAME:
 				setName((String)newValue);
 				return;
-			case MyURDFPackage.BOX__HEIGHT:
-				setHeight((URDFAttrNumeric)newValue);
-				return;
 			case MyURDFPackage.BOX__WIDTH:
 				setWidth((URDFAttrNumeric)newValue);
 				return;
 			case MyURDFPackage.BOX__LENGTH:
 				setLength((URDFAttrNumeric)newValue);
+				return;
+			case MyURDFPackage.BOX__HEIGHT:
+				setHeight((URDFAttrNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -325,14 +325,14 @@ public class BoxImpl extends GeometryImpl implements Box {
 			case MyURDFPackage.BOX__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case MyURDFPackage.BOX__HEIGHT:
-				setHeight((URDFAttrNumeric)null);
-				return;
 			case MyURDFPackage.BOX__WIDTH:
 				setWidth((URDFAttrNumeric)null);
 				return;
 			case MyURDFPackage.BOX__LENGTH:
 				setLength((URDFAttrNumeric)null);
+				return;
+			case MyURDFPackage.BOX__HEIGHT:
+				setHeight((URDFAttrNumeric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -348,12 +348,12 @@ public class BoxImpl extends GeometryImpl implements Box {
 		switch (featureID) {
 			case MyURDFPackage.BOX__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case MyURDFPackage.BOX__HEIGHT:
-				return height != null;
 			case MyURDFPackage.BOX__WIDTH:
 				return width != null;
 			case MyURDFPackage.BOX__LENGTH:
 				return length != null;
+			case MyURDFPackage.BOX__HEIGHT:
+				return height != null;
 		}
 		return super.eIsSet(featureID);
 	}

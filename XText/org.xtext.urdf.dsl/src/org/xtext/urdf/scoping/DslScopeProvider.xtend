@@ -3,6 +3,22 @@
  */
 package org.xtext.urdf.scoping
 
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.common.util.EList
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.scoping.IScope
+import org.eclipse.xtext.scoping.Scopes
+import org.xtext.urdf.myURDF.DotExpression
+import org.xtext.urdf.myURDF.Joint
+import org.xtext.urdf.myURDF.Link
+import org.xtext.urdf.myURDF.ReUsableRef
+import org.xtext.urdf.myURDF.ReUseAble
+import org.xtext.urdf.myURDF.Reuse
+import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.Topology
 
 /**
  * This class contains custom scoping description.
@@ -11,5 +27,150 @@ package org.xtext.urdf.scoping
  * on how and when to use it.
  */
 class DslScopeProvider extends AbstractDslScopeProvider {
+	override IScope getScope(EObject context, EReference reference) {
+		val robot = EcoreUtil2.getContainerOfType(context, Robot)
+		//Make sure to be able to refer to existing Links in Topology - even if defined later in document 
+		if (context instanceof Robot) {
+			//IF USER IS DEFINING A NEW TOPOLOGI
+			val test = context 
+			if(reference.name.equals("parent")) {
+				//CHECK IF OTHER TOPOLOGIES ARE ALLREADY DEFINED
+				//OBS: LINK CAN ONLY BE STARTING POINT OF TOPOLOGY IF UNIQUE ROOT - OR ALREADY IN OTHER TOPOLOGY 
+				if(context.topologies.empty) {
+					Scopes.scopeFor(robot.links)
+				}
+				else {
+					//root already defined: new 'root' can only be link from existing topology (only one root link)
+					
+				}
+				
+			}
+			else super.getScope(context, reference)
+			
+		}
+		
+		if (context instanceof Topology) {
+			if(context.eContainer instanceof Robot) {
+				val par = context.parent
+				val testt = robot.links.filter[x | !x.name.equals(context.parent.name)]
+ 				Scopes.scopeFor(robot.links.filter[x | !x.name.equals(context.parent.name)])
+			}
+			else /*if(context.eContainer instanceof Topology)*/ {
+				//GET LIST OF LINKS ALREADY USED AS PARENTS IN THIS TOPOLOGY 
+				val previous = EcoreUtil2.getAllContainers(context).filter(Topology).map[x | x.parent].toList
+				//RETURN AVAILABLE LINKS IF AND ONLY IF! NOT ALREADY USED IN THIS TOPOLOGY OR UPPER NESTING OF TOPOLOGIES!
+				val mytest = robot.links.filter[x | !previous.contains(x)].map[z | z.name]
+				var newtest = new BasicEList<EObject>()
+				newtest.add(robot.links.get(0))
+				Scopes.scopeFor(newtest)
+			//super.getScope(context, reference)
+			}
+			//else super.getScope(context, reference)
+			
+		   
+		}
+		
+				
+		//SOMEHOW THIS LINK SCOPING RULE IS NOT USED - EXIST VIA SUPER.GETSCOPE?? 
+		if (context instanceof Link) {
+			//val robot = EcoreUtil2.getContainerOfType(context, Robot)
+			return Scopes.scopeFor(robot.links.
+				//EXCLUDE CURRENT LINK
+				filter[x | !x.name.equals(context.name)].
+				//REMEMBER ALSO TO EXCLUDE LINKS MADE FROM REUSE
+				filter[y | y.isReuseOf == null]
+			)
+		}
+		
+		if (context instanceof Joint) {
+			val o = reference.EReferenceType.name
+			val g = reference.name
+			if (reference.name.equals("isReuseOf")) {
+				//val robot = EcoreUtil2.getContainerOfType(context, Robot)
+				return Scopes.scopeFor(robot.joint.
+				//EXCLUDE CURRENT JOINT
+				filter[x | !x.name.equals(context.name)].
+				//REMEMBER ALSO TO EXCLUDE JOINTS MADE FROM REUSE
+				filter[y | y.isReuseOf == null]
+				)
+			}
+			else super.getScope(context, reference)
+			
+		}
+		
+		if (context instanceof Reuse) {		
+			//RETURN SCOPE FOR EDIT	
+		
+			if (context.eContainer instanceof Link) {
+				val curr = EcoreUtil2.getContainerOfType(context, Link)
+				return Scopes.scopeFor(newArrayList(curr.isReuseOf).toList)
+			} else {
+				val curr = EcoreUtil2.getContainerOfType(context, Joint)
+				//var BasicEList<Joint> list = new BasicEList<Joint>()
+				//list.add(curr.isReuseOf)
+				return Scopes.scopeFor(newArrayList(curr.isReuseOf).toList)
+			}
+			
+	    }
+	    
+ 		else if (context instanceof DotExpression) {
+			val head = context.ref
+			
+			//SEEMS TO BE WORKING...
+		 	switch (head) {
+            	ReUsableRef : {
+            		//val ggg = head.reuseable.eContents
+            		Scopes::scopeFor(head.reuseable.eContents) 
+            	}	
+            	DotExpression : {
+                	val tail = head.tail
+					/*if (tail instanceof Box) {
+						val testtt = tail.eContents.filter(EObject).empty
+						val test = tail.eClass.EAllReferences//
+						val test1 = tail.eClass.EReferences.map[x | x.eContainmentFeature.name]
+						val on = test1.length
+						
+					}*/
+					
+                	switch (tail) {
+                		//Box       :	Scopes::scopeFor(tail.eClass.EReferences, [y | QualifiedName.create(y.name) ], IScope::NULLSCOPE)
+                		
+                		ReUseAble :  Scopes::scopeFor(tail.eContents, [x | 
+                						//IF NAME IS EXPLICITLY DEFINED, USE THAT!!
+                						if(x.eGet(x.eClass.getEStructuralFeature("name")) != null) 
+                							QualifiedName.create(x.eGet(x.eClass.getEStructuralFeature("name")) as String) 
+                						else 
+                						//ELSE CREATE NAME FROM CONTAINMENT FEATURE
+                						//OBS: NEED TO NAME INDIVIDUALLY, IF DE FACTO MULTIVALUE CONTAINMENT!!
+                							QualifiedName.create(x.eContainmentFeature.name)
+                					], IScope::NULLSCOPE)
+                					
+                					 
+                    	default: IScope::NULLSCOPE
+                	}
+            	}
+            	 
+        	}   
+        	
+		}
+		else
+		//DELEGATE TO DEFAULT IMPL....
+		super.getScope(context, reference)
 
+	}
+	
+	//USING EGET TO GET RUNTIME VALUE OF REFERENCES??...
+	def static EList<EObject> getAllMyEReferencesAsEObjects(EObject curr_object) {
+		var myrefs = new BasicEList<EObject>()
+		for(EReference ref : curr_object.eClass().getEAllReferences()) {
+			//var mytype = ref.EReferenceType
+			if(ref.containment) {
+				if(ref.many) myrefs += (curr_object.eGet(ref) as EList<EObject>)
+				else myrefs.add(curr_object.eGet(ref) as EObject)
+			}
+			
+		}
+		myrefs
+	}
+	
 }

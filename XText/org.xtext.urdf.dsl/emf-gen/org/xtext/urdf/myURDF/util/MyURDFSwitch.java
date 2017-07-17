@@ -74,113 +74,43 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.TOPOLOGY: {
-				Topology topology = (Topology)theEObject;
-				T result = caseTopology(topology);
+			case MyURDFPackage.RE_USE_ABLE: {
+				ReUseAble reUseAble = (ReUseAble)theEObject;
+				T result = caseReUseAble(reUseAble);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.LINK: {
 				Link link = (Link)theEObject;
 				T result = caseLink(link);
-				if (result == null) result = caseNamedElement(link);
 				if (result == null) result = caseReUseAble(link);
+				if (result == null) result = caseNamedElement(link);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.LINK_DECORATOR: {
-				LinkDecorator linkDecorator = (LinkDecorator)theEObject;
-				T result = caseLinkDecorator(linkDecorator);
+			case MyURDFPackage.REUSE: {
+				Reuse reuse = (Reuse)theEObject;
+				T result = caseReuse(reuse);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.LINK_REF: {
-				LinkRef linkRef = (LinkRef)theEObject;
-				T result = caseLinkRef(linkRef);
+			case MyURDFPackage.REF: {
+				Ref ref = (Ref)theEObject;
+				T result = caseRef(ref);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.JOINT: {
-				Joint joint = (Joint)theEObject;
-				T result = caseJoint(joint);
-				if (result == null) result = caseNamedElement(joint);
-				if (result == null) result = caseReUseAble(joint);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.JOINT_REF: {
-				JointRef jointRef = (JointRef)theEObject;
-				T result = caseJointRef(jointRef);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.INERTIAL: {
-				Inertial inertial = (Inertial)theEObject;
-				T result = caseInertial(inertial);
-				if (result == null) result = caseNamedElement(inertial);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.INERTIA: {
-				Inertia inertia = (Inertia)theEObject;
-				T result = caseInertia(inertia);
-				if (result == null) result = caseNamedElement(inertia);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.VISUAL: {
-				Visual visual = (Visual)theEObject;
-				T result = caseVisual(visual);
-				if (result == null) result = caseNamedElement(visual);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.GEOMETRY: {
-				Geometry geometry = (Geometry)theEObject;
-				T result = caseGeometry(geometry);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.BOX: {
-				Box box = (Box)theEObject;
-				T result = caseBox(box);
-				if (result == null) result = caseGeometry(box);
-				if (result == null) result = caseNamedElement(box);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.CYLINDER: {
-				Cylinder cylinder = (Cylinder)theEObject;
-				T result = caseCylinder(cylinder);
-				if (result == null) result = caseGeometry(cylinder);
-				if (result == null) result = caseNamedElement(cylinder);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.COLLISION: {
-				Collision collision = (Collision)theEObject;
-				T result = caseCollision(collision);
-				if (result == null) result = caseNamedElement(collision);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.ORIGIN: {
-				Origin origin = (Origin)theEObject;
-				T result = caseOrigin(origin);
-				if (result == null) result = caseNamedElement(origin);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.MASS: {
-				Mass mass = (Mass)theEObject;
-				T result = caseMass(mass);
-				if (result == null) result = caseNamedElement(mass);
+			case MyURDFPackage.RE_USABLE_REF: {
+				ReUsableRef reUsableRef = (ReUsableRef)theEObject;
+				T result = caseReUsableRef(reUsableRef);
+				if (result == null) result = caseRef(reUsableRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.URDF_ATTR_SIGNED_NUMERIC: {
 				URDFAttrSignedNumeric urdfAttrSignedNumeric = (URDFAttrSignedNumeric)theEObject;
 				T result = caseURDFAttrSignedNumeric(urdfAttrSignedNumeric);
+				if (result == null) result = caseReUseAble(urdfAttrSignedNumeric);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -199,6 +129,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.URDF_ATTR_NUMERIC: {
 				URDFAttrNumeric urdfAttrNumeric = (URDFAttrNumeric)theEObject;
 				T result = caseURDFAttrNumeric(urdfAttrNumeric);
+				if (result == null) result = caseReUseAble(urdfAttrNumeric);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -208,11 +139,92 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case MyURDFPackage.DOT_EXPRESSION: {
+				DotExpression dotExpression = (DotExpression)theEObject;
+				T result = caseDotExpression(dotExpression);
+				if (result == null) result = caseRef(dotExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.INERTIAL: {
+				Inertial inertial = (Inertial)theEObject;
+				T result = caseInertial(inertial);
+				if (result == null) result = caseReUseAble(inertial);
+				if (result == null) result = caseNamedElement(inertial);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.VISUAL: {
+				Visual visual = (Visual)theEObject;
+				T result = caseVisual(visual);
+				if (result == null) result = caseReUseAble(visual);
+				if (result == null) result = caseNamedElement(visual);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.INERTIA: {
+				Inertia inertia = (Inertia)theEObject;
+				T result = caseInertia(inertia);
+				if (result == null) result = caseReUseAble(inertia);
+				if (result == null) result = caseNamedElement(inertia);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.MASS: {
+				Mass mass = (Mass)theEObject;
+				T result = caseMass(mass);
+				if (result == null) result = caseReUseAble(mass);
+				if (result == null) result = caseNamedElement(mass);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.ORIGIN: {
+				Origin origin = (Origin)theEObject;
+				T result = caseOrigin(origin);
+				if (result == null) result = caseReUseAble(origin);
+				if (result == null) result = caseNamedElement(origin);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.COLLISION: {
+				Collision collision = (Collision)theEObject;
+				T result = caseCollision(collision);
+				if (result == null) result = caseReUseAble(collision);
+				if (result == null) result = caseNamedElement(collision);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.GEOMETRY: {
+				Geometry geometry = (Geometry)theEObject;
+				T result = caseGeometry(geometry);
+				if (result == null) result = caseReUseAble(geometry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.BOX: {
+				Box box = (Box)theEObject;
+				T result = caseBox(box);
+				if (result == null) result = caseGeometry(box);
+				if (result == null) result = caseNamedElement(box);
+				if (result == null) result = caseReUseAble(box);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.CYLINDER: {
+				Cylinder cylinder = (Cylinder)theEObject;
+				T result = caseCylinder(cylinder);
+				if (result == null) result = caseGeometry(cylinder);
+				if (result == null) result = caseNamedElement(cylinder);
+				if (result == null) result = caseReUseAble(cylinder);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case MyURDFPackage.MESH: {
 				Mesh mesh = (Mesh)theEObject;
 				T result = caseMesh(mesh);
 				if (result == null) result = caseGeometry(mesh);
 				if (result == null) result = caseNamedElement(mesh);
+				if (result == null) result = caseReUseAble(mesh);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -221,14 +233,14 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				T result = caseSphere(sphere);
 				if (result == null) result = caseGeometry(sphere);
 				if (result == null) result = caseNamedElement(sphere);
+				if (result == null) result = caseReUseAble(sphere);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.COLOR: {
-				Color color = (Color)theEObject;
-				T result = caseColor(color);
-				if (result == null) result = caseMaterial(color);
-				if (result == null) result = caseNamedElement(color);
+			case MyURDFPackage.MATERIAL: {
+				Material material = (Material)theEObject;
+				T result = caseMaterial(material);
+				if (result == null) result = caseReUseAble(material);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -237,38 +249,47 @@ public class MyURDFSwitch<T> extends Switch<T> {
 				T result = caseTexture(texture);
 				if (result == null) result = caseMaterial(texture);
 				if (result == null) result = caseNamedElement(texture);
+				if (result == null) result = caseReUseAble(texture);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.MATERIAL: {
-				Material material = (Material)theEObject;
-				T result = caseMaterial(material);
+			case MyURDFPackage.COLOR: {
+				Color color = (Color)theEObject;
+				T result = caseColor(color);
+				if (result == null) result = caseMaterial(color);
+				if (result == null) result = caseNamedElement(color);
+				if (result == null) result = caseReUseAble(color);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.LIMIT: {
-				Limit limit = (Limit)theEObject;
-				T result = caseLimit(limit);
-				if (result == null) result = caseNamedElement(limit);
+			case MyURDFPackage.JOINT: {
+				Joint joint = (Joint)theEObject;
+				T result = caseJoint(joint);
+				if (result == null) result = caseReUseAble(joint);
+				if (result == null) result = caseNamedElement(joint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.AXIS: {
 				Axis axis = (Axis)theEObject;
 				T result = caseAxis(axis);
+				if (result == null) result = caseReUseAble(axis);
 				if (result == null) result = caseNamedElement(axis);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.JOINT_DECORATOR: {
-				JointDecorator jointDecorator = (JointDecorator)theEObject;
-				T result = caseJointDecorator(jointDecorator);
+			case MyURDFPackage.LIMIT: {
+				Limit limit = (Limit)theEObject;
+				T result = caseLimit(limit);
+				if (result == null) result = caseReUseAble(limit);
+				if (result == null) result = caseNamedElement(limit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.CALIBRATION: {
 				Calibration calibration = (Calibration)theEObject;
 				T result = caseCalibration(calibration);
+				if (result == null) result = caseReUseAble(calibration);
 				if (result == null) result = caseNamedElement(calibration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -276,6 +297,7 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.DYNAMICS: {
 				Dynamics dynamics = (Dynamics)theEObject;
 				T result = caseDynamics(dynamics);
+				if (result == null) result = caseReUseAble(dynamics);
 				if (result == null) result = caseNamedElement(dynamics);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -283,25 +305,38 @@ public class MyURDFSwitch<T> extends Switch<T> {
 			case MyURDFPackage.SAFETY_CONTROLLER: {
 				SafetyController safetyController = (SafetyController)theEObject;
 				T result = caseSafetyController(safetyController);
+				if (result == null) result = caseReUseAble(safetyController);
 				if (result == null) result = caseNamedElement(safetyController);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MyURDFPackage.JOINT_DECO_REF: {
-				JointDecoRef jointDecoRef = (JointDecoRef)theEObject;
-				T result = caseJointDecoRef(jointDecoRef);
+			case MyURDFPackage.TOPOLOGY: {
+				Topology topology = (Topology)theEObject;
+				T result = caseTopology(topology);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.JOINT_REF: {
+				JointRef jointRef = (JointRef)theEObject;
+				T result = caseJointRef(jointRef);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.ASSIGN_NEW_VALUE: {
+				AssignNewValue assignNewValue = (AssignNewValue)theEObject;
+				T result = caseAssignNewValue(assignNewValue);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MyURDFPackage.ADD_TO: {
+				AddTo addTo = (AddTo)theEObject;
+				T result = caseAddTo(addTo);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case MyURDFPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MyURDFPackage.RE_USE_ABLE: {
-				ReUseAble reUseAble = (ReUseAble)theEObject;
-				T result = caseReUseAble(reUseAble);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -385,32 +420,47 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Link Decorator</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Reuse</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Link Decorator</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Reuse</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLinkDecorator(LinkDecorator object) {
+	public T caseReuse(Reuse object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Link Ref</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Link Ref</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLinkRef(LinkRef object) {
+	public T caseRef(Ref object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Re Usable Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Re Usable Ref</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReUsableRef(ReUsableRef object) {
 		return null;
 	}
 
@@ -441,6 +491,51 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseJointRef(JointRef object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assign New Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assign New Value</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssignNewValue(AssignNewValue object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add To</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add To</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAddTo(AddTo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
 		return null;
 	}
 
@@ -595,6 +690,21 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dot Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dot Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDotExpression(DotExpression object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Inertia</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -730,21 +840,6 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Joint Decorator</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Joint Decorator</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJointDecorator(JointDecorator object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Calibration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -786,36 +881,6 @@ public class MyURDFSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSafetyController(SafetyController object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Joint Deco Ref</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Joint Deco Ref</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseJointDecoRef(JointDecoRef object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedElement(NamedElement object) {
 		return null;
 	}
 

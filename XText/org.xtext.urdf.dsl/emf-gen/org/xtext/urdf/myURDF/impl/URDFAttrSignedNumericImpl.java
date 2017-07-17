@@ -26,7 +26,7 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  *
  * @generated
  */
-public class URDFAttrSignedNumericImpl extends MinimalEObjectImpl.Container implements URDFAttrSignedNumeric {
+public class URDFAttrSignedNumericImpl extends ReUseAbleImpl implements URDFAttrSignedNumeric {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

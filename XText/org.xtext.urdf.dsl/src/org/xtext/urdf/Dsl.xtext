@@ -25,93 +25,85 @@ import "http://www.itu.dk/uRDF"
  * DONE: Origin values should be ('-')? INT or FLOAT or SCIENTIFIC - get SIGNED_NUMERIC class from metamodel...
  */
 
-
 Robot:
 	'Robot' name=ID
-	 ('Topology' topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)*
-	 //usage+=Usage*
+	 ('Topology' topologies+=Topology | 
+	 	         links+=Link | 
+	 	         joint+=Joint |
+	 	         addto+=AddTo
+	 )*
 ;
-
-ReUseAble:
-	Link | Joint 
-;
-/* 
-Usage returns Usage:
-    "use" ref=DotExpression
-;
-
-DotExpression returns Ref:
-    EntityRef ({DotExpression.ref=current}  "." tail=[ecore::EStructuralFeature])*       //Compiler ikke
-    //EntityRef ({DotExpression.ref=current}  "." tail=[ReUseAble])*                  // Ok
-;
-* 
-
-
-EntityRef returns Ref:
-    {EntityRef} entity=[ReUseAble]
-;
-*/
 
 Topology:
-	parent=[Link|ID] (joint=JointRef child=Topology)?;  
+	parent=[Link] (joint=JointRef child=Topology)?
+;  
 
-Link:
-	'Link' name=ID
-	('isReuseOf' isReuseOf=[Link])?
-	decorator=LinkDecorator
-;
-
-LinkDecorator:
-	{LinkDecorator} 
-	inertial+=Inertial*	
-	visual+=Visual*	
-	collision+=Collision*
-;
-
-LinkRef:
-	'add_to' ref=[Link|ID] 
-	decorator=LinkDecorator
-;
-
-Joint:
-	'Joint' name=ID
-	'ChildOf' ChildOf=[Link|ID]
-	'ParentOf' ParentOf=[Link|ID]
-	'Type' Type=JointType
-	('isReuseOf' isReuseOf=[Joint])?
-	decorator=JointDecorator
-;
-
-JointDecorator:
-	{JointDecorator} 
-	(limit=Limit)?
-	(axis=Axis)?
-	(calibration=Calibration)?
-	(dynamics=Dynamics)?
-	(safetycontroller=SafetyController)?
-;
-
-JointDecoRef:
-	'add_to' ref=[Joint|ID]
-	decorator=JointDecorator
-;
-
-enum JointType:
-		fixed = 'Fixed' |revolute = 'Revolute' |  prismatic = 'Prismatic' | continuous = 'Continuous';
-		
 JointRef:
 	 fix = '->' | rev = 'r->' | pris = 'p->' | cont = 'c->'  
-;		
-
-Inertial:
-		{Inertial} 'Inertial' (name=ID)?
-		inertia=Inertia
-		mass=Mass
-		(origin=Origin)?
 ;
 
-Inertia returns Inertia:
-	'Inertia' (name=ID)?
+ReUseAble: 
+ 	Link | Visual | Inertial | Collision
+;
+
+ReUseAbleReduced returns ReUseAble:
+	Visual | Inertial | Collision
+;
+
+ReUseAbleReduce returns ReUseAble:
+	Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+;
+  
+Link:
+	{Link} 'Link' name=ID
+	(('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+)	 
+		| ('reuse' isReuseOf=[Link] (reuse=Reuse)?)
+	)?
+;
+
+AddTo:
+	(AddToLink link=[Link] 
+		add = ReUseAbleReduced ) | 
+	(AddToJoint joint=[Joint]
+		add =  ReUseAbleReduce   
+	)
+;
+
+AddToLink:
+	'Add' 'to' 'link'
+;
+
+AddToJoint:
+	'Add' 'to' 'joint'
+;
+
+Reuse:
+	{Reuse}  'add' add=ReUseAbleReduced | 'edit' edit=AssignNewValue
+;
+
+
+AssignNewValue:
+	{AssignNewValue} getRef=DotExpression '=' newReuseable=ReUseAble
+;
+
+
+DotExpression returns Ref:
+    ReUsableRef ({DotExpression.ref=current}  "." tail=[ReUseAble])*
+;
+
+ReUsableRef returns Ref: 
+	{ReUsableRef} reuseable=[ReUseAble]
+;
+
+Inertial:
+	{Inertial} 'Inertial' (name=ID)?
+	inertia=Inertia
+	mass=Mass
+	(origin=Origin)?
+;
+
+Inertia:
+	{Inertia} 'Inertia' (name=ID)?
 	'ixx' ixx=URDFAttrSignedNumeric 
 	'ixy' ixy=URDFAttrSignedNumeric
 	'ixz' ixz=URDFAttrSignedNumeric
@@ -123,9 +115,31 @@ Inertia returns Inertia:
 
 Visual:
 	{Visual} 'Visual' (name=ID)? 
-	geometry+=Geometry*
+	'Geometry' geometry=Geometry
+	(origin=Origin)?               //problem: Kan ikke definere material uden origin pt
+	('Material' material=Material)? //problem: Kan ikke definere material uden origin pt
+	
+;
+
+Origin:
+    {Origin} 'Origin' (name=ID)?
+    'x' x=URDFAttrSignedNumeric 
+	'y' y=URDFAttrSignedNumeric
+	'z' z=URDFAttrSignedNumeric
+    ('roll' roll=URDFAttrSignedNumeric)?
+	('pitch' pitch=URDFAttrSignedNumeric)? 
+	('yaw' yaw=URDFAttrSignedNumeric)?
+;
+
+Mass:
+	{Mass} 'Mass' (name=ID)?
+	'massKilogram' massKilogram=URDFAttrSignedNumeric
+;
+
+Collision:
+	'Collision' (name=ID)?
+	'Geometry' geometry=Geometry
 	(origin=Origin)?
-	//material=Material
 ;
 
 Geometry:
@@ -151,7 +165,7 @@ Cylinder:
 Mesh:
 	'Mesh' (name=ID)?
 	'pathToFile' pathToFile=URDFAttrSTRING
-	('scale' dimension=Box)?
+	//('scale' dimension=Box)?
 ;
 
 Sphere:
@@ -159,33 +173,18 @@ Sphere:
 	'radius' radius=URDFAttrNumeric	
 ;
 
-
-Collision:
-	{Collision} 'Collision' (name=ID)?
-	geometry+=Geometry*
-	(origin=Origin)?
-;
-
-Origin:
-    'Origin' (name=ID)?
-    'x' x=URDFAttrSignedNumeric 
-	'y' y=URDFAttrSignedNumeric
-	'z' z=URDFAttrSignedNumeric 
-    ('roll' roll=URDFAttrSignedNumeric)?
-	('pitch' pitch=URDFAttrSignedNumeric)? 
-	('yaw' yaw=URDFAttrSignedNumeric)?
-;
-
-Mass:
-	'Mass' (name=ID)?
-	'mass_(ValueInKilograms)' massValueInKilograms=URDFAttrNumeric
-;
-
 Material:
-	Color | Texture;
+	Texture | Color 
+;
 
 
-/* RGBA values must be floats between 0 and 1 incl */
+Texture:
+	'Texture' (name=ID)?
+	'pathToFile' pathToFile=URDFAttrSTRING
+;
+
+
+// RGBA values must be floats between 0 and 1 incl 
 Color:
 	'Color' (name=ID)?
 	'red' red=URDFAttrFloat 
@@ -194,62 +193,73 @@ Color:
 	'alpha' alpha=URDFAttrFloat	
 ;
 
-Texture:
-	'Texture' (name=ID)?
-	'pathToFile' pathToFile=URDFAttrSTRING
+Joint:
+	'Joint' name=ID
+	(('def'  'ChildOf' childOf=[Link] 
+			 'ParentOf' parentOf=[Link] 
+			 'Type' type=JointType) 
+			 ( origin=Origin | axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 
+	 //HOW TO REUSE: CHANGE PARENT AND CHILD LINKS??
+	 ('reuse' isReuseOf=[Joint] 
+	 	'ChildOf' childOf=[Link] 
+		'ParentOf' parentOf=[Link] 
+	 	(reuse=Reuse)?
+	 )
+	)
+;
+
+enum JointType:
+		fixed = 'fixed' |revolute = 'revolute' |  prismatic = 'prismatic' | continuous = 'continuous'
+;
+
+/* Binary values must be 0 or 1 - digitsum must be 1, WHY NEED TO DEFINE ALL THREE?? */
+//keyword aliases: 'xyz' or 'x', 'y', 'z'
+Axis:
+	'Axis' (name=ID)?
+	'x' x=URDFAttrINT
+	'y' y=URDFAttrINT
+	'z' z=URDFAttrINT 
 ;
 
 Limit:
 	'Limit' (name=ID)?
 	'effort' effort=URDFAttrSignedNumeric 
 	'velocity' velocity=URDFAttrSignedNumeric 
-	'lower' lower=(URDFAttrSignedNumeric)?
-	'upper' upper=(URDFAttrSignedNumeric)? 
-;
-
-/* Binary values must be 0 or 1 - 
- * digitsum must be 1*/
-//keyword aliases: 'xyz' or 'x', 'y', 'z'
-Axis:
-	'Axis' (name=ID)?
-	'x' x=URDFAttrINT
-	'y' y=URDFAttrINT
-	'z' z=URDFAttrINT
-    
+	('lower' lower=URDFAttrSignedNumeric | 'upper' upper=URDFAttrSignedNumeric)* 
 ;
 
 Calibration:
 	 {Calibration} 'Calibration' (name=ID)?
-	 ('rising' rising=URDFAttrSignedNumeric)? 
-	 ('falling' falling=URDFAttrSignedNumeric)? 
+	 ('rising' rising=URDFAttrSignedNumeric | 'falling' falling=URDFAttrSignedNumeric) 
 ;
 
 Dynamics:
 	{Dynamics} 'Dynamics' (name=ID)?
-	('friction' friction=URDFAttrSignedNumeric)?
-	('damping' damping=URDFAttrSignedNumeric)?
+	('friction' friction=URDFAttrSignedNumeric | 'damping' damping=URDFAttrSignedNumeric)+
 ;
 
-//Should we cut Mimic from the spec??
-/*Mimic:
-	'Mimic' (name=ID)?
-	'mimics' mimics=[Joint|ID]
-	('multiplier' multiplier=SIGNED_NUMERIC)?
-	('offSet' offSet=SIGNED_NUMERIC)?
-;*/
 
 SafetyController:
 	'SafetyController' (name=ID)?
-	('softLowerLimit' softLowerLimit=URDFAttrSignedNumeric)?
-	('softUpperLimit' softUpperLimit=URDFAttrSignedNumeric)?
-	('k_position' k_position=URDFAttrSignedNumeric)?
 	'k_velocity' k_velocity=URDFAttrSignedNumeric
+	('k_position' k_position=URDFAttrSignedNumeric |
+	 'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric | 
+	 'softUpperLimit' softUpperLimit=URDFAttrSignedNumeric)*
 ;
 
-/*Constant:
-	
+
+//Should we cut Mimic from the spec - NEED TO GET INTERPRETATION OF ATTRS??
+/*Mimic:
+	'Mimic' (name=ID)?
+	'mimics' mimics=[Joint]
+	('multiplier' multiplier=URDFAttrSignedNumeric)?
+	('offSet' offSet=URDFAttrSignedNumeric)?
 ;*/
-	
+
+
+/*Constant:
+;*/
+
 URDFAttrSignedNumeric:
 	value = SIGNED_NUMERIC
 ;

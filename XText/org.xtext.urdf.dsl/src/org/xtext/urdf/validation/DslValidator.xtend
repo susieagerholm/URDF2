@@ -37,7 +37,7 @@ class DslValidator extends AbstractDslValidator {
     //A Robot must contain at least one Link to be valid instance
     @Check
 	def checkRobotContainsLink(Robot robot) {
-		if (robot.link.length < 1)
+		if (robot.links.length < 1)
 		error("A Robot must contain at least one Link to be valid instance", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
@@ -46,12 +46,12 @@ class DslValidator extends AbstractDslValidator {
 	@Check
 	def checkLinkIsConnectedToAJoint(Robot robot) {
 		//if more than one link - must be attached to joint
-		if(robot.link.length > 1 && !robot.link.forall[l |  
+		if(robot.links.length > 1 && !robot.links.forall[l |  
 			robot.joint.map[parentOf.name].contains(l.name) || 
 			robot.joint.map[childOf.name].contains(l.name)
 		]) 
 		error("A Link has to be referenced as parentOf and/or childOf at least one Joint", 
-        		MyURDFPackage.Literals.ROBOT__LINK)
+        		MyURDFPackage.Literals.ROBOT__LINKS)
 	}
 	
 	// A Joint must not have the same Link as parent and child

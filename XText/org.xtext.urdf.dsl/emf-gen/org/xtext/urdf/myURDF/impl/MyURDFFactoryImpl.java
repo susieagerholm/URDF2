@@ -59,36 +59,41 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case MyURDFPackage.ROBOT: return createRobot();
-			case MyURDFPackage.TOPOLOGY: return createTopology();
+			case MyURDFPackage.RE_USE_ABLE: return createReUseAble();
 			case MyURDFPackage.LINK: return createLink();
-			case MyURDFPackage.LINK_DECORATOR: return createLinkDecorator();
-			case MyURDFPackage.LINK_REF: return createLinkRef();
-			case MyURDFPackage.JOINT: return createJoint();
-			case MyURDFPackage.JOINT_REF: return createJointRef();
-			case MyURDFPackage.INERTIAL: return createInertial();
-			case MyURDFPackage.INERTIA: return createInertia();
-			case MyURDFPackage.VISUAL: return createVisual();
-			case MyURDFPackage.BOX: return createBox();
-			case MyURDFPackage.CYLINDER: return createCylinder();
-			case MyURDFPackage.COLLISION: return createCollision();
-			case MyURDFPackage.ORIGIN: return createOrigin();
-			case MyURDFPackage.MASS: return createMass();
+			case MyURDFPackage.REUSE: return createReuse();
+			case MyURDFPackage.REF: return createRef();
+			case MyURDFPackage.RE_USABLE_REF: return createReUsableRef();
 			case MyURDFPackage.URDF_ATTR_SIGNED_NUMERIC: return createURDFAttrSignedNumeric();
 			case MyURDFPackage.URDF_ATTR_FLOAT: return createURDFAttrFloat();
 			case MyURDFPackage.URDF_ATTR_INT: return createURDFAttrINT();
 			case MyURDFPackage.URDF_ATTR_NUMERIC: return createURDFAttrNumeric();
 			case MyURDFPackage.URDF_ATTR_STRING: return createURDFAttrSTRING();
+			case MyURDFPackage.DOT_EXPRESSION: return createDotExpression();
+			case MyURDFPackage.INERTIAL: return createInertial();
+			case MyURDFPackage.VISUAL: return createVisual();
+			case MyURDFPackage.INERTIA: return createInertia();
+			case MyURDFPackage.MASS: return createMass();
+			case MyURDFPackage.ORIGIN: return createOrigin();
+			case MyURDFPackage.COLLISION: return createCollision();
+			case MyURDFPackage.GEOMETRY: return createGeometry();
+			case MyURDFPackage.BOX: return createBox();
+			case MyURDFPackage.CYLINDER: return createCylinder();
 			case MyURDFPackage.MESH: return createMesh();
 			case MyURDFPackage.SPHERE: return createSphere();
-			case MyURDFPackage.COLOR: return createColor();
+			case MyURDFPackage.MATERIAL: return createMaterial();
 			case MyURDFPackage.TEXTURE: return createTexture();
-			case MyURDFPackage.LIMIT: return createLimit();
+			case MyURDFPackage.COLOR: return createColor();
+			case MyURDFPackage.JOINT: return createJoint();
 			case MyURDFPackage.AXIS: return createAxis();
-			case MyURDFPackage.JOINT_DECORATOR: return createJointDecorator();
+			case MyURDFPackage.LIMIT: return createLimit();
 			case MyURDFPackage.CALIBRATION: return createCalibration();
 			case MyURDFPackage.DYNAMICS: return createDynamics();
 			case MyURDFPackage.SAFETY_CONTROLLER: return createSafetyController();
-			case MyURDFPackage.JOINT_DECO_REF: return createJointDecoRef();
+			case MyURDFPackage.TOPOLOGY: return createTopology();
+			case MyURDFPackage.JOINT_REF: return createJointRef();
+			case MyURDFPackage.ASSIGN_NEW_VALUE: return createAssignNewValue();
+			case MyURDFPackage.ADD_TO: return createAddTo();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -139,6 +144,16 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ReUseAble createReUseAble() {
+		ReUseAbleImpl reUseAble = new ReUseAbleImpl();
+		return reUseAble;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Topology createTopology() {
 		TopologyImpl topology = new TopologyImpl();
 		return topology;
@@ -159,9 +174,9 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LinkDecorator createLinkDecorator() {
-		LinkDecoratorImpl linkDecorator = new LinkDecoratorImpl();
-		return linkDecorator;
+	public Reuse createReuse() {
+		ReuseImpl reuse = new ReuseImpl();
+		return reuse;
 	}
 
 	/**
@@ -169,9 +184,19 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LinkRef createLinkRef() {
-		LinkRefImpl linkRef = new LinkRefImpl();
-		return linkRef;
+	public Ref createRef() {
+		RefImpl ref = new RefImpl();
+		return ref;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReUsableRef createReUsableRef() {
+		ReUsableRefImpl reUsableRef = new ReUsableRefImpl();
+		return reUsableRef;
 	}
 
 	/**
@@ -192,6 +217,26 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	public JointRef createJointRef() {
 		JointRefImpl jointRef = new JointRefImpl();
 		return jointRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssignNewValue createAssignNewValue() {
+		AssignNewValueImpl assignNewValue = new AssignNewValueImpl();
+		return assignNewValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AddTo createAddTo() {
+		AddToImpl addTo = new AddToImpl();
+		return addTo;
 	}
 
 	/**
@@ -222,6 +267,16 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	public Collision createCollision() {
 		CollisionImpl collision = new CollisionImpl();
 		return collision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Geometry createGeometry() {
+		GeometryImpl geometry = new GeometryImpl();
+		return geometry;
 	}
 
 	/**
@@ -299,6 +354,16 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public DotExpression createDotExpression() {
+		DotExpressionImpl dotExpression = new DotExpressionImpl();
+		return dotExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Inertia createInertia() {
 		InertiaImpl inertia = new InertiaImpl();
 		return inertia;
@@ -369,6 +434,16 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Material createMaterial() {
+		MaterialImpl material = new MaterialImpl();
+		return material;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Limit createLimit() {
 		LimitImpl limit = new LimitImpl();
 		return limit;
@@ -382,16 +457,6 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	public Axis createAxis() {
 		AxisImpl axis = new AxisImpl();
 		return axis;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JointDecorator createJointDecorator() {
-		JointDecoratorImpl jointDecorator = new JointDecoratorImpl();
-		return jointDecorator;
 	}
 
 	/**
@@ -422,16 +487,6 @@ public class MyURDFFactoryImpl extends EFactoryImpl implements MyURDFFactory {
 	public SafetyController createSafetyController() {
 		SafetyControllerImpl safetyController = new SafetyControllerImpl();
 		return safetyController;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JointDecoRef createJointDecoRef() {
-		JointDecoRefImpl jointDecoRef = new JointDecoRefImpl();
-		return jointDecoRef;
 	}
 
 	/**

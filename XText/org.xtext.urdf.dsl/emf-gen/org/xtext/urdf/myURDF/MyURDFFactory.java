@@ -32,6 +32,15 @@ public interface MyURDFFactory extends EFactory {
 	Robot createRobot();
 
 	/**
+	 * Returns a new object of class '<em>Re Use Able</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Re Use Able</em>'.
+	 * @generated
+	 */
+	ReUseAble createReUseAble();
+
+	/**
 	 * Returns a new object of class '<em>Topology</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -50,22 +59,31 @@ public interface MyURDFFactory extends EFactory {
 	Link createLink();
 
 	/**
-	 * Returns a new object of class '<em>Link Decorator</em>'.
+	 * Returns a new object of class '<em>Reuse</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Decorator</em>'.
+	 * @return a new object of class '<em>Reuse</em>'.
 	 * @generated
 	 */
-	LinkDecorator createLinkDecorator();
+	Reuse createReuse();
 
 	/**
-	 * Returns a new object of class '<em>Link Ref</em>'.
+	 * Returns a new object of class '<em>Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Link Ref</em>'.
+	 * @return a new object of class '<em>Ref</em>'.
 	 * @generated
 	 */
-	LinkRef createLinkRef();
+	Ref createRef();
+
+	/**
+	 * Returns a new object of class '<em>Re Usable Ref</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Re Usable Ref</em>'.
+	 * @generated
+	 */
+	ReUsableRef createReUsableRef();
 
 	/**
 	 * Returns a new object of class '<em>Joint</em>'.
@@ -84,6 +102,24 @@ public interface MyURDFFactory extends EFactory {
 	 * @generated
 	 */
 	JointRef createJointRef();
+
+	/**
+	 * Returns a new object of class '<em>Assign New Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Assign New Value</em>'.
+	 * @generated
+	 */
+	AssignNewValue createAssignNewValue();
+
+	/**
+	 * Returns a new object of class '<em>Add To</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Add To</em>'.
+	 * @generated
+	 */
+	AddTo createAddTo();
 
 	/**
 	 * Returns a new object of class '<em>Inertial</em>'.
@@ -111,6 +147,15 @@ public interface MyURDFFactory extends EFactory {
 	 * @generated
 	 */
 	Collision createCollision();
+
+	/**
+	 * Returns a new object of class '<em>Geometry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Geometry</em>'.
+	 * @generated
+	 */
+	Geometry createGeometry();
 
 	/**
 	 * Returns a new object of class '<em>Origin</em>'.
@@ -176,6 +221,15 @@ public interface MyURDFFactory extends EFactory {
 	URDFAttrSTRING createURDFAttrSTRING();
 
 	/**
+	 * Returns a new object of class '<em>Dot Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dot Expression</em>'.
+	 * @generated
+	 */
+	DotExpression createDotExpression();
+
+	/**
 	 * Returns a new object of class '<em>Inertia</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -239,6 +293,15 @@ public interface MyURDFFactory extends EFactory {
 	Sphere createSphere();
 
 	/**
+	 * Returns a new object of class '<em>Material</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Material</em>'.
+	 * @generated
+	 */
+	Material createMaterial();
+
+	/**
 	 * Returns a new object of class '<em>Limit</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -255,15 +318,6 @@ public interface MyURDFFactory extends EFactory {
 	 * @generated
 	 */
 	Axis createAxis();
-
-	/**
-	 * Returns a new object of class '<em>Joint Decorator</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Joint Decorator</em>'.
-	 * @generated
-	 */
-	JointDecorator createJointDecorator();
 
 	/**
 	 * Returns a new object of class '<em>Calibration</em>'.
@@ -291,15 +345,6 @@ public interface MyURDFFactory extends EFactory {
 	 * @generated
 	 */
 	SafetyController createSafetyController();
-
-	/**
-	 * Returns a new object of class '<em>Joint Deco Ref</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Joint Deco Ref</em>'.
-	 * @generated
-	 */
-	JointDecoRef createJointDecoRef();
 
 	/**
 	 * Returns the package supported by this factory.

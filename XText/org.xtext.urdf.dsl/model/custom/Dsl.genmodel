@@ -13,81 +13,26 @@
       <genEnumLiterals ecoreEnumLiteral="Dsl.ecore#//JointType/continuous"/>
     </genEnums>
     <genClasses ecoreClass="Dsl.ecore#//Robot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/topologies"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/link"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/links"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/joint"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/linkrefs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/topologies"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Robot/addto"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Topology">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/parent"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/joint"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/child"/>
-    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//ReUseAble"/>
     <genClasses ecoreClass="Dsl.ecore#//Link">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/decorator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/isReuseOf"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/reuse"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/inertial"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/visual"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Link/collision"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//LinkDecorator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkDecorator/inertial"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkDecorator/visual"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkDecorator/collision"/>
+    <genClasses ecoreClass="Dsl.ecore#//Reuse">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Reuse/add"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Reuse/edit"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//LinkRef">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkRef/ref"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//LinkRef/decorator"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Joint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ChildOf"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/ParentOf"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/Type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/decorator"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//JointRef">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/fix"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/rev"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/pris"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/cont"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Inertial">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/inertia"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/mass"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/origin"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Inertia">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixx"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixz"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/iyy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/iyz"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/izz"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Visual">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/geometry"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/origin"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Geometry"/>
-    <genClasses ecoreClass="Dsl.ecore#//Box">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/height"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/width"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Box/length"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Cylinder">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Cylinder/radius"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Cylinder/length"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Collision">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/geometry"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/origin"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Origin">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/x"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/y"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/z"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/roll"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/pitch"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/yaw"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Mass">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Mass/massValueInKilograms"/>
+    <genClasses ecoreClass="Dsl.ecore#//Ref"/>
+    <genClasses ecoreClass="Dsl.ecore#//ReUsableRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//ReUsableRef/reuseable"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//URDFAttrSignedNumeric">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//URDFAttrSignedNumeric/value"/>
@@ -104,12 +49,62 @@
     <genClasses ecoreClass="Dsl.ecore#//URDFAttrSTRING">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//URDFAttrSTRING/value"/>
     </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//DotExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//DotExpression/ref"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//DotExpression/tail"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Inertial">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/inertia"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/mass"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Inertial/origin"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Visual">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/geometry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Visual/material"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Inertia">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixx"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/ixz"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/izz"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/iyy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Inertia/iyz"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Mass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Mass/massKilogram"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Origin">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/z"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/yaw"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/pitch"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Origin/roll"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Collision">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Collision/geometry"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Geometry"/>
+    <genClasses ecoreClass="Dsl.ecore#//Box">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/width"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Box/length"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Box/height"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Cylinder">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Cylinder/radius"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Cylinder/length"/>
+    </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Mesh">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Mesh/pathToFile"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Mesh/dimension"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Sphere">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Sphere/radius"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//Material"/>
+    <genClasses ecoreClass="Dsl.ecore#//Texture">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Texture/pathToFile"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Color">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/red"/>
@@ -117,27 +112,29 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/blue"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Color/alpha"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Texture">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Texture/pathToFile"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//Material"/>
-    <genClasses ecoreClass="Dsl.ecore#//Limit">
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/effort"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/velocity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/lower"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/upper"/>
+    <genClasses ecoreClass="Dsl.ecore#//Joint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/isReuseOf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/childOf"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/parentOf"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//Joint/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/axis"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/limit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/calibration"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/dynamics"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/reuse"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Joint/safetycontroller"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Axis">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/y"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Axis/z"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//JointDecorator">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/axis"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/limit"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/calibration"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/dynamics"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecorator/safetycontroller"/>
+    <genClasses ecoreClass="Dsl.ecore#//Limit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/effort"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/velocity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Limit/upper"/>
     </genClasses>
     <genClasses ecoreClass="Dsl.ecore#//Calibration">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//Calibration/rising"/>
@@ -150,18 +147,31 @@
     <genClasses ecoreClass="Dsl.ecore#//SafetyController">
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/k_velocity"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/k_position"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/softUpperLimit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/softLowerLimit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference Dsl.ecore#//SafetyController/softUpperLimit"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//JointDecoRef">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecoRef/decorator"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//JointDecoRef/ref"/>
+    <genClasses ecoreClass="Dsl.ecore#//Topology">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/parent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/joint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//Topology/child"/>
     </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//NamedElement">
+    <genClasses ecoreClass="Dsl.ecore#//JointRef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/fix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/rev"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/pris"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//JointRef/cont"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//AssignNewValue">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//AssignNewValue/getRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//AssignNewValue/newReuseable"/>
+    </genClasses>
+    <genClasses ecoreClass="Dsl.ecore#//AddTo">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//AddTo/link"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//AddTo/joint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Dsl.ecore#//AddTo/add"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Dsl.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Dsl.ecore#//NamedElement/name"/>
-    </genClasses>
-    <genClasses ecoreClass="Dsl.ecore#//ReUseAble">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Dsl.ecore#//ReUseAble/isReuseOf"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

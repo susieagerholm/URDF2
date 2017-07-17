@@ -24,13 +24,9 @@ import org.xtext.urdf.myURDF.Dynamics;
 import org.xtext.urdf.myURDF.Inertia;
 import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Joint;
-import org.xtext.urdf.myURDF.JointDecoRef;
-import org.xtext.urdf.myURDF.JointDecorator;
 import org.xtext.urdf.myURDF.JointRef;
 import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.LinkDecorator;
-import org.xtext.urdf.myURDF.LinkRef;
 import org.xtext.urdf.myURDF.Mass;
 import org.xtext.urdf.myURDF.Mesh;
 import org.xtext.urdf.myURDF.MyURDFPackage;
@@ -92,12 +88,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MyURDFPackage.JOINT:
 				sequence_Joint(context, (Joint) semanticObject); 
 				return; 
-			case MyURDFPackage.JOINT_DECO_REF:
+			/*case MyURDFPackage.JOINT_DECO_REF:
 				sequence_JointDecoRef(context, (JointDecoRef) semanticObject); 
 				return; 
 			case MyURDFPackage.JOINT_DECORATOR:
 				sequence_JointDecorator(context, (JointDecorator) semanticObject); 
-				return; 
+				return; */
 			case MyURDFPackage.JOINT_REF:
 				sequence_JointRef(context, (JointRef) semanticObject); 
 				return; 
@@ -107,12 +103,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MyURDFPackage.LINK:
 				sequence_Link(context, (Link) semanticObject); 
 				return; 
-			case MyURDFPackage.LINK_DECORATOR:
+			/*case MyURDFPackage.LINK_DECORATOR:
 				sequence_LinkDecorator(context, (LinkDecorator) semanticObject); 
 				return; 
 			case MyURDFPackage.LINK_REF:
 				sequence_LinkRef(context, (LinkRef) semanticObject); 
-				return; 
+				return;*/ 
 			case MyURDFPackage.MASS:
 				sequence_Mass(context, (Mass) semanticObject); 
 				return; 
@@ -286,7 +282,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (ref=[Joint|ID] decorator=JointDecorator)
 	 */
-	protected void sequence_JointDecoRef(ISerializationContext context, JointDecoRef semanticObject) {
+	/*protected void sequence_JointDecoRef(ISerializationContext context, JointDecoRef semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__REF) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__REF));
@@ -297,7 +293,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getJointDecoRefAccess().getRefJointIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
 		feeder.accept(grammarAccess.getJointDecoRefAccess().getDecoratorJointDecoratorParserRuleCall_2_0(), semanticObject.getDecorator());
 		feeder.finish();
-	}
+	}*/
 	
 	
 	/**
@@ -307,9 +303,9 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (limit=Limit? axis=Axis? calibration=Calibration? dynamics=Dynamics? safetycontroller=SafetyController?)
 	 */
-	protected void sequence_JointDecorator(ISerializationContext context, JointDecorator semanticObject) {
+	/*protected void sequence_JointDecorator(ISerializationContext context, JointDecorator semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
+	}*/
 	
 	
 	/**
@@ -362,9 +358,9 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (inertial+=Inertial* visual+=Visual* collision+=Collision*)
 	 */
-	protected void sequence_LinkDecorator(ISerializationContext context, LinkDecorator semanticObject) {
+	/*protected void sequence_LinkDecorator(ISerializationContext context, LinkDecorator semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
+	}*/
 	
 	
 	/**
@@ -374,7 +370,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (ref=[Link|ID] decorator=LinkDecorator)
 	 */
-	protected void sequence_LinkRef(ISerializationContext context, LinkRef semanticObject) {
+	/*protected void sequence_LinkRef(ISerializationContext context, LinkRef semanticObject) {
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.LINK_REF__REF) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.LINK_REF__REF));
@@ -385,7 +381,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		feeder.accept(grammarAccess.getLinkRefAccess().getRefLinkIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
 		feeder.accept(grammarAccess.getLinkRefAccess().getDecoratorLinkDecoratorParserRuleCall_2_0(), semanticObject.getDecorator());
 		feeder.finish();
-	}
+	}*/
 	
 	
 	/**

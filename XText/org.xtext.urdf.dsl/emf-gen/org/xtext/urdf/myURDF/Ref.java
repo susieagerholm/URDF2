@@ -7,14 +7,13 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Material</b></em>'.
+ * A representation of the model object '<em><b>Ref</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.xtext.urdf.myURDF.MyURDFPackage#getMaterial()
+ * @see org.xtext.urdf.myURDF.MyURDFPackage#getRef()
  * @model
  * @generated
  */
-public interface Material extends ReUseAble {
-
-} // Material
+public interface Ref extends EObject {
+} // Ref

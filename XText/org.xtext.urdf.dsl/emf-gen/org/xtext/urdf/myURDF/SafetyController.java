@@ -16,15 +16,15 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getK_velocity <em>Kvelocity</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getK_position <em>Kposition</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getSoftLowerLimit <em>Soft Lower Limit</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.SafetyController#getSoftUpperLimit <em>Soft Upper Limit</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getSafetyController()
  * @model
  * @generated
  */
-public interface SafetyController extends NamedElement {
+public interface SafetyController extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Soft Lower Limit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

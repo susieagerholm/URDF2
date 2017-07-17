@@ -27,7 +27,6 @@ import org.xtext.urdf.myURDF.URDFAttrSTRING;
  * <ul>
  *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getPathToFile <em>Path To File</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.MeshImpl#getDimension <em>Dimension</em>}</li>
  * </ul>
  *
  * @generated
@@ -42,7 +41,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
-
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -52,7 +50,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getPathToFile() <em>Path To File</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -62,16 +59,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	 * @ordered
 	 */
 	protected URDFAttrSTRING pathToFile;
-
-	/**
-	 * The cached value of the '{@link #getDimension() <em>Dimension</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDimension()
-	 * @generated
-	 * @ordered
-	 */
-	protected Box dimension;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,56 +148,11 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Box getDimension() {
-		return dimension;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDimension(Box newDimension, NotificationChain msgs) {
-		Box oldDimension = dimension;
-		dimension = newDimension;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.MESH__DIMENSION, oldDimension, newDimension);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDimension(Box newDimension) {
-		if (newDimension != dimension) {
-			NotificationChain msgs = null;
-			if (dimension != null)
-				msgs = ((InternalEObject)dimension).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MESH__DIMENSION, null, msgs);
-			if (newDimension != null)
-				msgs = ((InternalEObject)newDimension).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MESH__DIMENSION, null, msgs);
-			msgs = basicSetDimension(newDimension, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MESH__DIMENSION, newDimension, newDimension));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				return basicSetPathToFile(null, msgs);
-			case MyURDFPackage.MESH__DIMENSION:
-				return basicSetDimension(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -227,8 +169,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 				return getName();
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				return getPathToFile();
-			case MyURDFPackage.MESH__DIMENSION:
-				return getDimension();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,9 +186,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 				return;
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				setPathToFile((URDFAttrSTRING)newValue);
-				return;
-			case MyURDFPackage.MESH__DIMENSION:
-				setDimension((Box)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -268,9 +205,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				setPathToFile((URDFAttrSTRING)null);
 				return;
-			case MyURDFPackage.MESH__DIMENSION:
-				setDimension((Box)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,8 +221,6 @@ public class MeshImpl extends GeometryImpl implements Mesh {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.MESH__PATH_TO_FILE:
 				return pathToFile != null;
-			case MyURDFPackage.MESH__DIMENSION:
-				return dimension != null;
 		}
 		return super.eIsSet(featureID);
 	}

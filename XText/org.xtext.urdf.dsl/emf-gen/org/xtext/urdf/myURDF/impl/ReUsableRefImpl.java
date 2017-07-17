@@ -6,53 +6,44 @@ package org.xtext.urdf.myURDF.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.MyURDFPackage;
-import org.xtext.urdf.myURDF.URDFAttrNumeric;
+import org.xtext.urdf.myURDF.ReUsableRef;
+import org.xtext.urdf.myURDF.ReUseAble;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>URDF Attr Numeric</b></em>'.
+ * An implementation of the model object '<em><b>Re Usable Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.URDFAttrNumericImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.ReUsableRefImpl#getReuseable <em>Reuseable</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeric {
+public class ReUsableRefImpl extends RefImpl implements ReUsableRef {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getReuseable() <em>Reuseable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getReuseable()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected String value = VALUE_EDEFAULT;
+	protected ReUseAble reuseable;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected URDFAttrNumericImpl() {
+	protected ReUsableRefImpl() {
 		super();
 	}
 
@@ -63,7 +54,7 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return MyURDFPackage.Literals.URDF_ATTR_NUMERIC;
+		return MyURDFPackage.Literals.RE_USABLE_REF;
 	}
 
 	/**
@@ -71,8 +62,16 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getValue() {
-		return value;
+	public ReUseAble getReuseable() {
+		if (reuseable != null && reuseable.eIsProxy()) {
+			InternalEObject oldReuseable = (InternalEObject)reuseable;
+			reuseable = (ReUseAble)eResolveProxy(oldReuseable);
+			if (reuseable != oldReuseable) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.RE_USABLE_REF__REUSEABLE, oldReuseable, reuseable));
+			}
+		}
+		return reuseable;
 	}
 
 	/**
@@ -80,11 +79,20 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
+	public ReUseAble basicGetReuseable() {
+		return reuseable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReuseable(ReUseAble newReuseable) {
+		ReUseAble oldReuseable = reuseable;
+		reuseable = newReuseable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.URDF_ATTR_NUMERIC__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.RE_USABLE_REF__REUSEABLE, oldReuseable, reuseable));
 	}
 
 	/**
@@ -95,8 +103,9 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.URDF_ATTR_NUMERIC__VALUE:
-				return getValue();
+			case MyURDFPackage.RE_USABLE_REF__REUSEABLE:
+				if (resolve) return getReuseable();
+				return basicGetReuseable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,8 +118,8 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.URDF_ATTR_NUMERIC__VALUE:
-				setValue((String)newValue);
+			case MyURDFPackage.RE_USABLE_REF__REUSEABLE:
+				setReuseable((ReUseAble)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +133,8 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.URDF_ATTR_NUMERIC__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case MyURDFPackage.RE_USABLE_REF__REUSEABLE:
+				setReuseable((ReUseAble)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,26 +148,10 @@ public class URDFAttrNumericImpl extends ReUseAbleImpl implements URDFAttrNumeri
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.URDF_ATTR_NUMERIC__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case MyURDFPackage.RE_USABLE_REF__REUSEABLE:
+				return reuseable != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
-
-} //URDFAttrNumericImpl
+} //ReUsableRefImpl

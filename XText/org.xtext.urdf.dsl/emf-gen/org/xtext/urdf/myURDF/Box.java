@@ -13,9 +13,9 @@ package org.xtext.urdf.myURDF;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Box#getHeight <em>Height</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Box#getWidth <em>Width</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Box#getLength <em>Length</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Box#getHeight <em>Height</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getBox()

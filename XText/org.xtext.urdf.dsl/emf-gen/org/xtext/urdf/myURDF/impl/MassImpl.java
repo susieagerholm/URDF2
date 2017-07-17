@@ -14,7 +14,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.Mass;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrNumeric;
+import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,22 +26,40 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.MassImpl#getMassValueInKilograms <em>Mass Value In Kilograms</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.MassImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.MassImpl#getMassKilogram <em>Mass Kilogram</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MassImpl extends NamedElementImpl implements Mass {
+public class MassImpl extends ReUseAbleImpl implements Mass {
 	/**
-	 * The cached value of the '{@link #getMassValueInKilograms() <em>Mass Value In Kilograms</em>}' containment reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMassValueInKilograms()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected URDFAttrNumeric massValueInKilograms;
-
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getMassKilogram() <em>Mass Kilogram</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMassKilogram()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrSignedNumeric massKilogram;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,8 +84,8 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public URDFAttrNumeric getMassValueInKilograms() {
-		return massValueInKilograms;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -73,11 +93,32 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMassValueInKilograms(URDFAttrNumeric newMassValueInKilograms, NotificationChain msgs) {
-		URDFAttrNumeric oldMassValueInKilograms = massValueInKilograms;
-		massValueInKilograms = newMassValueInKilograms;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public URDFAttrSignedNumeric getMassKilogram() {
+		return massKilogram;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMassKilogram(URDFAttrSignedNumeric newMassKilogram, NotificationChain msgs) {
+		URDFAttrSignedNumeric oldMassKilogram = massKilogram;
+		massKilogram = newMassKilogram;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS, oldMassValueInKilograms, newMassValueInKilograms);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__MASS_KILOGRAM, oldMassKilogram, newMassKilogram);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -88,18 +129,18 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMassValueInKilograms(URDFAttrNumeric newMassValueInKilograms) {
-		if (newMassValueInKilograms != massValueInKilograms) {
+	public void setMassKilogram(URDFAttrSignedNumeric newMassKilogram) {
+		if (newMassKilogram != massKilogram) {
 			NotificationChain msgs = null;
-			if (massValueInKilograms != null)
-				msgs = ((InternalEObject)massValueInKilograms).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS, null, msgs);
-			if (newMassValueInKilograms != null)
-				msgs = ((InternalEObject)newMassValueInKilograms).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS, null, msgs);
-			msgs = basicSetMassValueInKilograms(newMassValueInKilograms, msgs);
+			if (massKilogram != null)
+				msgs = ((InternalEObject)massKilogram).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MASS__MASS_KILOGRAM, null, msgs);
+			if (newMassKilogram != null)
+				msgs = ((InternalEObject)newMassKilogram).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.MASS__MASS_KILOGRAM, null, msgs);
+			msgs = basicSetMassKilogram(newMassKilogram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS, newMassValueInKilograms, newMassValueInKilograms));
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.MASS__MASS_KILOGRAM, newMassKilogram, newMassKilogram));
 	}
 
 	/**
@@ -110,8 +151,8 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
-				return basicSetMassValueInKilograms(null, msgs);
+			case MyURDFPackage.MASS__MASS_KILOGRAM:
+				return basicSetMassKilogram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -124,8 +165,10 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
-				return getMassValueInKilograms();
+			case MyURDFPackage.MASS__NAME:
+				return getName();
+			case MyURDFPackage.MASS__MASS_KILOGRAM:
+				return getMassKilogram();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,8 +181,11 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
-				setMassValueInKilograms((URDFAttrNumeric)newValue);
+			case MyURDFPackage.MASS__NAME:
+				setName((String)newValue);
+				return;
+			case MyURDFPackage.MASS__MASS_KILOGRAM:
+				setMassKilogram((URDFAttrSignedNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -153,8 +199,11 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
-				setMassValueInKilograms((URDFAttrNumeric)null);
+			case MyURDFPackage.MASS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case MyURDFPackage.MASS__MASS_KILOGRAM:
+				setMassKilogram((URDFAttrSignedNumeric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -168,10 +217,60 @@ public class MassImpl extends NamedElementImpl implements Mass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.MASS__MASS_VALUE_IN_KILOGRAMS:
-				return massValueInKilograms != null;
+			case MyURDFPackage.MASS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MyURDFPackage.MASS__MASS_KILOGRAM:
+				return massKilogram != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.MASS__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.MASS__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MassImpl

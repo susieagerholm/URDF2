@@ -27,7 +27,7 @@ public enum JointType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	FIXED(0, "fixed", "Fixed"),
+	FIXED(0, "fixed", "fixed"),
 
 	/**
 	 * The '<em><b>Revolute</b></em>' literal object.
@@ -37,7 +37,7 @@ public enum JointType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	REVOLUTE(1, "revolute", "Revolute"),
+	REVOLUTE(1, "revolute", "revolute"),
 
 	/**
 	 * The '<em><b>Prismatic</b></em>' literal object.
@@ -47,7 +47,7 @@ public enum JointType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PRISMATIC(2, "prismatic", "Prismatic"),
+	PRISMATIC(2, "prismatic", "prismatic"),
 
 	/**
 	 * The '<em><b>Continuous</b></em>' literal object.
@@ -57,7 +57,7 @@ public enum JointType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	CONTINUOUS(3, "continuous", "Continuous");
+	CONTINUOUS(3, "continuous", "continuous");
 
 	/**
 	 * The '<em><b>Fixed</b></em>' literal value.
@@ -68,7 +68,7 @@ public enum JointType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #FIXED
-	 * @model name="fixed" literal="Fixed"
+	 * @model name="fixed"
 	 * @generated
 	 * @ordered
 	 */
@@ -83,7 +83,7 @@ public enum JointType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #REVOLUTE
-	 * @model name="revolute" literal="Revolute"
+	 * @model name="revolute"
 	 * @generated
 	 * @ordered
 	 */
@@ -98,7 +98,7 @@ public enum JointType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #PRISMATIC
-	 * @model name="prismatic" literal="Prismatic"
+	 * @model name="prismatic"
 	 * @generated
 	 * @ordered
 	 */
@@ -113,7 +113,7 @@ public enum JointType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CONTINUOUS
-	 * @model name="continuous" literal="Continuous"
+	 * @model name="continuous"
 	 * @generated
 	 * @ordered
 	 */

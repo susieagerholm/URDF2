@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Inertial extends NamedElement {
+public interface Inertial extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Inertia</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public interface Inertial extends NamedElement {
 	 * @return the value of the '<em>Inertia</em>' containment reference.
 	 * @see #setInertia(Inertia)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getInertial_Inertia()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	Inertia getInertia();
@@ -61,7 +61,7 @@ public interface Inertial extends NamedElement {
 	 * @return the value of the '<em>Mass</em>' containment reference.
 	 * @see #setMass(Mass)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getInertial_Mass()
-	 * @model containment="true" required="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	Mass getMass();

@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Limit extends NamedElement {
+public interface Limit extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Effort</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

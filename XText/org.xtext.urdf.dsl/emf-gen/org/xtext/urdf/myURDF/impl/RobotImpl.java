@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.urdf.myURDF.AddTo;
 import org.xtext.urdf.myURDF.Joint;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.LinkRef;
 import org.xtext.urdf.myURDF.MyURDFPackage;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.Topology;
@@ -34,34 +34,24 @@ import org.xtext.urdf.myURDF.Topology;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getTopologies <em>Topologies</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getLink <em>Link</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getLinks <em>Links</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getJoint <em>Joint</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getLinkrefs <em>Linkrefs</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getTopologies <em>Topologies</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.RobotImpl#getAddto <em>Addto</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RobotImpl extends NamedElementImpl implements Robot {
 	/**
-	 * The cached value of the '{@link #getTopologies() <em>Topologies</em>}' containment reference list.
+	 * The cached value of the '{@link #getLinks() <em>Links</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTopologies()
+	 * @see #getLinks()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Topology> topologies;
-
-	/**
-	 * The cached value of the '{@link #getLink() <em>Link</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLink()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Link> link;
+	protected EList<Link> links;
 
 	/**
 	 * The cached value of the '{@link #getJoint() <em>Joint</em>}' containment reference list.
@@ -74,14 +64,24 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	protected EList<Joint> joint;
 
 	/**
-	 * The cached value of the '{@link #getLinkrefs() <em>Linkrefs</em>}' containment reference list.
+	 * The cached value of the '{@link #getTopologies() <em>Topologies</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLinkrefs()
+	 * @see #getTopologies()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<LinkRef> linkrefs;
+	protected EList<Topology> topologies;
+
+	/**
+	 * The cached value of the '{@link #getAddto() <em>Addto</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAddto()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AddTo> addto;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,6 +107,18 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Link> getLinks() {
+		if (links == null) {
+			links = new EObjectContainmentEList<Link>(Link.class, this, MyURDFPackage.ROBOT__LINKS);
+		}
+		return links;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Topology> getTopologies() {
 		if (topologies == null) {
 			topologies = new EObjectContainmentEList<Topology>(Topology.class, this, MyURDFPackage.ROBOT__TOPOLOGIES);
@@ -119,11 +131,11 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Link> getLink() {
-		if (link == null) {
-			link = new EObjectContainmentEList<Link>(Link.class, this, MyURDFPackage.ROBOT__LINK);
+	public EList<AddTo> getAddto() {
+		if (addto == null) {
+			addto = new EObjectContainmentEList<AddTo>(AddTo.class, this, MyURDFPackage.ROBOT__ADDTO);
 		}
-		return link;
+		return addto;
 	}
 
 	/**
@@ -143,29 +155,17 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<LinkRef> getLinkrefs() {
-		if (linkrefs == null) {
-			linkrefs = new EObjectContainmentEList<LinkRef>(LinkRef.class, this, MyURDFPackage.ROBOT__LINKREFS);
-		}
-		return linkrefs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__TOPOLOGIES:
-				return ((InternalEList<?>)getTopologies()).basicRemove(otherEnd, msgs);
-			case MyURDFPackage.ROBOT__LINK:
-				return ((InternalEList<?>)getLink()).basicRemove(otherEnd, msgs);
+			case MyURDFPackage.ROBOT__LINKS:
+				return ((InternalEList<?>)getLinks()).basicRemove(otherEnd, msgs);
 			case MyURDFPackage.ROBOT__JOINT:
 				return ((InternalEList<?>)getJoint()).basicRemove(otherEnd, msgs);
-			case MyURDFPackage.ROBOT__LINKREFS:
-				return ((InternalEList<?>)getLinkrefs()).basicRemove(otherEnd, msgs);
+			case MyURDFPackage.ROBOT__TOPOLOGIES:
+				return ((InternalEList<?>)getTopologies()).basicRemove(otherEnd, msgs);
+			case MyURDFPackage.ROBOT__ADDTO:
+				return ((InternalEList<?>)getAddto()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -178,14 +178,14 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__TOPOLOGIES:
-				return getTopologies();
-			case MyURDFPackage.ROBOT__LINK:
-				return getLink();
+			case MyURDFPackage.ROBOT__LINKS:
+				return getLinks();
 			case MyURDFPackage.ROBOT__JOINT:
 				return getJoint();
-			case MyURDFPackage.ROBOT__LINKREFS:
-				return getLinkrefs();
+			case MyURDFPackage.ROBOT__TOPOLOGIES:
+				return getTopologies();
+			case MyURDFPackage.ROBOT__ADDTO:
+				return getAddto();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -199,21 +199,21 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__TOPOLOGIES:
-				getTopologies().clear();
-				getTopologies().addAll((Collection<? extends Topology>)newValue);
-				return;
-			case MyURDFPackage.ROBOT__LINK:
-				getLink().clear();
-				getLink().addAll((Collection<? extends Link>)newValue);
+			case MyURDFPackage.ROBOT__LINKS:
+				getLinks().clear();
+				getLinks().addAll((Collection<? extends Link>)newValue);
 				return;
 			case MyURDFPackage.ROBOT__JOINT:
 				getJoint().clear();
 				getJoint().addAll((Collection<? extends Joint>)newValue);
 				return;
-			case MyURDFPackage.ROBOT__LINKREFS:
-				getLinkrefs().clear();
-				getLinkrefs().addAll((Collection<? extends LinkRef>)newValue);
+			case MyURDFPackage.ROBOT__TOPOLOGIES:
+				getTopologies().clear();
+				getTopologies().addAll((Collection<? extends Topology>)newValue);
+				return;
+			case MyURDFPackage.ROBOT__ADDTO:
+				getAddto().clear();
+				getAddto().addAll((Collection<? extends AddTo>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -227,17 +227,17 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__TOPOLOGIES:
-				getTopologies().clear();
-				return;
-			case MyURDFPackage.ROBOT__LINK:
-				getLink().clear();
+			case MyURDFPackage.ROBOT__LINKS:
+				getLinks().clear();
 				return;
 			case MyURDFPackage.ROBOT__JOINT:
 				getJoint().clear();
 				return;
-			case MyURDFPackage.ROBOT__LINKREFS:
-				getLinkrefs().clear();
+			case MyURDFPackage.ROBOT__TOPOLOGIES:
+				getTopologies().clear();
+				return;
+			case MyURDFPackage.ROBOT__ADDTO:
+				getAddto().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -251,14 +251,14 @@ public class RobotImpl extends NamedElementImpl implements Robot {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.ROBOT__TOPOLOGIES:
-				return topologies != null && !topologies.isEmpty();
-			case MyURDFPackage.ROBOT__LINK:
-				return link != null && !link.isEmpty();
+			case MyURDFPackage.ROBOT__LINKS:
+				return links != null && !links.isEmpty();
 			case MyURDFPackage.ROBOT__JOINT:
 				return joint != null && !joint.isEmpty();
-			case MyURDFPackage.ROBOT__LINKREFS:
-				return linkrefs != null && !linkrefs.isEmpty();
+			case MyURDFPackage.ROBOT__TOPOLOGIES:
+				return topologies != null && !topologies.isEmpty();
+			case MyURDFPackage.ROBOT__ADDTO:
+				return addto != null && !addto.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

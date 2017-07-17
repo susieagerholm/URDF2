@@ -14,38 +14,38 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.Mass#getMassValueInKilograms <em>Mass Value In Kilograms</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Mass#getMassKilogram <em>Mass Kilogram</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getMass()
  * @model
  * @generated
  */
-public interface Mass extends NamedElement {
+public interface Mass extends ReUseAble, NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Mass Value In Kilograms</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Mass Kilogram</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mass Value In Kilograms</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Mass Kilogram</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mass Value In Kilograms</em>' containment reference.
-	 * @see #setMassValueInKilograms(URDFAttrNumeric)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getMass_MassValueInKilograms()
+	 * @return the value of the '<em>Mass Kilogram</em>' containment reference.
+	 * @see #setMassKilogram(URDFAttrSignedNumeric)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getMass_MassKilogram()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	URDFAttrNumeric getMassValueInKilograms();
+	URDFAttrSignedNumeric getMassKilogram();
 
 	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Mass#getMassValueInKilograms <em>Mass Value In Kilograms</em>}' containment reference.
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Mass#getMassKilogram <em>Mass Kilogram</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mass Value In Kilograms</em>' containment reference.
-	 * @see #getMassValueInKilograms()
+	 * @param value the new value of the '<em>Mass Kilogram</em>' containment reference.
+	 * @see #getMassKilogram()
 	 * @generated
 	 */
-	void setMassValueInKilograms(URDFAttrNumeric value);
+	void setMassKilogram(URDFAttrSignedNumeric value);
 
 } // Mass

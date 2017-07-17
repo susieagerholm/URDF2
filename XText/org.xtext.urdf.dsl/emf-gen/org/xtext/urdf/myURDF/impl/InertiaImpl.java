@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.Inertia;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
 /**
@@ -24,17 +25,38 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxx <em>Ixx</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxy <em>Ixy</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIxz <em>Ixz</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIzz <em>Izz</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIyy <em>Iyy</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIyz <em>Iyz</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.InertiaImpl#getIzz <em>Izz</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class InertiaImpl extends NamedElementImpl implements Inertia {
+public class InertiaImpl extends ReUseAbleImpl implements Inertia {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getIxx() <em>Ixx</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -66,6 +88,16 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	protected URDFAttrSignedNumeric ixz;
 
 	/**
+	 * The cached value of the '{@link #getIzz() <em>Izz</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIzz()
+	 * @generated
+	 * @ordered
+	 */
+	protected URDFAttrSignedNumeric izz;
+
+	/**
 	 * The cached value of the '{@link #getIyy() <em>Iyy</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,16 +118,6 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	protected URDFAttrSignedNumeric iyz;
 
 	/**
-	 * The cached value of the '{@link #getIzz() <em>Izz</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIzz()
-	 * @generated
-	 * @ordered
-	 */
-	protected URDFAttrSignedNumeric izz;
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -112,6 +134,27 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.INERTIA;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.INERTIA__NAME, oldName, name));
 	}
 
 	/**
@@ -386,12 +429,12 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 				return basicSetIxy(null, msgs);
 			case MyURDFPackage.INERTIA__IXZ:
 				return basicSetIxz(null, msgs);
+			case MyURDFPackage.INERTIA__IZZ:
+				return basicSetIzz(null, msgs);
 			case MyURDFPackage.INERTIA__IYY:
 				return basicSetIyy(null, msgs);
 			case MyURDFPackage.INERTIA__IYZ:
 				return basicSetIyz(null, msgs);
-			case MyURDFPackage.INERTIA__IZZ:
-				return basicSetIzz(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -404,18 +447,20 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIA__NAME:
+				return getName();
 			case MyURDFPackage.INERTIA__IXX:
 				return getIxx();
 			case MyURDFPackage.INERTIA__IXY:
 				return getIxy();
 			case MyURDFPackage.INERTIA__IXZ:
 				return getIxz();
+			case MyURDFPackage.INERTIA__IZZ:
+				return getIzz();
 			case MyURDFPackage.INERTIA__IYY:
 				return getIyy();
 			case MyURDFPackage.INERTIA__IYZ:
 				return getIyz();
-			case MyURDFPackage.INERTIA__IZZ:
-				return getIzz();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -428,6 +473,9 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIA__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.INERTIA__IXX:
 				setIxx((URDFAttrSignedNumeric)newValue);
 				return;
@@ -437,14 +485,14 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 			case MyURDFPackage.INERTIA__IXZ:
 				setIxz((URDFAttrSignedNumeric)newValue);
 				return;
+			case MyURDFPackage.INERTIA__IZZ:
+				setIzz((URDFAttrSignedNumeric)newValue);
+				return;
 			case MyURDFPackage.INERTIA__IYY:
 				setIyy((URDFAttrSignedNumeric)newValue);
 				return;
 			case MyURDFPackage.INERTIA__IYZ:
 				setIyz((URDFAttrSignedNumeric)newValue);
-				return;
-			case MyURDFPackage.INERTIA__IZZ:
-				setIzz((URDFAttrSignedNumeric)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -458,6 +506,9 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIA__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.INERTIA__IXX:
 				setIxx((URDFAttrSignedNumeric)null);
 				return;
@@ -467,14 +518,14 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 			case MyURDFPackage.INERTIA__IXZ:
 				setIxz((URDFAttrSignedNumeric)null);
 				return;
+			case MyURDFPackage.INERTIA__IZZ:
+				setIzz((URDFAttrSignedNumeric)null);
+				return;
 			case MyURDFPackage.INERTIA__IYY:
 				setIyy((URDFAttrSignedNumeric)null);
 				return;
 			case MyURDFPackage.INERTIA__IYZ:
 				setIyz((URDFAttrSignedNumeric)null);
-				return;
-			case MyURDFPackage.INERTIA__IZZ:
-				setIzz((URDFAttrSignedNumeric)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -488,20 +539,70 @@ public class InertiaImpl extends NamedElementImpl implements Inertia {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIA__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.INERTIA__IXX:
 				return ixx != null;
 			case MyURDFPackage.INERTIA__IXY:
 				return ixy != null;
 			case MyURDFPackage.INERTIA__IXZ:
 				return ixz != null;
+			case MyURDFPackage.INERTIA__IZZ:
+				return izz != null;
 			case MyURDFPackage.INERTIA__IYY:
 				return iyy != null;
 			case MyURDFPackage.INERTIA__IYZ:
 				return iyz != null;
-			case MyURDFPackage.INERTIA__IZZ:
-				return izz != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.INERTIA__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.INERTIA__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //InertiaImpl

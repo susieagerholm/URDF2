@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.Axis;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrINT;
 
 /**
@@ -24,6 +25,7 @@ import org.xtext.urdf.myURDF.URDFAttrINT;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getX <em>X</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getY <em>Y</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.AxisImpl#getZ <em>Z</em>}</li>
@@ -31,7 +33,27 @@ import org.xtext.urdf.myURDF.URDFAttrINT;
  *
  * @generated
  */
-public class AxisImpl extends NamedElementImpl implements Axis {
+public class AxisImpl extends ReUseAbleImpl implements Axis {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getX() <em>X</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -79,6 +101,27 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.AXIS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.AXIS__NAME, oldName, name));
 	}
 
 	/**
@@ -236,6 +279,8 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.AXIS__NAME:
+				return getName();
 			case MyURDFPackage.AXIS__X:
 				return getX();
 			case MyURDFPackage.AXIS__Y:
@@ -254,6 +299,9 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.AXIS__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.AXIS__X:
 				setX((URDFAttrINT)newValue);
 				return;
@@ -275,6 +323,9 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.AXIS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.AXIS__X:
 				setX((URDFAttrINT)null);
 				return;
@@ -296,6 +347,8 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.AXIS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.AXIS__X:
 				return x != null;
 			case MyURDFPackage.AXIS__Y:
@@ -304,6 +357,54 @@ public class AxisImpl extends NamedElementImpl implements Axis {
 				return z != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.AXIS__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.AXIS__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AxisImpl

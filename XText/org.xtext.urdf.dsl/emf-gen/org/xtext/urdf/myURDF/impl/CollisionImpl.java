@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.xtext.urdf.myURDF.Collision;
 import org.xtext.urdf.myURDF.Geometry;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Origin;
 
 /**
@@ -29,22 +30,33 @@ import org.xtext.urdf.myURDF.Origin;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getGeometry <em>Geometry</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.CollisionImpl#getGeometry <em>Geometry</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CollisionImpl extends NamedElementImpl implements Collision {
+public class CollisionImpl extends ReUseAbleImpl implements Collision {
 	/**
-	 * The cached value of the '{@link #getGeometry() <em>Geometry</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGeometry()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Geometry> geometry;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
@@ -55,6 +67,16 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	 * @ordered
 	 */
 	protected Origin origin;
+
+	/**
+	 * The cached value of the '{@link #getGeometry() <em>Geometry</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeometry()
+	 * @generated
+	 * @ordered
+	 */
+	protected Geometry geometry;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,11 +102,63 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Geometry> getGeometry() {
-		if (geometry == null) {
-			geometry = new EObjectContainmentEList<Geometry>(Geometry.class, this, MyURDFPackage.COLLISION__GEOMETRY);
-		}
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.COLLISION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Geometry getGeometry() {
 		return geometry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetGeometry(Geometry newGeometry, NotificationChain msgs) {
+		Geometry oldGeometry = geometry;
+		geometry = newGeometry;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.COLLISION__GEOMETRY, oldGeometry, newGeometry);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGeometry(Geometry newGeometry) {
+		if (newGeometry != geometry) {
+			NotificationChain msgs = null;
+			if (geometry != null)
+				msgs = ((InternalEObject)geometry).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.COLLISION__GEOMETRY, null, msgs);
+			if (newGeometry != null)
+				msgs = ((InternalEObject)newGeometry).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.COLLISION__GEOMETRY, null, msgs);
+			msgs = basicSetGeometry(newGeometry, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.COLLISION__GEOMETRY, newGeometry, newGeometry));
 	}
 
 	/**
@@ -138,10 +212,10 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__GEOMETRY:
-				return ((InternalEList<?>)getGeometry()).basicRemove(otherEnd, msgs);
 			case MyURDFPackage.COLLISION__ORIGIN:
 				return basicSetOrigin(null, msgs);
+			case MyURDFPackage.COLLISION__GEOMETRY:
+				return basicSetGeometry(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -154,10 +228,12 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__GEOMETRY:
-				return getGeometry();
+			case MyURDFPackage.COLLISION__NAME:
+				return getName();
 			case MyURDFPackage.COLLISION__ORIGIN:
 				return getOrigin();
+			case MyURDFPackage.COLLISION__GEOMETRY:
+				return getGeometry();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,12 +247,14 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__GEOMETRY:
-				getGeometry().clear();
-				getGeometry().addAll((Collection<? extends Geometry>)newValue);
+			case MyURDFPackage.COLLISION__NAME:
+				setName((String)newValue);
 				return;
 			case MyURDFPackage.COLLISION__ORIGIN:
 				setOrigin((Origin)newValue);
+				return;
+			case MyURDFPackage.COLLISION__GEOMETRY:
+				setGeometry((Geometry)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,11 +268,14 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__GEOMETRY:
-				getGeometry().clear();
+			case MyURDFPackage.COLLISION__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case MyURDFPackage.COLLISION__ORIGIN:
 				setOrigin((Origin)null);
+				return;
+			case MyURDFPackage.COLLISION__GEOMETRY:
+				setGeometry((Geometry)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -208,12 +289,62 @@ public class CollisionImpl extends NamedElementImpl implements Collision {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MyURDFPackage.COLLISION__GEOMETRY:
-				return geometry != null && !geometry.isEmpty();
+			case MyURDFPackage.COLLISION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.COLLISION__ORIGIN:
 				return origin != null;
+			case MyURDFPackage.COLLISION__GEOMETRY:
+				return geometry != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.COLLISION__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.COLLISION__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CollisionImpl

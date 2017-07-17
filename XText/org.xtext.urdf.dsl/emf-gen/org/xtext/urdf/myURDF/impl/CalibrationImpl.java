@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.Calibration;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
 /**
@@ -24,13 +25,34 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getRising <em>Rising</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.CalibrationImpl#getFalling <em>Falling</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CalibrationImpl extends NamedElementImpl implements Calibration {
+public class CalibrationImpl extends ReUseAbleImpl implements Calibration {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRising() <em>Rising</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -68,6 +90,27 @@ public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.CALIBRATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.CALIBRATION__NAME, oldName, name));
 	}
 
 	/**
@@ -180,6 +223,8 @@ public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.CALIBRATION__NAME:
+				return getName();
 			case MyURDFPackage.CALIBRATION__RISING:
 				return getRising();
 			case MyURDFPackage.CALIBRATION__FALLING:
@@ -196,6 +241,9 @@ public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.CALIBRATION__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.CALIBRATION__RISING:
 				setRising((URDFAttrSignedNumeric)newValue);
 				return;
@@ -214,6 +262,9 @@ public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.CALIBRATION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.CALIBRATION__RISING:
 				setRising((URDFAttrSignedNumeric)null);
 				return;
@@ -232,12 +283,62 @@ public class CalibrationImpl extends NamedElementImpl implements Calibration {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.CALIBRATION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.CALIBRATION__RISING:
 				return rising != null;
 			case MyURDFPackage.CALIBRATION__FALLING:
 				return falling != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.CALIBRATION__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.CALIBRATION__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //CalibrationImpl

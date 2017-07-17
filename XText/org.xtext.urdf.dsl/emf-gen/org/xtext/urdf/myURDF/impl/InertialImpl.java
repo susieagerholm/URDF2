@@ -16,6 +16,7 @@ import org.xtext.urdf.myURDF.Inertia;
 import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Mass;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Origin;
 
 /**
@@ -26,6 +27,7 @@ import org.xtext.urdf.myURDF.Origin;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.InertialImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertialImpl#getInertia <em>Inertia</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertialImpl#getMass <em>Mass</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.InertialImpl#getOrigin <em>Origin</em>}</li>
@@ -33,7 +35,27 @@ import org.xtext.urdf.myURDF.Origin;
  *
  * @generated
  */
-public class InertialImpl extends NamedElementImpl implements Inertial {
+public class InertialImpl extends ReUseAbleImpl implements Inertial {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getInertia() <em>Inertia</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -81,6 +103,27 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.INERTIAL;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.INERTIAL__NAME, oldName, name));
 	}
 
 	/**
@@ -238,6 +281,8 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIAL__NAME:
+				return getName();
 			case MyURDFPackage.INERTIAL__INERTIA:
 				return getInertia();
 			case MyURDFPackage.INERTIAL__MASS:
@@ -256,6 +301,9 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIAL__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.INERTIAL__INERTIA:
 				setInertia((Inertia)newValue);
 				return;
@@ -277,6 +325,9 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIAL__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.INERTIAL__INERTIA:
 				setInertia((Inertia)null);
 				return;
@@ -298,6 +349,8 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.INERTIAL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.INERTIAL__INERTIA:
 				return inertia != null;
 			case MyURDFPackage.INERTIAL__MASS:
@@ -306,6 +359,54 @@ public class InertialImpl extends NamedElementImpl implements Inertial {
 				return origin != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.INERTIAL__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.INERTIAL__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //InertialImpl

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getURDFAttrFloat()
- * @model annotation="http://www.obeo.fr/dsl/dnc/archetype archetype='MomentInterval'"
+ * @model
  * @generated
  */
 public interface URDFAttrFloat extends EObject {
@@ -33,7 +33,7 @@ public interface URDFAttrFloat extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(float)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getURDFAttrFloat_Value()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	float getValue();

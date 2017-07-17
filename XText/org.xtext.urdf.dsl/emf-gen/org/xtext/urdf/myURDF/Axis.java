@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Axis extends NamedElement {
+public interface Axis extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>X</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

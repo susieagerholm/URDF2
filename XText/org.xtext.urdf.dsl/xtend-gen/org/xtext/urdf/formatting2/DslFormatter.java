@@ -28,8 +28,8 @@ public class DslFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<Robot>interior(robot, _function);
-    EList<Link> _link = robot.getLink();
-    for (final Link link : _link) {
+    EList<Link> _links = robot.getLinks();
+    for (final Link link : _links) {
       Link _format = document.<Link>format(link);
       final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.setNewLines(1, 1, 2);
@@ -118,6 +118,9 @@ public class DslFormatter extends AbstractFormatter2 {
     } else if (axis instanceof Axis) {
       _format((Axis)axis, document);
       return;
+    } else if (axis instanceof Geometry) {
+      _format((Geometry)axis, document);
+      return;
     } else if (axis instanceof Joint) {
       _format((Joint)axis, document);
       return;
@@ -132,9 +135,6 @@ public class DslFormatter extends AbstractFormatter2 {
       return;
     } else if (axis instanceof Visual) {
       _format((Visual)axis, document);
-      return;
-    } else if (axis instanceof Geometry) {
-      _format((Geometry)axis, document);
       return;
     } else if (axis instanceof EObject) {
       _format((EObject)axis, document);

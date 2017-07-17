@@ -9,12 +9,19 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.xtext.urdf.myURDF.Axis;
+import org.xtext.urdf.myURDF.Calibration;
+import org.xtext.urdf.myURDF.Dynamics;
 import org.xtext.urdf.myURDF.Joint;
-import org.xtext.urdf.myURDF.JointDecorator;
 import org.xtext.urdf.myURDF.JointType;
+import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
+import org.xtext.urdf.myURDF.Origin;
 import org.xtext.urdf.myURDF.ReUseAble;
+import org.xtext.urdf.myURDF.Reuse;
+import org.xtext.urdf.myURDF.SafetyController;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,16 +31,43 @@ import org.xtext.urdf.myURDF.ReUseAble;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getChildOf <em>Child Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getParentOf <em>Parent Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getDecorator <em>Decorator</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getAxis <em>Axis</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getLimit <em>Limit</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getCalibration <em>Calibration</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getDynamics <em>Dynamics</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getReuse <em>Reuse</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.JointImpl#getSafetycontroller <em>Safetycontroller</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class JointImpl extends NamedElementImpl implements Joint {
+public class JointImpl extends ReUseAbleImpl implements Joint {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -42,7 +76,7 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 * @generated
 	 * @ordered
 	 */
-	protected ReUseAble isReuseOf;
+	protected Joint isReuseOf;
 
 	/**
 	 * The cached value of the '{@link #getChildOf() <em>Child Of</em>}' reference.
@@ -85,14 +119,74 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	protected JointType type = TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDecorator() <em>Decorator</em>}' containment reference.
+	 * The cached value of the '{@link #getAxis() <em>Axis</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDecorator()
+	 * @see #getAxis()
 	 * @generated
 	 * @ordered
 	 */
-	protected JointDecorator decorator;
+	protected Axis axis;
+
+	/**
+	 * The cached value of the '{@link #getLimit() <em>Limit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLimit()
+	 * @generated
+	 * @ordered
+	 */
+	protected Limit limit;
+
+	/**
+	 * The cached value of the '{@link #getCalibration() <em>Calibration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCalibration()
+	 * @generated
+	 * @ordered
+	 */
+	protected Calibration calibration;
+
+	/**
+	 * The cached value of the '{@link #getDynamics() <em>Dynamics</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDynamics()
+	 * @generated
+	 * @ordered
+	 */
+	protected Dynamics dynamics;
+
+	/**
+	 * The cached value of the '{@link #getOrigin() <em>Origin</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOrigin()
+	 * @generated
+	 * @ordered
+	 */
+	protected Origin origin;
+
+	/**
+	 * The cached value of the '{@link #getReuse() <em>Reuse</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReuse()
+	 * @generated
+	 * @ordered
+	 */
+	protected Reuse reuse;
+
+	/**
+	 * The cached value of the '{@link #getSafetycontroller() <em>Safetycontroller</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSafetycontroller()
+	 * @generated
+	 * @ordered
+	 */
+	protected SafetyController safetycontroller;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,6 +205,27 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.JOINT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__NAME, oldName, name));
 	}
 
 	/**
@@ -139,10 +254,311 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReUseAble getIsReuseOf() {
+	public Axis getAxis() {
+		return axis;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetAxis(Axis newAxis, NotificationChain msgs) {
+		Axis oldAxis = axis;
+		axis = newAxis;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__AXIS, oldAxis, newAxis);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAxis(Axis newAxis) {
+		if (newAxis != axis) {
+			NotificationChain msgs = null;
+			if (axis != null)
+				msgs = ((InternalEObject)axis).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__AXIS, null, msgs);
+			if (newAxis != null)
+				msgs = ((InternalEObject)newAxis).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__AXIS, null, msgs);
+			msgs = basicSetAxis(newAxis, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__AXIS, newAxis, newAxis));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Limit getLimit() {
+		return limit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLimit(Limit newLimit, NotificationChain msgs) {
+		Limit oldLimit = limit;
+		limit = newLimit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__LIMIT, oldLimit, newLimit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLimit(Limit newLimit) {
+		if (newLimit != limit) {
+			NotificationChain msgs = null;
+			if (limit != null)
+				msgs = ((InternalEObject)limit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__LIMIT, null, msgs);
+			if (newLimit != null)
+				msgs = ((InternalEObject)newLimit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__LIMIT, null, msgs);
+			msgs = basicSetLimit(newLimit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__LIMIT, newLimit, newLimit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Calibration getCalibration() {
+		return calibration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCalibration(Calibration newCalibration, NotificationChain msgs) {
+		Calibration oldCalibration = calibration;
+		calibration = newCalibration;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__CALIBRATION, oldCalibration, newCalibration);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCalibration(Calibration newCalibration) {
+		if (newCalibration != calibration) {
+			NotificationChain msgs = null;
+			if (calibration != null)
+				msgs = ((InternalEObject)calibration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__CALIBRATION, null, msgs);
+			if (newCalibration != null)
+				msgs = ((InternalEObject)newCalibration).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__CALIBRATION, null, msgs);
+			msgs = basicSetCalibration(newCalibration, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__CALIBRATION, newCalibration, newCalibration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Dynamics getDynamics() {
+		return dynamics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDynamics(Dynamics newDynamics, NotificationChain msgs) {
+		Dynamics oldDynamics = dynamics;
+		dynamics = newDynamics;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__DYNAMICS, oldDynamics, newDynamics);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDynamics(Dynamics newDynamics) {
+		if (newDynamics != dynamics) {
+			NotificationChain msgs = null;
+			if (dynamics != null)
+				msgs = ((InternalEObject)dynamics).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__DYNAMICS, null, msgs);
+			if (newDynamics != null)
+				msgs = ((InternalEObject)newDynamics).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__DYNAMICS, null, msgs);
+			msgs = basicSetDynamics(newDynamics, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__DYNAMICS, newDynamics, newDynamics));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Origin getOrigin() {
+		return origin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOrigin(Origin newOrigin, NotificationChain msgs) {
+		Origin oldOrigin = origin;
+		origin = newOrigin;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__ORIGIN, oldOrigin, newOrigin);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOrigin(Origin newOrigin) {
+		if (newOrigin != origin) {
+			NotificationChain msgs = null;
+			if (origin != null)
+				msgs = ((InternalEObject)origin).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__ORIGIN, null, msgs);
+			if (newOrigin != null)
+				msgs = ((InternalEObject)newOrigin).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__ORIGIN, null, msgs);
+			msgs = basicSetOrigin(newOrigin, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__ORIGIN, newOrigin, newOrigin));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Reuse getReuse() {
+		return reuse;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReuse(Reuse newReuse, NotificationChain msgs) {
+		Reuse oldReuse = reuse;
+		reuse = newReuse;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__REUSE, oldReuse, newReuse);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReuse(Reuse newReuse) {
+		if (newReuse != reuse) {
+			NotificationChain msgs = null;
+			if (reuse != null)
+				msgs = ((InternalEObject)reuse).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__REUSE, null, msgs);
+			if (newReuse != null)
+				msgs = ((InternalEObject)newReuse).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__REUSE, null, msgs);
+			msgs = basicSetReuse(newReuse, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__REUSE, newReuse, newReuse));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SafetyController getSafetycontroller() {
+		return safetycontroller;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSafetycontroller(SafetyController newSafetycontroller, NotificationChain msgs) {
+		SafetyController oldSafetycontroller = safetycontroller;
+		safetycontroller = newSafetycontroller;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__SAFETYCONTROLLER, oldSafetycontroller, newSafetycontroller);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSafetycontroller(SafetyController newSafetycontroller) {
+		if (newSafetycontroller != safetycontroller) {
+			NotificationChain msgs = null;
+			if (safetycontroller != null)
+				msgs = ((InternalEObject)safetycontroller).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__SAFETYCONTROLLER, null, msgs);
+			if (newSafetycontroller != null)
+				msgs = ((InternalEObject)newSafetycontroller).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__SAFETYCONTROLLER, null, msgs);
+			msgs = basicSetSafetycontroller(newSafetycontroller, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__SAFETYCONTROLLER, newSafetycontroller, newSafetycontroller));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Joint getIsReuseOf() {
 		if (isReuseOf != null && isReuseOf.eIsProxy()) {
 			InternalEObject oldIsReuseOf = (InternalEObject)isReuseOf;
-			isReuseOf = (ReUseAble)eResolveProxy(oldIsReuseOf);
+			isReuseOf = (Joint)eResolveProxy(oldIsReuseOf);
 			if (isReuseOf != oldIsReuseOf) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.JOINT__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
@@ -156,7 +572,7 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReUseAble basicGetIsReuseOf() {
+	public Joint basicGetIsReuseOf() {
 		return isReuseOf;
 	}
 
@@ -165,54 +581,11 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsReuseOf(ReUseAble newIsReuseOf) {
-		ReUseAble oldIsReuseOf = isReuseOf;
+	public void setIsReuseOf(Joint newIsReuseOf) {
+		Joint oldIsReuseOf = isReuseOf;
 		isReuseOf = newIsReuseOf;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JointDecorator getDecorator() {
-		return decorator;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDecorator(JointDecorator newDecorator, NotificationChain msgs) {
-		JointDecorator oldDecorator = decorator;
-		decorator = newDecorator;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__DECORATOR, oldDecorator, newDecorator);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDecorator(JointDecorator newDecorator) {
-		if (newDecorator != decorator) {
-			NotificationChain msgs = null;
-			if (decorator != null)
-				msgs = ((InternalEObject)decorator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__DECORATOR, null, msgs);
-			if (newDecorator != null)
-				msgs = ((InternalEObject)newDecorator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyURDFPackage.JOINT__DECORATOR, null, msgs);
-			msgs = basicSetDecorator(newDecorator, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.JOINT__DECORATOR, newDecorator, newDecorator));
 	}
 
 	/**
@@ -299,8 +672,20 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MyURDFPackage.JOINT__DECORATOR:
-				return basicSetDecorator(null, msgs);
+			case MyURDFPackage.JOINT__AXIS:
+				return basicSetAxis(null, msgs);
+			case MyURDFPackage.JOINT__LIMIT:
+				return basicSetLimit(null, msgs);
+			case MyURDFPackage.JOINT__CALIBRATION:
+				return basicSetCalibration(null, msgs);
+			case MyURDFPackage.JOINT__DYNAMICS:
+				return basicSetDynamics(null, msgs);
+			case MyURDFPackage.JOINT__ORIGIN:
+				return basicSetOrigin(null, msgs);
+			case MyURDFPackage.JOINT__REUSE:
+				return basicSetReuse(null, msgs);
+			case MyURDFPackage.JOINT__SAFETYCONTROLLER:
+				return basicSetSafetycontroller(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -313,6 +698,8 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.JOINT__NAME:
+				return getName();
 			case MyURDFPackage.JOINT__IS_REUSE_OF:
 				if (resolve) return getIsReuseOf();
 				return basicGetIsReuseOf();
@@ -324,8 +711,20 @@ public class JointImpl extends NamedElementImpl implements Joint {
 				return basicGetParentOf();
 			case MyURDFPackage.JOINT__TYPE:
 				return getType();
-			case MyURDFPackage.JOINT__DECORATOR:
-				return getDecorator();
+			case MyURDFPackage.JOINT__AXIS:
+				return getAxis();
+			case MyURDFPackage.JOINT__LIMIT:
+				return getLimit();
+			case MyURDFPackage.JOINT__CALIBRATION:
+				return getCalibration();
+			case MyURDFPackage.JOINT__DYNAMICS:
+				return getDynamics();
+			case MyURDFPackage.JOINT__ORIGIN:
+				return getOrigin();
+			case MyURDFPackage.JOINT__REUSE:
+				return getReuse();
+			case MyURDFPackage.JOINT__SAFETYCONTROLLER:
+				return getSafetycontroller();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -338,8 +737,11 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.JOINT__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)newValue);
+				setIsReuseOf((Joint)newValue);
 				return;
 			case MyURDFPackage.JOINT__CHILD_OF:
 				setChildOf((Link)newValue);
@@ -350,8 +752,26 @@ public class JointImpl extends NamedElementImpl implements Joint {
 			case MyURDFPackage.JOINT__TYPE:
 				setType((JointType)newValue);
 				return;
-			case MyURDFPackage.JOINT__DECORATOR:
-				setDecorator((JointDecorator)newValue);
+			case MyURDFPackage.JOINT__AXIS:
+				setAxis((Axis)newValue);
+				return;
+			case MyURDFPackage.JOINT__LIMIT:
+				setLimit((Limit)newValue);
+				return;
+			case MyURDFPackage.JOINT__CALIBRATION:
+				setCalibration((Calibration)newValue);
+				return;
+			case MyURDFPackage.JOINT__DYNAMICS:
+				setDynamics((Dynamics)newValue);
+				return;
+			case MyURDFPackage.JOINT__ORIGIN:
+				setOrigin((Origin)newValue);
+				return;
+			case MyURDFPackage.JOINT__REUSE:
+				setReuse((Reuse)newValue);
+				return;
+			case MyURDFPackage.JOINT__SAFETYCONTROLLER:
+				setSafetycontroller((SafetyController)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,8 +785,11 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.JOINT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.JOINT__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)null);
+				setIsReuseOf((Joint)null);
 				return;
 			case MyURDFPackage.JOINT__CHILD_OF:
 				setChildOf((Link)null);
@@ -377,8 +800,26 @@ public class JointImpl extends NamedElementImpl implements Joint {
 			case MyURDFPackage.JOINT__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
-			case MyURDFPackage.JOINT__DECORATOR:
-				setDecorator((JointDecorator)null);
+			case MyURDFPackage.JOINT__AXIS:
+				setAxis((Axis)null);
+				return;
+			case MyURDFPackage.JOINT__LIMIT:
+				setLimit((Limit)null);
+				return;
+			case MyURDFPackage.JOINT__CALIBRATION:
+				setCalibration((Calibration)null);
+				return;
+			case MyURDFPackage.JOINT__DYNAMICS:
+				setDynamics((Dynamics)null);
+				return;
+			case MyURDFPackage.JOINT__ORIGIN:
+				setOrigin((Origin)null);
+				return;
+			case MyURDFPackage.JOINT__REUSE:
+				setReuse((Reuse)null);
+				return;
+			case MyURDFPackage.JOINT__SAFETYCONTROLLER:
+				setSafetycontroller((SafetyController)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -392,6 +833,8 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.JOINT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.JOINT__IS_REUSE_OF:
 				return isReuseOf != null;
 			case MyURDFPackage.JOINT__CHILD_OF:
@@ -400,8 +843,20 @@ public class JointImpl extends NamedElementImpl implements Joint {
 				return parentOf != null;
 			case MyURDFPackage.JOINT__TYPE:
 				return type != TYPE_EDEFAULT;
-			case MyURDFPackage.JOINT__DECORATOR:
-				return decorator != null;
+			case MyURDFPackage.JOINT__AXIS:
+				return axis != null;
+			case MyURDFPackage.JOINT__LIMIT:
+				return limit != null;
+			case MyURDFPackage.JOINT__CALIBRATION:
+				return calibration != null;
+			case MyURDFPackage.JOINT__DYNAMICS:
+				return dynamics != null;
+			case MyURDFPackage.JOINT__ORIGIN:
+				return origin != null;
+			case MyURDFPackage.JOINT__REUSE:
+				return reuse != null;
+			case MyURDFPackage.JOINT__SAFETYCONTROLLER:
+				return safetycontroller != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -413,9 +868,9 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ReUseAble.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case MyURDFPackage.JOINT__IS_REUSE_OF: return MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF;
+				case MyURDFPackage.JOINT__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -429,9 +884,9 @@ public class JointImpl extends NamedElementImpl implements Joint {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ReUseAble.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF: return MyURDFPackage.JOINT__IS_REUSE_OF;
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.JOINT__NAME;
 				default: return -1;
 			}
 		}
@@ -448,7 +903,9 @@ public class JointImpl extends NamedElementImpl implements Joint {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (Type: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", type: ");
 		result.append(type);
 		result.append(')');
 		return result.toString();

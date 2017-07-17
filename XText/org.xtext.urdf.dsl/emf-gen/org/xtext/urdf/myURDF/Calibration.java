@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Calibration extends NamedElement {
+public interface Calibration extends ReUseAble, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Rising</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

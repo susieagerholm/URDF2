@@ -17,26 +17,10 @@ import org.xtext.urdf.myURDF.ReUseAble;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Re Use Able</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.xtext.urdf.myURDF.impl.ReUseAbleImpl#getIsReuseOf <em>Is Reuse Of</em>}</li>
- * </ul>
  *
  * @generated
  */
-public abstract class ReUseAbleImpl extends MinimalEObjectImpl.Container implements ReUseAble {
-	/**
-	 * The cached value of the '{@link #getIsReuseOf() <em>Is Reuse Of</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsReuseOf()
-	 * @generated
-	 * @ordered
-	 */
-	protected ReUseAble isReuseOf;
-
+public class ReUseAbleImpl extends MinimalEObjectImpl.Container implements ReUseAble {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,103 +38,6 @@ public abstract class ReUseAbleImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.RE_USE_ABLE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ReUseAble getIsReuseOf() {
-		if (isReuseOf != null && isReuseOf.eIsProxy()) {
-			InternalEObject oldIsReuseOf = (InternalEObject)isReuseOf;
-			isReuseOf = (ReUseAble)eResolveProxy(oldIsReuseOf);
-			if (isReuseOf != oldIsReuseOf) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
-			}
-		}
-		return isReuseOf;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ReUseAble basicGetIsReuseOf() {
-		return isReuseOf;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsReuseOf(ReUseAble newIsReuseOf) {
-		ReUseAble oldIsReuseOf = isReuseOf;
-		isReuseOf = newIsReuseOf;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF, oldIsReuseOf, isReuseOf));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF:
-				if (resolve) return getIsReuseOf();
-				return basicGetIsReuseOf();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF:
-				setIsReuseOf((ReUseAble)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case MyURDFPackage.RE_USE_ABLE__IS_REUSE_OF:
-				return isReuseOf != null;
-		}
-		return super.eIsSet(featureID);
 	}
 
 } //ReUseAbleImpl

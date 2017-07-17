@@ -58,7 +58,7 @@ public class UrdfGenerator
 	  doc.appendChild(rootElement);
 	
 	  EList<EObject> totalList = new BasicEList<EObject>(); 
-	  totalList.addAll(robot.getLink());
+	  totalList.addAll(robot.getLinks());
 	  totalList.addAll(robot.getJoint());
 	  Iterator<EObject> it = totalList.iterator();
 	  

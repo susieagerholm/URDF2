@@ -73,64 +73,24 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 				return createRobotAdapter();
 			}
 			@Override
-			public Adapter caseTopology(Topology object) {
-				return createTopologyAdapter();
+			public Adapter caseReUseAble(ReUseAble object) {
+				return createReUseAbleAdapter();
 			}
 			@Override
 			public Adapter caseLink(Link object) {
 				return createLinkAdapter();
 			}
 			@Override
-			public Adapter caseLinkDecorator(LinkDecorator object) {
-				return createLinkDecoratorAdapter();
+			public Adapter caseReuse(Reuse object) {
+				return createReuseAdapter();
 			}
 			@Override
-			public Adapter caseLinkRef(LinkRef object) {
-				return createLinkRefAdapter();
+			public Adapter caseRef(Ref object) {
+				return createRefAdapter();
 			}
 			@Override
-			public Adapter caseJoint(Joint object) {
-				return createJointAdapter();
-			}
-			@Override
-			public Adapter caseJointRef(JointRef object) {
-				return createJointRefAdapter();
-			}
-			@Override
-			public Adapter caseInertial(Inertial object) {
-				return createInertialAdapter();
-			}
-			@Override
-			public Adapter caseInertia(Inertia object) {
-				return createInertiaAdapter();
-			}
-			@Override
-			public Adapter caseVisual(Visual object) {
-				return createVisualAdapter();
-			}
-			@Override
-			public Adapter caseGeometry(Geometry object) {
-				return createGeometryAdapter();
-			}
-			@Override
-			public Adapter caseBox(Box object) {
-				return createBoxAdapter();
-			}
-			@Override
-			public Adapter caseCylinder(Cylinder object) {
-				return createCylinderAdapter();
-			}
-			@Override
-			public Adapter caseCollision(Collision object) {
-				return createCollisionAdapter();
-			}
-			@Override
-			public Adapter caseOrigin(Origin object) {
-				return createOriginAdapter();
-			}
-			@Override
-			public Adapter caseMass(Mass object) {
-				return createMassAdapter();
+			public Adapter caseReUsableRef(ReUsableRef object) {
+				return createReUsableRefAdapter();
 			}
 			@Override
 			public Adapter caseURDFAttrSignedNumeric(URDFAttrSignedNumeric object) {
@@ -153,6 +113,46 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 				return createURDFAttrSTRINGAdapter();
 			}
 			@Override
+			public Adapter caseDotExpression(DotExpression object) {
+				return createDotExpressionAdapter();
+			}
+			@Override
+			public Adapter caseInertial(Inertial object) {
+				return createInertialAdapter();
+			}
+			@Override
+			public Adapter caseVisual(Visual object) {
+				return createVisualAdapter();
+			}
+			@Override
+			public Adapter caseInertia(Inertia object) {
+				return createInertiaAdapter();
+			}
+			@Override
+			public Adapter caseMass(Mass object) {
+				return createMassAdapter();
+			}
+			@Override
+			public Adapter caseOrigin(Origin object) {
+				return createOriginAdapter();
+			}
+			@Override
+			public Adapter caseCollision(Collision object) {
+				return createCollisionAdapter();
+			}
+			@Override
+			public Adapter caseGeometry(Geometry object) {
+				return createGeometryAdapter();
+			}
+			@Override
+			public Adapter caseBox(Box object) {
+				return createBoxAdapter();
+			}
+			@Override
+			public Adapter caseCylinder(Cylinder object) {
+				return createCylinderAdapter();
+			}
+			@Override
 			public Adapter caseMesh(Mesh object) {
 				return createMeshAdapter();
 			}
@@ -161,28 +161,28 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 				return createSphereAdapter();
 			}
 			@Override
-			public Adapter caseColor(Color object) {
-				return createColorAdapter();
+			public Adapter caseMaterial(Material object) {
+				return createMaterialAdapter();
 			}
 			@Override
 			public Adapter caseTexture(Texture object) {
 				return createTextureAdapter();
 			}
 			@Override
-			public Adapter caseMaterial(Material object) {
-				return createMaterialAdapter();
+			public Adapter caseColor(Color object) {
+				return createColorAdapter();
 			}
 			@Override
-			public Adapter caseLimit(Limit object) {
-				return createLimitAdapter();
+			public Adapter caseJoint(Joint object) {
+				return createJointAdapter();
 			}
 			@Override
 			public Adapter caseAxis(Axis object) {
 				return createAxisAdapter();
 			}
 			@Override
-			public Adapter caseJointDecorator(JointDecorator object) {
-				return createJointDecoratorAdapter();
+			public Adapter caseLimit(Limit object) {
+				return createLimitAdapter();
 			}
 			@Override
 			public Adapter caseCalibration(Calibration object) {
@@ -197,16 +197,24 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 				return createSafetyControllerAdapter();
 			}
 			@Override
-			public Adapter caseJointDecoRef(JointDecoRef object) {
-				return createJointDecoRefAdapter();
+			public Adapter caseTopology(Topology object) {
+				return createTopologyAdapter();
+			}
+			@Override
+			public Adapter caseJointRef(JointRef object) {
+				return createJointRefAdapter();
+			}
+			@Override
+			public Adapter caseAssignNewValue(AssignNewValue object) {
+				return createAssignNewValueAdapter();
+			}
+			@Override
+			public Adapter caseAddTo(AddTo object) {
+				return createAddToAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseReUseAble(ReUseAble object) {
-				return createReUseAbleAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -299,30 +307,44 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.LinkDecorator <em>Link Decorator</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.Reuse <em>Reuse</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.xtext.urdf.myURDF.LinkDecorator
+	 * @see org.xtext.urdf.myURDF.Reuse
 	 * @generated
 	 */
-	public Adapter createLinkDecoratorAdapter() {
+	public Adapter createReuseAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.LinkRef <em>Link Ref</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.Ref <em>Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.xtext.urdf.myURDF.LinkRef
+	 * @see org.xtext.urdf.myURDF.Ref
 	 * @generated
 	 */
-	public Adapter createLinkRefAdapter() {
+	public Adapter createRefAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.ReUsableRef <em>Re Usable Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.ReUsableRef
+	 * @generated
+	 */
+	public Adapter createReUsableRefAdapter() {
 		return null;
 	}
 
@@ -351,6 +373,48 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJointRefAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.AssignNewValue <em>Assign New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.AssignNewValue
+	 * @generated
+	 */
+	public Adapter createAssignNewValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.AddTo <em>Add To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.AddTo
+	 * @generated
+	 */
+	public Adapter createAddToAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
 		return null;
 	}
 
@@ -495,6 +559,20 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.DotExpression <em>Dot Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xtext.urdf.myURDF.DotExpression
+	 * @generated
+	 */
+	public Adapter createDotExpressionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.Inertia <em>Inertia</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -621,20 +699,6 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.JointDecorator <em>Joint Decorator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.xtext.urdf.myURDF.JointDecorator
-	 * @generated
-	 */
-	public Adapter createJointDecoratorAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.Calibration <em>Calibration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -673,34 +737,6 @@ public class MyURDFAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSafetyControllerAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.JointDecoRef <em>Joint Deco Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.xtext.urdf.myURDF.JointDecoRef
-	 * @generated
-	 */
-	public Adapter createJointDecoRefAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.xtext.urdf.myURDF.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.xtext.urdf.myURDF.NamedElement
-	 * @generated
-	 */
-	public Adapter createNamedElementAdapter() {
 		return null;
 	}
 

@@ -28,7 +28,7 @@ class DslFormatter extends AbstractFormatter2 {
 		//robot.regionFor.feature(MyURDFPackage.Literals.NAMED_ELEMENT__NAME).append[newLine]
 		robot.interior[indent]
 			
-		for (Link link : robot.getLink()) { link.format.prepend[setNewLines(1, 1, 2); noSpace] }
+		for (Link link : robot.getLinks()) { link.format.prepend[setNewLines(1, 1, 2); noSpace] }
 		for (Joint joint : robot.getJoint()) { joint.format.prepend[setNewLines(1, 1, 2); noSpace] }	
 	}
 	

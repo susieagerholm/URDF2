@@ -7,10 +7,7 @@ import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager
 
 class DslRuntimeModule extends AbstractDslRuntimeModule {
-	override Class<? extends ILinkingService> bindILinkingService() {
-		return UrdfLinkingService
-	}
-	
+		
 	 override bindXtextResource() {
 	     DerivedStateAwareResource   
 	}   

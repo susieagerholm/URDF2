@@ -25,7 +25,7 @@ import org.xtext.urdf.myURDF.impl.MyURDFPackageImpl;
 public class TestAdapter {
 
 	
-	public static Robot createTestUrdf() 	{
+	public static Robot () 	{
 	   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
 	   //URDFModel model = eINSTANCE.createURDFModel();
 	   MyURDFPackage pkg = MyURDFPackageImpl.init();
@@ -57,7 +57,7 @@ public class TestAdapter {
 	   EList<Link> linkList = new BasicEList<Link>();
 	   linkList.add(link);
 	   linkList.add(link2);
-	   robot.eSet(MyURDFPackage.ROBOT__LINK, linkList);
+	   robot.eSet(MyURDFPackage.ROBOT__LINKS, linkList);
 	
 
 	   //Joints

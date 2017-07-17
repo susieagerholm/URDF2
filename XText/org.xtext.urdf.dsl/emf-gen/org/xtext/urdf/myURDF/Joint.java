@@ -14,17 +14,50 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getIsReuseOf <em>Is Reuse Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getChildOf <em>Child Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getParentOf <em>Parent Of</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.Joint#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.urdf.myURDF.Joint#getDecorator <em>Decorator</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getAxis <em>Axis</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getLimit <em>Limit</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getCalibration <em>Calibration</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getDynamics <em>Dynamics</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getOrigin <em>Origin</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getReuse <em>Reuse</em>}</li>
+ *   <li>{@link org.xtext.urdf.myURDF.Joint#getSafetycontroller <em>Safetycontroller</em>}</li>
  * </ul>
  *
  * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint()
  * @model
  * @generated
  */
-public interface Joint extends NamedElement, ReUseAble {
+public interface Joint extends ReUseAble, NamedElement {
+	/**
+	 * Returns the value of the '<em><b>Is Reuse Of</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Reuse Of</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Reuse Of</em>' reference.
+	 * @see #setIsReuseOf(Joint)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_IsReuseOf()
+	 * @model
+	 * @generated
+	 */
+	Joint getIsReuseOf();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getIsReuseOf <em>Is Reuse Of</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Reuse Of</em>' reference.
+	 * @see #getIsReuseOf()
+	 * @generated
+	 */
+	void setIsReuseOf(Joint value);
+
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.xtext.urdf.myURDF.JointType}.
@@ -38,7 +71,7 @@ public interface Joint extends NamedElement, ReUseAble {
 	 * @see org.xtext.urdf.myURDF.JointType
 	 * @see #setType(JointType)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Type()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	JointType getType();
@@ -55,30 +88,186 @@ public interface Joint extends NamedElement, ReUseAble {
 	void setType(JointType value);
 
 	/**
-	 * Returns the value of the '<em><b>Decorator</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Axis</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Decorator</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Axis</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Decorator</em>' containment reference.
-	 * @see #setDecorator(JointDecorator)
-	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Decorator()
+	 * @return the value of the '<em>Axis</em>' containment reference.
+	 * @see #setAxis(Axis)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Axis()
 	 * @model containment="true"
 	 * @generated
 	 */
-	JointDecorator getDecorator();
+	Axis getAxis();
 
 	/**
-	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getDecorator <em>Decorator</em>}' containment reference.
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getAxis <em>Axis</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Decorator</em>' containment reference.
-	 * @see #getDecorator()
+	 * @param value the new value of the '<em>Axis</em>' containment reference.
+	 * @see #getAxis()
 	 * @generated
 	 */
-	void setDecorator(JointDecorator value);
+	void setAxis(Axis value);
+
+	/**
+	 * Returns the value of the '<em><b>Limit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Limit</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Limit</em>' containment reference.
+	 * @see #setLimit(Limit)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Limit()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Limit getLimit();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getLimit <em>Limit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Limit</em>' containment reference.
+	 * @see #getLimit()
+	 * @generated
+	 */
+	void setLimit(Limit value);
+
+	/**
+	 * Returns the value of the '<em><b>Calibration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Calibration</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Calibration</em>' containment reference.
+	 * @see #setCalibration(Calibration)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Calibration()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Calibration getCalibration();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getCalibration <em>Calibration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Calibration</em>' containment reference.
+	 * @see #getCalibration()
+	 * @generated
+	 */
+	void setCalibration(Calibration value);
+
+	/**
+	 * Returns the value of the '<em><b>Dynamics</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dynamics</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dynamics</em>' containment reference.
+	 * @see #setDynamics(Dynamics)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Dynamics()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Dynamics getDynamics();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getDynamics <em>Dynamics</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dynamics</em>' containment reference.
+	 * @see #getDynamics()
+	 * @generated
+	 */
+	void setDynamics(Dynamics value);
+
+	/**
+	 * Returns the value of the '<em><b>Origin</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Origin</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Origin</em>' containment reference.
+	 * @see #setOrigin(Origin)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Origin()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Origin getOrigin();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getOrigin <em>Origin</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Origin</em>' containment reference.
+	 * @see #getOrigin()
+	 * @generated
+	 */
+	void setOrigin(Origin value);
+
+	/**
+	 * Returns the value of the '<em><b>Reuse</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reuse</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reuse</em>' containment reference.
+	 * @see #setReuse(Reuse)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Reuse()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Reuse getReuse();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getReuse <em>Reuse</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reuse</em>' containment reference.
+	 * @see #getReuse()
+	 * @generated
+	 */
+	void setReuse(Reuse value);
+
+	/**
+	 * Returns the value of the '<em><b>Safetycontroller</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Safetycontroller</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Safetycontroller</em>' containment reference.
+	 * @see #setSafetycontroller(SafetyController)
+	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getJoint_Safetycontroller()
+	 * @model containment="true"
+	 * @generated
+	 */
+	SafetyController getSafetycontroller();
+
+	/**
+	 * Sets the value of the '{@link org.xtext.urdf.myURDF.Joint#getSafetycontroller <em>Safetycontroller</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Safetycontroller</em>' containment reference.
+	 * @see #getSafetycontroller()
+	 * @generated
+	 */
+	void setSafetycontroller(SafetyController value);
 
 	/**
 	 * Returns the value of the '<em><b>Child Of</b></em>' reference.

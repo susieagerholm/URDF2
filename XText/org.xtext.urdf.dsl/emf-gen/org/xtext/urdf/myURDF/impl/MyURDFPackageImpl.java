@@ -12,25 +12,24 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
+import org.xtext.urdf.myURDF.AddTo;
+import org.xtext.urdf.myURDF.AssignNewValue;
 import org.xtext.urdf.myURDF.Axis;
 import org.xtext.urdf.myURDF.Box;
 import org.xtext.urdf.myURDF.Calibration;
 import org.xtext.urdf.myURDF.Collision;
 import org.xtext.urdf.myURDF.Color;
 import org.xtext.urdf.myURDF.Cylinder;
+import org.xtext.urdf.myURDF.DotExpression;
 import org.xtext.urdf.myURDF.Dynamics;
 import org.xtext.urdf.myURDF.Geometry;
 import org.xtext.urdf.myURDF.Inertia;
 import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Joint;
-import org.xtext.urdf.myURDF.JointDecoRef;
-import org.xtext.urdf.myURDF.JointDecorator;
 import org.xtext.urdf.myURDF.JointRef;
 import org.xtext.urdf.myURDF.JointType;
 import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.LinkDecorator;
-import org.xtext.urdf.myURDF.LinkRef;
 import org.xtext.urdf.myURDF.Mass;
 import org.xtext.urdf.myURDF.Material;
 import org.xtext.urdf.myURDF.Mesh;
@@ -39,7 +38,10 @@ import org.xtext.urdf.myURDF.MyURDFFactory;
 import org.xtext.urdf.myURDF.MyURDFPackage;
 import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.Origin;
+import org.xtext.urdf.myURDF.ReUsableRef;
 import org.xtext.urdf.myURDF.ReUseAble;
+import org.xtext.urdf.myURDF.Ref;
+import org.xtext.urdf.myURDF.Reuse;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.SafetyController;
 import org.xtext.urdf.myURDF.Sphere;
@@ -99,14 +101,21 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass linkDecoratorEClass = null;
+	private EClass reuseEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass linkRefEClass = null;
+	private EClass refEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass reUsableRefEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +130,27 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	private EClass jointRefEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass assignNewValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass addToEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass namedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -197,6 +227,13 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass dotExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass inertiaEClass = null;
 
 	/**
@@ -260,13 +297,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass jointDecoratorEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass calibrationEClass = null;
 
 	/**
@@ -282,20 +312,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	private EClass safetyControllerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass jointDecoRefEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -389,7 +405,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRobot_Topologies() {
+	public EReference getRobot_Links() {
 		return (EReference)robotEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -398,16 +414,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRobot_Link() {
-		return (EReference)robotEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getRobot_Joint() {
+	public EReference getRobot_Topologies() {
 		return (EReference)robotEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -416,8 +423,17 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRobot_Linkrefs() {
+	public EReference getRobot_Addto() {
 		return (EReference)robotEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRobot_Joint() {
+		return (EReference)robotEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -488,7 +504,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLink_Decorator() {
+	public EReference getLink_IsReuseOf() {
 		return (EReference)linkEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -497,8 +513,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLinkDecorator() {
-		return linkDecoratorEClass;
+	public EReference getLink_Reuse() {
+		return (EReference)linkEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -506,8 +522,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkDecorator_Inertial() {
-		return (EReference)linkDecoratorEClass.getEStructuralFeatures().get(0);
+	public EReference getLink_Inertial() {
+		return (EReference)linkEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -515,8 +531,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkDecorator_Visual() {
-		return (EReference)linkDecoratorEClass.getEStructuralFeatures().get(1);
+	public EReference getLink_Visual() {
+		return (EReference)linkEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -524,8 +540,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkDecorator_Collision() {
-		return (EReference)linkDecoratorEClass.getEStructuralFeatures().get(2);
+	public EReference getLink_Collision() {
+		return (EReference)linkEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -533,8 +549,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getLinkRef() {
-		return linkRefEClass;
+	public EClass getReuse() {
+		return reuseEClass;
 	}
 
 	/**
@@ -542,8 +558,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkRef_Ref() {
-		return (EReference)linkRefEClass.getEStructuralFeatures().get(0);
+	public EReference getReuse_Add() {
+		return (EReference)reuseEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -551,8 +567,35 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLinkRef_Decorator() {
-		return (EReference)linkRefEClass.getEStructuralFeatures().get(1);
+	public EReference getReuse_Edit() {
+		return (EReference)reuseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRef() {
+		return refEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getReUsableRef() {
+		return reUsableRefEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReUsableRef_Reuseable() {
+		return (EReference)reUsableRefEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -569,8 +612,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getJoint_Type() {
-		return (EAttribute)jointEClass.getEStructuralFeatures().get(2);
+	public EReference getJoint_IsReuseOf() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -578,8 +621,71 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJoint_Decorator() {
-		return (EReference)jointEClass.getEStructuralFeatures().get(3);
+	public EAttribute getJoint_Type() {
+		return (EAttribute)jointEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Axis() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Limit() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Calibration() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Dynamics() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Origin() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Reuse() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getJoint_Safetycontroller() {
+		return (EReference)jointEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -632,8 +738,89 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAssignNewValue() {
+		return assignNewValueEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignNewValue_GetRef() {
+		return (EReference)assignNewValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAssignNewValue_NewReuseable() {
+		return (EReference)assignNewValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAddTo() {
+		return addToEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAddTo_Link() {
+		return (EReference)addToEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAddTo_Joint() {
+		return (EReference)addToEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAddTo_Add() {
+		return (EReference)addToEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getNamedElement() {
+		return namedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNamedElement_Name() {
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getJoint_ChildOf() {
-		return (EReference)jointEClass.getEStructuralFeatures().get(0);
+		return (EReference)jointEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -642,7 +829,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getJoint_ParentOf() {
-		return (EReference)jointEClass.getEStructuralFeatures().get(1);
+		return (EReference)jointEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -696,7 +883,16 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getVisual_Geometry() {
-		return (EReference)visualEClass.getEStructuralFeatures().get(0);
+		return (EReference)visualEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVisual_Material() {
+		return (EReference)visualEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -705,7 +901,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getVisual_Origin() {
-		return (EReference)visualEClass.getEStructuralFeatures().get(1);
+		return (EReference)visualEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -723,7 +919,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getCollision_Geometry() {
-		return (EReference)collisionEClass.getEStructuralFeatures().get(0);
+		return (EReference)collisionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -732,7 +928,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getCollision_Origin() {
-		return (EReference)collisionEClass.getEStructuralFeatures().get(1);
+		return (EReference)collisionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -777,7 +973,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getOrigin_Roll() {
-		return (EReference)originEClass.getEStructuralFeatures().get(3);
+		return (EReference)originEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -795,7 +991,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getOrigin_Yaw() {
-		return (EReference)originEClass.getEStructuralFeatures().get(5);
+		return (EReference)originEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -812,7 +1008,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMass_MassValueInKilograms() {
+	public EReference getMass_MassKilogram() {
 		return (EReference)massEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -911,6 +1107,33 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDotExpression() {
+		return dotExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDotExpression_Ref() {
+		return (EReference)dotExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDotExpression_Tail() {
+		return (EReference)dotExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInertia() {
 		return inertiaEClass;
 	}
@@ -948,15 +1171,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getInertia_Iyy() {
-		return (EReference)inertiaEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getInertia_Iyz() {
 		return (EReference)inertiaEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -965,8 +1179,17 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInertia_Izz() {
+	public EReference getInertia_Iyz() {
 		return (EReference)inertiaEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInertia_Izz() {
+		return (EReference)inertiaEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1047,7 +1270,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getBox_Height() {
-		return (EReference)boxEClass.getEStructuralFeatures().get(0);
+		return (EReference)boxEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1056,7 +1279,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getBox_Width() {
-		return (EReference)boxEClass.getEStructuralFeatures().get(1);
+		return (EReference)boxEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1065,7 +1288,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getBox_Length() {
-		return (EReference)boxEClass.getEStructuralFeatures().get(2);
+		return (EReference)boxEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1111,15 +1334,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 */
 	public EReference getMesh_PathToFile() {
 		return (EReference)meshEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMesh_Dimension() {
-		return (EReference)meshEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1192,60 +1406,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 */
 	public EClass getAxis() {
 		return axisEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getJointDecorator() {
-		return jointDecoratorEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecorator_Axis() {
-		return (EReference)jointDecoratorEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecorator_Limit() {
-		return (EReference)jointDecoratorEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecorator_Calibration() {
-		return (EReference)jointDecoratorEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecorator_Dynamics() {
-		return (EReference)jointDecoratorEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecorator_Safetycontroller() {
-		return (EReference)jointDecoratorEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1343,51 +1503,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getJointDecoRef() {
-		return jointDecoRefEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecoRef_Decorator() {
-		return (EReference)jointDecoRefEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getJointDecoRef_Ref() {
-		return (EReference)jointDecoRefEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getNamedElement() {
-		return namedElementEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getNamedElement_Name() {
-		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getReUseAble() {
 		return reUseAbleEClass;
 	}
@@ -1397,17 +1512,8 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReUseAble_IsReuseOf() {
-		return (EReference)reUseAbleEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSafetyController_SoftLowerLimit() {
-		return (EReference)safetyControllerEClass.getEStructuralFeatures().get(3);
+		return (EReference)safetyControllerEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1416,7 +1522,7 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 	 * @generated
 	 */
 	public EReference getSafetyController_SoftUpperLimit() {
-		return (EReference)safetyControllerEClass.getEStructuralFeatures().get(2);
+		return (EReference)safetyControllerEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1475,82 +1581,28 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 
 		// Create classes and their features
 		robotEClass = createEClass(ROBOT);
-		createEReference(robotEClass, ROBOT__TOPOLOGIES);
-		createEReference(robotEClass, ROBOT__LINK);
+		createEReference(robotEClass, ROBOT__LINKS);
 		createEReference(robotEClass, ROBOT__JOINT);
-		createEReference(robotEClass, ROBOT__LINKREFS);
+		createEReference(robotEClass, ROBOT__TOPOLOGIES);
+		createEReference(robotEClass, ROBOT__ADDTO);
 
-		topologyEClass = createEClass(TOPOLOGY);
-		createEReference(topologyEClass, TOPOLOGY__PARENT);
-		createEReference(topologyEClass, TOPOLOGY__JOINT);
-		createEReference(topologyEClass, TOPOLOGY__CHILD);
+		reUseAbleEClass = createEClass(RE_USE_ABLE);
 
 		linkEClass = createEClass(LINK);
-		createEReference(linkEClass, LINK__DECORATOR);
+		createEReference(linkEClass, LINK__IS_REUSE_OF);
+		createEReference(linkEClass, LINK__REUSE);
+		createEReference(linkEClass, LINK__INERTIAL);
+		createEReference(linkEClass, LINK__VISUAL);
+		createEReference(linkEClass, LINK__COLLISION);
 
-		linkDecoratorEClass = createEClass(LINK_DECORATOR);
-		createEReference(linkDecoratorEClass, LINK_DECORATOR__INERTIAL);
-		createEReference(linkDecoratorEClass, LINK_DECORATOR__VISUAL);
-		createEReference(linkDecoratorEClass, LINK_DECORATOR__COLLISION);
+		reuseEClass = createEClass(REUSE);
+		createEReference(reuseEClass, REUSE__ADD);
+		createEReference(reuseEClass, REUSE__EDIT);
 
-		linkRefEClass = createEClass(LINK_REF);
-		createEReference(linkRefEClass, LINK_REF__REF);
-		createEReference(linkRefEClass, LINK_REF__DECORATOR);
+		refEClass = createEClass(REF);
 
-		jointEClass = createEClass(JOINT);
-		createEReference(jointEClass, JOINT__CHILD_OF);
-		createEReference(jointEClass, JOINT__PARENT_OF);
-		createEAttribute(jointEClass, JOINT__TYPE);
-		createEReference(jointEClass, JOINT__DECORATOR);
-
-		jointRefEClass = createEClass(JOINT_REF);
-		createEAttribute(jointRefEClass, JOINT_REF__FIX);
-		createEAttribute(jointRefEClass, JOINT_REF__REV);
-		createEAttribute(jointRefEClass, JOINT_REF__PRIS);
-		createEAttribute(jointRefEClass, JOINT_REF__CONT);
-
-		inertialEClass = createEClass(INERTIAL);
-		createEReference(inertialEClass, INERTIAL__INERTIA);
-		createEReference(inertialEClass, INERTIAL__MASS);
-		createEReference(inertialEClass, INERTIAL__ORIGIN);
-
-		inertiaEClass = createEClass(INERTIA);
-		createEReference(inertiaEClass, INERTIA__IXX);
-		createEReference(inertiaEClass, INERTIA__IXY);
-		createEReference(inertiaEClass, INERTIA__IXZ);
-		createEReference(inertiaEClass, INERTIA__IYY);
-		createEReference(inertiaEClass, INERTIA__IYZ);
-		createEReference(inertiaEClass, INERTIA__IZZ);
-
-		visualEClass = createEClass(VISUAL);
-		createEReference(visualEClass, VISUAL__GEOMETRY);
-		createEReference(visualEClass, VISUAL__ORIGIN);
-
-		geometryEClass = createEClass(GEOMETRY);
-
-		boxEClass = createEClass(BOX);
-		createEReference(boxEClass, BOX__HEIGHT);
-		createEReference(boxEClass, BOX__WIDTH);
-		createEReference(boxEClass, BOX__LENGTH);
-
-		cylinderEClass = createEClass(CYLINDER);
-		createEReference(cylinderEClass, CYLINDER__RADIUS);
-		createEReference(cylinderEClass, CYLINDER__LENGTH);
-
-		collisionEClass = createEClass(COLLISION);
-		createEReference(collisionEClass, COLLISION__GEOMETRY);
-		createEReference(collisionEClass, COLLISION__ORIGIN);
-
-		originEClass = createEClass(ORIGIN);
-		createEReference(originEClass, ORIGIN__X);
-		createEReference(originEClass, ORIGIN__Y);
-		createEReference(originEClass, ORIGIN__Z);
-		createEReference(originEClass, ORIGIN__ROLL);
-		createEReference(originEClass, ORIGIN__PITCH);
-		createEReference(originEClass, ORIGIN__YAW);
-
-		massEClass = createEClass(MASS);
-		createEReference(massEClass, MASS__MASS_VALUE_IN_KILOGRAMS);
+		reUsableRefEClass = createEClass(RE_USABLE_REF);
+		createEReference(reUsableRefEClass, RE_USABLE_REF__REUSEABLE);
 
 		urdfAttrSignedNumericEClass = createEClass(URDF_ATTR_SIGNED_NUMERIC);
 		createEAttribute(urdfAttrSignedNumericEClass, URDF_ATTR_SIGNED_NUMERIC__VALUE);
@@ -1567,12 +1619,64 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 		urdfAttrSTRINGEClass = createEClass(URDF_ATTR_STRING);
 		createEAttribute(urdfAttrSTRINGEClass, URDF_ATTR_STRING__VALUE);
 
+		dotExpressionEClass = createEClass(DOT_EXPRESSION);
+		createEReference(dotExpressionEClass, DOT_EXPRESSION__REF);
+		createEReference(dotExpressionEClass, DOT_EXPRESSION__TAIL);
+
+		inertialEClass = createEClass(INERTIAL);
+		createEReference(inertialEClass, INERTIAL__INERTIA);
+		createEReference(inertialEClass, INERTIAL__MASS);
+		createEReference(inertialEClass, INERTIAL__ORIGIN);
+
+		visualEClass = createEClass(VISUAL);
+		createEReference(visualEClass, VISUAL__ORIGIN);
+		createEReference(visualEClass, VISUAL__GEOMETRY);
+		createEReference(visualEClass, VISUAL__MATERIAL);
+
+		inertiaEClass = createEClass(INERTIA);
+		createEReference(inertiaEClass, INERTIA__IXX);
+		createEReference(inertiaEClass, INERTIA__IXY);
+		createEReference(inertiaEClass, INERTIA__IXZ);
+		createEReference(inertiaEClass, INERTIA__IZZ);
+		createEReference(inertiaEClass, INERTIA__IYY);
+		createEReference(inertiaEClass, INERTIA__IYZ);
+
+		massEClass = createEClass(MASS);
+		createEReference(massEClass, MASS__MASS_KILOGRAM);
+
+		originEClass = createEClass(ORIGIN);
+		createEReference(originEClass, ORIGIN__X);
+		createEReference(originEClass, ORIGIN__Y);
+		createEReference(originEClass, ORIGIN__Z);
+		createEReference(originEClass, ORIGIN__YAW);
+		createEReference(originEClass, ORIGIN__PITCH);
+		createEReference(originEClass, ORIGIN__ROLL);
+
+		collisionEClass = createEClass(COLLISION);
+		createEReference(collisionEClass, COLLISION__ORIGIN);
+		createEReference(collisionEClass, COLLISION__GEOMETRY);
+
+		geometryEClass = createEClass(GEOMETRY);
+
+		boxEClass = createEClass(BOX);
+		createEReference(boxEClass, BOX__WIDTH);
+		createEReference(boxEClass, BOX__LENGTH);
+		createEReference(boxEClass, BOX__HEIGHT);
+
+		cylinderEClass = createEClass(CYLINDER);
+		createEReference(cylinderEClass, CYLINDER__RADIUS);
+		createEReference(cylinderEClass, CYLINDER__LENGTH);
+
 		meshEClass = createEClass(MESH);
 		createEReference(meshEClass, MESH__PATH_TO_FILE);
-		createEReference(meshEClass, MESH__DIMENSION);
 
 		sphereEClass = createEClass(SPHERE);
 		createEReference(sphereEClass, SPHERE__RADIUS);
+
+		materialEClass = createEClass(MATERIAL);
+
+		textureEClass = createEClass(TEXTURE);
+		createEReference(textureEClass, TEXTURE__PATH_TO_FILE);
 
 		colorEClass = createEClass(COLOR);
 		createEReference(colorEClass, COLOR__RED);
@@ -1580,28 +1684,29 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 		createEReference(colorEClass, COLOR__BLUE);
 		createEReference(colorEClass, COLOR__ALPHA);
 
-		textureEClass = createEClass(TEXTURE);
-		createEReference(textureEClass, TEXTURE__PATH_TO_FILE);
-
-		materialEClass = createEClass(MATERIAL);
-
-		limitEClass = createEClass(LIMIT);
-		createEReference(limitEClass, LIMIT__EFFORT);
-		createEReference(limitEClass, LIMIT__VELOCITY);
-		createEReference(limitEClass, LIMIT__LOWER);
-		createEReference(limitEClass, LIMIT__UPPER);
+		jointEClass = createEClass(JOINT);
+		createEReference(jointEClass, JOINT__IS_REUSE_OF);
+		createEReference(jointEClass, JOINT__CHILD_OF);
+		createEReference(jointEClass, JOINT__PARENT_OF);
+		createEAttribute(jointEClass, JOINT__TYPE);
+		createEReference(jointEClass, JOINT__AXIS);
+		createEReference(jointEClass, JOINT__LIMIT);
+		createEReference(jointEClass, JOINT__CALIBRATION);
+		createEReference(jointEClass, JOINT__DYNAMICS);
+		createEReference(jointEClass, JOINT__ORIGIN);
+		createEReference(jointEClass, JOINT__REUSE);
+		createEReference(jointEClass, JOINT__SAFETYCONTROLLER);
 
 		axisEClass = createEClass(AXIS);
 		createEReference(axisEClass, AXIS__X);
 		createEReference(axisEClass, AXIS__Y);
 		createEReference(axisEClass, AXIS__Z);
 
-		jointDecoratorEClass = createEClass(JOINT_DECORATOR);
-		createEReference(jointDecoratorEClass, JOINT_DECORATOR__AXIS);
-		createEReference(jointDecoratorEClass, JOINT_DECORATOR__LIMIT);
-		createEReference(jointDecoratorEClass, JOINT_DECORATOR__CALIBRATION);
-		createEReference(jointDecoratorEClass, JOINT_DECORATOR__DYNAMICS);
-		createEReference(jointDecoratorEClass, JOINT_DECORATOR__SAFETYCONTROLLER);
+		limitEClass = createEClass(LIMIT);
+		createEReference(limitEClass, LIMIT__EFFORT);
+		createEReference(limitEClass, LIMIT__VELOCITY);
+		createEReference(limitEClass, LIMIT__LOWER);
+		createEReference(limitEClass, LIMIT__UPPER);
 
 		calibrationEClass = createEClass(CALIBRATION);
 		createEReference(calibrationEClass, CALIBRATION__RISING);
@@ -1614,18 +1719,31 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 		safetyControllerEClass = createEClass(SAFETY_CONTROLLER);
 		createEReference(safetyControllerEClass, SAFETY_CONTROLLER__KVELOCITY);
 		createEReference(safetyControllerEClass, SAFETY_CONTROLLER__KPOSITION);
-		createEReference(safetyControllerEClass, SAFETY_CONTROLLER__SOFT_UPPER_LIMIT);
 		createEReference(safetyControllerEClass, SAFETY_CONTROLLER__SOFT_LOWER_LIMIT);
+		createEReference(safetyControllerEClass, SAFETY_CONTROLLER__SOFT_UPPER_LIMIT);
 
-		jointDecoRefEClass = createEClass(JOINT_DECO_REF);
-		createEReference(jointDecoRefEClass, JOINT_DECO_REF__DECORATOR);
-		createEReference(jointDecoRefEClass, JOINT_DECO_REF__REF);
+		topologyEClass = createEClass(TOPOLOGY);
+		createEReference(topologyEClass, TOPOLOGY__PARENT);
+		createEReference(topologyEClass, TOPOLOGY__JOINT);
+		createEReference(topologyEClass, TOPOLOGY__CHILD);
+
+		jointRefEClass = createEClass(JOINT_REF);
+		createEAttribute(jointRefEClass, JOINT_REF__FIX);
+		createEAttribute(jointRefEClass, JOINT_REF__REV);
+		createEAttribute(jointRefEClass, JOINT_REF__PRIS);
+		createEAttribute(jointRefEClass, JOINT_REF__CONT);
+
+		assignNewValueEClass = createEClass(ASSIGN_NEW_VALUE);
+		createEReference(assignNewValueEClass, ASSIGN_NEW_VALUE__GET_REF);
+		createEReference(assignNewValueEClass, ASSIGN_NEW_VALUE__NEW_REUSEABLE);
+
+		addToEClass = createEClass(ADD_TO);
+		createEReference(addToEClass, ADD_TO__LINK);
+		createEReference(addToEClass, ADD_TO__JOINT);
+		createEReference(addToEClass, ADD_TO__ADD);
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-
-		reUseAbleEClass = createEClass(RE_USE_ABLE);
-		createEReference(reUseAbleEClass, RE_USE_ABLE__IS_REUSE_OF);
 
 		// Create enums
 		jointTypeEEnum = createEEnum(JOINT_TYPE);
@@ -1663,134 +1781,149 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 
 		// Add supertypes to classes
 		robotEClass.getESuperTypes().add(this.getNamedElement());
-		linkEClass.getESuperTypes().add(this.getNamedElement());
 		linkEClass.getESuperTypes().add(this.getReUseAble());
-		jointEClass.getESuperTypes().add(this.getNamedElement());
-		jointEClass.getESuperTypes().add(this.getReUseAble());
+		linkEClass.getESuperTypes().add(this.getNamedElement());
+		reUsableRefEClass.getESuperTypes().add(this.getRef());
+		urdfAttrSignedNumericEClass.getESuperTypes().add(this.getReUseAble());
+		urdfAttrNumericEClass.getESuperTypes().add(this.getReUseAble());
+		dotExpressionEClass.getESuperTypes().add(this.getRef());
+		inertialEClass.getESuperTypes().add(this.getReUseAble());
 		inertialEClass.getESuperTypes().add(this.getNamedElement());
-		inertiaEClass.getESuperTypes().add(this.getNamedElement());
+		visualEClass.getESuperTypes().add(this.getReUseAble());
 		visualEClass.getESuperTypes().add(this.getNamedElement());
+		inertiaEClass.getESuperTypes().add(this.getReUseAble());
+		inertiaEClass.getESuperTypes().add(this.getNamedElement());
+		massEClass.getESuperTypes().add(this.getReUseAble());
+		massEClass.getESuperTypes().add(this.getNamedElement());
+		originEClass.getESuperTypes().add(this.getReUseAble());
+		originEClass.getESuperTypes().add(this.getNamedElement());
+		collisionEClass.getESuperTypes().add(this.getReUseAble());
+		collisionEClass.getESuperTypes().add(this.getNamedElement());
+		geometryEClass.getESuperTypes().add(this.getReUseAble());
 		boxEClass.getESuperTypes().add(this.getGeometry());
 		boxEClass.getESuperTypes().add(this.getNamedElement());
 		cylinderEClass.getESuperTypes().add(this.getGeometry());
 		cylinderEClass.getESuperTypes().add(this.getNamedElement());
-		collisionEClass.getESuperTypes().add(this.getNamedElement());
-		originEClass.getESuperTypes().add(this.getNamedElement());
-		massEClass.getESuperTypes().add(this.getNamedElement());
 		meshEClass.getESuperTypes().add(this.getGeometry());
 		meshEClass.getESuperTypes().add(this.getNamedElement());
 		sphereEClass.getESuperTypes().add(this.getGeometry());
 		sphereEClass.getESuperTypes().add(this.getNamedElement());
-		colorEClass.getESuperTypes().add(this.getMaterial());
-		colorEClass.getESuperTypes().add(this.getNamedElement());
+		materialEClass.getESuperTypes().add(this.getReUseAble());
 		textureEClass.getESuperTypes().add(this.getMaterial());
 		textureEClass.getESuperTypes().add(this.getNamedElement());
-		limitEClass.getESuperTypes().add(this.getNamedElement());
+		colorEClass.getESuperTypes().add(this.getMaterial());
+		colorEClass.getESuperTypes().add(this.getNamedElement());
+		jointEClass.getESuperTypes().add(this.getReUseAble());
+		jointEClass.getESuperTypes().add(this.getNamedElement());
+		axisEClass.getESuperTypes().add(this.getReUseAble());
 		axisEClass.getESuperTypes().add(this.getNamedElement());
+		limitEClass.getESuperTypes().add(this.getReUseAble());
+		limitEClass.getESuperTypes().add(this.getNamedElement());
+		calibrationEClass.getESuperTypes().add(this.getReUseAble());
 		calibrationEClass.getESuperTypes().add(this.getNamedElement());
+		dynamicsEClass.getESuperTypes().add(this.getReUseAble());
 		dynamicsEClass.getESuperTypes().add(this.getNamedElement());
+		safetyControllerEClass.getESuperTypes().add(this.getReUseAble());
 		safetyControllerEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(robotEClass, Robot.class, "Robot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRobot_Topologies(), this.getTopology(), null, "topologies", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRobot_Link(), this.getLink(), null, "link", null, 1, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRobot_Links(), this.getLink(), null, "links", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRobot_Joint(), this.getJoint(), null, "joint", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRobot_Linkrefs(), this.getLinkRef(), null, "linkrefs", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRobot_Topologies(), this.getTopology(), null, "topologies", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRobot_Addto(), this.getAddTo(), null, "addto", null, 0, -1, Robot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(topologyEClass, Topology.class, "Topology", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopology_Parent(), this.getLink(), null, "parent", null, 1, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopology_Joint(), this.getJointRef(), null, "joint", null, 0, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopology_Child(), this.getTopology(), null, "child", null, 0, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(reUseAbleEClass, ReUseAble.class, "ReUseAble", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(linkEClass, Link.class, "Link", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLink_Decorator(), this.getLinkDecorator(), null, "decorator", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_IsReuseOf(), this.getLink(), null, "isReuseOf", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Reuse(), this.getReuse(), null, "reuse", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Inertial(), this.getInertial(), null, "inertial", null, 0, 1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Visual(), this.getVisual(), null, "visual", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLink_Collision(), this.getCollision(), null, "collision", null, 0, -1, Link.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(linkDecoratorEClass, LinkDecorator.class, "LinkDecorator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLinkDecorator_Inertial(), this.getInertial(), null, "inertial", null, 0, -1, LinkDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkDecorator_Visual(), this.getVisual(), null, "visual", null, 0, -1, LinkDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkDecorator_Collision(), this.getCollision(), null, "collision", null, 0, -1, LinkDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(reuseEClass, Reuse.class, "Reuse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReuse_Add(), this.getReUseAble(), null, "add", null, 0, 1, Reuse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReuse_Edit(), this.getAssignNewValue(), null, "edit", null, 0, 1, Reuse.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(linkRefEClass, LinkRef.class, "LinkRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLinkRef_Ref(), this.getLink(), null, "ref", null, 1, 1, LinkRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLinkRef_Decorator(), this.getLinkDecorator(), null, "decorator", null, 1, 1, LinkRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(refEClass, Ref.class, "Ref", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(jointEClass, Joint.class, "Joint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJoint_ChildOf(), this.getLink(), null, "ChildOf", null, 1, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJoint_ParentOf(), this.getLink(), null, "ParentOf", null, 1, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getJoint_Type(), this.getJointType(), "Type", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJoint_Decorator(), this.getJointDecorator(), null, "decorator", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(reUsableRefEClass, ReUsableRef.class, "ReUsableRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReUsableRef_Reuseable(), this.getReUseAble(), null, "reuseable", null, 0, 1, ReUsableRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(jointRefEClass, JointRef.class, "JointRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getJointRef_Fix(), ecorePackage.getEString(), "fix", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getJointRef_Rev(), ecorePackage.getEString(), "rev", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getJointRef_Pris(), ecorePackage.getEString(), "pris", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getJointRef_Cont(), ecorePackage.getEString(), "cont", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(urdfAttrSignedNumericEClass, URDFAttrSignedNumeric.class, "URDFAttrSignedNumeric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getURDFAttrSignedNumeric_Value(), ecorePackage.getEString(), "value", null, 0, 1, URDFAttrSignedNumeric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(urdfAttrFloatEClass, URDFAttrFloat.class, "URDFAttrFloat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getURDFAttrFloat_Value(), ecorePackage.getEFloat(), "value", null, 0, 1, URDFAttrFloat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(urdfAttrINTEClass, URDFAttrINT.class, "URDFAttrINT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getURDFAttrINT_Value(), ecorePackage.getEInt(), "value", null, 0, 1, URDFAttrINT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(urdfAttrNumericEClass, URDFAttrNumeric.class, "URDFAttrNumeric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getURDFAttrNumeric_Value(), ecorePackage.getEString(), "value", null, 0, 1, URDFAttrNumeric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(urdfAttrSTRINGEClass, URDFAttrSTRING.class, "URDFAttrSTRING", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getURDFAttrSTRING_Value(), ecorePackage.getEString(), "value", null, 0, 1, URDFAttrSTRING.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dotExpressionEClass, DotExpression.class, "DotExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDotExpression_Ref(), this.getRef(), null, "ref", null, 0, 1, DotExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDotExpression_Tail(), this.getReUseAble(), null, "tail", null, 0, 1, DotExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inertialEClass, Inertial.class, "Inertial", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInertial_Inertia(), this.getInertia(), null, "inertia", null, 1, 1, Inertial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInertial_Mass(), this.getMass(), null, "mass", null, 1, 1, Inertial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInertial_Inertia(), this.getInertia(), null, "inertia", null, 0, 1, Inertial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInertial_Mass(), this.getMass(), null, "mass", null, 0, 1, Inertial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInertial_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Inertial.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(visualEClass, Visual.class, "Visual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVisual_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Visual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisual_Geometry(), this.getGeometry(), null, "geometry", null, 1, 1, Visual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisual_Material(), this.getMaterial(), null, "material", null, 0, 1, Visual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inertiaEClass, Inertia.class, "Inertia", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInertia_Ixx(), this.getURDFAttrSignedNumeric(), null, "ixx", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInertia_Ixy(), this.getURDFAttrSignedNumeric(), null, "ixy", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInertia_Ixz(), this.getURDFAttrSignedNumeric(), null, "ixz", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInertia_Izz(), this.getURDFAttrSignedNumeric(), null, "izz", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInertia_Iyy(), this.getURDFAttrSignedNumeric(), null, "iyy", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInertia_Iyz(), this.getURDFAttrSignedNumeric(), null, "iyz", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInertia_Izz(), this.getURDFAttrSignedNumeric(), null, "izz", null, 1, 1, Inertia.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(visualEClass, Visual.class, "Visual", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVisual_Geometry(), this.getGeometry(), null, "geometry", null, 1, -1, Visual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVisual_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Visual.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(geometryEClass, Geometry.class, "Geometry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(boxEClass, Box.class, "Box", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBox_Height(), this.getURDFAttrNumeric(), null, "height", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBox_Width(), this.getURDFAttrNumeric(), null, "width", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBox_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(cylinderEClass, Cylinder.class, "Cylinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCylinder_Radius(), this.getURDFAttrNumeric(), null, "radius", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCylinder_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(collisionEClass, Collision.class, "Collision", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCollision_Geometry(), this.getGeometry(), null, "geometry", null, 1, -1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCollision_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(massEClass, Mass.class, "Mass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMass_MassKilogram(), this.getURDFAttrSignedNumeric(), null, "massKilogram", null, 1, 1, Mass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(originEClass, Origin.class, "Origin", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOrigin_X(), this.getURDFAttrSignedNumeric(), null, "x", null, 1, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrigin_Y(), this.getURDFAttrSignedNumeric(), null, "y", null, 1, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrigin_Z(), this.getURDFAttrSignedNumeric(), null, "z", null, 1, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOrigin_Roll(), this.getURDFAttrSignedNumeric(), null, "roll", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOrigin_Pitch(), this.getURDFAttrSignedNumeric(), null, "pitch", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOrigin_Yaw(), this.getURDFAttrSignedNumeric(), null, "yaw", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOrigin_Pitch(), this.getURDFAttrSignedNumeric(), null, "pitch", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOrigin_Roll(), this.getURDFAttrSignedNumeric(), null, "roll", null, 0, 1, Origin.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(massEClass, Mass.class, "Mass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMass_MassValueInKilograms(), this.getURDFAttrNumeric(), null, "massValueInKilograms", null, 1, 1, Mass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(collisionEClass, Collision.class, "Collision", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCollision_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollision_Geometry(), this.getGeometry(), null, "geometry", null, 1, 1, Collision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(urdfAttrSignedNumericEClass, URDFAttrSignedNumeric.class, "URDFAttrSignedNumeric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getURDFAttrSignedNumeric_Value(), ecorePackage.getEString(), "value", null, 1, 1, URDFAttrSignedNumeric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(geometryEClass, Geometry.class, "Geometry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(urdfAttrFloatEClass, URDFAttrFloat.class, "URDFAttrFloat", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getURDFAttrFloat_Value(), ecorePackage.getEFloat(), "value", null, 1, 1, URDFAttrFloat.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(boxEClass, Box.class, "Box", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBox_Width(), this.getURDFAttrNumeric(), null, "width", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBox_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBox_Height(), this.getURDFAttrNumeric(), null, "height", null, 1, 1, Box.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(urdfAttrINTEClass, URDFAttrINT.class, "URDFAttrINT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getURDFAttrINT_Value(), ecorePackage.getEInt(), "value", "0", 1, 1, URDFAttrINT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(urdfAttrNumericEClass, URDFAttrNumeric.class, "URDFAttrNumeric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getURDFAttrNumeric_Value(), ecorePackage.getEString(), "value", null, 1, 1, URDFAttrNumeric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(urdfAttrSTRINGEClass, URDFAttrSTRING.class, "URDFAttrSTRING", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getURDFAttrSTRING_Value(), theXMLTypePackage.getString(), "value", null, 1, 1, URDFAttrSTRING.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(cylinderEClass, Cylinder.class, "Cylinder", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCylinder_Radius(), this.getURDFAttrNumeric(), null, "radius", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCylinder_Length(), this.getURDFAttrNumeric(), null, "length", null, 1, 1, Cylinder.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(meshEClass, Mesh.class, "Mesh", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMesh_PathToFile(), this.getURDFAttrSTRING(), null, "pathToFile", null, 1, 1, Mesh.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMesh_Dimension(), this.getBox(), null, "dimension", null, 0, 1, Mesh.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sphereEClass, Sphere.class, "Sphere", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSphere_Radius(), this.getURDFAttrNumeric(), null, "radius", null, 1, 1, Sphere.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(materialEClass, Material.class, "Material", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(textureEClass, Texture.class, "Texture", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTexture_PathToFile(), this.getURDFAttrSTRING(), null, "pathToFile", null, 1, 1, Texture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(colorEClass, Color.class, "Color", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getColor_Red(), this.getURDFAttrFloat(), null, "red", null, 1, 1, Color.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1798,28 +1931,29 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 		initEReference(getColor_Blue(), this.getURDFAttrFloat(), null, "blue", null, 1, 1, Color.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getColor_Alpha(), this.getURDFAttrFloat(), null, "alpha", null, 1, 1, Color.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(textureEClass, Texture.class, "Texture", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTexture_PathToFile(), this.getURDFAttrSTRING(), null, "pathToFile", null, 1, 1, Texture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(materialEClass, Material.class, "Material", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(limitEClass, Limit.class, "Limit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLimit_Effort(), this.getURDFAttrSignedNumeric(), null, "effort", null, 1, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLimit_Velocity(), this.getURDFAttrSignedNumeric(), null, "velocity", null, 1, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLimit_Lower(), this.getURDFAttrSignedNumeric(), null, "lower", null, 0, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getLimit_Upper(), this.getURDFAttrSignedNumeric(), null, "upper", null, 0, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(jointEClass, Joint.class, "Joint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getJoint_IsReuseOf(), this.getJoint(), null, "isReuseOf", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_ChildOf(), this.getLink(), null, "childOf", null, 1, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_ParentOf(), this.getLink(), null, "parentOf", null, 1, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJoint_Type(), this.getJointType(), "type", null, 1, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Axis(), this.getAxis(), null, "axis", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Limit(), this.getLimit(), null, "limit", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Calibration(), this.getCalibration(), null, "calibration", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Dynamics(), this.getDynamics(), null, "dynamics", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Origin(), this.getOrigin(), null, "origin", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Reuse(), this.getReuse(), null, "reuse", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJoint_Safetycontroller(), this.getSafetyController(), null, "safetycontroller", null, 0, 1, Joint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(axisEClass, Axis.class, "Axis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAxis_X(), this.getURDFAttrINT(), null, "x", null, 1, 1, Axis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAxis_Y(), this.getURDFAttrINT(), null, "y", null, 1, 1, Axis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAxis_Z(), this.getURDFAttrINT(), null, "z", null, 1, 1, Axis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(jointDecoratorEClass, JointDecorator.class, "JointDecorator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJointDecorator_Axis(), this.getAxis(), null, "axis", null, 0, 1, JointDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJointDecorator_Limit(), this.getLimit(), null, "limit", null, 0, 1, JointDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJointDecorator_Calibration(), this.getCalibration(), null, "calibration", null, 0, 1, JointDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJointDecorator_Dynamics(), this.getDynamics(), null, "dynamics", null, 0, 1, JointDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJointDecorator_Safetycontroller(), this.getSafetyController(), null, "safetycontroller", null, 0, 1, JointDecorator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(limitEClass, Limit.class, "Limit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLimit_Effort(), this.getURDFAttrSignedNumeric(), null, "effort", null, 1, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLimit_Velocity(), this.getURDFAttrSignedNumeric(), null, "velocity", null, 1, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLimit_Lower(), this.getURDFAttrSignedNumeric(), null, "lower", null, 0, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLimit_Upper(), this.getURDFAttrSignedNumeric(), null, "upper", null, 0, 1, Limit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(calibrationEClass, Calibration.class, "Calibration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCalibration_Rising(), this.getURDFAttrSignedNumeric(), null, "rising", null, 0, 1, Calibration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1832,18 +1966,31 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 		initEClass(safetyControllerEClass, SafetyController.class, "SafetyController", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSafetyController_K_velocity(), this.getURDFAttrSignedNumeric(), null, "k_velocity", null, 1, 1, SafetyController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSafetyController_K_position(), this.getURDFAttrSignedNumeric(), null, "k_position", null, 0, 1, SafetyController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSafetyController_SoftUpperLimit(), this.getURDFAttrSignedNumeric(), null, "softUpperLimit", null, 0, 1, SafetyController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSafetyController_SoftLowerLimit(), this.getURDFAttrSignedNumeric(), null, "softLowerLimit", null, 0, 1, SafetyController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSafetyController_SoftUpperLimit(), this.getURDFAttrSignedNumeric(), null, "softUpperLimit", null, 0, 1, SafetyController.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(jointDecoRefEClass, JointDecoRef.class, "JointDecoRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJointDecoRef_Decorator(), this.getJointDecorator(), null, "decorator", null, 1, 1, JointDecoRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJointDecoRef_Ref(), this.getJoint(), null, "ref", null, 1, 1, JointDecoRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(topologyEClass, Topology.class, "Topology", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTopology_Parent(), this.getLink(), null, "parent", null, 1, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopology_Joint(), this.getJointRef(), null, "joint", null, 0, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopology_Child(), this.getTopology(), null, "child", null, 0, 1, Topology.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(jointRefEClass, JointRef.class, "JointRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getJointRef_Fix(), ecorePackage.getEString(), "fix", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJointRef_Rev(), ecorePackage.getEString(), "rev", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJointRef_Pris(), ecorePackage.getEString(), "pris", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJointRef_Cont(), ecorePackage.getEString(), "cont", null, 0, 1, JointRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(assignNewValueEClass, AssignNewValue.class, "AssignNewValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAssignNewValue_GetRef(), this.getRef(), null, "getRef", null, 1, 1, AssignNewValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignNewValue_NewReuseable(), this.getReUseAble(), null, "newReuseable", null, 0, 1, AssignNewValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(addToEClass, AddTo.class, "AddTo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAddTo_Link(), this.getLink(), null, "link", null, 0, 1, AddTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddTo_Joint(), this.getJoint(), null, "joint", null, 0, 1, AddTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAddTo_Add(), this.getReUseAble(), null, "add", null, 1, 1, AddTo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), theXMLTypePackage.getID(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(reUseAbleEClass, ReUseAble.class, "ReUseAble", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReUseAble_IsReuseOf(), this.getReUseAble(), null, "isReuseOf", null, 0, 1, ReUseAble.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(jointTypeEEnum, JointType.class, "JointType");
@@ -1854,26 +2001,6 @@ public class MyURDFPackageImpl extends EPackageImpl implements MyURDFPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.obeo.fr/dsl/dnc/archetype
-		createArchetypeAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.obeo.fr/dsl/dnc/archetype</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createArchetypeAnnotations() {
-		String source = "http://www.obeo.fr/dsl/dnc/archetype";	
-		addAnnotation
-		  (urdfAttrFloatEClass, 
-		   source, 
-		   new String[] {
-			 "archetype", "MomentInterval"
-		   });
 	}
 
 } //MyURDFPackageImpl

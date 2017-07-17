@@ -65,7 +65,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 33;
+	int NAMED_ELEMENT = 36;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -105,22 +105,13 @@ public interface MyURDFPackage extends EPackage {
 	int ROBOT__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Topologies</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Links</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROBOT__TOPOLOGIES = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Link</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROBOT__LINK = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int ROBOT__LINKS = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Joint</b></em>' containment reference list.
@@ -129,16 +120,25 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ROBOT__JOINT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int ROBOT__JOINT = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Linkrefs</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Topologies</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROBOT__LINKREFS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int ROBOT__TOPOLOGIES = NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Addto</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROBOT__ADDTO = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Robot</em>' class.
@@ -157,43 +157,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getTopology()
 	 * @generated
 	 */
-	int TOPOLOGY = 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPOLOGY__PARENT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Joint</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPOLOGY__JOINT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Child</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPOLOGY__CHILD = 2;
-
-	/**
-	 * The number of structural features of the '<em>Topology</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOPOLOGY_FEATURE_COUNT = 3;
+	int TOPOLOGY = 32;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.MaterialImpl <em>Material</em>}' class.
@@ -203,7 +167,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getMaterial()
 	 * @generated
 	 */
-	int MATERIAL = 25;
+	int MATERIAL = 23;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.GeometryImpl <em>Geometry</em>}' class.
@@ -213,7 +177,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getGeometry()
 	 * @generated
 	 */
-	int GEOMETRY = 10;
+	int GEOMETRY = 18;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.LinkImpl <em>Link</em>}' class.
@@ -226,123 +190,34 @@ public interface MyURDFPackage extends EPackage {
 	int LINK = 2;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ReuseImpl <em>Reuse</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.ReuseImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReuse()
 	 * @generated
-	 * @ordered
 	 */
-	int LINK__NAME = NAMED_ELEMENT__NAME;
+	int REUSE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Is Reuse Of</b></em>' reference.
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.RefImpl <em>Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.RefImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getRef()
 	 * @generated
-	 * @ordered
 	 */
-	int LINK__IS_REUSE_OF = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REF = 4;
 
 	/**
-	 * The feature id for the '<em><b>Decorator</b></em>' containment reference.
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ReUsableRefImpl <em>Re Usable Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK__DECORATOR = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Link</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.LinkDecoratorImpl <em>Link Decorator</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.LinkDecoratorImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLinkDecorator()
+	 * @see org.xtext.urdf.myURDF.impl.ReUsableRefImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReUsableRef()
 	 * @generated
 	 */
-	int LINK_DECORATOR = 3;
-
-	/**
-	 * The feature id for the '<em><b>Inertial</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_DECORATOR__INERTIAL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Visual</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_DECORATOR__VISUAL = 1;
-
-	/**
-	 * The feature id for the '<em><b>Collision</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_DECORATOR__COLLISION = 2;
-
-	/**
-	 * The number of structural features of the '<em>Link Decorator</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_DECORATOR_FEATURE_COUNT = 3;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.LinkRefImpl <em>Link Ref</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.LinkRefImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLinkRef()
-	 * @generated
-	 */
-	int LINK_REF = 4;
-
-	/**
-	 * The feature id for the '<em><b>Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_REF__REF = 0;
-
-	/**
-	 * The feature id for the '<em><b>Decorator</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_REF__DECORATOR = 1;
-
-	/**
-	 * The number of structural features of the '<em>Link Ref</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINK_REF_FEATURE_COUNT = 2;
+	int RE_USABLE_REF = 5;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.JointImpl <em>Joint</em>}' class.
@@ -352,70 +227,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJoint()
 	 * @generated
 	 */
-	int JOINT = 5;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Reuse Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__IS_REUSE_OF = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Child Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__CHILD_OF = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Parent Of</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__PARENT_OF = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Decorator</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT__DECORATOR = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Joint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int JOINT = 26;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.JointRefImpl <em>Joint Ref</em>}' class.
@@ -425,52 +237,27 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointRef()
 	 * @generated
 	 */
-	int JOINT_REF = 6;
+	int JOINT_REF = 33;
 
 	/**
-	 * The feature id for the '<em><b>Fix</b></em>' attribute.
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.AssignNewValueImpl <em>Assign New Value</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.AssignNewValueImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAssignNewValue()
 	 * @generated
-	 * @ordered
 	 */
-	int JOINT_REF__FIX = 0;
+	int ASSIGN_NEW_VALUE = 34;
 
 	/**
-	 * The feature id for the '<em><b>Rev</b></em>' attribute.
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.AddToImpl <em>Add To</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.AddToImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAddTo()
 	 * @generated
-	 * @ordered
 	 */
-	int JOINT_REF__REV = 1;
-
-	/**
-	 * The feature id for the '<em><b>Pris</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_REF__PRIS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Cont</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_REF__CONT = 3;
-
-	/**
-	 * The number of structural features of the '<em>Joint Ref</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_REF_FEATURE_COUNT = 4;
+	int ADD_TO = 35;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.InertialImpl <em>Inertial</em>}' class.
@@ -480,52 +267,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getInertial()
 	 * @generated
 	 */
-	int INERTIAL = 7;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIAL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Inertia</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIAL__INERTIA = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Mass</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIAL__MASS = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIAL__ORIGIN = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Inertial</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int INERTIAL = 12;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.VisualImpl <em>Visual</em>}' class.
@@ -535,7 +277,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getVisual()
 	 * @generated
 	 */
-	int VISUAL = 9;
+	int VISUAL = 13;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.CollisionImpl <em>Collision</em>}' class.
@@ -545,7 +287,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getCollision()
 	 * @generated
 	 */
-	int COLLISION = 13;
+	int COLLISION = 17;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.OriginImpl <em>Origin</em>}' class.
@@ -555,7 +297,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getOrigin()
 	 * @generated
 	 */
-	int ORIGIN = 14;
+	int ORIGIN = 16;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.MassImpl <em>Mass</em>}' class.
@@ -575,7 +317,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getURDFAttrSignedNumeric()
 	 * @generated
 	 */
-	int URDF_ATTR_SIGNED_NUMERIC = 16;
+	int URDF_ATTR_SIGNED_NUMERIC = 6;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.URDFAttrFloatImpl <em>URDF Attr Float</em>}' class.
@@ -585,7 +327,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getURDFAttrFloat()
 	 * @generated
 	 */
-	int URDF_ATTR_FLOAT = 17;
+	int URDF_ATTR_FLOAT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.URDFAttrINTImpl <em>URDF Attr INT</em>}' class.
@@ -595,7 +337,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getURDFAttrINT()
 	 * @generated
 	 */
-	int URDF_ATTR_INT = 18;
+	int URDF_ATTR_INT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.URDFAttrNumericImpl <em>URDF Attr Numeric</em>}' class.
@@ -605,7 +347,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getURDFAttrNumeric()
 	 * @generated
 	 */
-	int URDF_ATTR_NUMERIC = 19;
+	int URDF_ATTR_NUMERIC = 9;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.URDFAttrSTRINGImpl <em>URDF Attr STRING</em>}' class.
@@ -615,7 +357,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getURDFAttrSTRING()
 	 * @generated
 	 */
-	int URDF_ATTR_STRING = 20;
+	int URDF_ATTR_STRING = 10;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.InertiaImpl <em>Inertia</em>}' class.
@@ -625,124 +367,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getInertia()
 	 * @generated
 	 */
-	int INERTIA = 8;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Ixx</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IXX = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Ixy</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IXY = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Ixz</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IXZ = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Iyy</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IYY = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Iyz</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IYZ = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Izz</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA__IZZ = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>Inertia</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INERTIA_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISUAL__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Geometry</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISUAL__GEOMETRY = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISUAL__ORIGIN = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Visual</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISUAL_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Geometry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEOMETRY_FEATURE_COUNT = 0;
+	int INERTIA = 14;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ColorImpl <em>Color</em>}' class.
@@ -752,7 +377,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getColor()
 	 * @generated
 	 */
-	int COLOR = 23;
+	int COLOR = 25;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.TextureImpl <em>Texture</em>}' class.
@@ -772,52 +397,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getBox()
 	 * @generated
 	 */
-	int BOX = 11;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__NAME = GEOMETRY_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Height</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__HEIGHT = GEOMETRY_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Width</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__WIDTH = GEOMETRY_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX__LENGTH = GEOMETRY_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Box</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOX_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 4;
+	int BOX = 19;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.CylinderImpl <em>Cylinder</em>}' class.
@@ -827,7 +407,106 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getCylinder()
 	 * @generated
 	 */
-	int CYLINDER = 12;
+	int CYLINDER = 20;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.DotExpressionImpl <em>Dot Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.DotExpressionImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getDotExpression()
+	 * @generated
+	 */
+	int DOT_EXPRESSION = 11;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.MeshImpl <em>Mesh</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.MeshImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getMesh()
+	 * @generated
+	 */
+	int MESH = 21;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.SphereImpl <em>Sphere</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.SphereImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getSphere()
+	 * @generated
+	 */
+	int SPHERE = 22;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.LimitImpl <em>Limit</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.LimitImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLimit()
+	 * @generated
+	 */
+	int LIMIT = 28;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.AxisImpl <em>Axis</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.AxisImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAxis()
+	 * @generated
+	 */
+	int AXIS = 27;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.CalibrationImpl <em>Calibration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.CalibrationImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getCalibration()
+	 * @generated
+	 */
+	int CALIBRATION = 29;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.DynamicsImpl <em>Dynamics</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.DynamicsImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getDynamics()
+	 * @generated
+	 */
+	int DYNAMICS = 30;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl <em>Safety Controller</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.SafetyControllerImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getSafetyController()
+	 * @generated
+	 */
+	int SAFETY_CONTROLLER = 31;
+
+	/**
+	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ReUseAbleImpl <em>Re Use Able</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xtext.urdf.myURDF.impl.ReUseAbleImpl
+	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReUseAble()
+	 * @generated
+	 */
+	int RE_USE_ABLE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Re Use Able</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RE_USE_ABLE_FEATURE_COUNT = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -836,169 +515,115 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CYLINDER__NAME = GEOMETRY_FEATURE_COUNT + 0;
+	int LINK__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Reuse Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYLINDER__RADIUS = GEOMETRY_FEATURE_COUNT + 1;
+	int LINK__IS_REUSE_OF = RE_USE_ABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Length</b></em>' containment reference.
+	 * The feature id for the '<em><b>Reuse</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYLINDER__LENGTH = GEOMETRY_FEATURE_COUNT + 2;
+	int LINK__REUSE = RE_USE_ABLE_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Cylinder</em>' class.
+	 * The feature id for the '<em><b>Inertial</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYLINDER_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 3;
+	int LINK__INERTIAL = RE_USE_ABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Visual</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION__NAME = NAMED_ELEMENT__NAME;
+	int LINK__VISUAL = RE_USE_ABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Geometry</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Collision</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION__GEOMETRY = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int LINK__COLLISION = RE_USE_ABLE_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
+	 * The number of structural features of the '<em>Link</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION__ORIGIN = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int LINK_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The number of structural features of the '<em>Collision</em>' class.
+	 * The feature id for the '<em><b>Add</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLISION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REUSE__ADD = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Edit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORIGIN__NAME = NAMED_ELEMENT__NAME;
+	int REUSE__EDIT = 1;
 
 	/**
-	 * The feature id for the '<em><b>X</b></em>' containment reference.
+	 * The number of structural features of the '<em>Reuse</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORIGIN__X = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int REUSE_FEATURE_COUNT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Y</b></em>' containment reference.
+	 * The number of structural features of the '<em>Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORIGIN__Y = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int REF_FEATURE_COUNT = 0;
 
 	/**
-	 * The feature id for the '<em><b>Z</b></em>' containment reference.
+	 * The feature id for the '<em><b>Reuseable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORIGIN__Z = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int RE_USABLE_REF__REUSEABLE = REF_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Roll</b></em>' containment reference.
+	 * The number of structural features of the '<em>Re Usable Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORIGIN__ROLL = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Pitch</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORIGIN__PITCH = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Yaw</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORIGIN__YAW = NAMED_ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The number of structural features of the '<em>Origin</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORIGIN_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MASS__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Mass Value In Kilograms</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MASS__MASS_VALUE_IN_KILOGRAMS = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Mass</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MASS_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int RE_USABLE_REF_FEATURE_COUNT = REF_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1007,7 +632,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URDF_ATTR_SIGNED_NUMERIC__VALUE = 0;
+	int URDF_ATTR_SIGNED_NUMERIC__VALUE = RE_USE_ABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>URDF Attr Signed Numeric</em>' class.
@@ -1016,7 +641,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URDF_ATTR_SIGNED_NUMERIC_FEATURE_COUNT = 1;
+	int URDF_ATTR_SIGNED_NUMERIC_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1061,7 +686,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URDF_ATTR_NUMERIC__VALUE = 0;
+	int URDF_ATTR_NUMERIC__VALUE = RE_USE_ABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>URDF Attr Numeric</em>' class.
@@ -1070,7 +695,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int URDF_ATTR_NUMERIC_FEATURE_COUNT = 1;
+	int URDF_ATTR_NUMERIC_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1091,14 +716,418 @@ public interface MyURDFPackage extends EPackage {
 	int URDF_ATTR_STRING_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.MeshImpl <em>Mesh</em>}' class.
+	 * The feature id for the '<em><b>Ref</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.MeshImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getMesh()
 	 * @generated
+	 * @ordered
 	 */
-	int MESH = 21;
+	int DOT_EXPRESSION__REF = REF_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Tail</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOT_EXPRESSION__TAIL = REF_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Dot Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOT_EXPRESSION_FEATURE_COUNT = REF_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIAL__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Inertia</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIAL__INERTIA = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Mass</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIAL__MASS = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIAL__ORIGIN = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Inertial</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIAL_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISUAL__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISUAL__ORIGIN = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Geometry</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISUAL__GEOMETRY = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Material</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISUAL__MATERIAL = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Visual</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISUAL_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ixx</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IXX = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Ixy</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IXY = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Ixz</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IXZ = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Izz</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IZZ = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Iyy</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IYY = RE_USE_ABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Iyz</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA__IYZ = RE_USE_ABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Inertia</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INERTIA_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASS__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Mass Kilogram</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASS__MASS_KILOGRAM = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Mass</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MASS_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>X</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__X = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Y</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__Y = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Z</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__Z = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Yaw</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__YAW = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Pitch</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__PITCH = RE_USE_ABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Roll</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN__ROLL = RE_USE_ABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Origin</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIGIN_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION__ORIGIN = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Geometry</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION__GEOMETRY = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Collision</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLISION_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Geometry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GEOMETRY_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__NAME = GEOMETRY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Width</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__WIDTH = GEOMETRY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__LENGTH = GEOMETRY_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Height</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX__HEIGHT = GEOMETRY_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Box</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOX_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYLINDER__NAME = GEOMETRY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Radius</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYLINDER__RADIUS = GEOMETRY_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Length</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYLINDER__LENGTH = GEOMETRY_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Cylinder</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYLINDER_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1119,32 +1148,13 @@ public interface MyURDFPackage extends EPackage {
 	int MESH__PATH_TO_FILE = GEOMETRY_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Dimension</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MESH__DIMENSION = GEOMETRY_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Mesh</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESH_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.SphereImpl <em>Sphere</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.SphereImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getSphere()
-	 * @generated
-	 */
-	int SPHERE = 22;
+	int MESH_FEATURE_COUNT = GEOMETRY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1180,7 +1190,34 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MATERIAL_FEATURE_COUNT = 0;
+	int MATERIAL_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXTURE__NAME = MATERIAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Path To File</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXTURE__PATH_TO_FILE = MATERIAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Texture</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEXTURE_FEATURE_COUNT = MATERIAL_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1243,411 +1280,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TEXTURE__NAME = MATERIAL_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Path To File</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXTURE__PATH_TO_FILE = MATERIAL_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Texture</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXTURE_FEATURE_COUNT = MATERIAL_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.LimitImpl <em>Limit</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.LimitImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLimit()
-	 * @generated
-	 */
-	int LIMIT = 26;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Effort</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT__EFFORT = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Velocity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT__VELOCITY = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Lower</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT__LOWER = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Upper</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT__UPPER = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Limit</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIMIT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.AxisImpl <em>Axis</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.AxisImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAxis()
-	 * @generated
-	 */
-	int AXIS = 27;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIS__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>X</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIS__X = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Y</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIS__Y = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Z</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIS__Z = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Axis</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AXIS_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.JointDecoratorImpl <em>Joint Decorator</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.JointDecoratorImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointDecorator()
-	 * @generated
-	 */
-	int JOINT_DECORATOR = 28;
-
-	/**
-	 * The feature id for the '<em><b>Axis</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR__AXIS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Limit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR__LIMIT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Calibration</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR__CALIBRATION = 2;
-
-	/**
-	 * The feature id for the '<em><b>Dynamics</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR__DYNAMICS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Safetycontroller</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR__SAFETYCONTROLLER = 4;
-
-	/**
-	 * The number of structural features of the '<em>Joint Decorator</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECORATOR_FEATURE_COUNT = 5;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.CalibrationImpl <em>Calibration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.CalibrationImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getCalibration()
-	 * @generated
-	 */
-	int CALIBRATION = 29;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALIBRATION__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Rising</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALIBRATION__RISING = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Falling</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALIBRATION__FALLING = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Calibration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CALIBRATION_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.DynamicsImpl <em>Dynamics</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.DynamicsImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getDynamics()
-	 * @generated
-	 */
-	int DYNAMICS = 30;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMICS__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Friction</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMICS__FRICTION = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Damping</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMICS__DAMPING = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Dynamics</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMICS_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.SafetyControllerImpl <em>Safety Controller</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.SafetyControllerImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getSafetyController()
-	 * @generated
-	 */
-	int SAFETY_CONTROLLER = 31;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER__NAME = NAMED_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Kvelocity</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER__KVELOCITY = NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Kposition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER__KPOSITION = NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Soft Upper Limit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER__SOFT_UPPER_LIMIT = NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Soft Lower Limit</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER__SOFT_LOWER_LIMIT = NAMED_ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>Safety Controller</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAFETY_CONTROLLER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.JointDecoRefImpl <em>Joint Deco Ref</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.JointDecoRefImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointDecoRef()
-	 * @generated
-	 */
-	int JOINT_DECO_REF = 32;
-
-	/**
-	 * The feature id for the '<em><b>Decorator</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECO_REF__DECORATOR = 0;
-
-	/**
-	 * The feature id for the '<em><b>Ref</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECO_REF__REF = 1;
-
-	/**
-	 * The number of structural features of the '<em>Joint Deco Ref</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JOINT_DECO_REF_FEATURE_COUNT = 2;
-
-	/**
-	 * The meta object id for the '{@link org.xtext.urdf.myURDF.impl.ReUseAbleImpl <em>Re Use Able</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.xtext.urdf.myURDF.impl.ReUseAbleImpl
-	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReUseAble()
-	 * @generated
-	 */
-	int RE_USE_ABLE = 34;
+	int JOINT__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Is Reuse Of</b></em>' reference.
@@ -1656,16 +1289,475 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RE_USE_ABLE__IS_REUSE_OF = 0;
+	int JOINT__IS_REUSE_OF = RE_USE_ABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Re Use Able</em>' class.
+	 * The feature id for the '<em><b>Child Of</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RE_USE_ABLE_FEATURE_COUNT = 1;
+	int JOINT__CHILD_OF = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Parent Of</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__PARENT_OF = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__TYPE = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Axis</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__AXIS = RE_USE_ABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Limit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__LIMIT = RE_USE_ABLE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Calibration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__CALIBRATION = RE_USE_ABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Dynamics</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__DYNAMICS = RE_USE_ABLE_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Origin</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__ORIGIN = RE_USE_ABLE_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Reuse</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__REUSE = RE_USE_ABLE_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Safetycontroller</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT__SAFETYCONTROLLER = RE_USE_ABLE_FEATURE_COUNT + 11;
+
+	/**
+	 * The number of structural features of the '<em>Joint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIS__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>X</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIS__X = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Y</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIS__Y = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Z</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIS__Z = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Axis</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AXIS_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Effort</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT__EFFORT = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Velocity</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT__VELOCITY = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Lower</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT__LOWER = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Upper</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT__UPPER = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Limit</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIMIT_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALIBRATION__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Rising</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALIBRATION__RISING = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Falling</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALIBRATION__FALLING = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Calibration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALIBRATION_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMICS__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Friction</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMICS__FRICTION = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Damping</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMICS__DAMPING = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Dynamics</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMICS_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER__NAME = RE_USE_ABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Kvelocity</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER__KVELOCITY = RE_USE_ABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Kposition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER__KPOSITION = RE_USE_ABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Soft Lower Limit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER__SOFT_LOWER_LIMIT = RE_USE_ABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Soft Upper Limit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER__SOFT_UPPER_LIMIT = RE_USE_ABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Safety Controller</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAFETY_CONTROLLER_FEATURE_COUNT = RE_USE_ABLE_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPOLOGY__PARENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Joint</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPOLOGY__JOINT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Child</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPOLOGY__CHILD = 2;
+
+	/**
+	 * The number of structural features of the '<em>Topology</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TOPOLOGY_FEATURE_COUNT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Fix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_REF__FIX = 0;
+
+	/**
+	 * The feature id for the '<em><b>Rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_REF__REV = 1;
+
+	/**
+	 * The feature id for the '<em><b>Pris</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_REF__PRIS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Cont</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_REF__CONT = 3;
+
+	/**
+	 * The number of structural features of the '<em>Joint Ref</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JOINT_REF_FEATURE_COUNT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Get Ref</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN_NEW_VALUE__GET_REF = 0;
+
+	/**
+	 * The feature id for the '<em><b>New Reuseable</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN_NEW_VALUE__NEW_REUSEABLE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Assign New Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN_NEW_VALUE_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Link</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO__LINK = 0;
+
+	/**
+	 * The feature id for the '<em><b>Joint</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO__JOINT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Add</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO__ADD = 2;
+
+	/**
+	 * The number of structural features of the '<em>Add To</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADD_TO_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.xtext.urdf.myURDF.JointType <em>Joint Type</em>}' enum.
@@ -1675,7 +1767,7 @@ public interface MyURDFPackage extends EPackage {
 	 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointType()
 	 * @generated
 	 */
-	int JOINT_TYPE = 35;
+	int JOINT_TYPE = 37;
 
 
 	/**
@@ -1689,6 +1781,17 @@ public interface MyURDFPackage extends EPackage {
 	EClass getRobot();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getLinks <em>Links</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Links</em>'.
+	 * @see org.xtext.urdf.myURDF.Robot#getLinks()
+	 * @see #getRobot()
+	 * @generated
+	 */
+	EReference getRobot_Links();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getTopologies <em>Topologies</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1700,15 +1803,15 @@ public interface MyURDFPackage extends EPackage {
 	EReference getRobot_Topologies();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getLink <em>Link</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getAddto <em>Addto</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Link</em>'.
-	 * @see org.xtext.urdf.myURDF.Robot#getLink()
+	 * @return the meta object for the containment reference list '<em>Addto</em>'.
+	 * @see org.xtext.urdf.myURDF.Robot#getAddto()
 	 * @see #getRobot()
 	 * @generated
 	 */
-	EReference getRobot_Link();
+	EReference getRobot_Addto();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getJoint <em>Joint</em>}'.
@@ -1720,17 +1823,6 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getRobot_Joint();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Robot#getLinkrefs <em>Linkrefs</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Linkrefs</em>'.
-	 * @see org.xtext.urdf.myURDF.Robot#getLinkrefs()
-	 * @see #getRobot()
-	 * @generated
-	 */
-	EReference getRobot_Linkrefs();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Topology <em>Topology</em>}'.
@@ -1806,90 +1898,122 @@ public interface MyURDFPackage extends EPackage {
 	EClass getLink();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Link#getDecorator <em>Decorator</em>}'.
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.Link#getIsReuseOf <em>Is Reuse Of</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.Link#getDecorator()
+	 * @return the meta object for the reference '<em>Is Reuse Of</em>'.
+	 * @see org.xtext.urdf.myURDF.Link#getIsReuseOf()
 	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLink_Decorator();
+	EReference getLink_IsReuseOf();
 
 	/**
-	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.LinkDecorator <em>Link Decorator</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Link#getReuse <em>Reuse</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Link Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkDecorator
+	 * @return the meta object for the containment reference '<em>Reuse</em>'.
+	 * @see org.xtext.urdf.myURDF.Link#getReuse()
+	 * @see #getLink()
 	 * @generated
 	 */
-	EClass getLinkDecorator();
+	EReference getLink_Reuse();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.LinkDecorator#getInertial <em>Inertial</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Link#getInertial <em>Inertial</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Inertial</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkDecorator#getInertial()
-	 * @see #getLinkDecorator()
+	 * @return the meta object for the containment reference '<em>Inertial</em>'.
+	 * @see org.xtext.urdf.myURDF.Link#getInertial()
+	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLinkDecorator_Inertial();
+	EReference getLink_Inertial();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.LinkDecorator#getVisual <em>Visual</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Link#getVisual <em>Visual</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Visual</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkDecorator#getVisual()
-	 * @see #getLinkDecorator()
+	 * @see org.xtext.urdf.myURDF.Link#getVisual()
+	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLinkDecorator_Visual();
+	EReference getLink_Visual();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.LinkDecorator#getCollision <em>Collision</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Link#getCollision <em>Collision</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Collision</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkDecorator#getCollision()
-	 * @see #getLinkDecorator()
+	 * @see org.xtext.urdf.myURDF.Link#getCollision()
+	 * @see #getLink()
 	 * @generated
 	 */
-	EReference getLinkDecorator_Collision();
+	EReference getLink_Collision();
 
 	/**
-	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.LinkRef <em>Link Ref</em>}'.
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Reuse <em>Reuse</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Link Ref</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkRef
+	 * @return the meta object for class '<em>Reuse</em>'.
+	 * @see org.xtext.urdf.myURDF.Reuse
 	 * @generated
 	 */
-	EClass getLinkRef();
+	EClass getReuse();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.LinkRef#getRef <em>Ref</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Reuse#getAdd <em>Add</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ref</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkRef#getRef()
-	 * @see #getLinkRef()
+	 * @return the meta object for the containment reference '<em>Add</em>'.
+	 * @see org.xtext.urdf.myURDF.Reuse#getAdd()
+	 * @see #getReuse()
 	 * @generated
 	 */
-	EReference getLinkRef_Ref();
+	EReference getReuse_Add();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.LinkRef#getDecorator <em>Decorator</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Reuse#getEdit <em>Edit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.LinkRef#getDecorator()
-	 * @see #getLinkRef()
+	 * @return the meta object for the containment reference '<em>Edit</em>'.
+	 * @see org.xtext.urdf.myURDF.Reuse#getEdit()
+	 * @see #getReuse()
 	 * @generated
 	 */
-	EReference getLinkRef_Decorator();
+	EReference getReuse_Edit();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Ref <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ref</em>'.
+	 * @see org.xtext.urdf.myURDF.Ref
+	 * @generated
+	 */
+	EClass getRef();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.ReUsableRef <em>Re Usable Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Re Usable Ref</em>'.
+	 * @see org.xtext.urdf.myURDF.ReUsableRef
+	 * @generated
+	 */
+	EClass getReUsableRef();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.ReUsableRef#getReuseable <em>Reuseable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reuseable</em>'.
+	 * @see org.xtext.urdf.myURDF.ReUsableRef#getReuseable()
+	 * @see #getReUsableRef()
+	 * @generated
+	 */
+	EReference getReUsableRef_Reuseable();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Joint <em>Joint</em>}'.
@@ -1900,6 +2024,17 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getJoint();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.Joint#getIsReuseOf <em>Is Reuse Of</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Is Reuse Of</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getIsReuseOf()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_IsReuseOf();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.xtext.urdf.myURDF.Joint#getType <em>Type</em>}'.
@@ -1913,15 +2048,81 @@ public interface MyURDFPackage extends EPackage {
 	EAttribute getJoint_Type();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getDecorator <em>Decorator</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getAxis <em>Axis</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.Joint#getDecorator()
+	 * @return the meta object for the containment reference '<em>Axis</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getAxis()
 	 * @see #getJoint()
 	 * @generated
 	 */
-	EReference getJoint_Decorator();
+	EReference getJoint_Axis();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getLimit <em>Limit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Limit</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getLimit()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Limit();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getCalibration <em>Calibration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Calibration</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getCalibration()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Calibration();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getDynamics <em>Dynamics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Dynamics</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getDynamics()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Dynamics();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getOrigin <em>Origin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Origin</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getOrigin()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Origin();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getReuse <em>Reuse</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Reuse</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getReuse()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Reuse();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Joint#getSafetycontroller <em>Safetycontroller</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Safetycontroller</em>'.
+	 * @see org.xtext.urdf.myURDF.Joint#getSafetycontroller()
+	 * @see #getJoint()
+	 * @generated
+	 */
+	EReference getJoint_Safetycontroller();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.JointRef <em>Joint Ref</em>}'.
@@ -1976,6 +2177,102 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJointRef_Cont();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.AssignNewValue <em>Assign New Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Assign New Value</em>'.
+	 * @see org.xtext.urdf.myURDF.AssignNewValue
+	 * @generated
+	 */
+	EClass getAssignNewValue();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.AssignNewValue#getGetRef <em>Get Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Get Ref</em>'.
+	 * @see org.xtext.urdf.myURDF.AssignNewValue#getGetRef()
+	 * @see #getAssignNewValue()
+	 * @generated
+	 */
+	EReference getAssignNewValue_GetRef();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.AssignNewValue#getNewReuseable <em>New Reuseable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>New Reuseable</em>'.
+	 * @see org.xtext.urdf.myURDF.AssignNewValue#getNewReuseable()
+	 * @see #getAssignNewValue()
+	 * @generated
+	 */
+	EReference getAssignNewValue_NewReuseable();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.AddTo <em>Add To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Add To</em>'.
+	 * @see org.xtext.urdf.myURDF.AddTo
+	 * @generated
+	 */
+	EClass getAddTo();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.AddTo#getLink <em>Link</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Link</em>'.
+	 * @see org.xtext.urdf.myURDF.AddTo#getLink()
+	 * @see #getAddTo()
+	 * @generated
+	 */
+	EReference getAddTo_Link();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.AddTo#getJoint <em>Joint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Joint</em>'.
+	 * @see org.xtext.urdf.myURDF.AddTo#getJoint()
+	 * @see #getAddTo()
+	 * @generated
+	 */
+	EReference getAddTo_Joint();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.AddTo#getAdd <em>Add</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Add</em>'.
+	 * @see org.xtext.urdf.myURDF.AddTo#getAdd()
+	 * @see #getAddTo()
+	 * @generated
+	 */
+	EReference getAddTo_Add();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see org.xtext.urdf.myURDF.NamedElement
+	 * @generated
+	 */
+	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.xtext.urdf.myURDF.NamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.xtext.urdf.myURDF.NamedElement#getName()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Name();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.Joint#getChildOf <em>Child Of</em>}'.
@@ -2053,15 +2350,26 @@ public interface MyURDFPackage extends EPackage {
 	EClass getVisual();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Visual#getGeometry <em>Geometry</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Visual#getGeometry <em>Geometry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Geometry</em>'.
+	 * @return the meta object for the containment reference '<em>Geometry</em>'.
 	 * @see org.xtext.urdf.myURDF.Visual#getGeometry()
 	 * @see #getVisual()
 	 * @generated
 	 */
 	EReference getVisual_Geometry();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Visual#getMaterial <em>Material</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Material</em>'.
+	 * @see org.xtext.urdf.myURDF.Visual#getMaterial()
+	 * @see #getVisual()
+	 * @generated
+	 */
+	EReference getVisual_Material();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Visual#getOrigin <em>Origin</em>}'.
@@ -2085,10 +2393,10 @@ public interface MyURDFPackage extends EPackage {
 	EClass getCollision();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.xtext.urdf.myURDF.Collision#getGeometry <em>Geometry</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Collision#getGeometry <em>Geometry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Geometry</em>'.
+	 * @return the meta object for the containment reference '<em>Geometry</em>'.
 	 * @see org.xtext.urdf.myURDF.Collision#getGeometry()
 	 * @see #getCollision()
 	 * @generated
@@ -2193,15 +2501,15 @@ public interface MyURDFPackage extends EPackage {
 	EClass getMass();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Mass#getMassValueInKilograms <em>Mass Value In Kilograms</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Mass#getMassKilogram <em>Mass Kilogram</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Mass Value In Kilograms</em>'.
-	 * @see org.xtext.urdf.myURDF.Mass#getMassValueInKilograms()
+	 * @return the meta object for the containment reference '<em>Mass Kilogram</em>'.
+	 * @see org.xtext.urdf.myURDF.Mass#getMassKilogram()
 	 * @see #getMass()
 	 * @generated
 	 */
-	EReference getMass_MassValueInKilograms();
+	EReference getMass_MassKilogram();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.URDFAttrSignedNumeric <em>URDF Attr Signed Numeric</em>}'.
@@ -2307,6 +2615,38 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getURDFAttrSTRING_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.DotExpression <em>Dot Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dot Expression</em>'.
+	 * @see org.xtext.urdf.myURDF.DotExpression
+	 * @generated
+	 */
+	EClass getDotExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.DotExpression#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Ref</em>'.
+	 * @see org.xtext.urdf.myURDF.DotExpression#getRef()
+	 * @see #getDotExpression()
+	 * @generated
+	 */
+	EReference getDotExpression_Ref();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.DotExpression#getTail <em>Tail</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Tail</em>'.
+	 * @see org.xtext.urdf.myURDF.DotExpression#getTail()
+	 * @see #getDotExpression()
+	 * @generated
+	 */
+	EReference getDotExpression_Tail();
 
 	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Inertia <em>Inertia</em>}'.
@@ -2556,17 +2896,6 @@ public interface MyURDFPackage extends EPackage {
 	EReference getMesh_PathToFile();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Mesh#getDimension <em>Dimension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Dimension</em>'.
-	 * @see org.xtext.urdf.myURDF.Mesh#getDimension()
-	 * @see #getMesh()
-	 * @generated
-	 */
-	EReference getMesh_Dimension();
-
-	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.Sphere <em>Sphere</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2650,71 +2979,6 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAxis();
-
-	/**
-	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.JointDecorator <em>Joint Decorator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Joint Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator
-	 * @generated
-	 */
-	EClass getJointDecorator();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecorator#getAxis <em>Axis</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Axis</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator#getAxis()
-	 * @see #getJointDecorator()
-	 * @generated
-	 */
-	EReference getJointDecorator_Axis();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecorator#getLimit <em>Limit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Limit</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator#getLimit()
-	 * @see #getJointDecorator()
-	 * @generated
-	 */
-	EReference getJointDecorator_Limit();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecorator#getCalibration <em>Calibration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Calibration</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator#getCalibration()
-	 * @see #getJointDecorator()
-	 * @generated
-	 */
-	EReference getJointDecorator_Calibration();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecorator#getDynamics <em>Dynamics</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Dynamics</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator#getDynamics()
-	 * @see #getJointDecorator()
-	 * @generated
-	 */
-	EReference getJointDecorator_Dynamics();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecorator#getSafetycontroller <em>Safetycontroller</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Safetycontroller</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecorator#getSafetycontroller()
-	 * @see #getJointDecorator()
-	 * @generated
-	 */
-	EReference getJointDecorator_Safetycontroller();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.Axis#getX <em>X</em>}'.
@@ -2824,59 +3088,6 @@ public interface MyURDFPackage extends EPackage {
 	EClass getSafetyController();
 
 	/**
-	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.JointDecoRef <em>Joint Deco Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Joint Deco Ref</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecoRef
-	 * @generated
-	 */
-	EClass getJointDecoRef();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.JointDecoRef#getDecorator <em>Decorator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Decorator</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecoRef#getDecorator()
-	 * @see #getJointDecoRef()
-	 * @generated
-	 */
-	EReference getJointDecoRef_Decorator();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.JointDecoRef#getRef <em>Ref</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Ref</em>'.
-	 * @see org.xtext.urdf.myURDF.JointDecoRef#getRef()
-	 * @see #getJointDecoRef()
-	 * @generated
-	 */
-	EReference getJointDecoRef_Ref();
-
-	/**
-	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.NamedElement <em>Named Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Named Element</em>'.
-	 * @see org.xtext.urdf.myURDF.NamedElement
-	 * @generated
-	 */
-	EClass getNamedElement();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.xtext.urdf.myURDF.NamedElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.xtext.urdf.myURDF.NamedElement#getName()
-	 * @see #getNamedElement()
-	 * @generated
-	 */
-	EAttribute getNamedElement_Name();
-
-	/**
 	 * Returns the meta object for class '{@link org.xtext.urdf.myURDF.ReUseAble <em>Re Use Able</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2885,17 +3096,6 @@ public interface MyURDFPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getReUseAble();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.xtext.urdf.myURDF.ReUseAble#getIsReuseOf <em>Is Reuse Of</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Is Reuse Of</em>'.
-	 * @see org.xtext.urdf.myURDF.ReUseAble#getIsReuseOf()
-	 * @see #getReUseAble()
-	 * @generated
-	 */
-	EReference getReUseAble_IsReuseOf();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.xtext.urdf.myURDF.SafetyController#getSoftLowerLimit <em>Soft Lower Limit</em>}'.
@@ -2984,6 +3184,14 @@ public interface MyURDFPackage extends EPackage {
 		EClass ROBOT = eINSTANCE.getRobot();
 
 		/**
+		 * The meta object literal for the '<em><b>Links</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROBOT__LINKS = eINSTANCE.getRobot_Links();
+
+		/**
 		 * The meta object literal for the '<em><b>Topologies</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2992,12 +3200,12 @@ public interface MyURDFPackage extends EPackage {
 		EReference ROBOT__TOPOLOGIES = eINSTANCE.getRobot_Topologies();
 
 		/**
-		 * The meta object literal for the '<em><b>Link</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Addto</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROBOT__LINK = eINSTANCE.getRobot_Link();
+		EReference ROBOT__ADDTO = eINSTANCE.getRobot_Addto();
 
 		/**
 		 * The meta object literal for the '<em><b>Joint</b></em>' containment reference list feature.
@@ -3006,14 +3214,6 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROBOT__JOINT = eINSTANCE.getRobot_Joint();
-
-		/**
-		 * The meta object literal for the '<em><b>Linkrefs</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ROBOT__LINKREFS = eINSTANCE.getRobot_Linkrefs();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.TopologyImpl <em>Topology</em>}' class.
@@ -3080,30 +3280,28 @@ public interface MyURDFPackage extends EPackage {
 		EClass LINK = eINSTANCE.getLink();
 
 		/**
-		 * The meta object literal for the '<em><b>Decorator</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Is Reuse Of</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK__DECORATOR = eINSTANCE.getLink_Decorator();
+		EReference LINK__IS_REUSE_OF = eINSTANCE.getLink_IsReuseOf();
 
 		/**
-		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.LinkDecoratorImpl <em>Link Decorator</em>}' class.
+		 * The meta object literal for the '<em><b>Reuse</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.xtext.urdf.myURDF.impl.LinkDecoratorImpl
-		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLinkDecorator()
 		 * @generated
 		 */
-		EClass LINK_DECORATOR = eINSTANCE.getLinkDecorator();
+		EReference LINK__REUSE = eINSTANCE.getLink_Reuse();
 
 		/**
-		 * The meta object literal for the '<em><b>Inertial</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Inertial</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_DECORATOR__INERTIAL = eINSTANCE.getLinkDecorator_Inertial();
+		EReference LINK__INERTIAL = eINSTANCE.getLink_Inertial();
 
 		/**
 		 * The meta object literal for the '<em><b>Visual</b></em>' containment reference list feature.
@@ -3111,7 +3309,7 @@ public interface MyURDFPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_DECORATOR__VISUAL = eINSTANCE.getLinkDecorator_Visual();
+		EReference LINK__VISUAL = eINSTANCE.getLink_Visual();
 
 		/**
 		 * The meta object literal for the '<em><b>Collision</b></em>' containment reference list feature.
@@ -3119,33 +3317,61 @@ public interface MyURDFPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_DECORATOR__COLLISION = eINSTANCE.getLinkDecorator_Collision();
+		EReference LINK__COLLISION = eINSTANCE.getLink_Collision();
 
 		/**
-		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.LinkRefImpl <em>Link Ref</em>}' class.
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.ReuseImpl <em>Reuse</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.xtext.urdf.myURDF.impl.LinkRefImpl
-		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getLinkRef()
+		 * @see org.xtext.urdf.myURDF.impl.ReuseImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReuse()
 		 * @generated
 		 */
-		EClass LINK_REF = eINSTANCE.getLinkRef();
+		EClass REUSE = eINSTANCE.getReuse();
 
 		/**
-		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LINK_REF__REF = eINSTANCE.getLinkRef_Ref();
-
-		/**
-		 * The meta object literal for the '<em><b>Decorator</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Add</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference LINK_REF__DECORATOR = eINSTANCE.getLinkRef_Decorator();
+		EReference REUSE__ADD = eINSTANCE.getReuse_Add();
+
+		/**
+		 * The meta object literal for the '<em><b>Edit</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REUSE__EDIT = eINSTANCE.getReuse_Edit();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.RefImpl <em>Ref</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.RefImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getRef()
+		 * @generated
+		 */
+		EClass REF = eINSTANCE.getRef();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.ReUsableRefImpl <em>Re Usable Ref</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.ReUsableRefImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getReUsableRef()
+		 * @generated
+		 */
+		EClass RE_USABLE_REF = eINSTANCE.getReUsableRef();
+
+		/**
+		 * The meta object literal for the '<em><b>Reuseable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RE_USABLE_REF__REUSEABLE = eINSTANCE.getReUsableRef_Reuseable();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.JointImpl <em>Joint</em>}' class.
@@ -3158,6 +3384,14 @@ public interface MyURDFPackage extends EPackage {
 		EClass JOINT = eINSTANCE.getJoint();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Reuse Of</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__IS_REUSE_OF = eINSTANCE.getJoint_IsReuseOf();
+
+		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3166,12 +3400,60 @@ public interface MyURDFPackage extends EPackage {
 		EAttribute JOINT__TYPE = eINSTANCE.getJoint_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Decorator</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Axis</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference JOINT__DECORATOR = eINSTANCE.getJoint_Decorator();
+		EReference JOINT__AXIS = eINSTANCE.getJoint_Axis();
+
+		/**
+		 * The meta object literal for the '<em><b>Limit</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__LIMIT = eINSTANCE.getJoint_Limit();
+
+		/**
+		 * The meta object literal for the '<em><b>Calibration</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__CALIBRATION = eINSTANCE.getJoint_Calibration();
+
+		/**
+		 * The meta object literal for the '<em><b>Dynamics</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__DYNAMICS = eINSTANCE.getJoint_Dynamics();
+
+		/**
+		 * The meta object literal for the '<em><b>Origin</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__ORIGIN = eINSTANCE.getJoint_Origin();
+
+		/**
+		 * The meta object literal for the '<em><b>Reuse</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__REUSE = eINSTANCE.getJoint_Reuse();
+
+		/**
+		 * The meta object literal for the '<em><b>Safetycontroller</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JOINT__SAFETYCONTROLLER = eINSTANCE.getJoint_Safetycontroller();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.JointRefImpl <em>Joint Ref</em>}' class.
@@ -3214,6 +3496,84 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute JOINT_REF__CONT = eINSTANCE.getJointRef_Cont();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.AssignNewValueImpl <em>Assign New Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.AssignNewValueImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAssignNewValue()
+		 * @generated
+		 */
+		EClass ASSIGN_NEW_VALUE = eINSTANCE.getAssignNewValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Ref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGN_NEW_VALUE__GET_REF = eINSTANCE.getAssignNewValue_GetRef();
+
+		/**
+		 * The meta object literal for the '<em><b>New Reuseable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGN_NEW_VALUE__NEW_REUSEABLE = eINSTANCE.getAssignNewValue_NewReuseable();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.AddToImpl <em>Add To</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.AddToImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getAddTo()
+		 * @generated
+		 */
+		EClass ADD_TO = eINSTANCE.getAddTo();
+
+		/**
+		 * The meta object literal for the '<em><b>Link</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADD_TO__LINK = eINSTANCE.getAddTo_Link();
+
+		/**
+		 * The meta object literal for the '<em><b>Joint</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADD_TO__JOINT = eINSTANCE.getAddTo_Joint();
+
+		/**
+		 * The meta object literal for the '<em><b>Add</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ADD_TO__ADD = eINSTANCE.getAddTo_Add();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.NamedElementImpl <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.NamedElementImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getNamedElement()
+		 * @generated
+		 */
+		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Child Of</b></em>' reference feature.
@@ -3276,12 +3636,20 @@ public interface MyURDFPackage extends EPackage {
 		EClass VISUAL = eINSTANCE.getVisual();
 
 		/**
-		 * The meta object literal for the '<em><b>Geometry</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Geometry</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference VISUAL__GEOMETRY = eINSTANCE.getVisual_Geometry();
+
+		/**
+		 * The meta object literal for the '<em><b>Material</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VISUAL__MATERIAL = eINSTANCE.getVisual_Material();
 
 		/**
 		 * The meta object literal for the '<em><b>Origin</b></em>' containment reference feature.
@@ -3302,7 +3670,7 @@ public interface MyURDFPackage extends EPackage {
 		EClass COLLISION = eINSTANCE.getCollision();
 
 		/**
-		 * The meta object literal for the '<em><b>Geometry</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Geometry</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -3386,12 +3754,12 @@ public interface MyURDFPackage extends EPackage {
 		EClass MASS = eINSTANCE.getMass();
 
 		/**
-		 * The meta object literal for the '<em><b>Mass Value In Kilograms</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Mass Kilogram</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MASS__MASS_VALUE_IN_KILOGRAMS = eINSTANCE.getMass_MassValueInKilograms();
+		EReference MASS__MASS_KILOGRAM = eINSTANCE.getMass_MassKilogram();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.URDFAttrSignedNumericImpl <em>URDF Attr Signed Numeric</em>}' class.
@@ -3482,6 +3850,32 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute URDF_ATTR_STRING__VALUE = eINSTANCE.getURDFAttrSTRING_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.DotExpressionImpl <em>Dot Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xtext.urdf.myURDF.impl.DotExpressionImpl
+		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getDotExpression()
+		 * @generated
+		 */
+		EClass DOT_EXPRESSION = eINSTANCE.getDotExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOT_EXPRESSION__REF = eINSTANCE.getDotExpression_Ref();
+
+		/**
+		 * The meta object literal for the '<em><b>Tail</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOT_EXPRESSION__TAIL = eINSTANCE.getDotExpression_Tail();
 
 		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.InertiaImpl <em>Inertia</em>}' class.
@@ -3680,14 +4074,6 @@ public interface MyURDFPackage extends EPackage {
 		EReference MESH__PATH_TO_FILE = eINSTANCE.getMesh_PathToFile();
 
 		/**
-		 * The meta object literal for the '<em><b>Dimension</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MESH__DIMENSION = eINSTANCE.getMesh_Dimension();
-
-		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.SphereImpl <em>Sphere</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3756,56 +4142,6 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EClass AXIS = eINSTANCE.getAxis();
-
-		/**
-		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.JointDecoratorImpl <em>Joint Decorator</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.xtext.urdf.myURDF.impl.JointDecoratorImpl
-		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointDecorator()
-		 * @generated
-		 */
-		EClass JOINT_DECORATOR = eINSTANCE.getJointDecorator();
-
-		/**
-		 * The meta object literal for the '<em><b>Axis</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECORATOR__AXIS = eINSTANCE.getJointDecorator_Axis();
-
-		/**
-		 * The meta object literal for the '<em><b>Limit</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECORATOR__LIMIT = eINSTANCE.getJointDecorator_Limit();
-
-		/**
-		 * The meta object literal for the '<em><b>Calibration</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECORATOR__CALIBRATION = eINSTANCE.getJointDecorator_Calibration();
-
-		/**
-		 * The meta object literal for the '<em><b>Dynamics</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECORATOR__DYNAMICS = eINSTANCE.getJointDecorator_Dynamics();
-
-		/**
-		 * The meta object literal for the '<em><b>Safetycontroller</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECORATOR__SAFETYCONTROLLER = eINSTANCE.getJointDecorator_Safetycontroller();
 
 		/**
 		 * The meta object literal for the '<em><b>X</b></em>' containment reference feature.
@@ -3894,50 +4230,6 @@ public interface MyURDFPackage extends EPackage {
 		EClass SAFETY_CONTROLLER = eINSTANCE.getSafetyController();
 
 		/**
-		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.JointDecoRefImpl <em>Joint Deco Ref</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.xtext.urdf.myURDF.impl.JointDecoRefImpl
-		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getJointDecoRef()
-		 * @generated
-		 */
-		EClass JOINT_DECO_REF = eINSTANCE.getJointDecoRef();
-
-		/**
-		 * The meta object literal for the '<em><b>Decorator</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECO_REF__DECORATOR = eINSTANCE.getJointDecoRef_Decorator();
-
-		/**
-		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JOINT_DECO_REF__REF = eINSTANCE.getJointDecoRef_Ref();
-
-		/**
-		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.NamedElementImpl <em>Named Element</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.xtext.urdf.myURDF.impl.NamedElementImpl
-		 * @see org.xtext.urdf.myURDF.impl.MyURDFPackageImpl#getNamedElement()
-		 * @generated
-		 */
-		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
-
-		/**
 		 * The meta object literal for the '{@link org.xtext.urdf.myURDF.impl.ReUseAbleImpl <em>Re Use Able</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3946,14 +4238,6 @@ public interface MyURDFPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RE_USE_ABLE = eINSTANCE.getReUseAble();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Reuse Of</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RE_USE_ABLE__IS_REUSE_OF = eINSTANCE.getReUseAble_IsReuseOf();
 
 		/**
 		 * The meta object literal for the '<em><b>Soft Lower Limit</b></em>' containment reference feature.

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
 /**
@@ -24,6 +25,7 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getEffort <em>Effort</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getVelocity <em>Velocity</em>}</li>
  *   <li>{@link org.xtext.urdf.myURDF.impl.LimitImpl#getLower <em>Lower</em>}</li>
@@ -32,7 +34,27 @@ import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
  *
  * @generated
  */
-public class LimitImpl extends NamedElementImpl implements Limit {
+public class LimitImpl extends ReUseAbleImpl implements Limit {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getEffort() <em>Effort</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -90,6 +112,27 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 	@Override
 	protected EClass eStaticClass() {
 		return MyURDFPackage.Literals.LIMIT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MyURDFPackage.LIMIT__NAME, oldName, name));
 	}
 
 	/**
@@ -292,6 +335,8 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case MyURDFPackage.LIMIT__NAME:
+				return getName();
 			case MyURDFPackage.LIMIT__EFFORT:
 				return getEffort();
 			case MyURDFPackage.LIMIT__VELOCITY:
@@ -312,6 +357,9 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case MyURDFPackage.LIMIT__NAME:
+				setName((String)newValue);
+				return;
 			case MyURDFPackage.LIMIT__EFFORT:
 				setEffort((URDFAttrSignedNumeric)newValue);
 				return;
@@ -336,6 +384,9 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.LIMIT__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case MyURDFPackage.LIMIT__EFFORT:
 				setEffort((URDFAttrSignedNumeric)null);
 				return;
@@ -360,6 +411,8 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case MyURDFPackage.LIMIT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case MyURDFPackage.LIMIT__EFFORT:
 				return effort != null;
 			case MyURDFPackage.LIMIT__VELOCITY:
@@ -370,6 +423,54 @@ public class LimitImpl extends NamedElementImpl implements Limit {
 				return upper != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case MyURDFPackage.LIMIT__NAME: return MyURDFPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case MyURDFPackage.NAMED_ELEMENT__NAME: return MyURDFPackage.LIMIT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //LimitImpl
