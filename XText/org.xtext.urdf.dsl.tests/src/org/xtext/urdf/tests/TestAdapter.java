@@ -99,7 +99,7 @@ public class TestAdapter {
 		Robot r = createTestUrdf();
 		DslValidator dsl = new DslValidator();
 		try {
-			System.out.println("Validation is: " + dsl.checkURDFComplete(r));
+			//System.out.println("Validation is: " + dsl.checkURDFComplete(r));
 		//	new UrdfGenerator().generate(r);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,10 +4,13 @@
 package org.xtext.urdf.validation
 
 import org.eclipse.xtext.validation.Check
-import org.xtext.urdf.myURDF.Axis
+import org.eclipse.xtext.EcoreUtil2
 import org.xtext.urdf.myURDF.MyURDFPackage
-import org.xtext.urdf.myURDF.ReUseAble
 import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.Topology
+import org.xtext.urdf.myURDF.Link
+import org.xtext.urdf.myURDF.Joint
+import org.xtext.urdf.myURDF.Axis
 
 /**
  * This class contains custom validation rules. 
@@ -16,25 +19,7 @@ import org.xtext.urdf.myURDF.Robot
  */
 class DslValidator extends AbstractDslValidator {
 	
-	//Skal vi ikke droppe denne kontrol struktur - gaar ud fra den er til test formaal?
-	@Check
-	def checkURDFComplete(Robot robot)
-	{
-		//robotContainsLink(robot)
-		
-		//checkJointTypesHaveRequiredLimitOrAxis(robot)
-//		if(!checkJointParentChildRelations(robot))
-//		{
-//			error("Parent child problem", URDFPackage.Literals.ROBOT__JOINT)
-//		} else {
-//			info("Robot is valid",URDFPackage.Literals.ROBOT__LINK);
-//		}
-		
-	}
-	
-	
-    
-    //A Robot must contain at least one Link to be valid instance
+	 //A Robot must contain at least one Link to be valid instance
     @Check
 	def checkRobotContainsLink(Robot robot) {
 		if (robot.links.length < 1)
@@ -42,25 +27,25 @@ class DslValidator extends AbstractDslValidator {
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
-	//A Link must be connected to a Joint in order to be part of graph (otherwise parser will report multiple roots)
+	//Link name must be unique
 	@Check
-	def checkLinkIsConnectedToAJoint(Robot robot) {
-		//if more than one link - must be attached to joint
-		if(robot.links.length > 1 && !robot.links.forall[l |  
-			robot.joint.map[parentOf.name].contains(l.name) || 
-			robot.joint.map[childOf.name].contains(l.name)
-		]) 
-		error("A Link has to be referenced as parentOf and/or childOf at least one Joint", 
-        		MyURDFPackage.Literals.ROBOT__LINKS)
+	def uniqueNameOfLinkRequired(Link linkk) {
+		val robot = EcoreUtil2.getContainerOfType(linkk, Robot)
+		if(robot.links.exists[x | x.name.equals(linkk.name)])
+			error("Link name has to be unique. Another link already has this name", 
+				MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
 	
-	// A Joint must not have the same Link as parent and child
-	//maybe this check should be integrated in the topologi instead... 
+	//Joint name must be unique
 	@Check
-	def checkJointParentChildRelations (Robot robot) {
-      robot.getJoint.forall[j | j.getParentOf != j.getChildOf]
-    }
+	def uniqueNameOfJointRequired(Joint jointt) {
+		val robot = EcoreUtil2.getContainerOfType(jointt, Robot)
+		if(robot.joint.exists[x | x.name.equals(jointt.name)])
+			error("Joint name has to be unique. Another link already has this name", 
+				MyURDFPackage.Literals.NAMED_ELEMENT__NAME)	
+	}
 	
+		
 	// A Joint of type revolute or prismatic must have Limit defined
 	@Check
 	def checkJointTypesHaveRequiredLimit(Robot robot) {
@@ -88,17 +73,159 @@ class DslValidator extends AbstractDslValidator {
 	
 	//@Check
 	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!!
-	/*def onlyPossibleToReuseIfNotAlreadyReused(ReUseAble reuser) {
+	def onlyPossibleToReuseIfNotAlreadyReused(Link reuser) {
 		if(reuser.isReuseOf.isReuseOf != null) 
-			error("Not legal to reuse from instance, that is already made from reuse", 
+			error("Not legal to reuse from a link, that is already made from reuse", 
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
+	}	
+	
+	//@Check
+	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!!
+	def onlyPossibleToReuseIfNotAlreadyReused(Joint reuser) {
+		if(reuser.isReuseOf.isReuseOf != null) 
+			error("Not legal to reuse from a joint, that is already made from reuse", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
 	
 	@Check
 	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!! 
-	def onlyPossibleToReuseIfSameType(ReUseAble reuser) {
+	//IS THIS CHECK NECESSARY
+	def onlyPossibleToReuseIfLink(Link reuser) {
 		if(reuser.eClass != reuser.isReuseOf.eClass) 
 			error("Not legal to reuse from instance, that is not of the same type", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
-	}*/	
+	}
+	
+	@Check
+	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!! 
+	//IS THIS CHECK NECESSARY
+	def onlyPossibleToReuseIfJoint(Joint reuser) {
+		if(reuser.eClass != reuser.isReuseOf.eClass) 
+			error("Not legal to reuse from instance, that is not of the same type", 
+        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
+	}
+	
+	/*1. Make sure there is unique root for the total topology = 
+	* a. all roots links - but one!! - must be non-root link in other topology
+	* b. no link must be outside of topologies
+	*/
+	
+	
+	//1.a Only one link may be true root = not child of any joint 
+	//IS THIS TEST ENOUGH TO TEST FOR ALL SCENARIOS OF MULTIPOLE ROOTS???
+	@Check
+	def allLinksButOneMustBeChildOfJoint (Robot robot) {
+		val testt = robot.links.filter[x | !robot.joint.map[y | y.parentOf].toSet.contains(x)]
+		if (robot.links.length > 1) {
+			if (robot.joint.empty) 
+				error("Multiple roots problem: This robot contains multiple link, but it has no joints connecting the links. A robot may have only one root link, that is not referenced as the child of a joint node", 
+					MyURDFPackage.Literals.ROBOT__LINKS
+			)
+			
+			else if(robot.links.filter[x | !robot.joint.map[y | y.parentOf].toSet.contains(x)].length > 1) 
+				error("Multiple roots problem: One or more links are potential roots of this robot, since they are not referenced as child of a joint node in topology or in joint definition. Only one link may be root", 
+					MyURDFPackage.Literals.ROBOT__LINKS)
+		}
+	}
+	
+	/* @Check
+	 * OVERFLOEDIGT TJEK?? HVIS 1A FANGER ALLE CASES
+	//1.b New link may not be outside of Topology...multiple roots problem
+	def noLinksDefinedOutsideOfTopology_1b (Robot robot) {
+		//check if more than one link defined...
+		if(robot.links.length > 1) {
+			if (robot.joint.empty) 
+			error("Multiple roots problem: This robot contains multiple link, but it has no joints connecting the links. A robot may have only one root link, that is not referenced as the child of a joint node", 
+				MyURDFPackage.Literals.ROBOT__LINKS)
+			else if (!robot.links.forall[l |  
+				val hej = robot.joint.map[parentOf.name].contains(l.name)
+				val hejj = robot.joint.map[childOf.name].contains(l.name)
+				robot.joint.map[parentOf.name].contains(l.name) || 
+				robot.joint.map[childOf.name].contains(l.name)
+			]) 
+			error("Multiple roots problem: One or more links are potential roots of this robot. A robot may have only one root link, that is not referenced as the child of a joint node", 
+				MyURDFPackage.Literals.ROBOT__LINKS
+			)
+        }		
+        		
+	} */
+	
+	
+	/*2. Make sure no cyclic reference in total topology :
+	* a. The link is not already parent upstream in this topology - 
+	* b. The link is not already parent in upstream of other topology/topologies this current topology is connected to
+	*/
+	
+	@Check
+	//2.a Link added to parent reference of a given topology may not be present upstream in that same topology
+	def checkNoCyclicReferencesInLocalTopology(Topology topos) {
+		val iiii = EcoreUtil2.getAllContainers(topos).filter(Topology).map[x | x.parent].toSet
+		//for each link added to topology, check it is not already parent upstream in same topology
+		if(EcoreUtil2.getAllContainers(topos).filter(Topology).map[x | x.parent].toSet.contains(topos.parent))	
+			error("Cyclic reference problem: Link is already referenced upstream in this graph", 
+					MyURDFPackage.Literals.ROBOT__TOPOLOGIES)
+	}
+	
+	@Check
+	//2.b Link added to parent reference of a given topology may not be present upstream in other, adjacent topology
+	def checkNoCyclicReferencesExtraTopology(Topology topos) {
+		val robot = EcoreUtil2.getContainerOfType(topos, Robot)
+		//for each link added to topology, check it is not already parent upstream other topology
+		val ancestors = EcoreUtil2.getAllContainers(topos).filter(Topology).map[x | x.parent].toSet
+		val local_root = EcoreUtil2.getAllContainers(topos).filter(Topology).filter[z | z.eContainer instanceof Robot]   
+		//for each link in upstream
+		//check if referenced in other topology
+		//if yes, check if current topos is parent reference in upstream topology
+		EcoreUtil2.getAllContainers(topos).filter(Topology).map[x | x.parent].toSet.
+			forEach[n | robot.topologies.forEach[q | q.eAllContents.filter(Topology).forEach[t | 
+				if(t.parent === n) {
+					if(EcoreUtil2.getAllContainers(t).filter(Topology).map[l | l.parent].toSet.contains(topos.parent))
+					error("Cyclic reference problem: Link is already referenced upstream in other graph", 
+					MyURDFPackage.Literals.ROBOT__TOPOLOGIES)
+			}
+		]]]
+		
+	}
+	
+	// 2.c ?A Joint must not have the same Link as parent and child
+	//maybe this check should be integrated in the topology instead... 
+	
+	@Check
+	def checkNoJointHasSameLinkAsParentAndChild (Joint joint) {
+      if(joint.childOf === joint.parentOf)
+      	error("Cyclic reference problem: Joint has same link as parent AND child creating a loop", 
+					MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
+      
+    }
+    
+    /*2.d? No two joints may have the same parentOf/childOf combination  
+	* 
+	* */
+	@Check
+	def checkNoTwoJointsHaveSameParentAndChildCombination (Joint joint) {
+		val robot = EcoreUtil2.getContainerOfType(joint, Robot)
+		if(robot.joint.exists[x | 
+			(x.childOf.name.equals(joint.childOf.name) && x.parentOf.name.equals(joint.parentOf.name)) ||
+			(x.childOf.name.equals(joint.parentOf.name) && x.parentOf.equals(joint.childOf.name))
+		])
+		error("Cyclic reference problem: Joint has same link as parent AND child combination as other joint creating a loop ", 
+					MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
+	}
+	
+	
+	/*4. Make sure links only have one parent = 
+	* a link may only appear once as non root in a topology chain  
+	**/
+	@Check
+	def linkReferencedInTopologyMayOnlyHaveOneParent (Topology topos) {
+    
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
