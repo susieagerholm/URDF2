@@ -25,7 +25,7 @@ import org.xtext.urdf.myURDF.impl.MyURDFPackageImpl;
 public class TestAdapter {
 
 	
-	public static Robot () 	{
+	public static RobotImpl createTestUrdf() 	{
 	   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
 	   //URDFModel model = eINSTANCE.createURDFModel();
 	   MyURDFPackage pkg = MyURDFPackageImpl.init();

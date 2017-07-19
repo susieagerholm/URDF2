@@ -37,7 +37,7 @@ class DslParsingTest{
 			Robot robo Link link1
 		'''.parse
 		
-		Assert.assertNotNull(result.link)
+		Assert.assertNotNull(result.links)
 		//val robototo = TestAdapter.createTestUrdf
 		//Assert.assertNotNull(robototo)
 	}
@@ -50,7 +50,7 @@ class DslParsingTest{
 	@Test 
 	def void createLink() {
 		val rob = TestAdapter.createTestUrdf
-		val myLink = rob.link.get(0)
+		val myLink = rob.links.get(0)
 		Assert.assertEquals("URDFLink1Testname", myLink.name)
 	}
 	

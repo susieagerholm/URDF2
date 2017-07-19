@@ -3,10 +3,93 @@
  */
 package org.xtext.urdf.ui.contentassist
 
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.jface.text.contentassist.CompletionProposal
+import org.eclipse.jface.text.contentassist.ICompletionProposal
+import org.eclipse.xtext.Group
+import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.xtext.urdf.myURDF.Joint
+import org.xtext.urdf.myURDF.Link
+import org.xtext.urdf.services.DslGrammarAccess
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  */
 class DslProposalProvider extends AbstractDslProposalProvider {
+	 @Inject extension DslGrammarAccess
+	
+	override complete_AddToLink(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+    	addToLinkAccess.group.createKeywordProposalAddToLink(context,acceptor)
+	}
+	
+	override complete_AddToJoint(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		addToJointAccess.group.createKeywordProposalAddToJoint(context,acceptor)
+	}
+	
+	def createKeywordProposalAddToLink(Group group, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (group == null || context.currentModel.eContents.filter(Link).empty) {
+			return null
+   		}
+   		//val test = group.elements
+   		//make sure consecutive keywords are presented as one string by content assist
+   		//https://blogs.itemis.com/en/xtext-hint-content-assist-for-multiple-consecutive-keywords
+    	val proposalString = group.elements.filter(Keyword).map[value].join(" ") + " "
+    	acceptor.accept(createCompletionProposal(proposalString, proposalString, null, context))	
+	}
+	
+	def createKeywordProposalAddToJoint(Group group, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		if (group == null || context.currentModel.eContents.filter(Joint).empty) {
+			return null
+		}	
+		//make sure consecutive keywords are presented as one string by content assist
+   		//https://blogs.itemis.com/en/xtext-hint-content-assist-for-multiple-consecutive-keywords
+		val proposalString = group.elements.filter(Keyword).map[value].join(" ") + " "
+    	acceptor.accept(createCompletionProposal(proposalString, proposalString, null, context))	
+	
+	}
+	
+		
+	
+	/*override completeRobot_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		
+		val bbb = context.copy
+		val ggg = bbb.toContext
+		val fff = context.firstSetGrammarElements.map[x | x.class]
+			val ii = acceptor
+		
+		completeRuleCall((assignment.getTerminal() as RuleCall), bbb.toContext, acceptor);
+		/*lookupCrossReference(model, reffi, acceptor, new Predicate<IEObjectDescription>() {
+			
+			override apply(IEObjectDescription input) {
+				if (input.name.toString.endsWith("hello_world")) false else true
+				//throw new UnsupportedOperationException("TODO: auto-generated method stub")
+			}		
+		}, [x | createCompletionProposal(x.name.toString + "my_assss", context)]) 
+		
+	}*/
+	
+ 	
+ 	//override completeRobot_Topologies(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+ 			
+		//completeRuleCall((assignment.getTerminal() as RuleCall), bbb.toContext, acceptor);
+ 	//}
+ 	
+	/*override void completeVisual_Geometry( EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		//if (context.lastCompleteNode.grammarElement.equals("Geometry")) {
+		val modello = model
+		
+		//}
+  	 //super.completeVisual_Geometry(model, assignment, context, new MyDLSStringProposalDelegate(acceptor, context))
+  	 //acceptor.accept(createCompletionProposal('hello_world', context))
+  	 //val test = acceptor
+  	
+    }*/
+   
+	
 }

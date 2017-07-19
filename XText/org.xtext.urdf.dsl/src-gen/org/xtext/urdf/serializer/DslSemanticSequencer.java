@@ -14,12 +14,15 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.xtext.urdf.myURDF.AddTo;
+import org.xtext.urdf.myURDF.AssignNewValue;
 import org.xtext.urdf.myURDF.Axis;
 import org.xtext.urdf.myURDF.Box;
 import org.xtext.urdf.myURDF.Calibration;
 import org.xtext.urdf.myURDF.Collision;
 import org.xtext.urdf.myURDF.Color;
 import org.xtext.urdf.myURDF.Cylinder;
+import org.xtext.urdf.myURDF.DotExpression;
 import org.xtext.urdf.myURDF.Dynamics;
 import org.xtext.urdf.myURDF.Inertia;
 import org.xtext.urdf.myURDF.Inertial;
@@ -31,6 +34,8 @@ import org.xtext.urdf.myURDF.Mass;
 import org.xtext.urdf.myURDF.Mesh;
 import org.xtext.urdf.myURDF.MyURDFPackage;
 import org.xtext.urdf.myURDF.Origin;
+import org.xtext.urdf.myURDF.ReUsableRef;
+import org.xtext.urdf.myURDF.Reuse;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.SafetyController;
 import org.xtext.urdf.myURDF.Sphere;
@@ -58,6 +63,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == MyURDFPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case MyURDFPackage.ADD_TO:
+				sequence_AddTo(context, (AddTo) semanticObject); 
+				return; 
+			case MyURDFPackage.ASSIGN_NEW_VALUE:
+				sequence_AssignNewValue(context, (AssignNewValue) semanticObject); 
+				return; 
 			case MyURDFPackage.AXIS:
 				sequence_Axis(context, (Axis) semanticObject); 
 				return; 
@@ -76,6 +87,9 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MyURDFPackage.CYLINDER:
 				sequence_Cylinder(context, (Cylinder) semanticObject); 
 				return; 
+			case MyURDFPackage.DOT_EXPRESSION:
+				sequence_DotExpression(context, (DotExpression) semanticObject); 
+				return; 
 			case MyURDFPackage.DYNAMICS:
 				sequence_Dynamics(context, (Dynamics) semanticObject); 
 				return; 
@@ -88,12 +102,6 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MyURDFPackage.JOINT:
 				sequence_Joint(context, (Joint) semanticObject); 
 				return; 
-			/*case MyURDFPackage.JOINT_DECO_REF:
-				sequence_JointDecoRef(context, (JointDecoRef) semanticObject); 
-				return; 
-			case MyURDFPackage.JOINT_DECORATOR:
-				sequence_JointDecorator(context, (JointDecorator) semanticObject); 
-				return; */
 			case MyURDFPackage.JOINT_REF:
 				sequence_JointRef(context, (JointRef) semanticObject); 
 				return; 
@@ -103,12 +111,6 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MyURDFPackage.LINK:
 				sequence_Link(context, (Link) semanticObject); 
 				return; 
-			/*case MyURDFPackage.LINK_DECORATOR:
-				sequence_LinkDecorator(context, (LinkDecorator) semanticObject); 
-				return; 
-			case MyURDFPackage.LINK_REF:
-				sequence_LinkRef(context, (LinkRef) semanticObject); 
-				return;*/ 
 			case MyURDFPackage.MASS:
 				sequence_Mass(context, (Mass) semanticObject); 
 				return; 
@@ -117,6 +119,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case MyURDFPackage.ORIGIN:
 				sequence_Origin(context, (Origin) semanticObject); 
+				return; 
+			case MyURDFPackage.RE_USABLE_REF:
+				sequence_ReUsableRef(context, (ReUsableRef) semanticObject); 
+				return; 
+			case MyURDFPackage.REUSE:
+				sequence_Reuse(context, (Reuse) semanticObject); 
 				return; 
 			case MyURDFPackage.ROBOT:
 				sequence_Robot(context, (Robot) semanticObject); 
@@ -158,6 +166,40 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     AddTo returns AddTo
+	 *
+	 * Constraint:
+	 *     ((link=[Link|ID] add=ReUseAbleReduced) | (joint=[Joint|ID] add=ReUseAbleReduce))
+	 */
+	protected void sequence_AddTo(ISerializationContext context, AddTo semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AssignNewValue returns AssignNewValue
+	 *
+	 * Constraint:
+	 *     (getRef=DotExpression newReuseable=ReUseAble)
+	 */
+	protected void sequence_AssignNewValue(ISerializationContext context, AssignNewValue semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.ASSIGN_NEW_VALUE__GET_REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.ASSIGN_NEW_VALUE__GET_REF));
+			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.ASSIGN_NEW_VALUE__NEW_REUSEABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.ASSIGN_NEW_VALUE__NEW_REUSEABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAssignNewValueAccess().getGetRefDotExpressionParserRuleCall_1_0(), semanticObject.getGetRef());
+		feeder.accept(grammarAccess.getAssignNewValueAccess().getNewReuseableReUseAbleParserRuleCall_3_0(), semanticObject.getNewReuseable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ReUseAbleReduce returns Axis
 	 *     Axis returns Axis
 	 *
 	 * Constraint:
@@ -183,10 +225,11 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAbleReduce returns Calibration
 	 *     Calibration returns Calibration
 	 *
 	 * Constraint:
-	 *     (name=ID? rising=URDFAttrSignedNumeric? falling=URDFAttrSignedNumeric?)
+	 *     (name=ID? (rising=URDFAttrSignedNumeric | falling=URDFAttrSignedNumeric))
 	 */
 	protected void sequence_Calibration(ISerializationContext context, Calibration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -195,10 +238,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAble returns Collision
+	 *     ReUseAbleReduced returns Collision
 	 *     Collision returns Collision
 	 *
 	 * Constraint:
-	 *     (name=ID? geometry+=Geometry* origin=Origin?)
+	 *     (name=ID? geometry=Geometry origin=Origin?)
 	 */
 	protected void sequence_Collision(ISerializationContext context, Collision semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -233,10 +278,33 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     DotExpression returns DotExpression
+	 *     DotExpression.DotExpression_1_0 returns DotExpression
+	 *
+	 * Constraint:
+	 *     (ref=DotExpression_DotExpression_1_0 tail=[ReUseAble|ID])
+	 */
+	protected void sequence_DotExpression(ISerializationContext context, DotExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.DOT_EXPRESSION__REF) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.DOT_EXPRESSION__REF));
+			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.DOT_EXPRESSION__TAIL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.DOT_EXPRESSION__TAIL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getDotExpressionAccess().getDotExpressionRefAction_1_0(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getDotExpressionAccess().getTailReUseAbleIDTerminalRuleCall_1_2_0_1(), semanticObject.getTail());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     ReUseAbleReduce returns Dynamics
 	 *     Dynamics returns Dynamics
 	 *
 	 * Constraint:
-	 *     (name=ID? friction=URDFAttrSignedNumeric? damping=URDFAttrSignedNumeric?)
+	 *     (name=ID? (friction=URDFAttrSignedNumeric | damping=URDFAttrSignedNumeric)+)
 	 */
 	protected void sequence_Dynamics(ISerializationContext context, Dynamics semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -265,6 +333,8 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAble returns Inertial
+	 *     ReUseAbleReduced returns Inertial
 	 *     Inertial returns Inertial
 	 *
 	 * Constraint:
@@ -273,39 +343,6 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	protected void sequence_Inertial(ISerializationContext context, Inertial semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-	
-	
-	/**
-	 * Contexts:
-	 *     JointDecoRef returns JointDecoRef
-	 *
-	 * Constraint:
-	 *     (ref=[Joint|ID] decorator=JointDecorator)
-	 */
-	/*protected void sequence_JointDecoRef(ISerializationContext context, JointDecoRef semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__REF));
-			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__DECORATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.JOINT_DECO_REF__DECORATOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getJointDecoRefAccess().getRefJointIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
-		feeder.accept(grammarAccess.getJointDecoRefAccess().getDecoratorJointDecoratorParserRuleCall_2_0(), semanticObject.getDecorator());
-		feeder.finish();
-	}*/
-	
-	
-	/**
-	 * Contexts:
-	 *     JointDecorator returns JointDecorator
-	 *
-	 * Constraint:
-	 *     (limit=Limit? axis=Axis? calibration=Calibration? dynamics=Dynamics? safetycontroller=SafetyController?)
-	 */
-	/*protected void sequence_JointDecorator(ISerializationContext context, JointDecorator semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}*/
 	
 	
 	/**
@@ -327,11 +364,22 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 * Constraint:
 	 *     (
 	 *         name=ID 
-	 *         ChildOf=[Link|ID] 
-	 *         ParentOf=[Link|ID] 
-	 *         Type=JointType 
-	 *         isReuseOf=[Joint|ID]? 
-	 *         decorator=JointDecorator
+	 *         (
+	 *             (
+	 *                 childOf=[Link|ID] 
+	 *                 parentOf=[Link|ID] 
+	 *                 type=JointType 
+	 *                 (
+	 *                     origin=Origin | 
+	 *                     axis=Axis | 
+	 *                     limit=Limit | 
+	 *                     calibration=Calibration | 
+	 *                     dynamics=Dynamics | 
+	 *                     safetycontroller=SafetyController
+	 *                 )*
+	 *             ) | 
+	 *             (isReuseOf=[Joint|ID] childOf=[Link|ID] parentOf=[Link|ID] reuse=Reuse?)
+	 *         )
 	 *     )
 	 */
 	protected void sequence_Joint(ISerializationContext context, Joint semanticObject) {
@@ -341,10 +389,11 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAbleReduce returns Limit
 	 *     Limit returns Limit
 	 *
 	 * Constraint:
-	 *     (name=ID? effort=URDFAttrSignedNumeric velocity=URDFAttrSignedNumeric lower=URDFAttrSignedNumeric? upper=URDFAttrSignedNumeric?)
+	 *     (name=ID? effort=URDFAttrSignedNumeric velocity=URDFAttrSignedNumeric (lower=URDFAttrSignedNumeric | upper=URDFAttrSignedNumeric)*)
 	 */
 	protected void sequence_Limit(ISerializationContext context, Limit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -353,43 +402,11 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
-	 *     LinkDecorator returns LinkDecorator
-	 *
-	 * Constraint:
-	 *     (inertial+=Inertial* visual+=Visual* collision+=Collision*)
-	 */
-	/*protected void sequence_LinkDecorator(ISerializationContext context, LinkDecorator semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}*/
-	
-	
-	/**
-	 * Contexts:
-	 *     LinkRef returns LinkRef
-	 *
-	 * Constraint:
-	 *     (ref=[Link|ID] decorator=LinkDecorator)
-	 */
-	/*protected void sequence_LinkRef(ISerializationContext context, LinkRef semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.LINK_REF__REF) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.LINK_REF__REF));
-			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.LINK_REF__DECORATOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.LINK_REF__DECORATOR));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getLinkRefAccess().getRefLinkIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
-		feeder.accept(grammarAccess.getLinkRefAccess().getDecoratorLinkDecoratorParserRuleCall_2_0(), semanticObject.getDecorator());
-		feeder.finish();
-	}*/
-	
-	
-	/**
-	 * Contexts:
+	 *     ReUseAble returns Link
 	 *     Link returns Link
 	 *
 	 * Constraint:
-	 *     (name=ID isReuseOf=[Link|ID]? decorator=LinkDecorator)
+	 *     (name=ID ((inertial=Inertial | visual+=Visual | collision+=Collision)+ | (isReuseOf=[Link|ID] reuse=Reuse?))?)
 	 */
 	protected void sequence_Link(ISerializationContext context, Link semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -401,7 +418,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mass returns Mass
 	 *
 	 * Constraint:
-	 *     (name=ID? massValueInKilograms=URDFAttrNumeric)
+	 *     (name=ID? massKilogram=URDFAttrSignedNumeric)
 	 */
 	protected void sequence_Mass(ISerializationContext context, Mass semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -414,7 +431,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mesh returns Mesh
 	 *
 	 * Constraint:
-	 *     (name=ID? pathToFile=URDFAttrSTRING dimension=Box?)
+	 *     (name=ID? pathToFile=URDFAttrSTRING)
 	 */
 	protected void sequence_Mesh(ISerializationContext context, Mesh semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -423,6 +440,7 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAbleReduce returns Origin
 	 *     Origin returns Origin
 	 *
 	 * Constraint:
@@ -443,10 +461,42 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     DotExpression returns ReUsableRef
+	 *     DotExpression.DotExpression_1_0 returns ReUsableRef
+	 *     ReUsableRef returns ReUsableRef
+	 *
+	 * Constraint:
+	 *     reuseable=[ReUseAble|ID]
+	 */
+	protected void sequence_ReUsableRef(ISerializationContext context, ReUsableRef semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyURDFPackage.Literals.RE_USABLE_REF__REUSEABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyURDFPackage.Literals.RE_USABLE_REF__REUSEABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getReUsableRefAccess().getReuseableReUseAbleIDTerminalRuleCall_1_0_1(), semanticObject.getReuseable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Reuse returns Reuse
+	 *
+	 * Constraint:
+	 *     (add=ReUseAbleReduced | edit=AssignNewValue)
+	 */
+	protected void sequence_Reuse(ISerializationContext context, Reuse semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Robot returns Robot
 	 *
 	 * Constraint:
-	 *     (name=ID (topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)*)
+	 *     (name=ID (topologies+=Topology | links+=Link | joint+=Joint | addto+=AddTo)*)
 	 */
 	protected void sequence_Robot(ISerializationContext context, Robot semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -455,15 +505,14 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAbleReduce returns SafetyController
 	 *     SafetyController returns SafetyController
 	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID? 
-	 *         softLowerLimit=URDFAttrSignedNumeric? 
-	 *         softUpperLimit=URDFAttrSignedNumeric? 
-	 *         k_position=URDFAttrSignedNumeric? 
-	 *         k_velocity=URDFAttrSignedNumeric
+	 *         k_velocity=URDFAttrSignedNumeric 
+	 *         (k_position=URDFAttrSignedNumeric | softLowerLimit=URDFAttrSignedNumeric | softUpperLimit=URDFAttrSignedNumeric)*
 	 *     )
 	 */
 	protected void sequence_SafetyController(ISerializationContext context, SafetyController semanticObject) {
@@ -601,10 +650,12 @@ public class DslSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     ReUseAble returns Visual
+	 *     ReUseAbleReduced returns Visual
 	 *     Visual returns Visual
 	 *
 	 * Constraint:
-	 *     (name=ID? geometry+=Geometry* origin=Origin?)
+	 *     (name=ID? geometry=Geometry origin=Origin? material=Material?)
 	 */
 	protected void sequence_Visual(ISerializationContext context, Visual semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

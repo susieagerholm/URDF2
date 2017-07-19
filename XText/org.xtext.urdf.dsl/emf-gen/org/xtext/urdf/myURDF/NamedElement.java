@@ -33,7 +33,7 @@ public interface NamedElement extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.xtext.urdf.myURDF.MyURDFPackage#getNamedElement_Name()
-	 * @model dataType="org.eclipse.emf.ecore.xml.type.ID"
+	 * @model id="true" dataType="org.eclipse.emf.ecore.xml.type.ID"
 	 * @generated
 	 */
 	String getName();

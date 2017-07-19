@@ -64,7 +64,7 @@ class DslValidator extends AbstractDslValidator {
 	// A Joint of type revolute or prismatic must have Limit defined
 	@Check
 	def checkJointTypesHaveRequiredLimit(Robot robot) {
-		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.decorator.limit != null])
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.limit != null])
 		error("A Joint of type revolute or prismatic must have a Limit defined", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
@@ -72,7 +72,7 @@ class DslValidator extends AbstractDslValidator {
 	// A Joint of type revolute or prismatic must have Axis defined
 	@Check
 	def checkJointTypesHaveRequiredAxis(Robot robot) {
-		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.decorator.axis != null])
+		if (!robot.joint.filter[j | j.type.getName.equals("revolute") || j.type.getName.equals("prismatic")].forall[j | j.axis != null])
 		error("A Joint of type revolute or prismatic must have an Axis defined", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
@@ -86,9 +86,9 @@ class DslValidator extends AbstractDslValidator {
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)	
 	}
 	
-	@Check
+	//@Check
 	//CANNOT BE TESTED BEFORE IMPLEMENTATION OF REUSE!!
-	def onlyPossibleToReuseIfNotAlreadyReused(ReUseAble reuser) {
+	/*def onlyPossibleToReuseIfNotAlreadyReused(ReUseAble reuser) {
 		if(reuser.isReuseOf.isReuseOf != null) 
 			error("Not legal to reuse from instance, that is already made from reuse", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
@@ -100,5 +100,5 @@ class DslValidator extends AbstractDslValidator {
 		if(reuser.eClass != reuser.isReuseOf.eClass) 
 			error("Not legal to reuse from instance, that is not of the same type", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
-	}	
+	}*/	
 }

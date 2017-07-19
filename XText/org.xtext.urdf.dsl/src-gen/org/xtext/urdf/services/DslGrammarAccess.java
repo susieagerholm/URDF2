@@ -38,12 +38,12 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTopologyKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cTopologiesAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
 		private final RuleCall cTopologiesTopologyParserRuleCall_2_0_1_0 = (RuleCall)cTopologiesAssignment_2_0_1.eContents().get(0);
-		private final Assignment cLinkAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
-		private final RuleCall cLinkLinkParserRuleCall_2_1_0 = (RuleCall)cLinkAssignment_2_1.eContents().get(0);
+		private final Assignment cLinksAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cLinksLinkParserRuleCall_2_1_0 = (RuleCall)cLinksAssignment_2_1.eContents().get(0);
 		private final Assignment cJointAssignment_2_2 = (Assignment)cAlternatives_2.eContents().get(2);
 		private final RuleCall cJointJointParserRuleCall_2_2_0 = (RuleCall)cJointAssignment_2_2.eContents().get(0);
-		private final Assignment cLinkrefsAssignment_2_3 = (Assignment)cAlternatives_2.eContents().get(3);
-		private final RuleCall cLinkrefsLinkRefParserRuleCall_2_3_0 = (RuleCall)cLinkrefsAssignment_2_3.eContents().get(0);
+		private final Assignment cAddtoAssignment_2_3 = (Assignment)cAlternatives_2.eContents().get(3);
+		private final RuleCall cAddtoAddToParserRuleCall_2_3_0 = (RuleCall)cAddtoAssignment_2_3.eContents().get(0);
 		
 		////import "http://www.example.org/uRDF" as uRDF
 		// //generate myURDF "http://www.itu.dk/uRDF"
@@ -66,11 +66,10 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		// * DONE: Origin values should be ('-')? INT or FLOAT or SCIENTIFIC - get SIGNED_NUMERIC class from metamodel...
 		// * /
 		//Robot:
-		//	'Robot' name=ID ('Topology' topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)* //usage+=Usage*
-		//;
+		//	'Robot' name=ID ('Topology' topologies+=Topology | links+=Link | joint+=Joint | addto+=AddTo)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Robot' name=ID ('Topology' topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)*
+		//'Robot' name=ID ('Topology' topologies+=Topology | links+=Link | joint+=Joint | addto+=AddTo)*
 		public Group getGroup() { return cGroup; }
 		
 		//'Robot'
@@ -82,7 +81,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//('Topology' topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)*
+		//('Topology' topologies+=Topology | links+=Link | joint+=Joint | addto+=AddTo)*
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
 		//'Topology' topologies+=Topology
@@ -97,11 +96,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//Topology
 		public RuleCall getTopologiesTopologyParserRuleCall_2_0_1_0() { return cTopologiesTopologyParserRuleCall_2_0_1_0; }
 		
-		//link+=Link
-		public Assignment getLinkAssignment_2_1() { return cLinkAssignment_2_1; }
+		//links+=Link
+		public Assignment getLinksAssignment_2_1() { return cLinksAssignment_2_1; }
 		
 		//Link
-		public RuleCall getLinkLinkParserRuleCall_2_1_0() { return cLinkLinkParserRuleCall_2_1_0; }
+		public RuleCall getLinksLinkParserRuleCall_2_1_0() { return cLinksLinkParserRuleCall_2_1_0; }
 		
 		//joint+=Joint
 		public Assignment getJointAssignment_2_2() { return cJointAssignment_2_2; }
@@ -109,11 +108,11 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//Joint
 		public RuleCall getJointJointParserRuleCall_2_2_0() { return cJointJointParserRuleCall_2_2_0; }
 		
-		//linkrefs+=LinkRef
-		public Assignment getLinkrefsAssignment_2_3() { return cLinkrefsAssignment_2_3; }
+		//addto+=AddTo
+		public Assignment getAddtoAssignment_2_3() { return cAddtoAssignment_2_3; }
 		
-		//LinkRef
-		public RuleCall getLinkrefsLinkRefParserRuleCall_2_3_0() { return cLinkrefsLinkRefParserRuleCall_2_3_0; }
+		//AddTo
+		public RuleCall getAddtoAddToParserRuleCall_2_3_0() { return cAddtoAddToParserRuleCall_2_3_0; }
 	}
 	public class TopologyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Topology");
@@ -127,25 +126,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cChildAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cChildTopologyParserRuleCall_1_1_0 = (RuleCall)cChildAssignment_1_1.eContents().get(0);
 		
-		/// *ReUseAble:
-		//	Link | Joint | LinkDecorator
-		//;
-		//
-		//Usage returns Usage:
-		//    "use" ref=DotExpression
-		//;
-		//
-		//DotExpression returns Ref:
-		//    EntityRef ({DotExpression.ref=current}  "." tail=[ecore::EStructuralFeature])*       //Compiler ikke
-		//    //EntityRef ({DotExpression.ref=current}  "." tail=[ReUseAble])*                  // Ok
-		//;
-		// * 
-		//
-		//
-		//EntityRef returns Ref:
-		//    {EntityRef} entity=[ReUseAble]
-		//;
-		// * /
 		//Topology:
 		//	parent=[Link] (joint=JointRef child=Topology)?;
 		@Override public ParserRule getRule() { return rule; }
@@ -176,319 +156,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Topology
 		public RuleCall getChildTopologyParserRuleCall_1_1_0() { return cChildTopologyParserRuleCall_1_1_0; }
-	}
-	public class LinkElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Link");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLinkKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cIsReuseOfKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cIsReuseOfAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final CrossReference cIsReuseOfLinkCrossReference_2_1_0 = (CrossReference)cIsReuseOfAssignment_2_1.eContents().get(0);
-		private final RuleCall cIsReuseOfLinkIDTerminalRuleCall_2_1_0_1 = (RuleCall)cIsReuseOfLinkCrossReference_2_1_0.eContents().get(1);
-		private final Assignment cDecoratorAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cDecoratorLinkDecoratorParserRuleCall_3_0 = (RuleCall)cDecoratorAssignment_3.eContents().get(0);
-		
-		//Link:
-		//	'Link' name=ID ('isReuseOf' isReuseOf=[Link])? decorator=LinkDecorator;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Link' name=ID ('isReuseOf' isReuseOf=[Link])? decorator=LinkDecorator
-		public Group getGroup() { return cGroup; }
-		
-		//'Link'
-		public Keyword getLinkKeyword_0() { return cLinkKeyword_0; }
-		
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
-		//('isReuseOf' isReuseOf=[Link])?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//'isReuseOf'
-		public Keyword getIsReuseOfKeyword_2_0() { return cIsReuseOfKeyword_2_0; }
-		
-		//isReuseOf=[Link]
-		public Assignment getIsReuseOfAssignment_2_1() { return cIsReuseOfAssignment_2_1; }
-		
-		//[Link]
-		public CrossReference getIsReuseOfLinkCrossReference_2_1_0() { return cIsReuseOfLinkCrossReference_2_1_0; }
-		
-		//ID
-		public RuleCall getIsReuseOfLinkIDTerminalRuleCall_2_1_0_1() { return cIsReuseOfLinkIDTerminalRuleCall_2_1_0_1; }
-		
-		//decorator=LinkDecorator
-		public Assignment getDecoratorAssignment_3() { return cDecoratorAssignment_3; }
-		
-		//LinkDecorator
-		public RuleCall getDecoratorLinkDecoratorParserRuleCall_3_0() { return cDecoratorLinkDecoratorParserRuleCall_3_0; }
-	}
-	public class LinkDecoratorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.LinkDecorator");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cLinkDecoratorAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cInertialAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cInertialInertialParserRuleCall_1_0 = (RuleCall)cInertialAssignment_1.eContents().get(0);
-		private final Assignment cVisualAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cVisualVisualParserRuleCall_2_0 = (RuleCall)cVisualAssignment_2.eContents().get(0);
-		private final Assignment cCollisionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cCollisionCollisionParserRuleCall_3_0 = (RuleCall)cCollisionAssignment_3.eContents().get(0);
-		
-		//LinkDecorator:
-		//	{LinkDecorator} inertial+=Inertial* visual+=Visual* collision+=Collision*;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{LinkDecorator} inertial+=Inertial* visual+=Visual* collision+=Collision*
-		public Group getGroup() { return cGroup; }
-		
-		//{LinkDecorator}
-		public Action getLinkDecoratorAction_0() { return cLinkDecoratorAction_0; }
-		
-		//inertial+=Inertial*
-		public Assignment getInertialAssignment_1() { return cInertialAssignment_1; }
-		
-		//Inertial
-		public RuleCall getInertialInertialParserRuleCall_1_0() { return cInertialInertialParserRuleCall_1_0; }
-		
-		//visual+=Visual*
-		public Assignment getVisualAssignment_2() { return cVisualAssignment_2; }
-		
-		//Visual
-		public RuleCall getVisualVisualParserRuleCall_2_0() { return cVisualVisualParserRuleCall_2_0; }
-		
-		//collision+=Collision*
-		public Assignment getCollisionAssignment_3() { return cCollisionAssignment_3; }
-		
-		//Collision
-		public RuleCall getCollisionCollisionParserRuleCall_3_0() { return cCollisionCollisionParserRuleCall_3_0; }
-	}
-	public class LinkRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.LinkRef");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAdd_toKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRefLinkCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
-		private final RuleCall cRefLinkIDTerminalRuleCall_1_0_1 = (RuleCall)cRefLinkCrossReference_1_0.eContents().get(1);
-		private final Assignment cDecoratorAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDecoratorLinkDecoratorParserRuleCall_2_0 = (RuleCall)cDecoratorAssignment_2.eContents().get(0);
-		
-		//LinkRef:
-		//	'add_to' ref=[Link] decorator=LinkDecorator;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'add_to' ref=[Link] decorator=LinkDecorator
-		public Group getGroup() { return cGroup; }
-		
-		//'add_to'
-		public Keyword getAdd_toKeyword_0() { return cAdd_toKeyword_0; }
-		
-		//ref=[Link]
-		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
-		
-		//[Link]
-		public CrossReference getRefLinkCrossReference_1_0() { return cRefLinkCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getRefLinkIDTerminalRuleCall_1_0_1() { return cRefLinkIDTerminalRuleCall_1_0_1; }
-		
-		//decorator=LinkDecorator
-		public Assignment getDecoratorAssignment_2() { return cDecoratorAssignment_2; }
-		
-		//LinkDecorator
-		public RuleCall getDecoratorLinkDecoratorParserRuleCall_2_0() { return cDecoratorLinkDecoratorParserRuleCall_2_0; }
-	}
-	public class JointElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Joint");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cJointKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cChildOfKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cChildOfAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cChildOfLinkCrossReference_3_0 = (CrossReference)cChildOfAssignment_3.eContents().get(0);
-		private final RuleCall cChildOfLinkIDTerminalRuleCall_3_0_1 = (RuleCall)cChildOfLinkCrossReference_3_0.eContents().get(1);
-		private final Keyword cParentOfKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cParentOfAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final CrossReference cParentOfLinkCrossReference_5_0 = (CrossReference)cParentOfAssignment_5.eContents().get(0);
-		private final RuleCall cParentOfLinkIDTerminalRuleCall_5_0_1 = (RuleCall)cParentOfLinkCrossReference_5_0.eContents().get(1);
-		private final Keyword cTypeKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cTypeAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cTypeJointTypeEnumRuleCall_7_0 = (RuleCall)cTypeAssignment_7.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cIsReuseOfKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cIsReuseOfAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final CrossReference cIsReuseOfJointCrossReference_8_1_0 = (CrossReference)cIsReuseOfAssignment_8_1.eContents().get(0);
-		private final RuleCall cIsReuseOfJointIDTerminalRuleCall_8_1_0_1 = (RuleCall)cIsReuseOfJointCrossReference_8_1_0.eContents().get(1);
-		private final Assignment cDecoratorAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cDecoratorJointDecoratorParserRuleCall_9_0 = (RuleCall)cDecoratorAssignment_9.eContents().get(0);
-		
-		//Joint:
-		//	'Joint' name=ID 'ChildOf' ChildOf=[Link] 'ParentOf' ParentOf=[Link] 'Type' Type=JointType ('isReuseOf'
-		//	isReuseOf=[Joint])? decorator=JointDecorator;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Joint' name=ID 'ChildOf' ChildOf=[Link] 'ParentOf' ParentOf=[Link] 'Type' Type=JointType ('isReuseOf'
-		//isReuseOf=[Joint])? decorator=JointDecorator
-		public Group getGroup() { return cGroup; }
-		
-		//'Joint'
-		public Keyword getJointKeyword_0() { return cJointKeyword_0; }
-		
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
-		//'ChildOf'
-		public Keyword getChildOfKeyword_2() { return cChildOfKeyword_2; }
-		
-		//ChildOf=[Link]
-		public Assignment getChildOfAssignment_3() { return cChildOfAssignment_3; }
-		
-		//[Link]
-		public CrossReference getChildOfLinkCrossReference_3_0() { return cChildOfLinkCrossReference_3_0; }
-		
-		//ID
-		public RuleCall getChildOfLinkIDTerminalRuleCall_3_0_1() { return cChildOfLinkIDTerminalRuleCall_3_0_1; }
-		
-		//'ParentOf'
-		public Keyword getParentOfKeyword_4() { return cParentOfKeyword_4; }
-		
-		//ParentOf=[Link]
-		public Assignment getParentOfAssignment_5() { return cParentOfAssignment_5; }
-		
-		//[Link]
-		public CrossReference getParentOfLinkCrossReference_5_0() { return cParentOfLinkCrossReference_5_0; }
-		
-		//ID
-		public RuleCall getParentOfLinkIDTerminalRuleCall_5_0_1() { return cParentOfLinkIDTerminalRuleCall_5_0_1; }
-		
-		//'Type'
-		public Keyword getTypeKeyword_6() { return cTypeKeyword_6; }
-		
-		//Type=JointType
-		public Assignment getTypeAssignment_7() { return cTypeAssignment_7; }
-		
-		//JointType
-		public RuleCall getTypeJointTypeEnumRuleCall_7_0() { return cTypeJointTypeEnumRuleCall_7_0; }
-		
-		//('isReuseOf' isReuseOf=[Joint])?
-		public Group getGroup_8() { return cGroup_8; }
-		
-		//'isReuseOf'
-		public Keyword getIsReuseOfKeyword_8_0() { return cIsReuseOfKeyword_8_0; }
-		
-		//isReuseOf=[Joint]
-		public Assignment getIsReuseOfAssignment_8_1() { return cIsReuseOfAssignment_8_1; }
-		
-		//[Joint]
-		public CrossReference getIsReuseOfJointCrossReference_8_1_0() { return cIsReuseOfJointCrossReference_8_1_0; }
-		
-		//ID
-		public RuleCall getIsReuseOfJointIDTerminalRuleCall_8_1_0_1() { return cIsReuseOfJointIDTerminalRuleCall_8_1_0_1; }
-		
-		//decorator=JointDecorator
-		public Assignment getDecoratorAssignment_9() { return cDecoratorAssignment_9; }
-		
-		//JointDecorator
-		public RuleCall getDecoratorJointDecoratorParserRuleCall_9_0() { return cDecoratorJointDecoratorParserRuleCall_9_0; }
-	}
-	public class JointDecoratorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.JointDecorator");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cJointDecoratorAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cLimitAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cLimitLimitParserRuleCall_1_0 = (RuleCall)cLimitAssignment_1.eContents().get(0);
-		private final Assignment cAxisAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAxisAxisParserRuleCall_2_0 = (RuleCall)cAxisAssignment_2.eContents().get(0);
-		private final Assignment cCalibrationAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cCalibrationCalibrationParserRuleCall_3_0 = (RuleCall)cCalibrationAssignment_3.eContents().get(0);
-		private final Assignment cDynamicsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDynamicsDynamicsParserRuleCall_4_0 = (RuleCall)cDynamicsAssignment_4.eContents().get(0);
-		private final Assignment cSafetycontrollerAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cSafetycontrollerSafetyControllerParserRuleCall_5_0 = (RuleCall)cSafetycontrollerAssignment_5.eContents().get(0);
-		
-		//JointDecorator:
-		//	{JointDecorator} limit=Limit? axis=Axis? calibration=Calibration? dynamics=Dynamics?
-		//	safetycontroller=SafetyController?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{JointDecorator} limit=Limit? axis=Axis? calibration=Calibration? dynamics=Dynamics? safetycontroller=SafetyController?
-		public Group getGroup() { return cGroup; }
-		
-		//{JointDecorator}
-		public Action getJointDecoratorAction_0() { return cJointDecoratorAction_0; }
-		
-		//limit=Limit?
-		public Assignment getLimitAssignment_1() { return cLimitAssignment_1; }
-		
-		//Limit
-		public RuleCall getLimitLimitParserRuleCall_1_0() { return cLimitLimitParserRuleCall_1_0; }
-		
-		//axis=Axis?
-		public Assignment getAxisAssignment_2() { return cAxisAssignment_2; }
-		
-		//Axis
-		public RuleCall getAxisAxisParserRuleCall_2_0() { return cAxisAxisParserRuleCall_2_0; }
-		
-		//calibration=Calibration?
-		public Assignment getCalibrationAssignment_3() { return cCalibrationAssignment_3; }
-		
-		//Calibration
-		public RuleCall getCalibrationCalibrationParserRuleCall_3_0() { return cCalibrationCalibrationParserRuleCall_3_0; }
-		
-		//dynamics=Dynamics?
-		public Assignment getDynamicsAssignment_4() { return cDynamicsAssignment_4; }
-		
-		//Dynamics
-		public RuleCall getDynamicsDynamicsParserRuleCall_4_0() { return cDynamicsDynamicsParserRuleCall_4_0; }
-		
-		//safetycontroller=SafetyController?
-		public Assignment getSafetycontrollerAssignment_5() { return cSafetycontrollerAssignment_5; }
-		
-		//SafetyController
-		public RuleCall getSafetycontrollerSafetyControllerParserRuleCall_5_0() { return cSafetycontrollerSafetyControllerParserRuleCall_5_0; }
-	}
-	public class JointDecoRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.JointDecoRef");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cAdd_toKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cRefJointCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
-		private final RuleCall cRefJointIDTerminalRuleCall_1_0_1 = (RuleCall)cRefJointCrossReference_1_0.eContents().get(1);
-		private final Assignment cDecoratorAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDecoratorJointDecoratorParserRuleCall_2_0 = (RuleCall)cDecoratorAssignment_2.eContents().get(0);
-		
-		//JointDecoRef:
-		//	'add_to' ref=[Joint] decorator=JointDecorator;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'add_to' ref=[Joint] decorator=JointDecorator
-		public Group getGroup() { return cGroup; }
-		
-		//'add_to'
-		public Keyword getAdd_toKeyword_0() { return cAdd_toKeyword_0; }
-		
-		//ref=[Joint]
-		public Assignment getRefAssignment_1() { return cRefAssignment_1; }
-		
-		//[Joint]
-		public CrossReference getRefJointCrossReference_1_0() { return cRefJointCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getRefJointIDTerminalRuleCall_1_0_1() { return cRefJointIDTerminalRuleCall_1_0_1; }
-		
-		//decorator=JointDecorator
-		public Assignment getDecoratorAssignment_2() { return cDecoratorAssignment_2; }
-		
-		//JointDecorator
-		public RuleCall getDecoratorJointDecoratorParserRuleCall_2_0() { return cDecoratorJointDecoratorParserRuleCall_2_0; }
 	}
 	public class JointRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.JointRef");
@@ -532,6 +199,449 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'c->'
 		public Keyword getContCKeyword_3_0() { return cContCKeyword_3_0; }
+	}
+	public class ReUseAbleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.ReUseAble");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cLinkParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cVisualParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cInertialParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cCollisionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//ReUseAble:
+		//	Link | Visual | Inertial | Collision;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Link | Visual | Inertial | Collision
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Link
+		public RuleCall getLinkParserRuleCall_0() { return cLinkParserRuleCall_0; }
+		
+		//Visual
+		public RuleCall getVisualParserRuleCall_1() { return cVisualParserRuleCall_1; }
+		
+		//Inertial
+		public RuleCall getInertialParserRuleCall_2() { return cInertialParserRuleCall_2; }
+		
+		//Collision
+		public RuleCall getCollisionParserRuleCall_3() { return cCollisionParserRuleCall_3; }
+	}
+	public class ReUseAbleReducedElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.ReUseAbleReduced");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cVisualParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cInertialParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCollisionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//ReUseAbleReduced ReUseAble:
+		//	Visual | Inertial | Collision
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Visual | Inertial | Collision
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Visual
+		public RuleCall getVisualParserRuleCall_0() { return cVisualParserRuleCall_0; }
+		
+		//Inertial
+		public RuleCall getInertialParserRuleCall_1() { return cInertialParserRuleCall_1; }
+		
+		//Collision
+		public RuleCall getCollisionParserRuleCall_2() { return cCollisionParserRuleCall_2; }
+	}
+	public class ReUseAbleReduceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.ReUseAbleReduce");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cOriginParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAxisParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLimitParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cCalibrationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cDynamicsParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cSafetyControllerParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		
+		//ReUseAbleReduce ReUseAble:
+		//	Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Origin
+		public RuleCall getOriginParserRuleCall_0() { return cOriginParserRuleCall_0; }
+		
+		//Axis
+		public RuleCall getAxisParserRuleCall_1() { return cAxisParserRuleCall_1; }
+		
+		//Limit
+		public RuleCall getLimitParserRuleCall_2() { return cLimitParserRuleCall_2; }
+		
+		//Calibration
+		public RuleCall getCalibrationParserRuleCall_3() { return cCalibrationParserRuleCall_3; }
+		
+		//Dynamics
+		public RuleCall getDynamicsParserRuleCall_4() { return cDynamicsParserRuleCall_4; }
+		
+		//SafetyController
+		public RuleCall getSafetyControllerParserRuleCall_5() { return cSafetyControllerParserRuleCall_5; }
+	}
+	public class LinkElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Link");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cLinkAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLinkKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cDefKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Alternatives cAlternatives_3_0_1 = (Alternatives)cGroup_3_0.eContents().get(1);
+		private final Assignment cInertialAssignment_3_0_1_0 = (Assignment)cAlternatives_3_0_1.eContents().get(0);
+		private final RuleCall cInertialInertialParserRuleCall_3_0_1_0_0 = (RuleCall)cInertialAssignment_3_0_1_0.eContents().get(0);
+		private final Assignment cVisualAssignment_3_0_1_1 = (Assignment)cAlternatives_3_0_1.eContents().get(1);
+		private final RuleCall cVisualVisualParserRuleCall_3_0_1_1_0 = (RuleCall)cVisualAssignment_3_0_1_1.eContents().get(0);
+		private final Assignment cCollisionAssignment_3_0_1_2 = (Assignment)cAlternatives_3_0_1.eContents().get(2);
+		private final RuleCall cCollisionCollisionParserRuleCall_3_0_1_2_0 = (RuleCall)cCollisionAssignment_3_0_1_2.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cReuseKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cIsReuseOfAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final CrossReference cIsReuseOfLinkCrossReference_3_1_1_0 = (CrossReference)cIsReuseOfAssignment_3_1_1.eContents().get(0);
+		private final RuleCall cIsReuseOfLinkIDTerminalRuleCall_3_1_1_0_1 = (RuleCall)cIsReuseOfLinkCrossReference_3_1_1_0.eContents().get(1);
+		private final Assignment cReuseAssignment_3_1_2 = (Assignment)cGroup_3_1.eContents().get(2);
+		private final RuleCall cReuseReuseParserRuleCall_3_1_2_0 = (RuleCall)cReuseAssignment_3_1_2.eContents().get(0);
+		
+		//Link:
+		//	{Link} 'Link' name=ID ('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+ | 'reuse' isReuseOf=[Link]
+		//	reuse=Reuse?)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Link} 'Link' name=ID ('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+ | 'reuse' isReuseOf=[Link]
+		//reuse=Reuse?)?
+		public Group getGroup() { return cGroup; }
+		
+		//{Link}
+		public Action getLinkAction_0() { return cLinkAction_0; }
+		
+		//'Link'
+		public Keyword getLinkKeyword_1() { return cLinkKeyword_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+ | 'reuse' isReuseOf=[Link] reuse=Reuse?)?
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//'def' (inertial=Inertial | visual+=Visual | collision+=Collision)+
+		public Group getGroup_3_0() { return cGroup_3_0; }
+		
+		//'def'
+		public Keyword getDefKeyword_3_0_0() { return cDefKeyword_3_0_0; }
+		
+		//(inertial=Inertial | visual+=Visual | collision+=Collision)+
+		public Alternatives getAlternatives_3_0_1() { return cAlternatives_3_0_1; }
+		
+		//inertial=Inertial
+		public Assignment getInertialAssignment_3_0_1_0() { return cInertialAssignment_3_0_1_0; }
+		
+		//Inertial
+		public RuleCall getInertialInertialParserRuleCall_3_0_1_0_0() { return cInertialInertialParserRuleCall_3_0_1_0_0; }
+		
+		//visual+=Visual
+		public Assignment getVisualAssignment_3_0_1_1() { return cVisualAssignment_3_0_1_1; }
+		
+		//Visual
+		public RuleCall getVisualVisualParserRuleCall_3_0_1_1_0() { return cVisualVisualParserRuleCall_3_0_1_1_0; }
+		
+		//collision+=Collision
+		public Assignment getCollisionAssignment_3_0_1_2() { return cCollisionAssignment_3_0_1_2; }
+		
+		//Collision
+		public RuleCall getCollisionCollisionParserRuleCall_3_0_1_2_0() { return cCollisionCollisionParserRuleCall_3_0_1_2_0; }
+		
+		//'reuse' isReuseOf=[Link] reuse=Reuse?
+		public Group getGroup_3_1() { return cGroup_3_1; }
+		
+		//'reuse'
+		public Keyword getReuseKeyword_3_1_0() { return cReuseKeyword_3_1_0; }
+		
+		//isReuseOf=[Link]
+		public Assignment getIsReuseOfAssignment_3_1_1() { return cIsReuseOfAssignment_3_1_1; }
+		
+		//[Link]
+		public CrossReference getIsReuseOfLinkCrossReference_3_1_1_0() { return cIsReuseOfLinkCrossReference_3_1_1_0; }
+		
+		//ID
+		public RuleCall getIsReuseOfLinkIDTerminalRuleCall_3_1_1_0_1() { return cIsReuseOfLinkIDTerminalRuleCall_3_1_1_0_1; }
+		
+		//reuse=Reuse?
+		public Assignment getReuseAssignment_3_1_2() { return cReuseAssignment_3_1_2; }
+		
+		//Reuse
+		public RuleCall getReuseReuseParserRuleCall_3_1_2_0() { return cReuseReuseParserRuleCall_3_1_2_0; }
+	}
+	public class AddToElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.AddTo");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final RuleCall cAddToLinkParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
+		private final Assignment cLinkAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final CrossReference cLinkLinkCrossReference_0_1_0 = (CrossReference)cLinkAssignment_0_1.eContents().get(0);
+		private final RuleCall cLinkLinkIDTerminalRuleCall_0_1_0_1 = (RuleCall)cLinkLinkCrossReference_0_1_0.eContents().get(1);
+		private final Assignment cAddAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cAddReUseAbleReducedParserRuleCall_0_2_0 = (RuleCall)cAddAssignment_0_2.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final RuleCall cAddToJointParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Assignment cJointAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final CrossReference cJointJointCrossReference_1_1_0 = (CrossReference)cJointAssignment_1_1.eContents().get(0);
+		private final RuleCall cJointJointIDTerminalRuleCall_1_1_0_1 = (RuleCall)cJointJointCrossReference_1_1_0.eContents().get(1);
+		private final Assignment cAddAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cAddReUseAbleReduceParserRuleCall_1_2_0 = (RuleCall)cAddAssignment_1_2.eContents().get(0);
+		
+		//AddTo:
+		//	AddToLink link=[Link] add=ReUseAbleReduced | AddToJoint joint=[Joint] add=ReUseAbleReduce;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//AddToLink link=[Link] add=ReUseAbleReduced | AddToJoint joint=[Joint] add=ReUseAbleReduce
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//AddToLink link=[Link] add=ReUseAbleReduced
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//AddToLink
+		public RuleCall getAddToLinkParserRuleCall_0_0() { return cAddToLinkParserRuleCall_0_0; }
+		
+		//link=[Link]
+		public Assignment getLinkAssignment_0_1() { return cLinkAssignment_0_1; }
+		
+		//[Link]
+		public CrossReference getLinkLinkCrossReference_0_1_0() { return cLinkLinkCrossReference_0_1_0; }
+		
+		//ID
+		public RuleCall getLinkLinkIDTerminalRuleCall_0_1_0_1() { return cLinkLinkIDTerminalRuleCall_0_1_0_1; }
+		
+		//add=ReUseAbleReduced
+		public Assignment getAddAssignment_0_2() { return cAddAssignment_0_2; }
+		
+		//ReUseAbleReduced
+		public RuleCall getAddReUseAbleReducedParserRuleCall_0_2_0() { return cAddReUseAbleReducedParserRuleCall_0_2_0; }
+		
+		//AddToJoint joint=[Joint] add=ReUseAbleReduce
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//AddToJoint
+		public RuleCall getAddToJointParserRuleCall_1_0() { return cAddToJointParserRuleCall_1_0; }
+		
+		//joint=[Joint]
+		public Assignment getJointAssignment_1_1() { return cJointAssignment_1_1; }
+		
+		//[Joint]
+		public CrossReference getJointJointCrossReference_1_1_0() { return cJointJointCrossReference_1_1_0; }
+		
+		//ID
+		public RuleCall getJointJointIDTerminalRuleCall_1_1_0_1() { return cJointJointIDTerminalRuleCall_1_1_0_1; }
+		
+		//add=ReUseAbleReduce
+		public Assignment getAddAssignment_1_2() { return cAddAssignment_1_2; }
+		
+		//ReUseAbleReduce
+		public RuleCall getAddReUseAbleReduceParserRuleCall_1_2_0() { return cAddReUseAbleReduceParserRuleCall_1_2_0; }
+	}
+	public class AddToLinkElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.AddToLink");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAddKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cToKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLinkKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//AddToLink:
+		//	'Add' 'to' 'link';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Add' 'to' 'link'
+		public Group getGroup() { return cGroup; }
+		
+		//'Add'
+		public Keyword getAddKeyword_0() { return cAddKeyword_0; }
+		
+		//'to'
+		public Keyword getToKeyword_1() { return cToKeyword_1; }
+		
+		//'link'
+		public Keyword getLinkKeyword_2() { return cLinkKeyword_2; }
+	}
+	public class AddToJointElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.AddToJoint");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAddKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cToKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cJointKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//AddToJoint:
+		//	'Add' 'to' 'joint';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Add' 'to' 'joint'
+		public Group getGroup() { return cGroup; }
+		
+		//'Add'
+		public Keyword getAddKeyword_0() { return cAddKeyword_0; }
+		
+		//'to'
+		public Keyword getToKeyword_1() { return cToKeyword_1; }
+		
+		//'joint'
+		public Keyword getJointKeyword_2() { return cJointKeyword_2; }
+	}
+	public class ReuseElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Reuse");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Action cReuseAction_0_0 = (Action)cGroup_0.eContents().get(0);
+		private final Keyword cAddKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
+		private final Assignment cAddAssignment_0_2 = (Assignment)cGroup_0.eContents().get(2);
+		private final RuleCall cAddReUseAbleReducedParserRuleCall_0_2_0 = (RuleCall)cAddAssignment_0_2.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cEditKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Assignment cEditAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cEditAssignNewValueParserRuleCall_1_1_0 = (RuleCall)cEditAssignment_1_1.eContents().get(0);
+		
+		//Reuse:
+		//	{Reuse} 'add' add=ReUseAbleReduced | 'edit' edit=AssignNewValue;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Reuse} 'add' add=ReUseAbleReduced | 'edit' edit=AssignNewValue
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//{Reuse} 'add' add=ReUseAbleReduced
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//{Reuse}
+		public Action getReuseAction_0_0() { return cReuseAction_0_0; }
+		
+		//'add'
+		public Keyword getAddKeyword_0_1() { return cAddKeyword_0_1; }
+		
+		//add=ReUseAbleReduced
+		public Assignment getAddAssignment_0_2() { return cAddAssignment_0_2; }
+		
+		//ReUseAbleReduced
+		public RuleCall getAddReUseAbleReducedParserRuleCall_0_2_0() { return cAddReUseAbleReducedParserRuleCall_0_2_0; }
+		
+		//'edit' edit=AssignNewValue
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'edit'
+		public Keyword getEditKeyword_1_0() { return cEditKeyword_1_0; }
+		
+		//edit=AssignNewValue
+		public Assignment getEditAssignment_1_1() { return cEditAssignment_1_1; }
+		
+		//AssignNewValue
+		public RuleCall getEditAssignNewValueParserRuleCall_1_1_0() { return cEditAssignNewValueParserRuleCall_1_1_0; }
+	}
+	public class AssignNewValueElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.AssignNewValue");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAssignNewValueAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cGetRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cGetRefDotExpressionParserRuleCall_1_0 = (RuleCall)cGetRefAssignment_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cNewReuseableAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNewReuseableReUseAbleParserRuleCall_3_0 = (RuleCall)cNewReuseableAssignment_3.eContents().get(0);
+		
+		//AssignNewValue:
+		//	{AssignNewValue} getRef=DotExpression '=' newReuseable=ReUseAble;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{AssignNewValue} getRef=DotExpression '=' newReuseable=ReUseAble
+		public Group getGroup() { return cGroup; }
+		
+		//{AssignNewValue}
+		public Action getAssignNewValueAction_0() { return cAssignNewValueAction_0; }
+		
+		//getRef=DotExpression
+		public Assignment getGetRefAssignment_1() { return cGetRefAssignment_1; }
+		
+		//DotExpression
+		public RuleCall getGetRefDotExpressionParserRuleCall_1_0() { return cGetRefDotExpressionParserRuleCall_1_0; }
+		
+		//'='
+		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
+		
+		//newReuseable=ReUseAble
+		public Assignment getNewReuseableAssignment_3() { return cNewReuseableAssignment_3; }
+		
+		//ReUseAble
+		public RuleCall getNewReuseableReUseAbleParserRuleCall_3_0() { return cNewReuseableReUseAbleParserRuleCall_3_0; }
+	}
+	public class DotExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.DotExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cReUsableRefParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cDotExpressionRefAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cFullStopKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cTailAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final CrossReference cTailReUseAbleCrossReference_1_2_0 = (CrossReference)cTailAssignment_1_2.eContents().get(0);
+		private final RuleCall cTailReUseAbleIDTerminalRuleCall_1_2_0_1 = (RuleCall)cTailReUseAbleCrossReference_1_2_0.eContents().get(1);
+		
+		//DotExpression Ref:
+		//	ReUsableRef ({DotExpression.ref=current} "." tail=[ReUseAble])*
+		@Override public ParserRule getRule() { return rule; }
+		
+		//ReUsableRef ({DotExpression.ref=current} "." tail=[ReUseAble])*
+		public Group getGroup() { return cGroup; }
+		
+		//ReUsableRef
+		public RuleCall getReUsableRefParserRuleCall_0() { return cReUsableRefParserRuleCall_0; }
+		
+		//({DotExpression.ref=current} "." tail=[ReUseAble])*
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//{DotExpression.ref=current}
+		public Action getDotExpressionRefAction_1_0() { return cDotExpressionRefAction_1_0; }
+		
+		//"."
+		public Keyword getFullStopKeyword_1_1() { return cFullStopKeyword_1_1; }
+		
+		//tail=[ReUseAble]
+		public Assignment getTailAssignment_1_2() { return cTailAssignment_1_2; }
+		
+		//[ReUseAble]
+		public CrossReference getTailReUseAbleCrossReference_1_2_0() { return cTailReUseAbleCrossReference_1_2_0; }
+		
+		//ID
+		public RuleCall getTailReUseAbleIDTerminalRuleCall_1_2_0_1() { return cTailReUseAbleIDTerminalRuleCall_1_2_0_1; }
+	}
+	public class ReUsableRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.ReUsableRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cReUsableRefAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cReuseableAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cReuseableReUseAbleCrossReference_1_0 = (CrossReference)cReuseableAssignment_1.eContents().get(0);
+		private final RuleCall cReuseableReUseAbleIDTerminalRuleCall_1_0_1 = (RuleCall)cReuseableReUseAbleCrossReference_1_0.eContents().get(1);
+		
+		//ReUsableRef Ref:
+		//	{ReUsableRef} reuseable=[ReUseAble]
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{ReUsableRef} reuseable=[ReUseAble]
+		public Group getGroup() { return cGroup; }
+		
+		//{ReUsableRef}
+		public Action getReUsableRefAction_0() { return cReUsableRefAction_0; }
+		
+		//reuseable=[ReUseAble]
+		public Assignment getReuseableAssignment_1() { return cReuseableAssignment_1; }
+		
+		//[ReUseAble]
+		public CrossReference getReuseableReUseAbleCrossReference_1_0() { return cReuseableReUseAbleCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getReuseableReUseAbleIDTerminalRuleCall_1_0_1() { return cReuseableReUseAbleIDTerminalRuleCall_1_0_1; }
 	}
 	public class InertialElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Inertial");
@@ -587,99 +697,105 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	public class InertiaElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Inertia");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cInertiaKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cIxxKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cIxxAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cIxxURDFAttrSignedNumericParserRuleCall_3_0 = (RuleCall)cIxxAssignment_3.eContents().get(0);
-		private final Keyword cIxyKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cIxyAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cIxyURDFAttrSignedNumericParserRuleCall_5_0 = (RuleCall)cIxyAssignment_5.eContents().get(0);
-		private final Keyword cIxzKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cIxzAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cIxzURDFAttrSignedNumericParserRuleCall_7_0 = (RuleCall)cIxzAssignment_7.eContents().get(0);
-		private final Keyword cIyyKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cIyyAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cIyyURDFAttrSignedNumericParserRuleCall_9_0 = (RuleCall)cIyyAssignment_9.eContents().get(0);
-		private final Keyword cIyzKeyword_10 = (Keyword)cGroup.eContents().get(10);
-		private final Assignment cIyzAssignment_11 = (Assignment)cGroup.eContents().get(11);
-		private final RuleCall cIyzURDFAttrSignedNumericParserRuleCall_11_0 = (RuleCall)cIyzAssignment_11.eContents().get(0);
-		private final Keyword cIzzKeyword_12 = (Keyword)cGroup.eContents().get(12);
-		private final Assignment cIzzAssignment_13 = (Assignment)cGroup.eContents().get(13);
-		private final RuleCall cIzzURDFAttrSignedNumericParserRuleCall_13_0 = (RuleCall)cIzzAssignment_13.eContents().get(0);
+		private final Action cInertiaAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cInertiaKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cIxxKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cIxxAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cIxxURDFAttrSignedNumericParserRuleCall_4_0 = (RuleCall)cIxxAssignment_4.eContents().get(0);
+		private final Keyword cIxyKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cIxyAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cIxyURDFAttrSignedNumericParserRuleCall_6_0 = (RuleCall)cIxyAssignment_6.eContents().get(0);
+		private final Keyword cIxzKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cIxzAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cIxzURDFAttrSignedNumericParserRuleCall_8_0 = (RuleCall)cIxzAssignment_8.eContents().get(0);
+		private final Keyword cIyyKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Assignment cIyyAssignment_10 = (Assignment)cGroup.eContents().get(10);
+		private final RuleCall cIyyURDFAttrSignedNumericParserRuleCall_10_0 = (RuleCall)cIyyAssignment_10.eContents().get(0);
+		private final Keyword cIyzKeyword_11 = (Keyword)cGroup.eContents().get(11);
+		private final Assignment cIyzAssignment_12 = (Assignment)cGroup.eContents().get(12);
+		private final RuleCall cIyzURDFAttrSignedNumericParserRuleCall_12_0 = (RuleCall)cIyzAssignment_12.eContents().get(0);
+		private final Keyword cIzzKeyword_13 = (Keyword)cGroup.eContents().get(13);
+		private final Assignment cIzzAssignment_14 = (Assignment)cGroup.eContents().get(14);
+		private final RuleCall cIzzURDFAttrSignedNumericParserRuleCall_14_0 = (RuleCall)cIzzAssignment_14.eContents().get(0);
 		
 		//Inertia:
-		//	'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz' ixz=URDFAttrSignedNumeric
-		//	'iyy' iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz' izz=URDFAttrSignedNumeric;
+		//	{Inertia} 'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz'
+		//	ixz=URDFAttrSignedNumeric 'iyy' iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz'
+		//	izz=URDFAttrSignedNumeric;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz' ixz=URDFAttrSignedNumeric 'iyy'
-		//iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz' izz=URDFAttrSignedNumeric
+		//{Inertia} 'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz'
+		//ixz=URDFAttrSignedNumeric 'iyy' iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz'
+		//izz=URDFAttrSignedNumeric
 		public Group getGroup() { return cGroup; }
 		
+		//{Inertia}
+		public Action getInertiaAction_0() { return cInertiaAction_0; }
+		
 		//'Inertia'
-		public Keyword getInertiaKeyword_0() { return cInertiaKeyword_0; }
+		public Keyword getInertiaKeyword_1() { return cInertiaKeyword_1; }
 		
 		//name=ID?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
 		//'ixx'
-		public Keyword getIxxKeyword_2() { return cIxxKeyword_2; }
+		public Keyword getIxxKeyword_3() { return cIxxKeyword_3; }
 		
 		//ixx=URDFAttrSignedNumeric
-		public Assignment getIxxAssignment_3() { return cIxxAssignment_3; }
+		public Assignment getIxxAssignment_4() { return cIxxAssignment_4; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIxxURDFAttrSignedNumericParserRuleCall_3_0() { return cIxxURDFAttrSignedNumericParserRuleCall_3_0; }
+		public RuleCall getIxxURDFAttrSignedNumericParserRuleCall_4_0() { return cIxxURDFAttrSignedNumericParserRuleCall_4_0; }
 		
 		//'ixy'
-		public Keyword getIxyKeyword_4() { return cIxyKeyword_4; }
+		public Keyword getIxyKeyword_5() { return cIxyKeyword_5; }
 		
 		//ixy=URDFAttrSignedNumeric
-		public Assignment getIxyAssignment_5() { return cIxyAssignment_5; }
+		public Assignment getIxyAssignment_6() { return cIxyAssignment_6; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIxyURDFAttrSignedNumericParserRuleCall_5_0() { return cIxyURDFAttrSignedNumericParserRuleCall_5_0; }
+		public RuleCall getIxyURDFAttrSignedNumericParserRuleCall_6_0() { return cIxyURDFAttrSignedNumericParserRuleCall_6_0; }
 		
 		//'ixz'
-		public Keyword getIxzKeyword_6() { return cIxzKeyword_6; }
+		public Keyword getIxzKeyword_7() { return cIxzKeyword_7; }
 		
 		//ixz=URDFAttrSignedNumeric
-		public Assignment getIxzAssignment_7() { return cIxzAssignment_7; }
+		public Assignment getIxzAssignment_8() { return cIxzAssignment_8; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIxzURDFAttrSignedNumericParserRuleCall_7_0() { return cIxzURDFAttrSignedNumericParserRuleCall_7_0; }
+		public RuleCall getIxzURDFAttrSignedNumericParserRuleCall_8_0() { return cIxzURDFAttrSignedNumericParserRuleCall_8_0; }
 		
 		//'iyy'
-		public Keyword getIyyKeyword_8() { return cIyyKeyword_8; }
+		public Keyword getIyyKeyword_9() { return cIyyKeyword_9; }
 		
 		//iyy=URDFAttrSignedNumeric
-		public Assignment getIyyAssignment_9() { return cIyyAssignment_9; }
+		public Assignment getIyyAssignment_10() { return cIyyAssignment_10; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIyyURDFAttrSignedNumericParserRuleCall_9_0() { return cIyyURDFAttrSignedNumericParserRuleCall_9_0; }
+		public RuleCall getIyyURDFAttrSignedNumericParserRuleCall_10_0() { return cIyyURDFAttrSignedNumericParserRuleCall_10_0; }
 		
 		//'iyz'
-		public Keyword getIyzKeyword_10() { return cIyzKeyword_10; }
+		public Keyword getIyzKeyword_11() { return cIyzKeyword_11; }
 		
 		//iyz=URDFAttrSignedNumeric
-		public Assignment getIyzAssignment_11() { return cIyzAssignment_11; }
+		public Assignment getIyzAssignment_12() { return cIyzAssignment_12; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIyzURDFAttrSignedNumericParserRuleCall_11_0() { return cIyzURDFAttrSignedNumericParserRuleCall_11_0; }
+		public RuleCall getIyzURDFAttrSignedNumericParserRuleCall_12_0() { return cIyzURDFAttrSignedNumericParserRuleCall_12_0; }
 		
 		//'izz'
-		public Keyword getIzzKeyword_12() { return cIzzKeyword_12; }
+		public Keyword getIzzKeyword_13() { return cIzzKeyword_13; }
 		
 		//izz=URDFAttrSignedNumeric
-		public Assignment getIzzAssignment_13() { return cIzzAssignment_13; }
+		public Assignment getIzzAssignment_14() { return cIzzAssignment_14; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getIzzURDFAttrSignedNumericParserRuleCall_13_0() { return cIzzURDFAttrSignedNumericParserRuleCall_13_0; }
+		public RuleCall getIzzURDFAttrSignedNumericParserRuleCall_14_0() { return cIzzURDFAttrSignedNumericParserRuleCall_14_0; }
 	}
 	public class VisualElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Visual");
@@ -688,17 +804,23 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cVisualKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Assignment cGeometryAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cGeometryGeometryParserRuleCall_3_0 = (RuleCall)cGeometryAssignment_3.eContents().get(0);
-		private final Assignment cOriginAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOriginOriginParserRuleCall_4_0 = (RuleCall)cOriginAssignment_4.eContents().get(0);
+		private final Keyword cGeometryKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cGeometryAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cGeometryGeometryParserRuleCall_4_0 = (RuleCall)cGeometryAssignment_4.eContents().get(0);
+		private final Assignment cOriginAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cOriginOriginParserRuleCall_5_0 = (RuleCall)cOriginAssignment_5.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cMaterialKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cMaterialAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cMaterialMaterialParserRuleCall_6_1_0 = (RuleCall)cMaterialAssignment_6_1.eContents().get(0);
 		
 		//Visual:
-		//	{Visual} 'Visual' name=ID? geometry+=Geometry* origin=Origin? //material=Material
+		//	{Visual} 'Visual' name=ID? 'Geometry' geometry=Geometry origin=Origin? ('Material' material=Material)?
+		//	//problem: Kan ikke definere material uden origin pt
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Visual} 'Visual' name=ID? geometry+=Geometry* origin=Origin?
+		//{Visual} 'Visual' name=ID? 'Geometry' geometry=Geometry origin=Origin? ('Material' material=Material)?
 		public Group getGroup() { return cGroup; }
 		
 		//{Visual}
@@ -713,7 +835,217 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//geometry+=Geometry*
+		//'Geometry'
+		public Keyword getGeometryKeyword_3() { return cGeometryKeyword_3; }
+		
+		//geometry=Geometry
+		public Assignment getGeometryAssignment_4() { return cGeometryAssignment_4; }
+		
+		//Geometry
+		public RuleCall getGeometryGeometryParserRuleCall_4_0() { return cGeometryGeometryParserRuleCall_4_0; }
+		
+		//origin=Origin?
+		public Assignment getOriginAssignment_5() { return cOriginAssignment_5; }
+		
+		//Origin
+		public RuleCall getOriginOriginParserRuleCall_5_0() { return cOriginOriginParserRuleCall_5_0; }
+		
+		//('Material' material=Material)?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//'Material'
+		public Keyword getMaterialKeyword_6_0() { return cMaterialKeyword_6_0; }
+		
+		//material=Material
+		public Assignment getMaterialAssignment_6_1() { return cMaterialAssignment_6_1; }
+		
+		//Material
+		public RuleCall getMaterialMaterialParserRuleCall_6_1_0() { return cMaterialMaterialParserRuleCall_6_1_0; }
+	}
+	public class OriginElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Origin");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cOriginAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cOriginKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cXKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cXAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cXURDFAttrSignedNumericParserRuleCall_4_0 = (RuleCall)cXAssignment_4.eContents().get(0);
+		private final Keyword cYKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cYAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cYURDFAttrSignedNumericParserRuleCall_6_0 = (RuleCall)cYAssignment_6.eContents().get(0);
+		private final Keyword cZKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cZAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cZURDFAttrSignedNumericParserRuleCall_8_0 = (RuleCall)cZAssignment_8.eContents().get(0);
+		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
+		private final Keyword cRollKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
+		private final Assignment cRollAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
+		private final RuleCall cRollURDFAttrSignedNumericParserRuleCall_9_1_0 = (RuleCall)cRollAssignment_9_1.eContents().get(0);
+		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
+		private final Keyword cPitchKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
+		private final Assignment cPitchAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
+		private final RuleCall cPitchURDFAttrSignedNumericParserRuleCall_10_1_0 = (RuleCall)cPitchAssignment_10_1.eContents().get(0);
+		private final Group cGroup_11 = (Group)cGroup.eContents().get(11);
+		private final Keyword cYawKeyword_11_0 = (Keyword)cGroup_11.eContents().get(0);
+		private final Assignment cYawAssignment_11_1 = (Assignment)cGroup_11.eContents().get(1);
+		private final RuleCall cYawURDFAttrSignedNumericParserRuleCall_11_1_0 = (RuleCall)cYawAssignment_11_1.eContents().get(0);
+		
+		//Origin:
+		//	{Origin} 'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric
+		//	('roll' roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Origin} 'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric ('roll'
+		//roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?
+		public Group getGroup() { return cGroup; }
+		
+		//{Origin}
+		public Action getOriginAction_0() { return cOriginAction_0; }
+		
+		//'Origin'
+		public Keyword getOriginKeyword_1() { return cOriginKeyword_1; }
+		
+		//name=ID?
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//'x'
+		public Keyword getXKeyword_3() { return cXKeyword_3; }
+		
+		//x=URDFAttrSignedNumeric
+		public Assignment getXAssignment_4() { return cXAssignment_4; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getXURDFAttrSignedNumericParserRuleCall_4_0() { return cXURDFAttrSignedNumericParserRuleCall_4_0; }
+		
+		//'y'
+		public Keyword getYKeyword_5() { return cYKeyword_5; }
+		
+		//y=URDFAttrSignedNumeric
+		public Assignment getYAssignment_6() { return cYAssignment_6; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getYURDFAttrSignedNumericParserRuleCall_6_0() { return cYURDFAttrSignedNumericParserRuleCall_6_0; }
+		
+		//'z'
+		public Keyword getZKeyword_7() { return cZKeyword_7; }
+		
+		//z=URDFAttrSignedNumeric
+		public Assignment getZAssignment_8() { return cZAssignment_8; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getZURDFAttrSignedNumericParserRuleCall_8_0() { return cZURDFAttrSignedNumericParserRuleCall_8_0; }
+		
+		//('roll' roll=URDFAttrSignedNumeric)?
+		public Group getGroup_9() { return cGroup_9; }
+		
+		//'roll'
+		public Keyword getRollKeyword_9_0() { return cRollKeyword_9_0; }
+		
+		//roll=URDFAttrSignedNumeric
+		public Assignment getRollAssignment_9_1() { return cRollAssignment_9_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getRollURDFAttrSignedNumericParserRuleCall_9_1_0() { return cRollURDFAttrSignedNumericParserRuleCall_9_1_0; }
+		
+		//('pitch' pitch=URDFAttrSignedNumeric)?
+		public Group getGroup_10() { return cGroup_10; }
+		
+		//'pitch'
+		public Keyword getPitchKeyword_10_0() { return cPitchKeyword_10_0; }
+		
+		//pitch=URDFAttrSignedNumeric
+		public Assignment getPitchAssignment_10_1() { return cPitchAssignment_10_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getPitchURDFAttrSignedNumericParserRuleCall_10_1_0() { return cPitchURDFAttrSignedNumericParserRuleCall_10_1_0; }
+		
+		//('yaw' yaw=URDFAttrSignedNumeric)?
+		public Group getGroup_11() { return cGroup_11; }
+		
+		//'yaw'
+		public Keyword getYawKeyword_11_0() { return cYawKeyword_11_0; }
+		
+		//yaw=URDFAttrSignedNumeric
+		public Assignment getYawAssignment_11_1() { return cYawAssignment_11_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getYawURDFAttrSignedNumericParserRuleCall_11_1_0() { return cYawURDFAttrSignedNumericParserRuleCall_11_1_0; }
+	}
+	public class MassElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Mass");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMassAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cMassKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cMassKilogramKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cMassKilogramAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMassKilogramURDFAttrSignedNumericParserRuleCall_4_0 = (RuleCall)cMassKilogramAssignment_4.eContents().get(0);
+		
+		//Mass:
+		//	{Mass} 'Mass' name=ID? 'massKilogram' massKilogram=URDFAttrSignedNumeric;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Mass} 'Mass' name=ID? 'massKilogram' massKilogram=URDFAttrSignedNumeric
+		public Group getGroup() { return cGroup; }
+		
+		//{Mass}
+		public Action getMassAction_0() { return cMassAction_0; }
+		
+		//'Mass'
+		public Keyword getMassKeyword_1() { return cMassKeyword_1; }
+		
+		//name=ID?
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//'massKilogram'
+		public Keyword getMassKilogramKeyword_3() { return cMassKilogramKeyword_3; }
+		
+		//massKilogram=URDFAttrSignedNumeric
+		public Assignment getMassKilogramAssignment_4() { return cMassKilogramAssignment_4; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getMassKilogramURDFAttrSignedNumericParserRuleCall_4_0() { return cMassKilogramURDFAttrSignedNumericParserRuleCall_4_0; }
+	}
+	public class CollisionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Collision");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cCollisionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cGeometryKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cGeometryAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cGeometryGeometryParserRuleCall_3_0 = (RuleCall)cGeometryAssignment_3.eContents().get(0);
+		private final Assignment cOriginAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cOriginOriginParserRuleCall_4_0 = (RuleCall)cOriginAssignment_4.eContents().get(0);
+		
+		//Collision:
+		//	'Collision' name=ID? 'Geometry' geometry=Geometry origin=Origin?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Collision' name=ID? 'Geometry' geometry=Geometry origin=Origin?
+		public Group getGroup() { return cGroup; }
+		
+		//'Collision'
+		public Keyword getCollisionKeyword_0() { return cCollisionKeyword_0; }
+		
+		//name=ID?
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'Geometry'
+		public Keyword getGeometryKeyword_2() { return cGeometryKeyword_2; }
+		
+		//geometry=Geometry
 		public Assignment getGeometryAssignment_3() { return cGeometryAssignment_3; }
 		
 		//Geometry
@@ -868,17 +1200,14 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cPathToFileKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cPathToFileAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cPathToFileURDFAttrSTRINGParserRuleCall_3_0 = (RuleCall)cPathToFileAssignment_3.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cScaleKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cDimensionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cDimensionBoxParserRuleCall_4_1_0 = (RuleCall)cDimensionAssignment_4_1.eContents().get(0);
 		
 		////TODO: create ValueConverter to convert scale to Box
 		// Mesh:
-		//	'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING ('scale' dimension=Box)?;
+		//	'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING //('scale' dimension=Box)?
+		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING ('scale' dimension=Box)?
+		//'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING
 		public Group getGroup() { return cGroup; }
 		
 		//'Mesh'
@@ -898,18 +1227,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//URDFAttrSTRING
 		public RuleCall getPathToFileURDFAttrSTRINGParserRuleCall_3_0() { return cPathToFileURDFAttrSTRINGParserRuleCall_3_0; }
-		
-		//('scale' dimension=Box)?
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//'scale'
-		public Keyword getScaleKeyword_4_0() { return cScaleKeyword_4_0; }
-		
-		//dimension=Box
-		public Assignment getDimensionAssignment_4_1() { return cDimensionAssignment_4_1; }
-		
-		//Box
-		public RuleCall getDimensionBoxParserRuleCall_4_1_0() { return cDimensionBoxParserRuleCall_4_1_0; }
 	}
 	public class SphereElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Sphere");
@@ -946,211 +1263,59 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//URDFAttrNumeric
 		public RuleCall getRadiusURDFAttrNumericParserRuleCall_3_0() { return cRadiusURDFAttrNumericParserRuleCall_3_0; }
 	}
-	public class CollisionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Collision");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cCollisionAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cCollisionKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Assignment cGeometryAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cGeometryGeometryParserRuleCall_3_0 = (RuleCall)cGeometryAssignment_3.eContents().get(0);
-		private final Assignment cOriginAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOriginOriginParserRuleCall_4_0 = (RuleCall)cOriginAssignment_4.eContents().get(0);
-		
-		//Collision:
-		//	{Collision} 'Collision' name=ID? geometry+=Geometry* origin=Origin?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{Collision} 'Collision' name=ID? geometry+=Geometry* origin=Origin?
-		public Group getGroup() { return cGroup; }
-		
-		//{Collision}
-		public Action getCollisionAction_0() { return cCollisionAction_0; }
-		
-		//'Collision'
-		public Keyword getCollisionKeyword_1() { return cCollisionKeyword_1; }
-		
-		//name=ID?
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-		
-		//geometry+=Geometry*
-		public Assignment getGeometryAssignment_3() { return cGeometryAssignment_3; }
-		
-		//Geometry
-		public RuleCall getGeometryGeometryParserRuleCall_3_0() { return cGeometryGeometryParserRuleCall_3_0; }
-		
-		//origin=Origin?
-		public Assignment getOriginAssignment_4() { return cOriginAssignment_4; }
-		
-		//Origin
-		public RuleCall getOriginOriginParserRuleCall_4_0() { return cOriginOriginParserRuleCall_4_0; }
-	}
-	public class OriginElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Origin");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOriginKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cXKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cXAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cXURDFAttrSignedNumericParserRuleCall_3_0 = (RuleCall)cXAssignment_3.eContents().get(0);
-		private final Keyword cYKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cYAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cYURDFAttrSignedNumericParserRuleCall_5_0 = (RuleCall)cYAssignment_5.eContents().get(0);
-		private final Keyword cZKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cZAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cZURDFAttrSignedNumericParserRuleCall_7_0 = (RuleCall)cZAssignment_7.eContents().get(0);
-		private final Group cGroup_8 = (Group)cGroup.eContents().get(8);
-		private final Keyword cRollKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
-		private final Assignment cRollAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
-		private final RuleCall cRollURDFAttrSignedNumericParserRuleCall_8_1_0 = (RuleCall)cRollAssignment_8_1.eContents().get(0);
-		private final Group cGroup_9 = (Group)cGroup.eContents().get(9);
-		private final Keyword cPitchKeyword_9_0 = (Keyword)cGroup_9.eContents().get(0);
-		private final Assignment cPitchAssignment_9_1 = (Assignment)cGroup_9.eContents().get(1);
-		private final RuleCall cPitchURDFAttrSignedNumericParserRuleCall_9_1_0 = (RuleCall)cPitchAssignment_9_1.eContents().get(0);
-		private final Group cGroup_10 = (Group)cGroup.eContents().get(10);
-		private final Keyword cYawKeyword_10_0 = (Keyword)cGroup_10.eContents().get(0);
-		private final Assignment cYawAssignment_10_1 = (Assignment)cGroup_10.eContents().get(1);
-		private final RuleCall cYawURDFAttrSignedNumericParserRuleCall_10_1_0 = (RuleCall)cYawAssignment_10_1.eContents().get(0);
-		
-		//Origin:
-		//	'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric ('roll'
-		//	roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric ('roll'
-		//roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?
-		public Group getGroup() { return cGroup; }
-		
-		//'Origin'
-		public Keyword getOriginKeyword_0() { return cOriginKeyword_0; }
-		
-		//name=ID?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
-		//'x'
-		public Keyword getXKeyword_2() { return cXKeyword_2; }
-		
-		//x=URDFAttrSignedNumeric
-		public Assignment getXAssignment_3() { return cXAssignment_3; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getXURDFAttrSignedNumericParserRuleCall_3_0() { return cXURDFAttrSignedNumericParserRuleCall_3_0; }
-		
-		//'y'
-		public Keyword getYKeyword_4() { return cYKeyword_4; }
-		
-		//y=URDFAttrSignedNumeric
-		public Assignment getYAssignment_5() { return cYAssignment_5; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getYURDFAttrSignedNumericParserRuleCall_5_0() { return cYURDFAttrSignedNumericParserRuleCall_5_0; }
-		
-		//'z'
-		public Keyword getZKeyword_6() { return cZKeyword_6; }
-		
-		//z=URDFAttrSignedNumeric
-		public Assignment getZAssignment_7() { return cZAssignment_7; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getZURDFAttrSignedNumericParserRuleCall_7_0() { return cZURDFAttrSignedNumericParserRuleCall_7_0; }
-		
-		//('roll' roll=URDFAttrSignedNumeric)?
-		public Group getGroup_8() { return cGroup_8; }
-		
-		//'roll'
-		public Keyword getRollKeyword_8_0() { return cRollKeyword_8_0; }
-		
-		//roll=URDFAttrSignedNumeric
-		public Assignment getRollAssignment_8_1() { return cRollAssignment_8_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getRollURDFAttrSignedNumericParserRuleCall_8_1_0() { return cRollURDFAttrSignedNumericParserRuleCall_8_1_0; }
-		
-		//('pitch' pitch=URDFAttrSignedNumeric)?
-		public Group getGroup_9() { return cGroup_9; }
-		
-		//'pitch'
-		public Keyword getPitchKeyword_9_0() { return cPitchKeyword_9_0; }
-		
-		//pitch=URDFAttrSignedNumeric
-		public Assignment getPitchAssignment_9_1() { return cPitchAssignment_9_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getPitchURDFAttrSignedNumericParserRuleCall_9_1_0() { return cPitchURDFAttrSignedNumericParserRuleCall_9_1_0; }
-		
-		//('yaw' yaw=URDFAttrSignedNumeric)?
-		public Group getGroup_10() { return cGroup_10; }
-		
-		//'yaw'
-		public Keyword getYawKeyword_10_0() { return cYawKeyword_10_0; }
-		
-		//yaw=URDFAttrSignedNumeric
-		public Assignment getYawAssignment_10_1() { return cYawAssignment_10_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getYawURDFAttrSignedNumericParserRuleCall_10_1_0() { return cYawURDFAttrSignedNumericParserRuleCall_10_1_0; }
-	}
-	public class MassElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Mass");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cMassKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cMass_ValueInKilogramsKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cMassValueInKilogramsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cMassValueInKilogramsURDFAttrNumericParserRuleCall_3_0 = (RuleCall)cMassValueInKilogramsAssignment_3.eContents().get(0);
-		
-		//Mass:
-		//	'Mass' name=ID? 'mass_(ValueInKilograms)' massValueInKilograms=URDFAttrNumeric;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'Mass' name=ID? 'mass_(ValueInKilograms)' massValueInKilograms=URDFAttrNumeric
-		public Group getGroup() { return cGroup; }
-		
-		//'Mass'
-		public Keyword getMassKeyword_0() { return cMassKeyword_0; }
-		
-		//name=ID?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
-		//'mass_(ValueInKilograms)'
-		public Keyword getMass_ValueInKilogramsKeyword_2() { return cMass_ValueInKilogramsKeyword_2; }
-		
-		//massValueInKilograms=URDFAttrNumeric
-		public Assignment getMassValueInKilogramsAssignment_3() { return cMassValueInKilogramsAssignment_3; }
-		
-		//URDFAttrNumeric
-		public RuleCall getMassValueInKilogramsURDFAttrNumericParserRuleCall_3_0() { return cMassValueInKilogramsURDFAttrNumericParserRuleCall_3_0; }
-	}
 	public class MaterialElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Material");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cColorParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTextureParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTextureParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cColorParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Material:
-		//	Color | Texture;
+		//	Texture | Color;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Color | Texture
+		//Texture | Color
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//Color
-		public RuleCall getColorParserRuleCall_0() { return cColorParserRuleCall_0; }
-		
 		//Texture
-		public RuleCall getTextureParserRuleCall_1() { return cTextureParserRuleCall_1; }
+		public RuleCall getTextureParserRuleCall_0() { return cTextureParserRuleCall_0; }
+		
+		//Color
+		public RuleCall getColorParserRuleCall_1() { return cColorParserRuleCall_1; }
+	}
+	public class TextureElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Texture");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cTextureKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cPathToFileKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cPathToFileAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cPathToFileURDFAttrSTRINGParserRuleCall_3_0 = (RuleCall)cPathToFileAssignment_3.eContents().get(0);
+		
+		//Texture:
+		//	'Texture' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Texture' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING
+		public Group getGroup() { return cGroup; }
+		
+		//'Texture'
+		public Keyword getTextureKeyword_0() { return cTextureKeyword_0; }
+		
+		//name=ID?
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'pathToFile'
+		public Keyword getPathToFileKeyword_2() { return cPathToFileKeyword_2; }
+		
+		//pathToFile=URDFAttrSTRING
+		public Assignment getPathToFileAssignment_3() { return cPathToFileAssignment_3; }
+		
+		//URDFAttrSTRING
+		public RuleCall getPathToFileURDFAttrSTRINGParserRuleCall_3_0() { return cPathToFileURDFAttrSTRINGParserRuleCall_3_0; }
 	}
 	public class ColorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Color");
@@ -1171,7 +1336,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cAlphaAssignment_9 = (Assignment)cGroup.eContents().get(9);
 		private final RuleCall cAlphaURDFAttrFloatParserRuleCall_9_0 = (RuleCall)cAlphaAssignment_9.eContents().get(0);
 		
-		/// * RGBA values must be floats between 0 and 1 incl * / Color:
+		//// RGBA values must be floats between 0 and 1 incl 
+		// Color:
 		//	'Color' name=ID? 'red' red=URDFAttrFloat 'green' green=URDFAttrFloat 'blue' blue=URDFAttrFloat 'alpha'
 		//	alpha=URDFAttrFloat;
 		@Override public ParserRule getRule() { return rule; }
@@ -1225,113 +1391,210 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//URDFAttrFloat
 		public RuleCall getAlphaURDFAttrFloatParserRuleCall_9_0() { return cAlphaURDFAttrFloatParserRuleCall_9_0; }
 	}
-	public class TextureElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Texture");
+	public class JointElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Joint");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTextureKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cJointKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cPathToFileKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPathToFileAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPathToFileURDFAttrSTRINGParserRuleCall_3_0 = (RuleCall)cPathToFileAssignment_3.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
+		private final Group cGroup_2_0_0 = (Group)cGroup_2_0.eContents().get(0);
+		private final Keyword cDefKeyword_2_0_0_0 = (Keyword)cGroup_2_0_0.eContents().get(0);
+		private final Keyword cChildOfKeyword_2_0_0_1 = (Keyword)cGroup_2_0_0.eContents().get(1);
+		private final Assignment cChildOfAssignment_2_0_0_2 = (Assignment)cGroup_2_0_0.eContents().get(2);
+		private final CrossReference cChildOfLinkCrossReference_2_0_0_2_0 = (CrossReference)cChildOfAssignment_2_0_0_2.eContents().get(0);
+		private final RuleCall cChildOfLinkIDTerminalRuleCall_2_0_0_2_0_1 = (RuleCall)cChildOfLinkCrossReference_2_0_0_2_0.eContents().get(1);
+		private final Keyword cParentOfKeyword_2_0_0_3 = (Keyword)cGroup_2_0_0.eContents().get(3);
+		private final Assignment cParentOfAssignment_2_0_0_4 = (Assignment)cGroup_2_0_0.eContents().get(4);
+		private final CrossReference cParentOfLinkCrossReference_2_0_0_4_0 = (CrossReference)cParentOfAssignment_2_0_0_4.eContents().get(0);
+		private final RuleCall cParentOfLinkIDTerminalRuleCall_2_0_0_4_0_1 = (RuleCall)cParentOfLinkCrossReference_2_0_0_4_0.eContents().get(1);
+		private final Keyword cTypeKeyword_2_0_0_5 = (Keyword)cGroup_2_0_0.eContents().get(5);
+		private final Assignment cTypeAssignment_2_0_0_6 = (Assignment)cGroup_2_0_0.eContents().get(6);
+		private final RuleCall cTypeJointTypeEnumRuleCall_2_0_0_6_0 = (RuleCall)cTypeAssignment_2_0_0_6.eContents().get(0);
+		private final Alternatives cAlternatives_2_0_1 = (Alternatives)cGroup_2_0.eContents().get(1);
+		private final Assignment cOriginAssignment_2_0_1_0 = (Assignment)cAlternatives_2_0_1.eContents().get(0);
+		private final RuleCall cOriginOriginParserRuleCall_2_0_1_0_0 = (RuleCall)cOriginAssignment_2_0_1_0.eContents().get(0);
+		private final Assignment cAxisAssignment_2_0_1_1 = (Assignment)cAlternatives_2_0_1.eContents().get(1);
+		private final RuleCall cAxisAxisParserRuleCall_2_0_1_1_0 = (RuleCall)cAxisAssignment_2_0_1_1.eContents().get(0);
+		private final Assignment cLimitAssignment_2_0_1_2 = (Assignment)cAlternatives_2_0_1.eContents().get(2);
+		private final RuleCall cLimitLimitParserRuleCall_2_0_1_2_0 = (RuleCall)cLimitAssignment_2_0_1_2.eContents().get(0);
+		private final Assignment cCalibrationAssignment_2_0_1_3 = (Assignment)cAlternatives_2_0_1.eContents().get(3);
+		private final RuleCall cCalibrationCalibrationParserRuleCall_2_0_1_3_0 = (RuleCall)cCalibrationAssignment_2_0_1_3.eContents().get(0);
+		private final Assignment cDynamicsAssignment_2_0_1_4 = (Assignment)cAlternatives_2_0_1.eContents().get(4);
+		private final RuleCall cDynamicsDynamicsParserRuleCall_2_0_1_4_0 = (RuleCall)cDynamicsAssignment_2_0_1_4.eContents().get(0);
+		private final Assignment cSafetycontrollerAssignment_2_0_1_5 = (Assignment)cAlternatives_2_0_1.eContents().get(5);
+		private final RuleCall cSafetycontrollerSafetyControllerParserRuleCall_2_0_1_5_0 = (RuleCall)cSafetycontrollerAssignment_2_0_1_5.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
+		private final Keyword cReuseKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cIsReuseOfAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final CrossReference cIsReuseOfJointCrossReference_2_1_1_0 = (CrossReference)cIsReuseOfAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cIsReuseOfJointIDTerminalRuleCall_2_1_1_0_1 = (RuleCall)cIsReuseOfJointCrossReference_2_1_1_0.eContents().get(1);
+		private final Keyword cChildOfKeyword_2_1_2 = (Keyword)cGroup_2_1.eContents().get(2);
+		private final Assignment cChildOfAssignment_2_1_3 = (Assignment)cGroup_2_1.eContents().get(3);
+		private final CrossReference cChildOfLinkCrossReference_2_1_3_0 = (CrossReference)cChildOfAssignment_2_1_3.eContents().get(0);
+		private final RuleCall cChildOfLinkIDTerminalRuleCall_2_1_3_0_1 = (RuleCall)cChildOfLinkCrossReference_2_1_3_0.eContents().get(1);
+		private final Keyword cParentOfKeyword_2_1_4 = (Keyword)cGroup_2_1.eContents().get(4);
+		private final Assignment cParentOfAssignment_2_1_5 = (Assignment)cGroup_2_1.eContents().get(5);
+		private final CrossReference cParentOfLinkCrossReference_2_1_5_0 = (CrossReference)cParentOfAssignment_2_1_5.eContents().get(0);
+		private final RuleCall cParentOfLinkIDTerminalRuleCall_2_1_5_0_1 = (RuleCall)cParentOfLinkCrossReference_2_1_5_0.eContents().get(1);
+		private final Assignment cReuseAssignment_2_1_6 = (Assignment)cGroup_2_1.eContents().get(6);
+		private final RuleCall cReuseReuseParserRuleCall_2_1_6_0 = (RuleCall)cReuseAssignment_2_1_6.eContents().get(0);
 		
-		//Texture:
-		//	'Texture' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING;
+		//Joint:
+		//	'Joint' name=ID (('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType) (origin=Origin |
+		//	axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 'reuse'
+		//	isReuseOf=[Joint] 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] reuse=Reuse?);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Texture' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING
+		//'Joint' name=ID (('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType) (origin=Origin |
+		//axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 'reuse'
+		//isReuseOf=[Joint] 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] reuse=Reuse?)
 		public Group getGroup() { return cGroup; }
 		
-		//'Texture'
-		public Keyword getTextureKeyword_0() { return cTextureKeyword_0; }
+		//'Joint'
+		public Keyword getJointKeyword_0() { return cJointKeyword_0; }
 		
-		//name=ID?
+		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//'pathToFile'
-		public Keyword getPathToFileKeyword_2() { return cPathToFileKeyword_2; }
+		//(('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType) (origin=Origin | axis=Axis |
+		//limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 'reuse'
+		//isReuseOf=[Joint] 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] reuse=Reuse?)
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 		
-		//pathToFile=URDFAttrSTRING
-		public Assignment getPathToFileAssignment_3() { return cPathToFileAssignment_3; }
+		//('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType) (origin=Origin | axis=Axis |
+		//limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)*
+		public Group getGroup_2_0() { return cGroup_2_0; }
 		
-		//URDFAttrSTRING
-		public RuleCall getPathToFileURDFAttrSTRINGParserRuleCall_3_0() { return cPathToFileURDFAttrSTRINGParserRuleCall_3_0; }
-	}
-	public class LimitElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Limit");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLimitKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cEffortKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cEffortAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cEffortURDFAttrSignedNumericParserRuleCall_3_0 = (RuleCall)cEffortAssignment_3.eContents().get(0);
-		private final Keyword cVelocityKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Assignment cVelocityAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cVelocityURDFAttrSignedNumericParserRuleCall_5_0 = (RuleCall)cVelocityAssignment_5.eContents().get(0);
-		private final Keyword cLowerKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		private final Assignment cLowerAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cLowerURDFAttrSignedNumericParserRuleCall_7_0 = (RuleCall)cLowerAssignment_7.eContents().get(0);
-		private final Keyword cUpperKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		private final Assignment cUpperAssignment_9 = (Assignment)cGroup.eContents().get(9);
-		private final RuleCall cUpperURDFAttrSignedNumericParserRuleCall_9_0 = (RuleCall)cUpperAssignment_9.eContents().get(0);
+		//('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType)
+		public Group getGroup_2_0_0() { return cGroup_2_0_0; }
 		
-		//Limit:
-		//	'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric 'lower'
-		//	lower=URDFAttrSignedNumeric? 'upper' upper=URDFAttrSignedNumeric?;
-		@Override public ParserRule getRule() { return rule; }
+		//'def'
+		public Keyword getDefKeyword_2_0_0_0() { return cDefKeyword_2_0_0_0; }
 		
-		//'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric 'lower'
-		//lower=URDFAttrSignedNumeric? 'upper' upper=URDFAttrSignedNumeric?
-		public Group getGroup() { return cGroup; }
+		//'ChildOf'
+		public Keyword getChildOfKeyword_2_0_0_1() { return cChildOfKeyword_2_0_0_1; }
 		
-		//'Limit'
-		public Keyword getLimitKeyword_0() { return cLimitKeyword_0; }
+		//childOf=[Link]
+		public Assignment getChildOfAssignment_2_0_0_2() { return cChildOfAssignment_2_0_0_2; }
 		
-		//name=ID?
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		//[Link]
+		public CrossReference getChildOfLinkCrossReference_2_0_0_2_0() { return cChildOfLinkCrossReference_2_0_0_2_0; }
 		
 		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		public RuleCall getChildOfLinkIDTerminalRuleCall_2_0_0_2_0_1() { return cChildOfLinkIDTerminalRuleCall_2_0_0_2_0_1; }
 		
-		//'effort'
-		public Keyword getEffortKeyword_2() { return cEffortKeyword_2; }
+		//'ParentOf'
+		public Keyword getParentOfKeyword_2_0_0_3() { return cParentOfKeyword_2_0_0_3; }
 		
-		//effort=URDFAttrSignedNumeric
-		public Assignment getEffortAssignment_3() { return cEffortAssignment_3; }
+		//parentOf=[Link]
+		public Assignment getParentOfAssignment_2_0_0_4() { return cParentOfAssignment_2_0_0_4; }
 		
-		//URDFAttrSignedNumeric
-		public RuleCall getEffortURDFAttrSignedNumericParserRuleCall_3_0() { return cEffortURDFAttrSignedNumericParserRuleCall_3_0; }
+		//[Link]
+		public CrossReference getParentOfLinkCrossReference_2_0_0_4_0() { return cParentOfLinkCrossReference_2_0_0_4_0; }
 		
-		//'velocity'
-		public Keyword getVelocityKeyword_4() { return cVelocityKeyword_4; }
+		//ID
+		public RuleCall getParentOfLinkIDTerminalRuleCall_2_0_0_4_0_1() { return cParentOfLinkIDTerminalRuleCall_2_0_0_4_0_1; }
 		
-		//velocity=URDFAttrSignedNumeric
-		public Assignment getVelocityAssignment_5() { return cVelocityAssignment_5; }
+		//'Type'
+		public Keyword getTypeKeyword_2_0_0_5() { return cTypeKeyword_2_0_0_5; }
 		
-		//URDFAttrSignedNumeric
-		public RuleCall getVelocityURDFAttrSignedNumericParserRuleCall_5_0() { return cVelocityURDFAttrSignedNumericParserRuleCall_5_0; }
+		//type=JointType
+		public Assignment getTypeAssignment_2_0_0_6() { return cTypeAssignment_2_0_0_6; }
 		
-		//'lower'
-		public Keyword getLowerKeyword_6() { return cLowerKeyword_6; }
+		//JointType
+		public RuleCall getTypeJointTypeEnumRuleCall_2_0_0_6_0() { return cTypeJointTypeEnumRuleCall_2_0_0_6_0; }
 		
-		//lower=URDFAttrSignedNumeric?
-		public Assignment getLowerAssignment_7() { return cLowerAssignment_7; }
+		//(origin=Origin | axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics |
+		//safetycontroller=SafetyController)*
+		public Alternatives getAlternatives_2_0_1() { return cAlternatives_2_0_1; }
 		
-		//URDFAttrSignedNumeric
-		public RuleCall getLowerURDFAttrSignedNumericParserRuleCall_7_0() { return cLowerURDFAttrSignedNumericParserRuleCall_7_0; }
+		//origin=Origin
+		public Assignment getOriginAssignment_2_0_1_0() { return cOriginAssignment_2_0_1_0; }
 		
-		//'upper'
-		public Keyword getUpperKeyword_8() { return cUpperKeyword_8; }
+		//Origin
+		public RuleCall getOriginOriginParserRuleCall_2_0_1_0_0() { return cOriginOriginParserRuleCall_2_0_1_0_0; }
 		
-		//upper=URDFAttrSignedNumeric?
-		public Assignment getUpperAssignment_9() { return cUpperAssignment_9; }
+		//axis=Axis
+		public Assignment getAxisAssignment_2_0_1_1() { return cAxisAssignment_2_0_1_1; }
 		
-		//URDFAttrSignedNumeric
-		public RuleCall getUpperURDFAttrSignedNumericParserRuleCall_9_0() { return cUpperURDFAttrSignedNumericParserRuleCall_9_0; }
+		//Axis
+		public RuleCall getAxisAxisParserRuleCall_2_0_1_1_0() { return cAxisAxisParserRuleCall_2_0_1_1_0; }
+		
+		//limit=Limit
+		public Assignment getLimitAssignment_2_0_1_2() { return cLimitAssignment_2_0_1_2; }
+		
+		//Limit
+		public RuleCall getLimitLimitParserRuleCall_2_0_1_2_0() { return cLimitLimitParserRuleCall_2_0_1_2_0; }
+		
+		//calibration=Calibration
+		public Assignment getCalibrationAssignment_2_0_1_3() { return cCalibrationAssignment_2_0_1_3; }
+		
+		//Calibration
+		public RuleCall getCalibrationCalibrationParserRuleCall_2_0_1_3_0() { return cCalibrationCalibrationParserRuleCall_2_0_1_3_0; }
+		
+		//dynamics=Dynamics
+		public Assignment getDynamicsAssignment_2_0_1_4() { return cDynamicsAssignment_2_0_1_4; }
+		
+		//Dynamics
+		public RuleCall getDynamicsDynamicsParserRuleCall_2_0_1_4_0() { return cDynamicsDynamicsParserRuleCall_2_0_1_4_0; }
+		
+		//safetycontroller=SafetyController
+		public Assignment getSafetycontrollerAssignment_2_0_1_5() { return cSafetycontrollerAssignment_2_0_1_5; }
+		
+		//SafetyController
+		public RuleCall getSafetycontrollerSafetyControllerParserRuleCall_2_0_1_5_0() { return cSafetycontrollerSafetyControllerParserRuleCall_2_0_1_5_0; }
+		
+		////HOW TO REUSE: CHANGE PARENT AND CHILD LINKS??
+		// 'reuse' isReuseOf=[Joint] 'ChildOf' childOf=[Link] 'ParentOf'
+		//parentOf=[Link] reuse=Reuse?
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//'reuse'
+		public Keyword getReuseKeyword_2_1_0() { return cReuseKeyword_2_1_0; }
+		
+		//isReuseOf=[Joint]
+		public Assignment getIsReuseOfAssignment_2_1_1() { return cIsReuseOfAssignment_2_1_1; }
+		
+		//[Joint]
+		public CrossReference getIsReuseOfJointCrossReference_2_1_1_0() { return cIsReuseOfJointCrossReference_2_1_1_0; }
+		
+		//ID
+		public RuleCall getIsReuseOfJointIDTerminalRuleCall_2_1_1_0_1() { return cIsReuseOfJointIDTerminalRuleCall_2_1_1_0_1; }
+		
+		//'ChildOf'
+		public Keyword getChildOfKeyword_2_1_2() { return cChildOfKeyword_2_1_2; }
+		
+		//childOf=[Link]
+		public Assignment getChildOfAssignment_2_1_3() { return cChildOfAssignment_2_1_3; }
+		
+		//[Link]
+		public CrossReference getChildOfLinkCrossReference_2_1_3_0() { return cChildOfLinkCrossReference_2_1_3_0; }
+		
+		//ID
+		public RuleCall getChildOfLinkIDTerminalRuleCall_2_1_3_0_1() { return cChildOfLinkIDTerminalRuleCall_2_1_3_0_1; }
+		
+		//'ParentOf'
+		public Keyword getParentOfKeyword_2_1_4() { return cParentOfKeyword_2_1_4; }
+		
+		//parentOf=[Link]
+		public Assignment getParentOfAssignment_2_1_5() { return cParentOfAssignment_2_1_5; }
+		
+		//[Link]
+		public CrossReference getParentOfLinkCrossReference_2_1_5_0() { return cParentOfLinkCrossReference_2_1_5_0; }
+		
+		//ID
+		public RuleCall getParentOfLinkIDTerminalRuleCall_2_1_5_0_1() { return cParentOfLinkIDTerminalRuleCall_2_1_5_0_1; }
+		
+		//reuse=Reuse?
+		public Assignment getReuseAssignment_2_1_6() { return cReuseAssignment_2_1_6; }
+		
+		//Reuse
+		public RuleCall getReuseReuseParserRuleCall_2_1_6_0() { return cReuseReuseParserRuleCall_2_1_6_0; }
 	}
 	public class AxisElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Axis");
@@ -1349,8 +1612,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cZAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cZURDFAttrINTParserRuleCall_7_0 = (RuleCall)cZAssignment_7.eContents().get(0);
 		
-		/// * Binary values must be 0 or 1 - 
-		// * digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
+		/// * Binary values must be 0 or 1 - digitsum must be 1, WHY NEED TO DEFINE ALL THREE?? * /
+		////keyword aliases: 'xyz' or 'x', 'y', 'z'
 		// Axis:
 		//	'Axis' name=ID? 'x' x=URDFAttrINT 'y' y=URDFAttrINT 'z' z=URDFAttrINT;
 		@Override public ParserRule getRule() { return rule; }
@@ -1394,6 +1657,91 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//URDFAttrINT
 		public RuleCall getZURDFAttrINTParserRuleCall_7_0() { return cZURDFAttrINTParserRuleCall_7_0; }
 	}
+	public class LimitElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Limit");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLimitKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cEffortKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cEffortAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cEffortURDFAttrSignedNumericParserRuleCall_3_0 = (RuleCall)cEffortAssignment_3.eContents().get(0);
+		private final Keyword cVelocityKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cVelocityAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cVelocityURDFAttrSignedNumericParserRuleCall_5_0 = (RuleCall)cVelocityAssignment_5.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Group cGroup_6_0 = (Group)cAlternatives_6.eContents().get(0);
+		private final Keyword cLowerKeyword_6_0_0 = (Keyword)cGroup_6_0.eContents().get(0);
+		private final Assignment cLowerAssignment_6_0_1 = (Assignment)cGroup_6_0.eContents().get(1);
+		private final RuleCall cLowerURDFAttrSignedNumericParserRuleCall_6_0_1_0 = (RuleCall)cLowerAssignment_6_0_1.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cUpperKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cUpperAssignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final RuleCall cUpperURDFAttrSignedNumericParserRuleCall_6_1_1_0 = (RuleCall)cUpperAssignment_6_1_1.eContents().get(0);
+		
+		//Limit:
+		//	'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric ('lower'
+		//	lower=URDFAttrSignedNumeric | 'upper' upper=URDFAttrSignedNumeric)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric ('lower'
+		//lower=URDFAttrSignedNumeric | 'upper' upper=URDFAttrSignedNumeric)*
+		public Group getGroup() { return cGroup; }
+		
+		//'Limit'
+		public Keyword getLimitKeyword_0() { return cLimitKeyword_0; }
+		
+		//name=ID?
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//'effort'
+		public Keyword getEffortKeyword_2() { return cEffortKeyword_2; }
+		
+		//effort=URDFAttrSignedNumeric
+		public Assignment getEffortAssignment_3() { return cEffortAssignment_3; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getEffortURDFAttrSignedNumericParserRuleCall_3_0() { return cEffortURDFAttrSignedNumericParserRuleCall_3_0; }
+		
+		//'velocity'
+		public Keyword getVelocityKeyword_4() { return cVelocityKeyword_4; }
+		
+		//velocity=URDFAttrSignedNumeric
+		public Assignment getVelocityAssignment_5() { return cVelocityAssignment_5; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getVelocityURDFAttrSignedNumericParserRuleCall_5_0() { return cVelocityURDFAttrSignedNumericParserRuleCall_5_0; }
+		
+		//('lower' lower=URDFAttrSignedNumeric | 'upper' upper=URDFAttrSignedNumeric)*
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+		
+		//'lower' lower=URDFAttrSignedNumeric
+		public Group getGroup_6_0() { return cGroup_6_0; }
+		
+		//'lower'
+		public Keyword getLowerKeyword_6_0_0() { return cLowerKeyword_6_0_0; }
+		
+		//lower=URDFAttrSignedNumeric
+		public Assignment getLowerAssignment_6_0_1() { return cLowerAssignment_6_0_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getLowerURDFAttrSignedNumericParserRuleCall_6_0_1_0() { return cLowerURDFAttrSignedNumericParserRuleCall_6_0_1_0; }
+		
+		//'upper' upper=URDFAttrSignedNumeric
+		public Group getGroup_6_1() { return cGroup_6_1; }
+		
+		//'upper'
+		public Keyword getUpperKeyword_6_1_0() { return cUpperKeyword_6_1_0; }
+		
+		//upper=URDFAttrSignedNumeric
+		public Assignment getUpperAssignment_6_1_1() { return cUpperAssignment_6_1_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getUpperURDFAttrSignedNumericParserRuleCall_6_1_1_0() { return cUpperURDFAttrSignedNumericParserRuleCall_6_1_1_0; }
+	}
 	public class CalibrationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Calibration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1401,21 +1749,22 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCalibrationKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cRisingKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cRisingAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cRisingURDFAttrSignedNumericParserRuleCall_3_1_0 = (RuleCall)cRisingAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cFallingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cFallingAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cFallingURDFAttrSignedNumericParserRuleCall_4_1_0 = (RuleCall)cFallingAssignment_4_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cRisingKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cRisingAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cRisingURDFAttrSignedNumericParserRuleCall_3_0_1_0 = (RuleCall)cRisingAssignment_3_0_1.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cFallingKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cFallingAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cFallingURDFAttrSignedNumericParserRuleCall_3_1_1_0 = (RuleCall)cFallingAssignment_3_1_1.eContents().get(0);
 		
 		//Calibration:
-		//	{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric)? ('falling'
-		//	falling=URDFAttrSignedNumeric)?;
+		//	{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric | 'falling'
+		//	falling=URDFAttrSignedNumeric);
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric)? ('falling' falling=URDFAttrSignedNumeric)?
+		//{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric | 'falling' falling=URDFAttrSignedNumeric)
 		public Group getGroup() { return cGroup; }
 		
 		//{Calibration}
@@ -1430,29 +1779,32 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//('rising' rising=URDFAttrSignedNumeric)?
-		public Group getGroup_3() { return cGroup_3; }
+		//('rising' rising=URDFAttrSignedNumeric | 'falling' falling=URDFAttrSignedNumeric)
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//'rising' rising=URDFAttrSignedNumeric
+		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'rising'
-		public Keyword getRisingKeyword_3_0() { return cRisingKeyword_3_0; }
+		public Keyword getRisingKeyword_3_0_0() { return cRisingKeyword_3_0_0; }
 		
 		//rising=URDFAttrSignedNumeric
-		public Assignment getRisingAssignment_3_1() { return cRisingAssignment_3_1; }
+		public Assignment getRisingAssignment_3_0_1() { return cRisingAssignment_3_0_1; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getRisingURDFAttrSignedNumericParserRuleCall_3_1_0() { return cRisingURDFAttrSignedNumericParserRuleCall_3_1_0; }
+		public RuleCall getRisingURDFAttrSignedNumericParserRuleCall_3_0_1_0() { return cRisingURDFAttrSignedNumericParserRuleCall_3_0_1_0; }
 		
-		//('falling' falling=URDFAttrSignedNumeric)?
-		public Group getGroup_4() { return cGroup_4; }
+		//'falling' falling=URDFAttrSignedNumeric
+		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//'falling'
-		public Keyword getFallingKeyword_4_0() { return cFallingKeyword_4_0; }
+		public Keyword getFallingKeyword_3_1_0() { return cFallingKeyword_3_1_0; }
 		
 		//falling=URDFAttrSignedNumeric
-		public Assignment getFallingAssignment_4_1() { return cFallingAssignment_4_1; }
+		public Assignment getFallingAssignment_3_1_1() { return cFallingAssignment_3_1_1; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getFallingURDFAttrSignedNumericParserRuleCall_4_1_0() { return cFallingURDFAttrSignedNumericParserRuleCall_4_1_0; }
+		public RuleCall getFallingURDFAttrSignedNumericParserRuleCall_3_1_1_0() { return cFallingURDFAttrSignedNumericParserRuleCall_3_1_1_0; }
 	}
 	public class DynamicsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.Dynamics");
@@ -1461,21 +1813,22 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDynamicsKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cFrictionKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cFrictionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cFrictionURDFAttrSignedNumericParserRuleCall_3_1_0 = (RuleCall)cFrictionAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cDampingKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cDampingAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cDampingURDFAttrSignedNumericParserRuleCall_4_1_0 = (RuleCall)cDampingAssignment_4_1.eContents().get(0);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cFrictionKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final Assignment cFrictionAssignment_3_0_1 = (Assignment)cGroup_3_0.eContents().get(1);
+		private final RuleCall cFrictionURDFAttrSignedNumericParserRuleCall_3_0_1_0 = (RuleCall)cFrictionAssignment_3_0_1.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cDampingKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cDampingAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cDampingURDFAttrSignedNumericParserRuleCall_3_1_1_0 = (RuleCall)cDampingAssignment_3_1_1.eContents().get(0);
 		
 		//Dynamics:
-		//	{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric)? ('damping'
-		//	damping=URDFAttrSignedNumeric)?;
+		//	{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric | 'damping'
+		//	damping=URDFAttrSignedNumeric)+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric)? ('damping' damping=URDFAttrSignedNumeric)?
+		//{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric | 'damping' damping=URDFAttrSignedNumeric)+
 		public Group getGroup() { return cGroup; }
 		
 		//{Dynamics}
@@ -1490,29 +1843,32 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 		
-		//('friction' friction=URDFAttrSignedNumeric)?
-		public Group getGroup_3() { return cGroup_3; }
+		//('friction' friction=URDFAttrSignedNumeric | 'damping' damping=URDFAttrSignedNumeric)+
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		
+		//'friction' friction=URDFAttrSignedNumeric
+		public Group getGroup_3_0() { return cGroup_3_0; }
 		
 		//'friction'
-		public Keyword getFrictionKeyword_3_0() { return cFrictionKeyword_3_0; }
+		public Keyword getFrictionKeyword_3_0_0() { return cFrictionKeyword_3_0_0; }
 		
 		//friction=URDFAttrSignedNumeric
-		public Assignment getFrictionAssignment_3_1() { return cFrictionAssignment_3_1; }
+		public Assignment getFrictionAssignment_3_0_1() { return cFrictionAssignment_3_0_1; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getFrictionURDFAttrSignedNumericParserRuleCall_3_1_0() { return cFrictionURDFAttrSignedNumericParserRuleCall_3_1_0; }
+		public RuleCall getFrictionURDFAttrSignedNumericParserRuleCall_3_0_1_0() { return cFrictionURDFAttrSignedNumericParserRuleCall_3_0_1_0; }
 		
-		//('damping' damping=URDFAttrSignedNumeric)?
-		public Group getGroup_4() { return cGroup_4; }
+		//'damping' damping=URDFAttrSignedNumeric
+		public Group getGroup_3_1() { return cGroup_3_1; }
 		
 		//'damping'
-		public Keyword getDampingKeyword_4_0() { return cDampingKeyword_4_0; }
+		public Keyword getDampingKeyword_3_1_0() { return cDampingKeyword_3_1_0; }
 		
 		//damping=URDFAttrSignedNumeric
-		public Assignment getDampingAssignment_4_1() { return cDampingAssignment_4_1; }
+		public Assignment getDampingAssignment_3_1_1() { return cDampingAssignment_3_1_1; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getDampingURDFAttrSignedNumericParserRuleCall_4_1_0() { return cDampingURDFAttrSignedNumericParserRuleCall_4_1_0; }
+		public RuleCall getDampingURDFAttrSignedNumericParserRuleCall_3_1_1_0() { return cDampingURDFAttrSignedNumericParserRuleCall_3_1_1_0; }
 	}
 	public class SafetyControllerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.SafetyController");
@@ -1520,39 +1876,31 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSafetyControllerKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cSoftLowerLimitKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cSoftLowerLimitAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cSoftLowerLimitURDFAttrSignedNumericParserRuleCall_2_1_0 = (RuleCall)cSoftLowerLimitAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cSoftUpperLimitKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cSoftUpperLimitAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cSoftUpperLimitURDFAttrSignedNumericParserRuleCall_3_1_0 = (RuleCall)cSoftUpperLimitAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cK_positionKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cK_positionAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cK_positionURDFAttrSignedNumericParserRuleCall_4_1_0 = (RuleCall)cK_positionAssignment_4_1.eContents().get(0);
-		private final Keyword cK_velocityKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cK_velocityAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cK_velocityURDFAttrSignedNumericParserRuleCall_6_0 = (RuleCall)cK_velocityAssignment_6.eContents().get(0);
+		private final Keyword cK_velocityKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cK_velocityAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cK_velocityURDFAttrSignedNumericParserRuleCall_3_0 = (RuleCall)cK_velocityAssignment_3.eContents().get(0);
+		private final Alternatives cAlternatives_4 = (Alternatives)cGroup.eContents().get(4);
+		private final Group cGroup_4_0 = (Group)cAlternatives_4.eContents().get(0);
+		private final Keyword cK_positionKeyword_4_0_0 = (Keyword)cGroup_4_0.eContents().get(0);
+		private final Assignment cK_positionAssignment_4_0_1 = (Assignment)cGroup_4_0.eContents().get(1);
+		private final RuleCall cK_positionURDFAttrSignedNumericParserRuleCall_4_0_1_0 = (RuleCall)cK_positionAssignment_4_0_1.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cAlternatives_4.eContents().get(1);
+		private final Keyword cSoftLowerLimitKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cSoftLowerLimitAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cSoftLowerLimitURDFAttrSignedNumericParserRuleCall_4_1_1_0 = (RuleCall)cSoftLowerLimitAssignment_4_1_1.eContents().get(0);
+		private final Group cGroup_4_2 = (Group)cAlternatives_4.eContents().get(2);
+		private final Keyword cSoftUpperLimitKeyword_4_2_0 = (Keyword)cGroup_4_2.eContents().get(0);
+		private final Assignment cSoftUpperLimitAssignment_4_2_1 = (Assignment)cGroup_4_2.eContents().get(1);
+		private final RuleCall cSoftUpperLimitURDFAttrSignedNumericParserRuleCall_4_2_1_0 = (RuleCall)cSoftUpperLimitAssignment_4_2_1.eContents().get(0);
 		
-		////Should we cut Mimic from the spec??
-		//
-		/// *Mimic:
-		//	'Mimic' (name=ID)?
-		//	'mimics' mimics=[Joint|ID]
-		//	('multiplier' multiplier=SIGNED_NUMERIC)?
-		//	('offSet' offSet=SIGNED_NUMERIC)?
-		//;* /
 		//SafetyController:
-		//	'SafetyController' name=ID? ('softLowerLimit' softLowerLimit=URDFAttrSignedNumeric)? ('softUpperLimit'
-		//	softUpperLimit=URDFAttrSignedNumeric)? ('k_position' k_position=URDFAttrSignedNumeric)? 'k_velocity'
-		//	k_velocity=URDFAttrSignedNumeric;
+		//	'SafetyController' name=ID? 'k_velocity' k_velocity=URDFAttrSignedNumeric ('k_position'
+		//	k_position=URDFAttrSignedNumeric | 'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric | 'softUpperLimit'
+		//	softUpperLimit=URDFAttrSignedNumeric)*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'SafetyController' name=ID? ('softLowerLimit' softLowerLimit=URDFAttrSignedNumeric)? ('softUpperLimit'
-		//softUpperLimit=URDFAttrSignedNumeric)? ('k_position' k_position=URDFAttrSignedNumeric)? 'k_velocity'
-		//k_velocity=URDFAttrSignedNumeric
+		//'SafetyController' name=ID? 'k_velocity' k_velocity=URDFAttrSignedNumeric ('k_position' k_position=URDFAttrSignedNumeric
+		//| 'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric | 'softUpperLimit' softUpperLimit=URDFAttrSignedNumeric)*
 		public Group getGroup() { return cGroup; }
 		
 		//'SafetyController'
@@ -1564,58 +1912,69 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
-		//('softLowerLimit' softLowerLimit=URDFAttrSignedNumeric)?
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//'softLowerLimit'
-		public Keyword getSoftLowerLimitKeyword_2_0() { return cSoftLowerLimitKeyword_2_0; }
-		
-		//softLowerLimit=URDFAttrSignedNumeric
-		public Assignment getSoftLowerLimitAssignment_2_1() { return cSoftLowerLimitAssignment_2_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getSoftLowerLimitURDFAttrSignedNumericParserRuleCall_2_1_0() { return cSoftLowerLimitURDFAttrSignedNumericParserRuleCall_2_1_0; }
-		
-		//('softUpperLimit' softUpperLimit=URDFAttrSignedNumeric)?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//'softUpperLimit'
-		public Keyword getSoftUpperLimitKeyword_3_0() { return cSoftUpperLimitKeyword_3_0; }
-		
-		//softUpperLimit=URDFAttrSignedNumeric
-		public Assignment getSoftUpperLimitAssignment_3_1() { return cSoftUpperLimitAssignment_3_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getSoftUpperLimitURDFAttrSignedNumericParserRuleCall_3_1_0() { return cSoftUpperLimitURDFAttrSignedNumericParserRuleCall_3_1_0; }
-		
-		//('k_position' k_position=URDFAttrSignedNumeric)?
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//'k_position'
-		public Keyword getK_positionKeyword_4_0() { return cK_positionKeyword_4_0; }
-		
-		//k_position=URDFAttrSignedNumeric
-		public Assignment getK_positionAssignment_4_1() { return cK_positionAssignment_4_1; }
-		
-		//URDFAttrSignedNumeric
-		public RuleCall getK_positionURDFAttrSignedNumericParserRuleCall_4_1_0() { return cK_positionURDFAttrSignedNumericParserRuleCall_4_1_0; }
-		
 		//'k_velocity'
-		public Keyword getK_velocityKeyword_5() { return cK_velocityKeyword_5; }
+		public Keyword getK_velocityKeyword_2() { return cK_velocityKeyword_2; }
 		
 		//k_velocity=URDFAttrSignedNumeric
-		public Assignment getK_velocityAssignment_6() { return cK_velocityAssignment_6; }
+		public Assignment getK_velocityAssignment_3() { return cK_velocityAssignment_3; }
 		
 		//URDFAttrSignedNumeric
-		public RuleCall getK_velocityURDFAttrSignedNumericParserRuleCall_6_0() { return cK_velocityURDFAttrSignedNumericParserRuleCall_6_0; }
+		public RuleCall getK_velocityURDFAttrSignedNumericParserRuleCall_3_0() { return cK_velocityURDFAttrSignedNumericParserRuleCall_3_0; }
+		
+		//('k_position' k_position=URDFAttrSignedNumeric | 'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric |
+		//'softUpperLimit' softUpperLimit=URDFAttrSignedNumeric)*
+		public Alternatives getAlternatives_4() { return cAlternatives_4; }
+		
+		//'k_position' k_position=URDFAttrSignedNumeric
+		public Group getGroup_4_0() { return cGroup_4_0; }
+		
+		//'k_position'
+		public Keyword getK_positionKeyword_4_0_0() { return cK_positionKeyword_4_0_0; }
+		
+		//k_position=URDFAttrSignedNumeric
+		public Assignment getK_positionAssignment_4_0_1() { return cK_positionAssignment_4_0_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getK_positionURDFAttrSignedNumericParserRuleCall_4_0_1_0() { return cK_positionURDFAttrSignedNumericParserRuleCall_4_0_1_0; }
+		
+		//'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric
+		public Group getGroup_4_1() { return cGroup_4_1; }
+		
+		//'softLowerLimit'
+		public Keyword getSoftLowerLimitKeyword_4_1_0() { return cSoftLowerLimitKeyword_4_1_0; }
+		
+		//softLowerLimit=URDFAttrSignedNumeric
+		public Assignment getSoftLowerLimitAssignment_4_1_1() { return cSoftLowerLimitAssignment_4_1_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getSoftLowerLimitURDFAttrSignedNumericParserRuleCall_4_1_1_0() { return cSoftLowerLimitURDFAttrSignedNumericParserRuleCall_4_1_1_0; }
+		
+		//'softUpperLimit' softUpperLimit=URDFAttrSignedNumeric
+		public Group getGroup_4_2() { return cGroup_4_2; }
+		
+		//'softUpperLimit'
+		public Keyword getSoftUpperLimitKeyword_4_2_0() { return cSoftUpperLimitKeyword_4_2_0; }
+		
+		//softUpperLimit=URDFAttrSignedNumeric
+		public Assignment getSoftUpperLimitAssignment_4_2_1() { return cSoftUpperLimitAssignment_4_2_1; }
+		
+		//URDFAttrSignedNumeric
+		public RuleCall getSoftUpperLimitURDFAttrSignedNumericParserRuleCall_4_2_1_0() { return cSoftUpperLimitURDFAttrSignedNumericParserRuleCall_4_2_1_0; }
 	}
 	public class URDFAttrSignedNumericElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.urdf.Dsl.URDFAttrSignedNumeric");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueSIGNED_NUMERICParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
+		////Should we cut Mimic from the spec - NEED TO GET INTERPRETATION OF ATTRS??
+		//
+		/// *Mimic:
+		//	'Mimic' (name=ID)?
+		//	'mimics' mimics=[Joint]
+		//	('multiplier' multiplier=URDFAttrSignedNumeric)?
+		//	('offSet' offSet=URDFAttrSignedNumeric)?
+		//;* /
 		/// *Constant:
-		//	
 		//;* / URDFAttrSignedNumeric:
 		//	value=SIGNED_NUMERIC;
 		@Override public ParserRule getRule() { return rule; }
@@ -1812,63 +2171,69 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cContinuousContinuousKeyword_3_0 = (Keyword)cContinuousEnumLiteralDeclaration_3.eContents().get(0);
 		
 		//enum JointType:
-		//	fixed='Fixed' | revolute='Revolute' | prismatic='Prismatic' | continuous='Continuous';
+		//	fixed | revolute | prismatic | continuous;
 		public EnumRule getRule() { return rule; }
 		
-		//fixed='Fixed' | revolute='Revolute' | prismatic='Prismatic' | continuous='Continuous'
+		//fixed | revolute | prismatic | continuous
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//fixed='Fixed'
+		//fixed
 		public EnumLiteralDeclaration getFixedEnumLiteralDeclaration_0() { return cFixedEnumLiteralDeclaration_0; }
 		
-		//'Fixed'
+		//'fixed'
 		public Keyword getFixedFixedKeyword_0_0() { return cFixedFixedKeyword_0_0; }
 		
-		//revolute='Revolute'
+		//revolute
 		public EnumLiteralDeclaration getRevoluteEnumLiteralDeclaration_1() { return cRevoluteEnumLiteralDeclaration_1; }
 		
-		//'Revolute'
+		//'revolute'
 		public Keyword getRevoluteRevoluteKeyword_1_0() { return cRevoluteRevoluteKeyword_1_0; }
 		
-		//prismatic='Prismatic'
+		//prismatic
 		public EnumLiteralDeclaration getPrismaticEnumLiteralDeclaration_2() { return cPrismaticEnumLiteralDeclaration_2; }
 		
-		//'Prismatic'
+		//'prismatic'
 		public Keyword getPrismaticPrismaticKeyword_2_0() { return cPrismaticPrismaticKeyword_2_0; }
 		
-		//continuous='Continuous'
+		//continuous
 		public EnumLiteralDeclaration getContinuousEnumLiteralDeclaration_3() { return cContinuousEnumLiteralDeclaration_3; }
 		
-		//'Continuous'
+		//'continuous'
 		public Keyword getContinuousContinuousKeyword_3_0() { return cContinuousContinuousKeyword_3_0; }
 	}
 	
 	private final RobotElements pRobot;
 	private final TopologyElements pTopology;
-	private final LinkElements pLink;
-	private final LinkDecoratorElements pLinkDecorator;
-	private final LinkRefElements pLinkRef;
-	private final JointElements pJoint;
-	private final JointDecoratorElements pJointDecorator;
-	private final JointDecoRefElements pJointDecoRef;
-	private final JointTypeElements eJointType;
 	private final JointRefElements pJointRef;
+	private final ReUseAbleElements pReUseAble;
+	private final ReUseAbleReducedElements pReUseAbleReduced;
+	private final ReUseAbleReduceElements pReUseAbleReduce;
+	private final LinkElements pLink;
+	private final AddToElements pAddTo;
+	private final AddToLinkElements pAddToLink;
+	private final AddToJointElements pAddToJoint;
+	private final ReuseElements pReuse;
+	private final AssignNewValueElements pAssignNewValue;
+	private final DotExpressionElements pDotExpression;
+	private final ReUsableRefElements pReUsableRef;
 	private final InertialElements pInertial;
 	private final InertiaElements pInertia;
 	private final VisualElements pVisual;
+	private final OriginElements pOrigin;
+	private final MassElements pMass;
+	private final CollisionElements pCollision;
 	private final GeometryElements pGeometry;
 	private final BoxElements pBox;
 	private final CylinderElements pCylinder;
 	private final MeshElements pMesh;
 	private final SphereElements pSphere;
-	private final CollisionElements pCollision;
-	private final OriginElements pOrigin;
-	private final MassElements pMass;
 	private final MaterialElements pMaterial;
-	private final ColorElements pColor;
 	private final TextureElements pTexture;
-	private final LimitElements pLimit;
+	private final ColorElements pColor;
+	private final JointElements pJoint;
+	private final JointTypeElements eJointType;
 	private final AxisElements pAxis;
+	private final LimitElements pLimit;
 	private final CalibrationElements pCalibration;
 	private final DynamicsElements pDynamics;
 	private final SafetyControllerElements pSafetyController;
@@ -1893,30 +2258,36 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pRobot = new RobotElements();
 		this.pTopology = new TopologyElements();
-		this.pLink = new LinkElements();
-		this.pLinkDecorator = new LinkDecoratorElements();
-		this.pLinkRef = new LinkRefElements();
-		this.pJoint = new JointElements();
-		this.pJointDecorator = new JointDecoratorElements();
-		this.pJointDecoRef = new JointDecoRefElements();
-		this.eJointType = new JointTypeElements();
 		this.pJointRef = new JointRefElements();
+		this.pReUseAble = new ReUseAbleElements();
+		this.pReUseAbleReduced = new ReUseAbleReducedElements();
+		this.pReUseAbleReduce = new ReUseAbleReduceElements();
+		this.pLink = new LinkElements();
+		this.pAddTo = new AddToElements();
+		this.pAddToLink = new AddToLinkElements();
+		this.pAddToJoint = new AddToJointElements();
+		this.pReuse = new ReuseElements();
+		this.pAssignNewValue = new AssignNewValueElements();
+		this.pDotExpression = new DotExpressionElements();
+		this.pReUsableRef = new ReUsableRefElements();
 		this.pInertial = new InertialElements();
 		this.pInertia = new InertiaElements();
 		this.pVisual = new VisualElements();
+		this.pOrigin = new OriginElements();
+		this.pMass = new MassElements();
+		this.pCollision = new CollisionElements();
 		this.pGeometry = new GeometryElements();
 		this.pBox = new BoxElements();
 		this.pCylinder = new CylinderElements();
 		this.pMesh = new MeshElements();
 		this.pSphere = new SphereElements();
-		this.pCollision = new CollisionElements();
-		this.pOrigin = new OriginElements();
-		this.pMass = new MassElements();
 		this.pMaterial = new MaterialElements();
-		this.pColor = new ColorElements();
 		this.pTexture = new TextureElements();
-		this.pLimit = new LimitElements();
+		this.pColor = new ColorElements();
+		this.pJoint = new JointElements();
+		this.eJointType = new JointTypeElements();
 		this.pAxis = new AxisElements();
+		this.pLimit = new LimitElements();
 		this.pCalibration = new CalibrationElements();
 		this.pDynamics = new DynamicsElements();
 		this.pSafetyController = new SafetyControllerElements();
@@ -1979,8 +2350,7 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	// * DONE: Origin values should be ('-')? INT or FLOAT or SCIENTIFIC - get SIGNED_NUMERIC class from metamodel...
 	// * /
 	//Robot:
-	//	'Robot' name=ID ('Topology' topologies+=Topology | link+=Link | joint+=Joint | linkrefs+=LinkRef)* //usage+=Usage*
-	//;
+	//	'Robot' name=ID ('Topology' topologies+=Topology | links+=Link | joint+=Joint | addto+=AddTo)*;
 	public RobotElements getRobotAccess() {
 		return pRobot;
 	}
@@ -1989,25 +2359,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getRobotAccess().getRule();
 	}
 	
-	/// *ReUseAble:
-	//	Link | Joint | LinkDecorator
-	//;
-	//
-	//Usage returns Usage:
-	//    "use" ref=DotExpression
-	//;
-	//
-	//DotExpression returns Ref:
-	//    EntityRef ({DotExpression.ref=current}  "." tail=[ecore::EStructuralFeature])*       //Compiler ikke
-	//    //EntityRef ({DotExpression.ref=current}  "." tail=[ReUseAble])*                  // Ok
-	//;
-	// * 
-	//
-	//
-	//EntityRef returns Ref:
-	//    {EntityRef} entity=[ReUseAble]
-	//;
-	// * /
 	//Topology:
 	//	parent=[Link] (joint=JointRef child=Topology)?;
 	public TopologyElements getTopologyAccess() {
@@ -2018,78 +2369,6 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getTopologyAccess().getRule();
 	}
 	
-	//Link:
-	//	'Link' name=ID ('isReuseOf' isReuseOf=[Link])? decorator=LinkDecorator;
-	public LinkElements getLinkAccess() {
-		return pLink;
-	}
-	
-	public ParserRule getLinkRule() {
-		return getLinkAccess().getRule();
-	}
-	
-	//LinkDecorator:
-	//	{LinkDecorator} inertial+=Inertial* visual+=Visual* collision+=Collision*;
-	public LinkDecoratorElements getLinkDecoratorAccess() {
-		return pLinkDecorator;
-	}
-	
-	public ParserRule getLinkDecoratorRule() {
-		return getLinkDecoratorAccess().getRule();
-	}
-	
-	//LinkRef:
-	//	'add_to' ref=[Link] decorator=LinkDecorator;
-	public LinkRefElements getLinkRefAccess() {
-		return pLinkRef;
-	}
-	
-	public ParserRule getLinkRefRule() {
-		return getLinkRefAccess().getRule();
-	}
-	
-	//Joint:
-	//	'Joint' name=ID 'ChildOf' ChildOf=[Link] 'ParentOf' ParentOf=[Link] 'Type' Type=JointType ('isReuseOf'
-	//	isReuseOf=[Joint])? decorator=JointDecorator;
-	public JointElements getJointAccess() {
-		return pJoint;
-	}
-	
-	public ParserRule getJointRule() {
-		return getJointAccess().getRule();
-	}
-	
-	//JointDecorator:
-	//	{JointDecorator} limit=Limit? axis=Axis? calibration=Calibration? dynamics=Dynamics?
-	//	safetycontroller=SafetyController?;
-	public JointDecoratorElements getJointDecoratorAccess() {
-		return pJointDecorator;
-	}
-	
-	public ParserRule getJointDecoratorRule() {
-		return getJointDecoratorAccess().getRule();
-	}
-	
-	//JointDecoRef:
-	//	'add_to' ref=[Joint] decorator=JointDecorator;
-	public JointDecoRefElements getJointDecoRefAccess() {
-		return pJointDecoRef;
-	}
-	
-	public ParserRule getJointDecoRefRule() {
-		return getJointDecoRefAccess().getRule();
-	}
-	
-	//enum JointType:
-	//	fixed='Fixed' | revolute='Revolute' | prismatic='Prismatic' | continuous='Continuous';
-	public JointTypeElements getJointTypeAccess() {
-		return eJointType;
-	}
-	
-	public EnumRule getJointTypeRule() {
-		return getJointTypeAccess().getRule();
-	}
-	
 	//JointRef:
 	//	fix='->' | rev='r->' | pris='p->' | cont='c->';
 	public JointRefElements getJointRefAccess() {
@@ -2098,6 +2377,117 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getJointRefRule() {
 		return getJointRefAccess().getRule();
+	}
+	
+	//ReUseAble:
+	//	Link | Visual | Inertial | Collision;
+	public ReUseAbleElements getReUseAbleAccess() {
+		return pReUseAble;
+	}
+	
+	public ParserRule getReUseAbleRule() {
+		return getReUseAbleAccess().getRule();
+	}
+	
+	//ReUseAbleReduced ReUseAble:
+	//	Visual | Inertial | Collision
+	public ReUseAbleReducedElements getReUseAbleReducedAccess() {
+		return pReUseAbleReduced;
+	}
+	
+	public ParserRule getReUseAbleReducedRule() {
+		return getReUseAbleReducedAccess().getRule();
+	}
+	
+	//ReUseAbleReduce ReUseAble:
+	//	Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+	public ReUseAbleReduceElements getReUseAbleReduceAccess() {
+		return pReUseAbleReduce;
+	}
+	
+	public ParserRule getReUseAbleReduceRule() {
+		return getReUseAbleReduceAccess().getRule();
+	}
+	
+	//Link:
+	//	{Link} 'Link' name=ID ('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+ | 'reuse' isReuseOf=[Link]
+	//	reuse=Reuse?)?;
+	public LinkElements getLinkAccess() {
+		return pLink;
+	}
+	
+	public ParserRule getLinkRule() {
+		return getLinkAccess().getRule();
+	}
+	
+	//AddTo:
+	//	AddToLink link=[Link] add=ReUseAbleReduced | AddToJoint joint=[Joint] add=ReUseAbleReduce;
+	public AddToElements getAddToAccess() {
+		return pAddTo;
+	}
+	
+	public ParserRule getAddToRule() {
+		return getAddToAccess().getRule();
+	}
+	
+	//AddToLink:
+	//	'Add' 'to' 'link';
+	public AddToLinkElements getAddToLinkAccess() {
+		return pAddToLink;
+	}
+	
+	public ParserRule getAddToLinkRule() {
+		return getAddToLinkAccess().getRule();
+	}
+	
+	//AddToJoint:
+	//	'Add' 'to' 'joint';
+	public AddToJointElements getAddToJointAccess() {
+		return pAddToJoint;
+	}
+	
+	public ParserRule getAddToJointRule() {
+		return getAddToJointAccess().getRule();
+	}
+	
+	//Reuse:
+	//	{Reuse} 'add' add=ReUseAbleReduced | 'edit' edit=AssignNewValue;
+	public ReuseElements getReuseAccess() {
+		return pReuse;
+	}
+	
+	public ParserRule getReuseRule() {
+		return getReuseAccess().getRule();
+	}
+	
+	//AssignNewValue:
+	//	{AssignNewValue} getRef=DotExpression '=' newReuseable=ReUseAble;
+	public AssignNewValueElements getAssignNewValueAccess() {
+		return pAssignNewValue;
+	}
+	
+	public ParserRule getAssignNewValueRule() {
+		return getAssignNewValueAccess().getRule();
+	}
+	
+	//DotExpression Ref:
+	//	ReUsableRef ({DotExpression.ref=current} "." tail=[ReUseAble])*
+	public DotExpressionElements getDotExpressionAccess() {
+		return pDotExpression;
+	}
+	
+	public ParserRule getDotExpressionRule() {
+		return getDotExpressionAccess().getRule();
+	}
+	
+	//ReUsableRef Ref:
+	//	{ReUsableRef} reuseable=[ReUseAble]
+	public ReUsableRefElements getReUsableRefAccess() {
+		return pReUsableRef;
+	}
+	
+	public ParserRule getReUsableRefRule() {
+		return getReUsableRefAccess().getRule();
 	}
 	
 	//Inertial:
@@ -2111,8 +2501,9 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Inertia:
-	//	'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz' ixz=URDFAttrSignedNumeric
-	//	'iyy' iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz' izz=URDFAttrSignedNumeric;
+	//	{Inertia} 'Inertia' name=ID? 'ixx' ixx=URDFAttrSignedNumeric 'ixy' ixy=URDFAttrSignedNumeric 'ixz'
+	//	ixz=URDFAttrSignedNumeric 'iyy' iyy=URDFAttrSignedNumeric 'iyz' iyz=URDFAttrSignedNumeric 'izz'
+	//	izz=URDFAttrSignedNumeric;
 	public InertiaElements getInertiaAccess() {
 		return pInertia;
 	}
@@ -2122,7 +2513,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Visual:
-	//	{Visual} 'Visual' name=ID? geometry+=Geometry* origin=Origin? //material=Material
+	//	{Visual} 'Visual' name=ID? 'Geometry' geometry=Geometry origin=Origin? ('Material' material=Material)?
+	//	//problem: Kan ikke definere material uden origin pt
 	//;
 	public VisualElements getVisualAccess() {
 		return pVisual;
@@ -2130,6 +2522,37 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getVisualRule() {
 		return getVisualAccess().getRule();
+	}
+	
+	//Origin:
+	//	{Origin} 'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric
+	//	('roll' roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?;
+	public OriginElements getOriginAccess() {
+		return pOrigin;
+	}
+	
+	public ParserRule getOriginRule() {
+		return getOriginAccess().getRule();
+	}
+	
+	//Mass:
+	//	{Mass} 'Mass' name=ID? 'massKilogram' massKilogram=URDFAttrSignedNumeric;
+	public MassElements getMassAccess() {
+		return pMass;
+	}
+	
+	public ParserRule getMassRule() {
+		return getMassAccess().getRule();
+	}
+	
+	//Collision:
+	//	'Collision' name=ID? 'Geometry' geometry=Geometry origin=Origin?;
+	public CollisionElements getCollisionAccess() {
+		return pCollision;
+	}
+	
+	public ParserRule getCollisionRule() {
+		return getCollisionAccess().getRule();
 	}
 	
 	//Geometry:
@@ -2165,7 +2588,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////TODO: create ValueConverter to convert scale to Box
 	// Mesh:
-	//	'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING ('scale' dimension=Box)?;
+	//	'Mesh' name=ID? 'pathToFile' pathToFile=URDFAttrSTRING //('scale' dimension=Box)?
+	//;
 	public MeshElements getMeshAccess() {
 		return pMesh;
 	}
@@ -2184,56 +2608,14 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getSphereAccess().getRule();
 	}
 	
-	//Collision:
-	//	{Collision} 'Collision' name=ID? geometry+=Geometry* origin=Origin?;
-	public CollisionElements getCollisionAccess() {
-		return pCollision;
-	}
-	
-	public ParserRule getCollisionRule() {
-		return getCollisionAccess().getRule();
-	}
-	
-	//Origin:
-	//	'Origin' name=ID? 'x' x=URDFAttrSignedNumeric 'y' y=URDFAttrSignedNumeric 'z' z=URDFAttrSignedNumeric ('roll'
-	//	roll=URDFAttrSignedNumeric)? ('pitch' pitch=URDFAttrSignedNumeric)? ('yaw' yaw=URDFAttrSignedNumeric)?;
-	public OriginElements getOriginAccess() {
-		return pOrigin;
-	}
-	
-	public ParserRule getOriginRule() {
-		return getOriginAccess().getRule();
-	}
-	
-	//Mass:
-	//	'Mass' name=ID? 'mass_(ValueInKilograms)' massValueInKilograms=URDFAttrNumeric;
-	public MassElements getMassAccess() {
-		return pMass;
-	}
-	
-	public ParserRule getMassRule() {
-		return getMassAccess().getRule();
-	}
-	
 	//Material:
-	//	Color | Texture;
+	//	Texture | Color;
 	public MaterialElements getMaterialAccess() {
 		return pMaterial;
 	}
 	
 	public ParserRule getMaterialRule() {
 		return getMaterialAccess().getRule();
-	}
-	
-	/// * RGBA values must be floats between 0 and 1 incl * / Color:
-	//	'Color' name=ID? 'red' red=URDFAttrFloat 'green' green=URDFAttrFloat 'blue' blue=URDFAttrFloat 'alpha'
-	//	alpha=URDFAttrFloat;
-	public ColorElements getColorAccess() {
-		return pColor;
-	}
-	
-	public ParserRule getColorRule() {
-		return getColorAccess().getRule();
 	}
 	
 	//Texture:
@@ -2246,19 +2628,42 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getTextureAccess().getRule();
 	}
 	
-	//Limit:
-	//	'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric 'lower'
-	//	lower=URDFAttrSignedNumeric? 'upper' upper=URDFAttrSignedNumeric?;
-	public LimitElements getLimitAccess() {
-		return pLimit;
+	//// RGBA values must be floats between 0 and 1 incl 
+	// Color:
+	//	'Color' name=ID? 'red' red=URDFAttrFloat 'green' green=URDFAttrFloat 'blue' blue=URDFAttrFloat 'alpha'
+	//	alpha=URDFAttrFloat;
+	public ColorElements getColorAccess() {
+		return pColor;
 	}
 	
-	public ParserRule getLimitRule() {
-		return getLimitAccess().getRule();
+	public ParserRule getColorRule() {
+		return getColorAccess().getRule();
 	}
 	
-	/// * Binary values must be 0 or 1 - 
-	// * digitsum must be 1* / //keyword aliases: 'xyz' or 'x', 'y', 'z'
+	//Joint:
+	//	'Joint' name=ID (('def' 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] 'Type' type=JointType) (origin=Origin |
+	//	axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 'reuse'
+	//	isReuseOf=[Joint] 'ChildOf' childOf=[Link] 'ParentOf' parentOf=[Link] reuse=Reuse?);
+	public JointElements getJointAccess() {
+		return pJoint;
+	}
+	
+	public ParserRule getJointRule() {
+		return getJointAccess().getRule();
+	}
+	
+	//enum JointType:
+	//	fixed | revolute | prismatic | continuous;
+	public JointTypeElements getJointTypeAccess() {
+		return eJointType;
+	}
+	
+	public EnumRule getJointTypeRule() {
+		return getJointTypeAccess().getRule();
+	}
+	
+	/// * Binary values must be 0 or 1 - digitsum must be 1, WHY NEED TO DEFINE ALL THREE?? * /
+	////keyword aliases: 'xyz' or 'x', 'y', 'z'
 	// Axis:
 	//	'Axis' name=ID? 'x' x=URDFAttrINT 'y' y=URDFAttrINT 'z' z=URDFAttrINT;
 	public AxisElements getAxisAccess() {
@@ -2269,9 +2674,20 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getAxisAccess().getRule();
 	}
 	
+	//Limit:
+	//	'Limit' name=ID? 'effort' effort=URDFAttrSignedNumeric 'velocity' velocity=URDFAttrSignedNumeric ('lower'
+	//	lower=URDFAttrSignedNumeric | 'upper' upper=URDFAttrSignedNumeric)*;
+	public LimitElements getLimitAccess() {
+		return pLimit;
+	}
+	
+	public ParserRule getLimitRule() {
+		return getLimitAccess().getRule();
+	}
+	
 	//Calibration:
-	//	{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric)? ('falling'
-	//	falling=URDFAttrSignedNumeric)?;
+	//	{Calibration} 'Calibration' name=ID? ('rising' rising=URDFAttrSignedNumeric | 'falling'
+	//	falling=URDFAttrSignedNumeric);
 	public CalibrationElements getCalibrationAccess() {
 		return pCalibration;
 	}
@@ -2281,8 +2697,8 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Dynamics:
-	//	{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric)? ('damping'
-	//	damping=URDFAttrSignedNumeric)?;
+	//	{Dynamics} 'Dynamics' name=ID? ('friction' friction=URDFAttrSignedNumeric | 'damping'
+	//	damping=URDFAttrSignedNumeric)+;
 	public DynamicsElements getDynamicsAccess() {
 		return pDynamics;
 	}
@@ -2291,18 +2707,10 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getDynamicsAccess().getRule();
 	}
 	
-	////Should we cut Mimic from the spec??
-	//
-	/// *Mimic:
-	//	'Mimic' (name=ID)?
-	//	'mimics' mimics=[Joint|ID]
-	//	('multiplier' multiplier=SIGNED_NUMERIC)?
-	//	('offSet' offSet=SIGNED_NUMERIC)?
-	//;* /
 	//SafetyController:
-	//	'SafetyController' name=ID? ('softLowerLimit' softLowerLimit=URDFAttrSignedNumeric)? ('softUpperLimit'
-	//	softUpperLimit=URDFAttrSignedNumeric)? ('k_position' k_position=URDFAttrSignedNumeric)? 'k_velocity'
-	//	k_velocity=URDFAttrSignedNumeric;
+	//	'SafetyController' name=ID? 'k_velocity' k_velocity=URDFAttrSignedNumeric ('k_position'
+	//	k_position=URDFAttrSignedNumeric | 'softLowerLimit' softLowerLimit=URDFAttrSignedNumeric | 'softUpperLimit'
+	//	softUpperLimit=URDFAttrSignedNumeric)*;
 	public SafetyControllerElements getSafetyControllerAccess() {
 		return pSafetyController;
 	}
@@ -2311,8 +2719,15 @@ public class DslGrammarAccess extends AbstractGrammarElementFinder {
 		return getSafetyControllerAccess().getRule();
 	}
 	
+	////Should we cut Mimic from the spec - NEED TO GET INTERPRETATION OF ATTRS??
+	//
+	/// *Mimic:
+	//	'Mimic' (name=ID)?
+	//	'mimics' mimics=[Joint]
+	//	('multiplier' multiplier=URDFAttrSignedNumeric)?
+	//	('offSet' offSet=URDFAttrSignedNumeric)?
+	//;* /
 	/// *Constant:
-	//	
 	//;* / URDFAttrSignedNumeric:
 	//	value=SIGNED_NUMERIC;
 	public URDFAttrSignedNumericElements getURDFAttrSignedNumericAccess() {

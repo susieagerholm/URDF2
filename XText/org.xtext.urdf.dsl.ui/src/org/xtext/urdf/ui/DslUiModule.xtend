@@ -11,6 +11,8 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider
  */
 @FinalFieldsConstructor
 class DslUiModule extends AbstractDslUiModule {
+	
+	//Bind custom code to auto format on save...
 	def Class<? extends XtextDocumentProvider> bindDocumentProvider() {
 		URDFDocumentProvider;
 	}
