@@ -1,20 +1,42 @@
 package org.xtext.urdf;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
+import org.xtext.urdf.myURDF.AddTo;
+import org.xtext.urdf.myURDF.Axis;
+import org.xtext.urdf.myURDF.Calibration;
+import org.xtext.urdf.myURDF.Collision;
+import org.xtext.urdf.myURDF.Dynamics;
+import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Joint;
+import org.xtext.urdf.myURDF.JointRef;
 import org.xtext.urdf.myURDF.JointType;
+import org.xtext.urdf.myURDF.Limit;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.MyURDFFactory;
+import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
+import org.xtext.urdf.myURDF.Origin;
+import org.xtext.urdf.myURDF.ReUseAble;
 import org.xtext.urdf.myURDF.Robot;
+import org.xtext.urdf.myURDF.SafetyController;
 import org.xtext.urdf.myURDF.Topology;
+import org.xtext.urdf.myURDF.Visual;
+import org.xtext.urdf.myURDF.impl.RobotImpl;
 
 class UrdfDerivedStateComputer implements IDerivedStateComputer {
+	
 	
 	@Override
 	public void discardDerivedState(DerivedStateAwareResource resource) {
@@ -23,7 +45,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		TreeIterator<EObject> temp = resource.getAllContents();
 		while (temp.hasNext()) {
 			EObject obj = temp.next();
-			if (obj instanceof org.xtext.urdf.myURDF.Topology) {
+			if (obj instanceof Topology) {
 //				obj.eContents().clear(); //Topology object does not support clear()
 
 				Topology topo = (Topology)obj;
@@ -31,6 +53,9 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 				topo.setChild(null);
 				topo.setJoint(null);
 			}
+			if (obj instanceof AddTo) {
+				//Should we set the object null - what happens in the UI?
+			}			
 		}
 	}
 	
@@ -40,21 +65,6 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 			installTopology(resource);
 		}
 	}
-	
-	/*public void installLinkDecoration(DerivedStateAwareResource resource) {
-		while(resource.getAllContents().hasNext()) {
-			Object obj = resource.getAllContents().next();
-			if(obj instanceof org.xtext.urdf.myURDF.Robot) {
-				Robot rob = (Robot)obj;
-				EList<LinkRef> refs = rob.getLinkrefs();
-				for (int i = 0; i < refs.size(); i++) {
-					LinkRef ref = refs.get(i);
-					LinkDecorator dec = MyURDFFactory.eINSTANCE.createLinkDecorator();
-					ref.setDecorator(dec);
-				}
-			}
-		}
-	}*/
 	
 	public void installTopology(DerivedStateAwareResource resource) {
 		TreeIterator<EObject> temp = resource.getAllContents();
@@ -68,68 +78,25 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 				TreeIterator<EObject> eo = rob.eAllContents();
 				while(eo.hasNext()) {
 					EObject top = eo.next();
+					if( top instanceof Joint) {
+						createStandardJointsInTopology((Joint)top,rob);
+					}
+					if( top instanceof AddTo) {
+						manageAddToProperties((AddTo)top,rob);
+					}
+
 					if (top instanceof Topology) {
 						Topology topo = (Topology)top;
 						if(topo.getChild() != null && topo.getParent() != null) {
 							switch (getLastEntry(top)) {
 							case " ": // we havent finished writing
-								return;
+								return;  //careful - we end installTopology
 							case "\n": //ok
 								break;
 							default:
 								break;
 							}
-
-							EList<Link> links = rob.getLinks();
-							boolean found = false;
-							boolean childFound = false;
-							for (Link l : links) {
-								if(l.getName().equals(getNodeText(topo, 1))) {
-									found = true;
-								}
-								if(l.getName().equals(getNodeText(topo.getChild(), 1))) {
-									childFound = true;
-								}
-							}
-
-							if(!found) {
-								Link newLink = MyURDFFactory.eINSTANCE.createLink();
-								newLink.setName(getNodeText(topo, 1));
-								rob.getLinks().add(newLink);
-							}
-							
-							if(!childFound) {
-								Link newLink2 = MyURDFFactory.eINSTANCE.createLink();
-								newLink2.setName(getNodeText(topo.getChild(), 1));
-								rob.getLinks().add(newLink2);
-							}
-							
-							Joint aJoint = MyURDFFactory.eINSTANCE.createJoint();
-							//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
-							//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
-							aJoint.setName(topo.getParent().getName() + "_" + getNodeText(topo.getChild(), 1));
-							//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
-							//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
-							aJoint.setChildOf(topo.getParent());
-							aJoint.setParentOf(topo.getChild().getParent());
-							
-							if (topo.getJoint().getRev() != null) aJoint.setType(JointType.REVOLUTE);
-							else if (topo.getJoint().getPris() != null) aJoint.setType(JointType.PRISMATIC);
-							else if (topo.getJoint().getCont() != null) aJoint.setType(JointType.CONTINUOUS);
-							else aJoint.setType(JointType.FIXED);
-							
-							rob.getJoint().add(aJoint);
-							
-							//CHECK WHY TYPE IS NOT ADDED TO GENERATED JOiNT
-							/*if (topo.getJoint().getRev() != null) {
-								topo.getJoint().setRev(JointType.REVOLUTE.toString());
-							} else if(topo.getJoint().getPris() != null) {
-								topo.getJoint().setPris(JointType.PRISMATIC.toString());
-							} else if(topo.getJoint().getCont() != null) {
-								topo.getJoint().setCont(JointType.CONTINUOUS.toString());
-							} else {
-								topo.getJoint().setFix(JointType.FIXED.toString());
-							}*/
+							manageTopology(rob,topo);
 						}
 					}
 				}
@@ -137,6 +104,137 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 	
+	private void addTopoLinkToRobot(Topology topo, Robot robo) {
+		Link newLink = MyURDFFactory.eINSTANCE.createLink();
+		newLink.setName(getNodeText(topo, 1));
+		robo.getLinks().add(newLink);
+	}
+	
+	private boolean isNameFound(EList<Link> links, Topology topo) {
+		boolean temp = false;
+		for (Link l : links) {
+			if(l.getName().equals(getNodeText(topo, 1))) {
+				temp = true;
+				break;
+			}
+		}
+		return temp;
+	}
+	
+	private void manageTopology(Robot rob, Topology topo) {
+		if(!isNameFound(rob.getLinks(),topo)) {
+			addTopoLinkToRobot(topo, rob);
+		}
+		
+		if(!isNameFound(rob.getLinks(),topo.getChild())) {
+			addTopoLinkToRobot(topo.getChild(), rob);
+		}
+		
+		Joint aJoint = MyURDFFactory.eINSTANCE.createJoint();
+		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
+		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
+		aJoint.setName(topo.getParent().getName() + "_" + getNodeText(topo.getChild(), 1));
+		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
+		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
+		aJoint.setChildOf(topo.getParent());
+		aJoint.setParentOf(topo.getChild().getParent());
+		aJoint.setType(getJointType(topo.getJoint()));
+		rob.getJoint().add(aJoint);
+	}
+
+	private EObject rename(EObject root) {
+		EStructuralFeature ft = root.eClass().getEStructuralFeature("name");
+		String rootName = (String)root.eGet(ft);
+    	root.eSet(ft,"_"+rootName);
+
+		TreeIterator<EObject> allContents = root.eAllContents();
+		while(allContents.hasNext()) {
+			EObject obj = allContents.next();
+			if(obj instanceof NamedElement) {
+				EStructuralFeature ft2 = obj.eClass().getEStructuralFeature("name");
+			    Object name = obj.eGet(ft2);
+			    if(name != null) {
+			    	obj.eSet(ft2,"_"+name);
+			    }
+			}		    
+		}
+		return root;
+	}
+	
+	private void manageAddToProperties(AddTo add, Robot robot) {
+		Link parentLink = null;
+		Joint parentJoint = null;
+		if(add.getAdd() == null) {
+			return;
+		}
+		
+		if(add.getLink() != null) {
+		 parentLink = (Link)getObjectByName(robot.getLinks(),add.getLink().getName());
+		}
+		if(add.getJoint() != null) {
+		 parentJoint = (Joint)getObjectByName(robot.getJoint(),add.getJoint().getName());
+		}
+
+		//When we copy an EObject all names will conflict with the parent object (a name has to be unique)
+		//Therefore we have to rename all names - prefix with an underscore. This impacts the generator when outputting the final URDF
+		ReUseAble newObj = EcoreUtil.copy(add.getAdd());
+		newObj = (ReUseAble)rename(newObj);
+		
+		if(parentLink!=null) {
+			manageAddToLink(parentLink,newObj,add);
+		} else if(parentJoint != null) {
+			manageAddToJoint(parentJoint,newObj,add);
+		} else {
+			return;
+		}
+	}
+	
+	private void manageAddToJoint(Joint parentJoint, ReUseAble newObj, AddTo add) {
+		if(newObj instanceof Axis) {
+			parentJoint.setAxis((Axis)newObj);
+		} else if(newObj instanceof Calibration) {
+			parentJoint.setCalibration((Calibration)newObj);
+		} else if(newObj instanceof Dynamics) {
+			parentJoint.setDynamics((Dynamics)newObj);
+		} else if(newObj instanceof Limit) {
+			parentJoint.setLimit((Limit)newObj);
+		} else if(newObj instanceof SafetyController) {
+			parentJoint.setSafetycontroller((SafetyController)newObj);
+		} else if(newObj instanceof Origin) {
+			parentJoint.setOrigin((Origin)newObj);
+		} 
+		
+	}
+
+	private void manageAddToLink(Link parentLink, ReUseAble newObj, AddTo add) {
+		if(newObj instanceof Visual) {
+			parentLink.getVisual().add((Visual)newObj);
+		} else if(add.getAdd() instanceof Collision) {
+			parentLink.getCollision().add((Collision)newObj);
+		} else if(add.getAdd() instanceof Inertial) {
+			parentLink.setInertial((Inertial)newObj);
+		}
+	}
+	
+	private void createStandardJointsInTopology(Joint joint, Robot robot) {
+		String ruleName = getRuleName(joint);
+		if(ruleName.equalsIgnoreCase("Joint")) {
+			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
+			topoParent.setParent(joint.getParentOf());
+			topoParent.setJoint(getJointRef(joint));
+
+			Topology topoChild = MyURDFFactory.eINSTANCE.createTopology();
+			topoChild.setParent(joint.getChildOf());
+			topoParent.setChild(topoChild);
+			if(robot.getTopologies()==null) {
+				// This is experimental - don't know whether this conflicts when a topology is created in the UI
+				  EList<EObject> newList = new BasicEList<EObject>();					
+				  ((RobotImpl)robot).eSet(MyURDFPackage.TOPOLOGY, newList);
+			} 
+			robot.getTopologies().add(topoParent);
+		}
+	}
+
 	private String getLastEntry(EObject obj) {
 		if (NodeModelUtils.getNode(obj) != null) {
 			String text = NodeModelUtils.getNode(obj).getRootNode().getText();
@@ -146,7 +244,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		return null;
 	}
 
-	public String getNodeText(EObject obj, int no) {
+	private String getNodeText(EObject obj, int no) {
    	  if (NodeModelUtils.getNode(obj) != null) {
 		  Iterable<ILeafNode> it = NodeModelUtils.getNode(obj).getLeafNodes();
 		  int i = 0;
@@ -158,6 +256,59 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	      }
    	  }
 	  return "";
+	}
+
+	private String getRuleName(EObject obj) {
+	  String ruleName = null;
+	  if (NodeModelUtils.getNode(obj) != null) {
+			  ICompositeNode iNode = NodeModelUtils.getNode(obj);
+			  EObject grammarElement = iNode.getGrammarElement();
+			  if (grammarElement instanceof RuleCall) {
+		            AbstractRule rule = ((RuleCall) grammarElement).getRule();
+		            ruleName = rule.getName();
+			  }
+	  }
+	  return ruleName;
+	}
+	
+	//From standard to Topo
+	private JointRef getJointRef(Joint joint) {
+		JointRef jointRef = MyURDFFactory.eINSTANCE.createJointRef();
+		if (joint.getType() != null) {
+			switch (joint.getType()) {
+			case PRISMATIC : jointRef.setPris(JointType.PRISMATIC.toString()); 
+			case REVOLUTE : jointRef.setPris(JointType.REVOLUTE.toString()); 
+			case FIXED : jointRef.setPris(JointType.FIXED.toString()); 
+			case CONTINUOUS : jointRef.setPris(JointType.CONTINUOUS.toString()); 
+			}
+		}
+		return jointRef;
+	}
+
+	//From Topo to standard
+	private JointType getJointType(JointRef ref) {
+		if (ref.getCont() != null) {
+			return JointType.CONTINUOUS;
+		} else if(ref.getPris() != null) {
+			return JointType.PRISMATIC;
+		} else if(ref.getFix() != null) {
+			return JointType.FIXED;
+		} else if(ref.getRev()!=null) {
+			return JointType.REVOLUTE;
+		} else {
+			return null;
+		}
+	}
+	
+	private <T extends NamedElement> EObject getObjectByName(EList<T> list,String name) {
+		EObject temp = null;
+		for (int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName().equals(name)) {
+				 temp = list.get(i);
+				 break;
+			}
+		}
+		return temp;
 	}
 	
 }
