@@ -19,6 +19,33 @@ import org.xtext.urdf.myURDF.Axis
  */
 class DslValidator extends AbstractDslValidator {
 	
+
+	@Check
+	def checkNoCyclicReferences(Robot robot) {
+		val test = new CyclesValidator().cycles(robot);
+		if(test.get(0)=="TRUE") {
+				error("Cyclic error. Problem with link: " + test.get(1), MyURDFPackage.Literals.ROBOT__LINKS)			
+		} else {
+
+		}
+	}	
+	
+	@Check
+	def allLinksButOneMustBeChildOfJoint2 (Robot robot) {
+		val test = new CyclesValidator().oneRoot(robot);
+
+		if(test) {
+		} else {
+				error("Multiple roots problem: This robot contains multiple link, but it has no joints connecting the links. A robot may have only one root link, that is not referenced as the child of a joint node",
+					MyURDFPackage.Literals.ROBOT__LINKS)
+		}
+	}
+	
+	
+	
+	
+	
+	
 	 //A Robot must contain at least one Link to be valid instance
     @Check
 	def checkRobotContainsLink(Robot robot) {

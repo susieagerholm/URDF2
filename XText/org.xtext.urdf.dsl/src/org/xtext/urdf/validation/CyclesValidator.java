@@ -1,14 +1,15 @@
 package org.xtext.urdf.validation;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.MyURDFFactory;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.Topology;
+
+
 
 public class CyclesValidator
 {
@@ -17,29 +18,7 @@ public class CyclesValidator
 		if(robot.getLinks().size()>1 && robot.getJoint().size()==0) {
 			return false;
 		} else {
-			ArrayList<Topology> newTopoList  = new ArrayList<Topology>();
-			HashMap<Topology, Boolean> mergeStatus = new HashMap<>();
-			EList<Topology> topos  = robot.getTopologies();
-			for (int i = 0; i < topos.size(); i++) {
-
-				Topology aTopo = topos.get(i);
-				if(mergeStatus.containsKey(aTopo) && mergeStatus.get(aTopo)==true) {
-					//The topology has been merged with another
-					continue;
-				}
-				System.out.println("Outer: "); 
-				printTopo(aTopo,null);
-				for (int j = 0; j < topos.size(); j++) {
-					Topology anotherTopo = topos.get(j);
-					if(aTopo.equals(anotherTopo)) {
-						continue;
-					}
-					System.out.println("Inner: " );
-					printTopo(anotherTopo,null);
-					newTopoList = manageTopologies(aTopo, anotherTopo,newTopoList,mergeStatus);
-					
-				}
-			}
+			EList<Topology> newTopoList = merge(robot.getTopologies());
 			if(newTopoList.size()==1) {
 				return true;
 			} else if(newTopoList.size()>1) {
@@ -62,21 +41,101 @@ public class CyclesValidator
 					}
 				}
 			}
-			
-
-
 		}
 		return true;
 	}
 	
-
-
-	public ArrayList<Topology> manageTopologies(Topology topo1,Topology topo2,ArrayList<Topology> newList,HashMap<Topology, Boolean> mergeStatus) {
-//		Topology newTopo = MyURDFFactory.eINSTANCE.createTopology();
-//      We use existing object - does merge affect UI?
+	public String[] cycles(Robot robot) {
+		if(robot.getTopologies() == null || robot.getTopologies().size()==0) {
+			return new String[] {"FALSE"};
+		} else {
+			// We have an issue when processing the first (during startup) cycles validation. The Child reference in the topology objects are null ! As if validation is called to early...
+			// This might trigger a wrong validation state after startup. Making for example a space in the UI - triggering another validation event - gives correct validation. How to solve? 
+			EList<Topology> topoList = merge(robot.getTopologies());
+			for (Topology aTopo : topoList) {
+				System.out.println("After merge: ");
+				printTopo(aTopo, null);
+				HashMap<String, Integer> temp = countLinksInChain(aTopo,new HashMap<String, Integer>());
+				String[] cycle = isCycle(temp);
+				if(cycle[0]=="TRUE")
+					return cycle;
+			}
+		}
+		return new String[] {"FALSE"};
+	}
+	
+	private String[] isCycle(HashMap<String, Integer> counter) {
+		for (String key : counter.keySet()) {
+			 int value = counter.get(key);
+			 if(value>1) {
+				return new String[] {"TRUE",key};
+			 }
+		}
+		return new String[] {"FALSE"};
+	}
+	
+	
+	private HashMap<String, Integer> countLinksInChain(Topology topo, HashMap<String, Integer> counter) {
+		if(topo.getParent() != null) {
+			counter.put(topo.getParent().getName(), counter.get(topo.getParent().getName()) == null ? 1 : counter.get(topo.getParent().getName()) + 1 );
+		} 
+		if(topo.getChild() !=null) {
+			counter = countLinksInChain(topo.getChild(), counter);
+		}
+		return counter;
+	}
+	
+	
+	private EList<Topology> merge(EList<Topology> topoList) {
+		if(topoList.size() == 1) {
+			return topoList;
+		}
 		
+		EList<Topology> newTopoList = new BasicEList<Topology>();
+		boolean merge = false;
+
+		outerloop:
+		for (int i = 0; i<topoList.size();i++) { //Do not use 'enhanced' loop syntax style when handling nested loops
+			Topology aTopo = topoList.get(i);
+//			System.out.println("Outer: "); 
+//			printTopo(aTopo,null);
+			for (Topology anotherTopo : topoList) {
+				if(aTopo.equals(anotherTopo)) {
+					continue;
+				}
+//				System.out.println("Inner: " );
+//				printTopo(anotherTopo,null);
+				Topology temp = manageTopologies(aTopo, anotherTopo);
+				if(temp != null) {
+					merge = true;
+					//merge Succesful
+					for (Topology topoTemp : topoList) {
+						if(topoTemp.equals(anotherTopo) || topoTemp.equals(aTopo)) {
+							continue;
+						} else {
+							newTopoList.add(topoTemp);
+						}
+					}
+					newTopoList.add(temp);
+					break outerloop;
+				}
+			}
+		}
+		
+		if(merge) {
+			newTopoList = merge(newTopoList);
+			merge = false;
+		}
+		if(newTopoList.size() == 0) {
+			//no merge
+			newTopoList = topoList;
+		}
+		
+		return newTopoList;
+	}
+	
+	public Topology manageTopologies(Topology topo1,Topology topo2) {
 		Topology newTopo = null;
-		boolean found = false;
 
 		//first find possible connection points
 		String topo1First = topo1.getParent().getName();
@@ -89,26 +148,13 @@ public class CyclesValidator
 		if(topo1Last.equals(topo2First)) {
 			newTopo = topo1;
 			getMergeTopology(newTopo).setChild(topo2);
-			found = true;
 		} else if(topo2Last.equals(topo1First)) {
 			newTopo = topo2;
 			getMergeTopology(newTopo).setChild(topo1);
-			found = true;
-		} else {
-			//Topologies cannot be merged, so we add them to the list separately
-			newList.add(topo1);
-			newList.add(topo2);
-			mergeStatus.put(topo1, false);
-			mergeStatus.put(topo2, false);
 		}
-		if(found) {
-			mergeStatus.put(topo1, true);
-			mergeStatus.put(topo2, true);
-			newList.add(newTopo);
-			System.out.println("Merged: ");
-			printTopo(newTopo,null);
-		}
-		return newList;
+//		System.out.println("Merged: ");
+//		printTopo(newTopo,null);
+		return newTopo;
 		
 		//Example of possible connections:
 		// L1 -> L2
@@ -120,6 +166,7 @@ public class CyclesValidator
 		// L4 -> L1 -> L2
 		
 	}
+
 	
 	private String printTopo(Topology topo, String printLine) {
 		if(topo == null || topo.getParent() == null) {
