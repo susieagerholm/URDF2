@@ -39,6 +39,7 @@ Workflow {
 			referencedResource = "platform:/resource/org.xtext.urdf2.dsl/model/custom/Dsl.genmodel"
 			
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
+			fragment = junit.Junit4Fragment2 auto-inject {}
 
 			fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
 				fragment = org.eclipse.xtext.generator.ecore2xtext.FormatterFragment {}
