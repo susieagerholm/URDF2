@@ -48,10 +48,20 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 			if (obj instanceof Topology) {
 //				obj.eContents().clear(); //Topology object does not support clear()
 
-				Topology topo = (Topology)obj;
-				topo.setParent(null);
-				topo.setChild(null);
-				topo.setJoint(null);
+				//When we set the objects below to null it impacts the topology objects in the resourceset when 
+				//derivedstate is called based on a SAVE event. Parent and child are null. This impacts validation 
+				//and the generator is therefore not called
+				
+				//When we receive a change event discard is not called and therefore derivedstate works as expected
+
+				//For transient objects (those not to be persisted) like Topology the intention with discard is probably to
+				//remove them before the generator persists. However that is not viable in our case as that would make validation
+				//fail. The question is whether 'disabling' discard has other sideeffects.
+				
+//				Topology topo = (Topology)obj;
+//				topo.setParent(null);
+//				topo.setChild(null);
+//				topo.setJoint(null);
 			}
 			if (obj instanceof AddTo) {
 				//Should we set the object null - what happens in the UI?
@@ -61,7 +71,8 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
-		if  (!preLinkingPhase) {   
+		//Calling resource.isLoaded() seems to fix the invalid start validation state issue - mentioned in the cycles method in CyclesValidation
+		if  (!preLinkingPhase && resource.isLoaded()) {   
 			installTopology(resource);
 		}
 	}
@@ -87,6 +98,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 
 					if (top instanceof Topology) {
 						Topology topo = (Topology)top;
+						//When saving - parent/child is null, and therefore we don't install topology as expected
 						if(topo.getChild() != null && topo.getParent() != null) {
 							switch (getLastEntry(top)) {
 							case " ": // we havent finished writing
@@ -218,7 +230,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	
 	private void createStandardJointsInTopology(Joint joint, Robot robot) {
 		String ruleName = getRuleName(joint);
-		if(ruleName.equalsIgnoreCase("Joint")) {
+		if(ruleName != null && ruleName.equalsIgnoreCase("Joint")) {
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
 			topoParent.setParent(joint.getParentOf());
 			topoParent.setJoint(getJointRef(joint));
