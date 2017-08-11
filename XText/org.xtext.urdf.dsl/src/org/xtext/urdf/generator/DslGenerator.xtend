@@ -17,6 +17,6 @@ class DslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val generator = new UrdfGenerator()
-		fsa.generateFile(generator.getResourceName(resource), generator.generateURDF(resource))
+		fsa.generateFile(generator.getRobot(resource).name + ".xml", generator.generateURDF(resource))
 	}
 }
