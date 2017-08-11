@@ -13,18 +13,39 @@ import org.junit.runner.RunWith
 import org.xtext.urdf.myURDF.Robot
 
 @RunWith(XtextRunner)
-@InjectWith(DslInjectorProvider)
-class DslParsingTest{
+@InjectWith(typeof(DslInjectorProvider))
 
-	@Inject
-	ParseHelper<Robot> parseHelper
+class DslParsingTest  {
+	//Robot robo
+	
+	@Inject extension ParseHelper<Robot>
+//	ParseHelper<Robot> parseHelper
 
-	@Test 
-	def void loadModel() {
-		val result = parseHelper.parse('''
-			Hello Xtext!
-		''')
-		Assert.assertNotNull(result)
+	/*
+	 * Are elements created as expected by their respective default constructor in grammar 
+	 * Are elements created as expected by Topology and iDerivedStateComputer
+	 * Are elements based on Reuse created as expected
+	 * Are Decorations created as expected
+	 */
+
+
+//	@Test 
+//	def void loadModel2() {
+//		val result = parseHelper.parse('''
+//			Hello Xtext!
+//		''')
+//		Assert.assertNotNull(result)
+//	}
+
+	@Test
+	def void loadRobot() {
+		val result = '''
+			Robot r1
+				Link l1 def Inertial in Inertia it ixx 6 ixy 4 ixz 7 iyy 2 iyz 1 izz 4 Mass massKilogram 6 Visual v1 Geometry Sphere s1 radius 2
+		'''.parse
+
+		Assert.assertNotNull(result.links)
 	}
+	
 
 }
