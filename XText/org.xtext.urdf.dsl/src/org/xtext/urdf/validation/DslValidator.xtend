@@ -18,33 +18,33 @@ import org.xtext.urdf.myURDF.Axis
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class DslValidator extends AbstractDslValidator {
+
+	@Check
+	def parentCheck(Robot robot) {
+		val test = new CyclesValidator().parentCheck(robot.topologies);
+		if(test.validationError) {
+			error("Multiple parents. The following link has 2 parents: " + test.errorLink.name, MyURDFPackage.Literals.ROBOT__TOPOLOGIES)
+		}
+	}
+
+	@Check
+	def oneRoot (Robot robot) {
+		val test = new CyclesValidator().getRootTopologies(robot.topologies);
+
+		if(test==null) {
+			error("Multiple roots problem: This robot contains multiple link, but it has no joints connecting the links. A robot may have only one root link, that is not referenced as the child of a joint node",
+					MyURDFPackage.Literals.ROBOT__LINKS)
+		} 
+	}
 	
 
 	@Check
 	def checkNoCyclicReferences(Robot robot) {
-		val test = new CyclesValidator().cycles(robot);
-		if(test.get(0)=="TRUE") {
-				error("Cyclic error. Problem with link: " + test.get(1), MyURDFPackage.Literals.ROBOT__LINKS)			
-		} else {
-
-		}
+		val test = new CyclesValidator().cycles(EcoreUtil2.copy(robot));
+		if(test!=null) {
+				error("Cyclic error. Problem with link: " + test, MyURDFPackage.Literals.ROBOT__LINKS)			
+		} 
 	}	
-	
-	@Check
-	def allLinksButOneMustBeChildOfJoint2 (Robot robot) {
-		val test = new CyclesValidator().oneRoot(robot);
-
-		if(test) {
-		} else {
-				error("Multiple roots problem: This robot contains multiple link, but it has no joints connecting the links. A robot may have only one root link, that is not referenced as the child of a joint node",
-					MyURDFPackage.Literals.ROBOT__LINKS)
-		}
-	}
-	
-	
-	
-	
-	
 	
 	 //A Robot must contain at least one Link to be valid instance
     @Check
@@ -55,7 +55,7 @@ class DslValidator extends AbstractDslValidator {
 	}
 	
 	//Link name must be unique
-	@Check
+//	@Check
 	def uniqueNameOfLinkRequired(Link linkk) {
 		val robot = EcoreUtil2.getContainerOfType(linkk, Robot)
 		if(robot.links.exists[x | x.name.equals(linkk.name)])
@@ -64,7 +64,7 @@ class DslValidator extends AbstractDslValidator {
 	}
 	
 	//Joint name must be unique
-	@Check
+//	@Check
 	def uniqueNameOfJointRequired(Joint jointt) {
 		val robot = EcoreUtil2.getContainerOfType(jointt, Robot)
 		if(robot.joint.exists[x | x.name.equals(jointt.name)])
@@ -140,6 +140,8 @@ class DslValidator extends AbstractDslValidator {
 	
 	//1.a Only one link may be true root = not child of any joint 
 	//IS THIS TEST ENOUGH TO TEST FOR ALL SCENARIOS OF MULTIPOLE ROOTS???
+
+/*
 	@Check
 	def allLinksButOneMustBeChildOfJoint (Robot robot) {
 		val testt = robot.links.filter[x | !robot.joint.map[y | y.parentOf].toSet.contains(x)]
@@ -154,6 +156,8 @@ class DslValidator extends AbstractDslValidator {
 					MyURDFPackage.Literals.ROBOT__LINKS)
 		}
 	}
+*/
+ 
 	
 	/* @Check
 	 * OVERFLOEDIGT TJEK?? HVIS 1A FANGER ALLE CASES
@@ -182,7 +186,8 @@ class DslValidator extends AbstractDslValidator {
 	* a. The link is not already parent upstream in this topology - 
 	* b. The link is not already parent in upstream of other topology/topologies this current topology is connected to
 	*/
-	
+
+/*	
 	@Check
 	//2.a Link added to parent reference of a given topology may not be present upstream in that same topology
 	def checkNoCyclicReferencesInLocalTopology(Topology topos) {
@@ -213,10 +218,10 @@ class DslValidator extends AbstractDslValidator {
 		]]]
 		
 	}
-	
+*/	
 	// 2.c ?A Joint must not have the same Link as parent and child
 	//maybe this check should be integrated in the topology instead... 
-	
+/*	
 	@Check
 	def checkNoJointHasSameLinkAsParentAndChild (Joint joint) {
       if(joint.childOf === joint.parentOf)
@@ -224,10 +229,11 @@ class DslValidator extends AbstractDslValidator {
 					MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
       
     }
-    
+*/    
     /*2.d? No two joints may have the same parentOf/childOf combination  
 	* 
 	* */
+/*	
 	@Check
 	def checkNoTwoJointsHaveSameParentAndChildCombination (Joint joint) {
 		val robot = EcoreUtil2.getContainerOfType(joint, Robot)
@@ -238,7 +244,7 @@ class DslValidator extends AbstractDslValidator {
 		error("Cyclic reference problem: Joint has same link as parent AND child combination as other joint creating a loop ", 
 					MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}
-	
+*/	
 	
 	/*4. Make sure links only have one parent = 
 	* a link may only appear once as non root in a topology chain  

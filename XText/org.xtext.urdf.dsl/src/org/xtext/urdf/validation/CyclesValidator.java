@@ -1,7 +1,7 @@
 package org.xtext.urdf.validation;
 
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -11,200 +11,201 @@ import org.xtext.urdf.myURDF.Topology;
 
 
 
-public class CyclesValidator
-{
-	public boolean oneRoot(Robot robot) {
-		
-		if(robot.getLinks().size()>1 && robot.getJoint().size()==0) {
-			return false;
-		} else {
-			EList<Topology> newTopoList = merge(robot.getTopologies());
-			if(newTopoList.size()==1) {
-				return true;
-			} else if(newTopoList.size()>1) {
-				Iterator<Topology> iter = newTopoList.iterator();
-				String firstRoot = null;
-				while (iter.hasNext()) {
-					Topology aTopo = iter.next();
-					if(firstRoot == null) {
-						if(aTopo.getParent()==null) {
-							System.out.println("Topology invalid");
-							return true;
-						}
-						firstRoot = aTopo.getParent().getName();
-					} else {
-						if(aTopo.getParent().getName().equals(firstRoot)) {
-							continue;
-						} else {
-							return false;
-						}
-					}
-				}
-			}
-		}
-		return true;
-	}
+public class CyclesValidator {
 	
-	public String[] cycles(Robot robot) {
-		if(robot.getTopologies() == null || robot.getTopologies().size()==0) {
-			return new String[] {"FALSE"};
-		} else {
-			// We have an issue when processing the first (during startup) cycles validation. The Child reference in the topology objects are null ! As if validation is called to early...
-			// This might trigger a wrong validation state after startup. Making for example a space in the UI - triggering another validation event - gives correct validation. How to solve? 
-			EList<Topology> topoList = merge(robot.getTopologies());
-			for (Topology aTopo : topoList) {
-				System.out.println("After merge: ");
-				printTopo(aTopo, null);
-				HashMap<String, Integer> temp = countLinksInChain(aTopo,new HashMap<String, Integer>());
-				String[] cycle = isCycle(temp);
-				if(cycle[0]=="TRUE")
-					return cycle;
-			}
-		}
-		return new String[] {"FALSE"};
-	}
 	
-	private String[] isCycle(HashMap<String, Integer> counter) {
+	private String getCycleLink(HashMap<String, Integer> counter) {
+		String cycleLink = null;
 		for (String key : counter.keySet()) {
 			 int value = counter.get(key);
 			 if(value>1) {
-				return new String[] {"TRUE",key};
+				cycleLink = key;
+				break;
 			 }
 		}
-		return new String[] {"FALSE"};
+		return cycleLink;
 	}
 	
 	
-	private HashMap<String, Integer> countLinksInChain(Topology topo, HashMap<String, Integer> counter) {
-		if(topo.getParent() != null) {
-			counter.put(topo.getParent().getName(), counter.get(topo.getParent().getName()) == null ? 1 : counter.get(topo.getParent().getName()) + 1 );
-		} 
-		if(topo.getChild() !=null) {
-			counter = countLinksInChain(topo.getChild(), counter);
-		}
-		return counter;
-	}
-	
-	
-	private EList<Topology> merge(EList<Topology> topoList) {
-		if(topoList.size() == 1) {
-			return topoList;
-		}
+	public ParentCheck parentCheck(EList<Topology> topoList) {
 		
-		EList<Topology> newTopoList = new BasicEList<Topology>();
-		boolean merge = false;
-
-		outerloop:
-		for (int i = 0; i<topoList.size();i++) { //Do not use 'enhanced' loop syntax style when handling nested loops
-			Topology aTopo = topoList.get(i);
-//			System.out.println("Outer: "); 
-//			printTopo(aTopo,null);
-			for (Topology anotherTopo : topoList) {
-				if(aTopo.equals(anotherTopo)) {
+		HashMap<String, String> map = new HashMap<>();
+		ParentCheck checker = new ParentCheck();
+		checker.setChecker(map);
+		
+		for (Topology topo : topoList) {
+			checker = countParents(topo, checker);
+			if(checker.isValidationError()) {
+				break;
+			}
+		}
+		return checker;
+	}
+	
+	private ParentCheck countParents(Topology topo, ParentCheck check) {
+		if(topo.getParent() != null && topo.getChild() != null) { 
+			  //If the parent name does NOT equal the parent name we are about to put in - there is an error
+			  String parentName = check.getChecker().get(topo.getChild().getParent().getName());
+			  if(parentName != null && !parentName.equalsIgnoreCase(topo.getParent().getName())) {
+				  check.setErrorLink(topo.getChild().getParent());
+				  check.setValidationError(true);
+			  } else {
+				  check.getChecker().put(topo.getChild().getParent().getName(), topo.getParent().getName());
+				  countParents(topo.getChild(), check);
+			  }
+		}
+		 
+		return check;
+	}
+	
+	public EList<Topology> getRootTopologies(EList<Topology> topoList) {
+		//Only the first link in a topology can be a potential root
+		//Therefore take the first link in a chain and check whether this link exists in one of the other chains
+		//If it does exist it cannot be root - unless if it's the first link in the chain 
+		HashMap<Topology,Boolean> map = new HashMap<Topology, Boolean>();
+		
+		for (Topology topoOuter : topoList) {
+			Link potentialRoot = topoOuter.getParent();
+			map.put(topoOuter, true);
+			for (Topology topoInner : topoList) {
+				if(topoOuter.equals(topoInner)) {
+					//We do not need to check the chain if it's the same topology 
 					continue;
-				}
-//				System.out.println("Inner: " );
-//				printTopo(anotherTopo,null);
-				Topology temp = manageTopologies(aTopo, anotherTopo);
-				if(temp != null) {
-					merge = true;
-					//merge Succesful
-					for (Topology topoTemp : topoList) {
-						if(topoTemp.equals(anotherTopo) || topoTemp.equals(aTopo)) {
-							continue;
-						} else {
-							newTopoList.add(topoTemp);
-						}
+				} else {
+					//If two topologies start with the same link - they can both be a potential root topology
+					//Therefore we start by checking the rest of the chain
+					if(topoInner.getChild() != null) {
+					  boolean found = isLinkInChain(topoInner.getChild(),potentialRoot);
+					  //We found the link in one of the other chains and therefore it cannot be root
+					  if(found) {
+						  map.put(topoOuter, false);
+						  break;
+					  } 
 					}
-					newTopoList.add(temp);
-					break outerloop;
 				}
 			}
 		}
-		
-		if(merge) {
-			newTopoList = merge(newTopoList);
-			merge = false;
-		}
-		if(newTopoList.size() == 0) {
-			//no merge
-			newTopoList = topoList;
-		}
-		
-		return newTopoList;
+
+		//if getRootTopos return null there are multiple roots
+		return getRootTopos(map);
+
 	}
 	
-	public Topology manageTopologies(Topology topo1,Topology topo2) {
-		Topology newTopo = null;
-
-		//first find possible connection points
-		String topo1First = topo1.getParent().getName();
-		String topo1Last = getLastChild(topo1).getName();
-		String topo2First = topo2.getParent().getName();
-		String topo2Last = getLastChild(topo2).getName();
-		
-		//Only combinations with a start and a end is possible - that is, two topologies that
-		//starts with L1 cannot be merged
-		if(topo1Last.equals(topo2First)) {
-			newTopo = topo1;
-			getMergeTopology(newTopo).setChild(topo2);
-		} else if(topo2Last.equals(topo1First)) {
-			newTopo = topo2;
-			getMergeTopology(newTopo).setChild(topo1);
+	private EList<Topology> getRootTopos(HashMap<Topology,Boolean> map) {
+		String tempLink = null;
+		EList<Topology> temp = new BasicEList<Topology>();
+		for (Topology topo : map.keySet()) {
+			if(map.get(topo) == false) {
+				//The false ones are not root topologies
+				continue;
+			}
+			if(tempLink==null) {
+				tempLink = topo.getParent().getName();
+				temp.add(topo);
+			} else {
+				if(tempLink.equals(topo.getParent().getName())) {
+					temp.add(topo);
+					continue;
+				} else {
+					temp = null;
+					break;
+				}
+			}
 		}
-//		System.out.println("Merged: ");
-//		printTopo(newTopo,null);
-		return newTopo;
-		
-		//Example of possible connections:
-		// L1 -> L2
-		// L2 -> L3
-		// L1 -> L2 -> L3
-		
-		// L1 -> L2
-		// L4 -> L1
-		// L4 -> L1 -> L2
-		
+		if(temp.isEmpty()) {
+			temp = null;
+		}
+		return temp;
 	}
-
 	
-	private String printTopo(Topology topo, String printLine) {
-		if(topo == null || topo.getParent() == null) {
-			return "Topology incomplete - parent is null";
+	
+	private HashMap<String, Integer> countLinksInChain(GenericTreeNode<String> leaf, HashMap<String, Integer> counter) {
+		if(counter == null) {
+			counter = new HashMap<String,Integer>();
 		}
-		
-		boolean top = false;
-		if(printLine == null) {
-			printLine="";
-			top=true;
-		}
-		printLine = (printLine=="" ? topo.getParent().getName() : printLine + " -> " + topo.getParent().getName());
-		
-		if(topo.getChild() != null) {
-			printLine = printTopo(topo.getChild(), printLine);
+		if(leaf != null) {
+			counter.put(leaf.getData(), counter.get(leaf.getData()) == null ? 1 : counter.get(leaf.getData()) + 1 );
 		} 
+		if(leaf.getParent() !=null) {
+			counter = countLinksInChain(leaf.getParent(), counter);
+		}
+		return counter;
+	}
+
+
+	private boolean isLinkInChain(Topology topo, Link potentialRootLink) {
+		    boolean temp = false;
+			if(topo.getParent().getName().equals(potentialRootLink.getName())) {
+				return true;
+			} else if (topo.getChild() != null) {
+				temp = isLinkInChain(topo.getChild(), potentialRootLink);
+			}
+			return temp;
+	}
+
+	public String cycles(Robot robot) {
+		EList<Topology> topoList = robot.getTopologies();
+	    GenericTree<String> tree = new GenericTree<String>();
+	    
+	    //Start to get the root topologies
+	    EList<Topology> rootList = getRootTopologies(topoList);
+	    if(rootList == null) {
+	    	return null;
+	    }
+	    
+		for (Topology topo : rootList) {
+			GenericTreeNode<String> node = buildNodeChainFromTopology(topo, null);
+			if(tree.getRoot() == null) {
+				tree.setRoot(node.getTopNode());;
+			} else if(tree.getRoot().equals(node.getTopNode())) {
+				tree.getRoot().addChild(node.getTopNode().getChildAt(0));;
+			} else {
+				System.out.println("It should not be possible to end here");
+			}
+			System.out.println(tree.toStringWithDepth());
+		}
 		
-		if(top) {
-			System.out.println(printLine);
+		topoList.removeAll(rootList);
+
+		//build rest of the tree
+		for (Topology topo : topoList) {
+			GenericTreeNode<String> parentNode = tree.find(topo.getParent().getName()).getParent();
+			GenericTreeNode<String> childNode = buildNodeChainFromTopology(topo, null);
+			parentNode.addChild(childNode);
+			System.out.println(tree.toStringWithDepth());
 		}
-		return printLine;
+		
+		return checkForCycles(tree);
 	}
+
 	
-	private Link getLastChild(Topology aTopo) {
-		if(aTopo.getChild() != null) {
-			return getLastChild(aTopo.getChild());
-		} else {
-			return aTopo.getParent();
+	private String checkForCycles(GenericTree<String> tree) {
+		String cycleLink = null;
+		Set<GenericTreeNode<String>> temp = tree.getRoot().getAllLeafNodes();
+		for(GenericTreeNode<String> leaf : temp) {
+			HashMap<String,Integer> map = countLinksInChain(leaf, null);
+			cycleLink = getCycleLink(map);
+			if(cycleLink != null) {
+				break;
+			}
 		}
+		return cycleLink;
 	}
+
 	
-	private Topology getMergeTopology(Topology aTopo) {
-		//Get the topology object to which we connect another Topology - not the last - but the one before 
-		if(aTopo.getChild() != null && aTopo.getChild().getChild()!=null) {
-			return getMergeTopology(aTopo.getChild());
-		} else {
-			return aTopo;
+	private GenericTreeNode<String> buildNodeChainFromTopology(Topology topo, GenericTreeNode<String> node) {
+		if(topo.getParent() != null) {
+			GenericTreeNode<String> temp = new GenericTreeNode<>(topo.getParent().getName());
+			if(node != null) {
+				node.addChild(temp);
+			} else {
+				node = temp;
+			}
+			if(topo.getChild() != null) {
+				node = buildNodeChainFromTopology(topo.getChild(),temp);
+			}
 		}
+		return node;
 	}
 	
 }
