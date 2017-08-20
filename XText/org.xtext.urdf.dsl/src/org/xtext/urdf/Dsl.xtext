@@ -31,7 +31,6 @@ Robot:
 	 	         joint+=Joint |
 	 	         addto+=AddTo
 	 )*
-	 
 ;
 
 Topology:

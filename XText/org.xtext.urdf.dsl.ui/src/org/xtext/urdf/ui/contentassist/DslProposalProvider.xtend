@@ -117,7 +117,6 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 		}*/
 		else super.completeKeyword(object, context, acceptor);
 		
-		
 	  }	
 		
 	//} 
