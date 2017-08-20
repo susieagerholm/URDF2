@@ -13,6 +13,10 @@ import org.xtext.urdf.myURDF.Topology;
 
 public class CyclesValidator {
 	
+	public RootCheck oneRoot(EList<Topology> topoList) {
+		return getRootTopologies(topoList, true);
+	}
+	
 	
 	private String getCycleLink(HashMap<String, Integer> counter) {
 		String cycleLink = null;
@@ -57,8 +61,9 @@ public class CyclesValidator {
 		 
 		return check;
 	}
-	
-	public EList<Topology> getRootTopologies(EList<Topology> topoList) {
+
+	@SuppressWarnings("unchecked")
+	private <T> T getRootTopologies(EList<Topology> topoList, boolean returnPotentialCandidates) {
 		//Only the first link in a topology can be a potential root
 		//Therefore take the first link in a chain and check whether this link exists in one of the other chains
 		//If it does exist it cannot be root - unless if it's the first link in the chain 
@@ -85,12 +90,54 @@ public class CyclesValidator {
 				}
 			}
 		}
+		
+		if(returnPotentialCandidates) {
+			return (T)getRootCheck(map);
+		}
 
 		//if getRootTopos return null there are multiple roots
-		return getRootTopos(map);
+		return (T)getRootTopos(map);
 
 	}
-	
+
+	private RootCheck getRootCheck(HashMap<Topology,Boolean> map) {
+		RootCheck check = new RootCheck();
+		check.setValidationError(false);
+		EList<Topology> temp = new BasicEList<Topology>();
+
+		String tempLink = null;
+		for (Topology topo : map.keySet()) {
+			if(map.get(topo) == false) {
+				continue;
+			}
+			temp.add(topo);
+			check.addPrettyPrintLine(printTopo(topo, null));
+			if(tempLink==null) {
+				tempLink = topo.getParent().getName();
+			} else if(!tempLink.equals(topo.getParent().getName())) {
+					check.setValidationError(true);
+			}
+		}
+		check.setPotentialRoots(temp);
+		return check;
+	}
+
+	private String printTopo(Topology topo, String printLine) {
+		if(topo == null || topo.getParent() == null) {
+			return "Topology incomplete - parent is null";
+		}
+		
+		if(printLine == null) {
+			printLine="";
+		}
+		printLine = (printLine=="" ? topo.getParent().getName() : printLine + " -> " + topo.getParent().getName());
+		
+		if(topo.getChild() != null) {
+			printLine = printTopo(topo.getChild(), printLine);
+		} 
+		return printLine;
+	}
+
 	private EList<Topology> getRootTopos(HashMap<Topology,Boolean> map) {
 		String tempLink = null;
 		EList<Topology> temp = new BasicEList<Topology>();
@@ -112,7 +159,7 @@ public class CyclesValidator {
 				}
 			}
 		}
-		if(temp.isEmpty()) {
+		if(temp == null || temp.isEmpty()) {
 			temp = null;
 		}
 		return temp;
@@ -143,12 +190,12 @@ public class CyclesValidator {
 			return temp;
 	}
 
-	public String cycles(Robot robot) {
+	public String cycles(Robot robot,boolean returnPotentialRoots) {
 		EList<Topology> topoList = robot.getTopologies();
 	    GenericTree<String> tree = new GenericTree<String>();
 	    
 	    //Start to get the root topologies
-	    EList<Topology> rootList = getRootTopologies(topoList);
+	    EList<Topology> rootList = getRootTopologies(topoList,returnPotentialRoots);
 	    if(rootList == null) {
 	    	return null;
 	    }
