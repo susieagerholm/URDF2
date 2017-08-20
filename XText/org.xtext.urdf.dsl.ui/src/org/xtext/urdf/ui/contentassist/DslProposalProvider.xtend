@@ -16,80 +16,137 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
 import org.xtext.urdf.myURDF.Joint
 import org.xtext.urdf.myURDF.Link
 import org.xtext.urdf.services.DslGrammarAccess
+import org.xtext.urdf.myURDF.AssignNewValue
+import org.xtext.urdf.myURDF.ReUsableRef
+import org.xtext.urdf.myURDF.DotExpression
+import org.xtext.urdf.myURDF.Reuse
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
+ * 
+ * SPECIFICATION:
+ * Multiple word keywords should be allowed													 DONE										 DONE
+ * Only suggest 'Add to link' / 'Add to joint' if an instance of link or joint is created    DONE
+ * AssignNewValue: Only suggest relevant new value of correct type for an edit				 DONE
+ * All optional containments in joint, origin, - should only be suggested, if not already defined in instance	 TODO
+ * Only suggest to edit a reuse if reused Link/Joint has any attributes        				 TODO
+ * SHould only suggest another dot, if we have a tail node									 TODO
+ * Should only suggest add of relevant type when reusing a link or joint					 TODO
+ * Should not suggest self again after reuseable ref in DotExpression 						 TODO
+ * Should only suggest reuse if other Link/Joint exists                                      TODO
+ * 
+ * 
  */
+ 
 class DslProposalProvider extends AbstractDslProposalProvider {
 	 @Inject extension DslGrammarAccess
+	 	
+	override completeKeyword(Keyword object, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		
+		//Make sure that only the appropriate type of decoration is suggested in edit...
+		 if(context.currentModel instanceof AssignNewValue) {
+			val myassign = (context.currentModel) as AssignNewValue
+			val myTag = object.getValue
+			
+			//No use in trying to edit the instance we're reusing
+			if (myassign.getRef instanceof ReUsableRef) {
+				if(!object.getValue.equals('=')) super.completeKeyword(object, context, acceptor)
+			}
+			
+			//Make sure we have gotten to the assignment part...
+			else if(context.lastCompleteNode.text.equals("=")) {
+				//Make sure there is a tail expression in dot (not only the reused link referenced)
+				if(myassign.getRef instanceof DotExpression && (myassign.getRef as DotExpression).tail != null) {
+					//Make sure that only relevant type is suggested as assignment
+					for (clazz : (myassign.getRef as DotExpression).tail.class.interfaces.toList) {
+						if(clazz.simpleName.equals(myTag)) {
+							super.completeKeyword(object, context, acceptor)
+						}
+					}
+				}
+				//else super.completeKeyword(object, context, acceptor) 	
+			}
+			
+			else super.completeKeyword(object, context, acceptor)
+					
+		}
+		
+		//Make sure, that all optional, single containment decorations are only suggested if not already defined in Joint 
+		else if(context.currentModel instanceof Joint) {
+			val myjoint = (context.currentModel) as Joint
+			val myTag = object.getValue
+			
+			switch(myTag) {
+				case myTag.equals("Origin") 			: if(myjoint.origin == null) super.completeKeyword(object, context, acceptor)
+			    case myTag.equals("Axis") 				: if(myjoint.axis == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("Limit") 				: if(myjoint.limit == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("Calibration") 		: if(myjoint.calibration == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("Dynamics") 			: if(myjoint.dynamics == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("SafetyController")	: if(myjoint.safetycontroller == null) super.completeKeyword(object, context, acceptor)
+				default 								: super.completeKeyword(object, context, acceptor)
+			}
+		}
+		
+		/*else if (context.currentModel instanceof DotExpression) {
+			ONLY SUGGEST DOT IF EXTENSION IS AVAILABLE...
+		}
+		*/
+		/*else if (context.currentModel instanceof Visual) {
+			val myvisual = (context.currentModel) as Visual
+			val myTag = object.getValue
+			
+			switch(myTag) {
+				case myTag.equals("Geometry") 			: if(myvisual.geometry == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("Origin") 			: if(myvisual.origin == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("Material") 			: if(myvisual.material == null) super.completeKeyword(object, context, acceptor)
+			}
+		}*/
+		
+		//MAKE SURE PITCH, ROLL, YAW IS ONLY SUGGESTED ONCE INSIDE ORIGIN
+		/*else if(context.currentModel instanceof Origin) {
+			val myorigin = (context.currentModel) as Origin
+			val myTag = object.getValue
+			
+			switch(myTag) {
+				case myTag.equals("roll") 				: if(myorigin.roll == null) super.completeKeyword(object, context, acceptor)
+			    case myTag.equals("pitch") 				: if(myorigin.pitch == null) super.completeKeyword(object, context, acceptor)
+				case myTag.equals("yaw") 				: if(myorigin.yaw == null) super.completeKeyword(object, context, acceptor)
+				default 								: super.completeKeyword(object, context, acceptor)
+			}
+		}*/
+		else super.completeKeyword(object, context, acceptor);
+		
+		
+	  }	
+		
+	//} 
 	
+	//MULTIPLE WORDS - KEYWORDS...
 	override complete_AddToLink(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    	addToLinkAccess.group.createKeywordProposalAddToLink(context,acceptor)
+    	addToLinkAccess.group.createKeywordProposalMultiple(context,acceptor, Link, true)
 	}
 	
 	override complete_AddToJoint(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		addToJointAccess.group.createKeywordProposalAddToJoint(context,acceptor)
+		addToJointAccess.group.createKeywordProposalMultiple(context,acceptor, Joint, true)
 	}
 	
-	def createKeywordProposalAddToLink(Group group, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (group == null || context.currentModel.eContents.filter(Link).empty) {
-			return null
-   		}
-   		//val test = group.elements
-   		//make sure consecutive keywords are presented as one string by content assist
-   		//https://blogs.itemis.com/en/xtext-hint-content-assist-for-multiple-consecutive-keywords
+	override complete_AddToReuse(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		addToReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
+	}
+	
+	override complete_EditReuse(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		editReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
+	}
+	
+	//make sure consecutive keywords are presented as one string by content assist
+   	//https://blogs.itemis.com/en/xtext-hint-content-assist-for-multiple-consecutive-keywords	
+	def createKeywordProposalMultiple(Group group, ContentAssistContext context, ICompletionProposalAcceptor acceptor, Class<? extends EObject> obj, boolean guard) {
+		//Only suggest Add To Link/Joint if any actually created
+		if(guard == true) if (group == null || context.currentModel.eContents.filter(obj).empty) return null	
+   		
     	val proposalString = group.elements.filter(Keyword).map[value].join(" ") + " "
     	acceptor.accept(createCompletionProposal(proposalString, proposalString, null, context))	
 	}
-	
-	def createKeywordProposalAddToJoint(Group group, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (group == null || context.currentModel.eContents.filter(Joint).empty) {
-			return null
-		}	
-		//make sure consecutive keywords are presented as one string by content assist
-   		//https://blogs.itemis.com/en/xtext-hint-content-assist-for-multiple-consecutive-keywords
-		val proposalString = group.elements.filter(Keyword).map[value].join(" ") + " "
-    	acceptor.accept(createCompletionProposal(proposalString, proposalString, null, context))	
-	
-	}
-	
-		
-	
-	/*override completeRobot_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		
-		val bbb = context.copy
-		val ggg = bbb.toContext
-		val fff = context.firstSetGrammarElements.map[x | x.class]
-			val ii = acceptor
-		
-		completeRuleCall((assignment.getTerminal() as RuleCall), bbb.toContext, acceptor);
-		/*lookupCrossReference(model, reffi, acceptor, new Predicate<IEObjectDescription>() {
-			
-			override apply(IEObjectDescription input) {
-				if (input.name.toString.endsWith("hello_world")) false else true
-				//throw new UnsupportedOperationException("TODO: auto-generated method stub")
-			}		
-		}, [x | createCompletionProposal(x.name.toString + "my_assss", context)]) 
-		
-	}*/
-	
- 	
- 	//override completeRobot_Topologies(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
- 			
-		//completeRuleCall((assignment.getTerminal() as RuleCall), bbb.toContext, acceptor);
- 	//}
- 	
-	/*override void completeVisual_Geometry( EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		//if (context.lastCompleteNode.grammarElement.equals("Geometry")) {
-		val modello = model
-		
-		//}
-  	 //super.completeVisual_Geometry(model, assignment, context, new MyDLSStringProposalDelegate(acceptor, context))
-  	 //acceptor.accept(createCompletionProposal('hello_world', context))
-  	 //val test = acceptor
-  	
-    }*/
-   
 	
 }

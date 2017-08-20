@@ -14,14 +14,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReUseAble"/>
   <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="isReuseOf" eType="#//Link"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reuse" eType="#//Reuse"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reuse" upperBound="-1"
+        eType="#//Reuse" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inertial" eType="#//Inertial"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="visual" upperBound="-1"
         eType="#//Visual" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="collision" upperBound="-1"
         eType="#//Collision" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromTopo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reuse">
     <eStructuralFeatures xsi:type="ecore:EReference" name="add" eType="#//ReUseAble"
@@ -159,10 +161,12 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="#//Origin"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reuse" eType="#//Reuse"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reuse" upperBound="-1"
+        eType="#//Reuse" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="safetycontroller" eType="#//SafetyController"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromTopo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JointType">
     <eLiterals name="fixed" literal="fixed"/>
@@ -237,6 +241,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//ID"
+        iD="true"/>
   </eClassifiers>
 </ecore:EPackage>
