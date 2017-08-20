@@ -269,9 +269,6 @@ SafetyController:
 ;*/
 
 
-/*Constant:
-;*/
-
 URDFAttrSignedNumeric:
 	value = SIGNED_NUMERIC
 ;

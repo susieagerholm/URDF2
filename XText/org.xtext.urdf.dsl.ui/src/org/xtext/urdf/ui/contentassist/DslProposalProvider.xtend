@@ -5,8 +5,6 @@ package org.xtext.urdf.ui.contentassist
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.jface.text.contentassist.CompletionProposal
-import org.eclipse.jface.text.contentassist.ICompletionProposal
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
@@ -20,6 +18,7 @@ import org.xtext.urdf.myURDF.AssignNewValue
 import org.xtext.urdf.myURDF.ReUsableRef
 import org.xtext.urdf.myURDF.DotExpression
 import org.xtext.urdf.myURDF.Reuse
+
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
