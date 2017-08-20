@@ -9,13 +9,12 @@ import "http://www.itu.dk/uRDF"
 
 /*
  * Todo: 
- * Expressions - inline for value assignment 
- * Add Constant to parser rules: Should be alternative in all numeric expr - and for ID with String value  
- * Topology of Link and Joint: How to specify?
- * Add reflect as alternative in relevant places...
- * Add reuse grammar with reference to reused entity (mydot example from christian not working!)
- * Create ValueConverter (and possibly other stuff to parse reflect as negation of reused)
- * Create ValueConverter to convert scale values to Box
+ * TODO: Expressions - inline for value assignment 
+ * TODO: Add Constant to parser rules: Should be alternative in all numeric expr - and for ID with String value  
+ * TODO: Add reflect as alternative in relevant places...
+ * TODO: Create ValueConverter to convert scale values to Box?
+ * DONE: Add reuse grammar with reference to reused Link/Joint (eg. dot_expr example from christian)
+ * DONE: Topology of Link and Joint: How to specify?
  * DONE: Create Constants datatype - signed numeric or string (incl concatenation with String)
  * DONE: Change interface to abstract class in metamodel
  * DONE: ReUse - add reference in the metamodel
@@ -42,8 +41,12 @@ JointRef:
 	 fix = '->' | rev = 'r->' | pris = 'p->' | cont = 'c->'  
 ;
 
+AssignReUseAble returns ReUseAble:
+	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+;
+
 ReUseAble: 
- 	Link | Visual | Inertial | Collision
+ 	Link | Joint // Visual | Inertial | Collision //| Joint | Origin | Axis | Limit | Calibration | Dynamics | SafetyController
 ;
 
 ReUseAbleReduced returns ReUseAble:
@@ -57,33 +60,45 @@ ReUseAbleReduce returns ReUseAble:
 Link:
 	{Link} 'Link' name=ID
 	(('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+)	 
-		| ('reuse' isReuseOf=[Link] (reuse=Reuse)?)
+		| ('reuse' isReuseOf=[Link] (->reuse+=Reuse)*)
 	)?
 ;
 
+
+//Make sure user can add Visuals, Inertial or Collisions to Link stub made from Topology 
+//Make sure user can add Origin, Axis, Limit, Calibration, Dynamics or SafetyController to Joint stub made from Topology
 AddTo:
 	(AddToLink link=[Link] 
 		add = ReUseAbleReduced ) | 
 	(AddToJoint joint=[Joint]
-		add =  ReUseAbleReduce   
+		add = ReUseAbleReduce   
 	)
 ;
 
 AddToLink:
-	'Add' 'to' 'link'
+	'add' 'item' 'to' 'existing' 'link'
 ;
 
 AddToJoint:
-	'Add' 'to' 'joint'
+	'add' 'item' 'to' 'existing' 'joint'
 ;
 
 Reuse:
-	{Reuse}  'add' add=ReUseAbleReduced | 'edit' edit=AssignNewValue
+	{Reuse} AddToReuse add=AssignReUseAble | EditReuse edit=AssignNewValue
+	
+;
+
+AddToReuse:
+	'add' 'item' 'to' 'reuse'
+;
+
+EditReuse:
+	'edit' 'item' 'from' 'reuse'
 ;
 
 
 AssignNewValue:
-	{AssignNewValue} getRef=DotExpression '=' newReuseable=ReUseAble
+	{AssignNewValue} getRef=DotExpression '=' newReuseable=AssignReUseAble
 ;
 
 
@@ -116,8 +131,7 @@ Inertia:
 Visual:
 	{Visual} 'Visual' (name=ID)? 
 	'Geometry' geometry=Geometry
-	(origin=Origin)?               //problem: Kan ikke definere material uden origin pt
-	('Material' material=Material)? //problem: Kan ikke definere material uden origin pt
+	(origin=Origin | 'Material' material=Material)* //problem: Kan ikke definere material uden origin pt
 	
 ;
 
@@ -126,9 +140,7 @@ Origin:
     'x' x=URDFAttrSignedNumeric 
 	'y' y=URDFAttrSignedNumeric
 	'z' z=URDFAttrSignedNumeric
-    ('roll' roll=URDFAttrSignedNumeric)?
-	('pitch' pitch=URDFAttrSignedNumeric)? 
-	('yaw' yaw=URDFAttrSignedNumeric)?
+    ('roll' roll=URDFAttrSignedNumeric | 'pitch' pitch=URDFAttrSignedNumeric | 'yaw' yaw=URDFAttrSignedNumeric)*
 ;
 
 Mass:
@@ -203,7 +215,7 @@ Joint:
 	 ('reuse' isReuseOf=[Joint] 
 	 	'ChildOf' childOf=[Link] 
 		'ParentOf' parentOf=[Link] 
-	 	(reuse=Reuse)?
+	 	(->reuse+=Reuse)*
 	 )
 	)
 ;
@@ -257,9 +269,6 @@ SafetyController:
 ;*/
 
 
-/*Constant:
-;*/
-
 URDFAttrSignedNumeric:
 	value = SIGNED_NUMERIC
 ;
@@ -296,5 +305,4 @@ NUMERIC:
 	INT | FLOAT | SCIENTIFIC
 ;
 
-
-
+ 
