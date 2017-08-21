@@ -52,7 +52,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 				//derivedstate is called based on a SAVE event. Parent and child are null. This impacts validation 
 				//and the generator is therefore not called
 				
-				//When we receive a change event discard is not called and therefore derivedstate works as expected
+				//When we receive a change event - discard is not called and therefore derivedstate works as expected
 
 				//For transient objects (those not to be persisted) like Topology the intention with discard is probably to
 				//remove them before the generator persists. However that is not viable in our case as that would make validation
@@ -100,14 +100,14 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 						Topology topo = (Topology)top;
 						//When saving - parent/child is null, and therefore we don't install topology as expected
 						if(topo.getChild() != null && topo.getParent() != null) {
-							switch (getLastEntry(top)) {
-							case " ": // we havent finished writing
-								return;  //careful - we end installTopology
-							case "\n": //ok
-								break;
-							default:
-								break;
-							}
+//							switch (getLastEntry(top)) {
+//							case " ": // we havent finished writing
+//								return;  //careful - we end installTopology
+//							case "\n": //ok
+//								break;
+//							default:
+//								break;
+//							}
 							manageTopology(rob,topo);
 						}
 					}
@@ -247,6 +247,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private String getLastEntry(EObject obj) {
 		if (NodeModelUtils.getNode(obj) != null) {
 			String text = NodeModelUtils.getNode(obj).getRootNode().getText();

@@ -3,7 +3,9 @@ package org.xtext.urdf.generator;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,6 +23,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.MyURDFPackage;
 import org.xtext.urdf.myURDF.Robot;
@@ -31,12 +34,14 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
 import org.xtext.urdf.myURDF.URDFAttrSTRING;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 
+import com.google.common.html.HtmlEscapers;
+
 
 public class UrdfGenerator
 {
 	
-	//Todo:
-	//Origin
+	List<String> originList = Arrays.asList("x","y","z","roll","pitch","yaw");
+	HashMap<String,String> originKeyValues = new HashMap<String,String>();;
 	
 	public Robot getRobot(Resource res)
 	{
@@ -161,9 +166,13 @@ public class UrdfGenerator
 	        				tag.appendChild(e);
 		        		} else if(isAttr(f)) { 
 	        				if(f.getName().equalsIgnoreCase("pathToFile")) {
-	        					tag.setAttribute("filename",getAttributeValue(f,entry));
+	        					tag.setAttribute("filename", getAttributeValue(f,entry).replace("\t", "\\t"));
 	        				} else {
-	        					tag.setAttribute(f.getName(), getAttributeValue(f,entry));
+	        					if(type.equalsIgnoreCase("origin")) {
+	        						manageOriginFields(tag,f,entry);
+	        					} else {
+	        						tag.setAttribute(f.getName(), getAttributeValue(f,entry));
+	        					}
 	        				}
 		        		} else {
 		        			generateTag(doc, tag, (EObject)f.get(entry));
@@ -181,7 +190,7 @@ public class UrdfGenerator
 	        			if((""+f.get(entry)).equalsIgnoreCase("null")) {
 	        				//ignore null attributes
 	        			} else {
-	        					tag.setAttribute(f.getName(),""+f.get(entry));
+	        				tag.setAttribute(f.getName(),""+f.get(entry));
 	        			}
 	        		}
 	        	 }
@@ -189,6 +198,24 @@ public class UrdfGenerator
 	          return destination;
 	}
 	
+	private void manageOriginFields(Element tag, Field f, EObject entry) {
+		// consider using entry.hashCode() to make sure we work on the same origin object. 
+		// it should not be a problem since this method only is called from generateTag which deals with one EObject at a time
+		if(originList.contains(f.getName())) {
+			originKeyValues.put(f.getName(), getAttributeValue(f,entry));
+		} 
+		if(originKeyValues.containsKey("x") && originKeyValues.containsKey("y") && originKeyValues.containsKey("z")) {
+			tag.setAttribute("xyz",originKeyValues.get("x") + " " +  originKeyValues.get("y") + " " + originKeyValues.get("z"));
+			originKeyValues.remove("x"); originKeyValues.remove("y"); originKeyValues.remove("z"); 
+		}
+		if(originKeyValues.containsKey("roll") && originKeyValues.containsKey("pitch") && originKeyValues.containsKey("yaw")) {
+			tag.setAttribute("rpy",originKeyValues.get("roll") + " " +  originKeyValues.get("pitch") + " " + originKeyValues.get("yaw"));
+			originKeyValues.remove("roll"); originKeyValues.remove("pitch"); originKeyValues.remove("yaw"); 
+		}
+	}
+	
+
+
 	private boolean isAttr(Field f) {
 		if(f.getType().isAssignableFrom(URDFAttrSignedNumeric.class) ||
 		   f.getType().isAssignableFrom(URDFAttrNumeric.class) ||
