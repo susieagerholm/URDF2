@@ -42,7 +42,7 @@ JointRef:
 ;
 
 AssignReUseAble returns ReUseAble:
-	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController | URDFAttrSignedNumeric
 ;
 
 ReUseAble: 

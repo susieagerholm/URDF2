@@ -8,34 +8,36 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor
+import org.xtext.urdf.myURDF.AssignNewValue
+import org.xtext.urdf.myURDF.DotExpression
 import org.xtext.urdf.myURDF.Joint
 import org.xtext.urdf.myURDF.Link
-import org.xtext.urdf.services.DslGrammarAccess
-import org.xtext.urdf.myURDF.AssignNewValue
+import org.xtext.urdf.myURDF.Origin
 import org.xtext.urdf.myURDF.ReUsableRef
-import org.xtext.urdf.myURDF.DotExpression
 import org.xtext.urdf.myURDF.Reuse
-
+import org.xtext.urdf.myURDF.Visual
+import org.xtext.urdf.services.DslGrammarAccess
+import org.xtext.urdf.myURDF.Robot
+import org.eclipse.xtext.EcoreUtil2
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
  * on how to customize the content assistant.
  * 
  * SPECIFICATION:
- * Multiple word keywords should be allowed													 DONE										 DONE
+ * Multiple word keywords should be allowed													 DONE										 
  * Only suggest 'Add to link' / 'Add to joint' if an instance of link or joint is created    DONE
  * AssignNewValue: Only suggest relevant new value of correct type for an edit				 DONE
- * All optional containments in joint, origin, - should only be suggested, if not already defined in instance	 TODO
- * Only suggest to edit a reuse if reused Link/Joint has any attributes        				 TODO
- * SHould only suggest another dot, if we have a tail node									 TODO
- * Should only suggest add of relevant type when reusing a link or joint					 TODO
+ * Optional containments in Joint - should only be suggested, if not already defined 	     DONE
+ * Optional containments in Visual - should only be suggested, if not already defined		 DONE
+ * Should only suggest add of relevant type when reusing a Link or Joint					 DONE
+ * Should only suggest reuse if other Link/Joint exists                                      DONE
+ * Only suggest to edit a reuse if reused Link/Joint has any attributes to edit				 TODO
+ * Should only suggest another dot, if we have a tail node									 TODO
  * Should not suggest self again after reuseable ref in DotExpression 						 TODO
- * Should only suggest reuse if other Link/Joint exists                                      TODO
- * 
- * 
  */
  
 class DslProposalProvider extends AbstractDslProposalProvider {
@@ -71,12 +73,67 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 					
 		}
 		
-		//Make sure, that all optional, single containment decorations are only suggested if not already defined in Joint 
+		else if (context.currentModel instanceof Reuse) {
+			val myreuse = (context.currentModel) as Reuse
+			val myTag = object.getValue
+			val mycontext = myreuse.eContainer
+			
+			if(mycontext instanceof Link) {
+				switch(myTag) {
+					case myTag.equals("Visual") 			: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Inertial") 			: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Collision") 			: super.completeKeyword(object, context, acceptor)
+				}
+				
+			}
+			else if (mycontext instanceof Joint) {
+				switch(myTag) {
+					case myTag.equals("Origin") 			: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Axis") 				: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Limit") 				: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Calibration") 		: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("Dynamics") 			: super.completeKeyword(object, context, acceptor)
+					case myTag.equals("SafetyController")	: super.completeKeyword(object, context, acceptor)
+				}
+			}
+			else super.completeKeyword(object, context, acceptor)
+		}
+		
+		//Make sure reuse is not suggested if there is none to reuse from...
+		/*else if(context.currentModel instanceof Robot) {
+			val myrobot = (context.currentModel) as Robot
+			val myTag = object.getValue
+			
+			val last_node = NodeModelUtils.findActualSemanticObjectFor(context.lastCompleteNode)
+			val isLink = last_node instanceof Link
+			val avail_for_reuse = if (isLink) myrobot.links.size else myrobot.joint.size
+			if (avail_for_reuse < 2) {
+				
+				if(!myTag.equals('reuse')) super.completeKeyword(object, context, acceptor)
+			}
+			else super.completeKeyword(object, context, acceptor)
+		}*/
+		
+		//Make sure reuse is not suggested if there is none to reuse from...
+		else if(context.currentModel instanceof Link) {
+			val mylink = (context.currentModel) as Link
+			val myrobot = EcoreUtil2.getContainerOfType(mylink, Robot)
+			val myTag = object.getValue
+			
+			if(myTag.equals("reuse")) {
+				if (myrobot.links.size > 1) super.completeKeyword(object, context, acceptor)
+			}
+			else super.completeKeyword(object, context, acceptor)
+			
+		}
+		
+		//Make sure, that all optional, single containment decorations in Joint are only suggested if not already defined
 		else if(context.currentModel instanceof Joint) {
 			val myjoint = (context.currentModel) as Joint
 			val myTag = object.getValue
 			
 			switch(myTag) {
+				case myTag.equals("reuse")				: if((myjoint.eContainer as Robot).joint.size > 1) super.completeKeyword(object, context, acceptor)
 				case myTag.equals("Origin") 			: if(myjoint.origin == null) super.completeKeyword(object, context, acceptor)
 			    case myTag.equals("Axis") 				: if(myjoint.axis == null) super.completeKeyword(object, context, acceptor)
 				case myTag.equals("Limit") 				: if(myjoint.limit == null) super.completeKeyword(object, context, acceptor)
@@ -87,23 +144,26 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 			}
 		}
 		
+		
 		/*else if (context.currentModel instanceof DotExpression) {
 			ONLY SUGGEST DOT IF EXTENSION IS AVAILABLE...
 		}
 		*/
-		/*else if (context.currentModel instanceof Visual) {
+		
+		//Make sure, that all optional, single containment decorations in Visual are only suggested if not already defined
+		else if (context.currentModel instanceof Visual) {
 			val myvisual = (context.currentModel) as Visual
 			val myTag = object.getValue
 			
 			switch(myTag) {
-				case myTag.equals("Geometry") 			: if(myvisual.geometry == null) super.completeKeyword(object, context, acceptor)
 				case myTag.equals("Origin") 			: if(myvisual.origin == null) super.completeKeyword(object, context, acceptor)
 				case myTag.equals("Material") 			: if(myvisual.material == null) super.completeKeyword(object, context, acceptor)
+				default									: super.completeKeyword(object, context, acceptor)
 			}
-		}*/
+		}
 		
-		//MAKE SURE PITCH, ROLL, YAW IS ONLY SUGGESTED ONCE INSIDE ORIGIN
-		/*else if(context.currentModel instanceof Origin) {
+		//Make sure, that yaw, pitch and roll are only suggested within Origin if not salready defined
+		else if(context.currentModel instanceof Origin) {
 			val myorigin = (context.currentModel) as Origin
 			val myTag = object.getValue
 			
@@ -113,8 +173,9 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 				case myTag.equals("yaw") 				: if(myorigin.yaw == null) super.completeKeyword(object, context, acceptor)
 				default 								: super.completeKeyword(object, context, acceptor)
 			}
-		}*/
+		}
 		else super.completeKeyword(object, context, acceptor);
+		
 		
 	  }	
 		

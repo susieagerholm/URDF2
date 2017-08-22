@@ -35,19 +35,19 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReUsableRef" eSuperTypes="#//Ref">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reuseable" eType="#//ReUseAble"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrSignedNumeric" eSuperTypes="#//ReUseAble">
+  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrSignedNumeric" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrFloat">
+  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrFloat" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrINT">
+  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrINT" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrNumeric" eSuperTypes="#//ReUseAble">
+  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrNumeric" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrSTRING">
+  <eClassifiers xsi:type="ecore:EClass" name="URDFAttrSTRING" eSuperTypes="#//ReUseAble #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DotExpression" eSuperTypes="#//Ref">
