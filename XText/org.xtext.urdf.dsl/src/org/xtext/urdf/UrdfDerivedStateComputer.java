@@ -49,8 +49,9 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 //				obj.eContents().clear(); //Topology object does not support clear()
 
 				//When we set the objects below to null it impacts the topology objects in the resourceset when 
-				//derivedstate is called based on a SAVE event. Parent and child are null. This impacts validation 
-				//and the generator is therefore not called
+				//derivedstate is called based on a SAVE event. Parent and child are null and therefore derivedstate
+				//is not installed as expected. Validation is dependent on derivedState (uses the topology chains)  
+				//which means validations fails. The generator is only called when validation succeeds. 
 				
 				//When we receive a change event - discard is not called and therefore derivedstate works as expected
 
@@ -77,15 +78,22 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 	
-	public void installTopology(DerivedStateAwareResource resource) {
+	private Robot getRobot(DerivedStateAwareResource resource) {
+//		EcoreUtil2.getAllContentsOfType(resource.getContents().get(0), Robot.class);
+		Robot rob = null;
 		TreeIterator<EObject> temp = resource.getAllContents();
-		boolean contin = true;
-		while (temp.hasNext() && contin) {
+		while (temp.hasNext()) {
 			EObject obj = temp.next();
-			// When we have found mr. robot we can stop the top loop as there can be only one
 			if (obj instanceof Robot) {
-				Robot rob = (Robot)obj;
-				contin = false;
+				rob = (Robot)obj;
+				break;
+			}
+		}
+		return rob;
+	}
+	
+	public void installTopology(DerivedStateAwareResource resource) {
+				Robot rob = getRobot(resource);
 				TreeIterator<EObject> eo = rob.eAllContents();
 				while(eo.hasNext()) {
 					EObject top = eo.next();
@@ -98,7 +106,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 
 					if (top instanceof Topology) {
 						Topology topo = (Topology)top;
-						//When saving - parent/child is null, and therefore we don't install topology as expected
+						//When saving - parent/child is null, and therefore we don't install topology as expected -> solution: we don't use discard derived state
 						if(topo.getChild() != null && topo.getParent() != null) {
 //							switch (getLastEntry(top)) {
 //							case " ": // we havent finished writing
@@ -112,8 +120,8 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 						}
 					}
 				}
-			}
-		}
+			
+		
 	}
 	
 	private void addTopoLinkToRobot(Topology topo, Robot robo) {
@@ -134,6 +142,8 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	private void manageTopology(Robot rob, Topology topo) {
+		//We receive one call per Topology object, so we don't need to traverse the whole topology chain
+		
 		if(!isNameFound(rob.getLinks(),topo)) {
 			addTopoLinkToRobot(topo, rob);
 		}
@@ -174,6 +184,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	private void manageAddToProperties(AddTo add, Robot robot) {
+		
 		Link parentLink = null;
 		Joint parentJoint = null;
 		if(add.getAdd() == null) {
@@ -187,8 +198,10 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		 parentJoint = (Joint)getObjectByName(robot.getJoint(),add.getJoint().getName());
 		}
 
-		//When we copy an EObject all names will conflict with the parent object (a name has to be unique)
-		//Therefore we have to rename all names - prefix with an underscore. This impacts the generator when outputting the final URDF
+		//We need to work on a copy object - otherwise the required 'add' feature in class AddToImpl is removed
+		//when we try to set it on the 'real' urdf object. 
+		//When we copy an EObject - all names will conflict with the parent object (a name has to be unique)
+		//Therefore we have to rename all names - prefix with an underscore. 
 		ReUseAble newObj = EcoreUtil.copy(add.getAdd());
 		newObj = (ReUseAble)rename(newObj);
 		
@@ -229,14 +242,17 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	private void createStandardJointsInTopology(Joint joint, Robot robot) {
+		//Here we create Topology objects based on standard joints. 
+		//We use the 'isTopoFlag' to filter relevant joints
+		
 		String ruleName = getRuleName(joint);
-		if(ruleName != null && ruleName.equalsIgnoreCase("Joint")) {
+		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") && !joint.isFromTopo()) {
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
-			topoParent.setParent(joint.getParentOf());
+			topoParent.setParent(joint.getChildOf());
 			topoParent.setJoint(getJointRef(joint));
 
 			Topology topoChild = MyURDFFactory.eINSTANCE.createTopology();
-			topoChild.setParent(joint.getChildOf());
+			topoChild.setParent(joint.getParentOf());
 			topoParent.setChild(topoChild);
 			if(robot.getTopologies()==null) {
 				// This is experimental - don't know whether this conflicts when a topology is created in the UI
