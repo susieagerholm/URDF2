@@ -6,7 +6,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.xtext.urdf2.dsl.ide;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.xtext.urdf2.dsl,
- URDF,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
