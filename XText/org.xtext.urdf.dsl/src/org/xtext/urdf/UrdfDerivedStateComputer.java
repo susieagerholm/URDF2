@@ -309,9 +309,9 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		if (joint.getType() != null) {
 			switch (joint.getType()) {
 			case PRISMATIC : jointRef.setPris(JointType.PRISMATIC.toString()); 
-			case REVOLUTE : jointRef.setPris(JointType.REVOLUTE.toString()); 
-			case FIXED : jointRef.setPris(JointType.FIXED.toString()); 
-			case CONTINUOUS : jointRef.setPris(JointType.CONTINUOUS.toString()); 
+			case REVOLUTE : jointRef.setRev(JointType.REVOLUTE.toString()); 
+			case FIXED : jointRef.setFix(JointType.FIXED.toString()); 
+			case CONTINUOUS : jointRef.setCont(JointType.CONTINUOUS.toString()); 
 			}
 		}
 		return jointRef;
