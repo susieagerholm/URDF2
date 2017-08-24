@@ -94,6 +94,9 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	
 	public void installTopology(DerivedStateAwareResource resource) {
 				Robot rob = getRobot(resource);
+				if(rob==null) {
+					return;
+				}
 				TreeIterator<EObject> eo = rob.eAllContents();
 				while(eo.hasNext()) {
 					EObject top = eo.next();
