@@ -1,5 +1,8 @@
 package org.xtext.urdf.tests;
 
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.xml.XMLConstants;
@@ -11,37 +14,34 @@ import javax.xml.validation.Validator;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.junit.Assert;
 import org.junit.Test;
-import org.xtext.urdf.myURDF.Robot;
-import org.xtext.urdf.validation.CyclesValidator;
+
+
 
 @InjectWith(DslInjectorProvider.class)
 
-public class DslGeneratorTest{
+public class DslGeneratorTest {
 	
 
 	@Test 
-	public static boolean validateAgainstXSD(InputStream xml, InputStream xsd)
-	{
-	    try
-	    {
+	public void validateAgainstXSD() 	{
+		//Validate generated URDF xml against a xml schema
+		InputStream xml = null;
+		InputStream xsd = null;
+		try {
+			xml = new FileInputStream(new File("c:\\temp\\r1.xml"));
+			xsd = new FileInputStream(new File("c:\\temp\\uRDF.xsd"));
 	        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 	        Schema schema = factory.newSchema(new StreamSource(xsd));
 	        Validator validator = schema.newValidator();
 	        validator.validate(new StreamSource(xml));
-	        return true;
-	    }
-	    catch(Exception ex)
-	    {
-	        return false;
-	    }
+	        Assert.assertEquals("true","true");
+	        
+		} catch (Exception e) {
+			e.printStackTrace();
+	        Assert.assertEquals("true","false");
+		}
 	}
-	
-	@Test 
-	public void cycles() {
-		Robot robo = TestAdapter.createTestUrdf();
-		String[] result = new CyclesValidator().cycles(robo);
-		Assert.assertTrue("cycle detected - but not expected", result[0]=="FALSE");
-	}
-	
 
 }
+
+

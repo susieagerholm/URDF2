@@ -1,20 +1,13 @@
 package org.xtext.urdf.tests;
 
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.junit.Assert;
 import org.xtext.urdf.myURDF.AddTo;
 import org.xtext.urdf.myURDF.Box;
-import org.xtext.urdf.myURDF.Collision;
 import org.xtext.urdf.myURDF.Cylinder;
-import org.xtext.urdf.myURDF.Joint;
-import org.xtext.urdf.myURDF.JointType;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.Mesh;
 import org.xtext.urdf.myURDF.MyURDFFactory;
-import org.xtext.urdf.myURDF.MyURDFPackage;
 import org.xtext.urdf.myURDF.Sphere;
 import org.xtext.urdf.myURDF.Topology;
 import org.xtext.urdf.myURDF.URDFAttrNumeric;
@@ -24,94 +17,87 @@ import org.xtext.urdf.myURDF.impl.LinkImpl;
 import org.xtext.urdf.myURDF.impl.MyURDFFactoryImpl;
 import org.xtext.urdf.myURDF.impl.RobotImpl;
 
-public class TestAdapter {
+public class TestUtil {
 
+	public static RobotImpl createCycleFoundTestUrdf() {
+		
+		 /*
+			Topology l1 -> l2 -> l1 
+		 */
+		
+		   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
+		   Topology topo = eINSTANCE.createTopology();
+		   Link l1 = eINSTANCE.createLink();
+		   l1.setName("l1");
+		   topo.setParent(l1);
+
+		   Topology child = eINSTANCE.createTopology();
+		   Link l2 = eINSTANCE.createLink();
+		   l2.setName("l2");
+		   child.setParent(l2);
+
+		   topo.setChild(child);
+
+		   Topology child2 = eINSTANCE.createTopology();
+		   child2.setParent(l1);
+		   
+		   child.setChild(child2);
+
+		   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();
+		   robot.setName("test");
+		   robot.getTopologies().add(topo);
+		   
+		   return robot;
+
+	}
 	
-	public static RobotImpl createTestUrdf() 	{
+	
+	public static RobotImpl createCycleTestUrdf() 	{
 	   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
 	   //URDFModel model = eINSTANCE.createURDFModel();
 	   
 	   //Robot
 	   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();
 	   robot.setName("test");
-//	   model.setRobot(robot);
 
-	   //Links
-	   LinkImpl link = (LinkImpl)eINSTANCE.createLink();
-//	   link.eSet(URDFPackage.LINK__NAME, "URDFTestName");
-	   link.setName("URDFLink1Testname");
-	   
-	   Collision col1 = eINSTANCE.createCollision();
-	   col1.setName("TestCollision1");
-	   Collision col2 = eINSTANCE.createCollision();
-	   col2.setName("TestCollision2");
-//	   geo.setName("TestBox");
-//	   col1.setGeometry(geo);
-	   EList<EObject> colList = new BasicEList<EObject>();
-	   colList.add(col1);
-	   colList.add(col2);
-//	   link.eSet(pkg.getLink_Collision(), colList);
-
-	   Link link2 = eINSTANCE.createLink();
-	   link2.setName("URDF2");
-	   EList<Link> linkList = new BasicEList<Link>();
-	   linkList.add(link);
-	   linkList.add(link2);
-	   robot.eSet(MyURDFPackage.ROBOT__LINKS, linkList);
-	
-
-	   //Joints
-	   Joint joint = eINSTANCE.createJoint();
-	   joint.setName("Joint1");
-	   joint.setChildOf(link);
-	   joint.setType(JointType.FIXED);
-	   joint.setParentOf(link2);
-	   
-	   
-	   Joint joint2 = eINSTANCE.createJoint();
-	   joint2.setName("Joint2");
-	   joint2.setChildOf(link2);
-	   joint2.setType(JointType.REVOLUTE);
-//	   limit.setEffort("4");
-//	   joint2.setLimit(limit);
-	   
-//	   axis.setX(1);
-//	   joint2.setLimit(limit);
-//	   joint2.setAxis(axis);
-	   
-	   
-	   EList<Joint> jointList = new BasicEList<Joint>();
-	   jointList.add(joint);
-	   jointList.add(joint2);
-	   robot.eSet(MyURDFPackage.ROBOT__JOINT,jointList);
-	   
+	   // Topology l1 -> l2
+	   // Topology l3 -> l4
+	   // Topology l1 -> l3
 	   
 	   Topology topo = eINSTANCE.createTopology();
+	   Link l1 = eINSTANCE.createLink();
+	   l1.setName("l1");
+	   topo.setParent(l1);
+
 	   Topology child = eINSTANCE.createTopology();
 	   Link l2 = eINSTANCE.createLink();
 	   l2.setName("l2");
 	   child.setParent(l2);
 
 	   topo.setChild(child);
-	   Link l1 = eINSTANCE.createLink();
-	   l1.setName("l1");
-	   topo.setParent(l1);
 
 	   Topology topo2 = eINSTANCE.createTopology();
-	   Topology child2 = eINSTANCE.createTopology();
 	   Link l3 = eINSTANCE.createLink();
 	   l3.setName("l3");
-	   child2.setParent(l3);
+	   topo2.setParent(l3);
 
-	   topo2.setChild(child2);
+	   Topology child2 = eINSTANCE.createTopology();
 	   Link l4 = eINSTANCE.createLink();
 	   l4.setName("l4");
-	   topo2.setParent(l4);
+	   child2.setParent(l4);
+
+	   topo2.setChild(child2);
+
+	   Topology topo3 = eINSTANCE.createTopology();
+	   Topology child3 = eINSTANCE.createTopology();
+	   topo3.setParent(l1);
+	   
+	   child3.setParent(l3);
+	   topo3.setChild(child3);
 	   
 	   robot.getTopologies().add(topo);
-	   robot.getTopologies().add(child);
 	   robot.getTopologies().add(topo2);
-	   robot.getTopologies().add(child2);
+	   robot.getTopologies().add(topo3);
 	   
 	   return robot;
 	   
@@ -188,5 +174,62 @@ public class TestAdapter {
 			Assert.assertEquals(parentLink.getVisual().get(0), newVis);
 			
 	}
+
+	public static RobotImpl createOneRootTestUrdf() 	{
+		   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
+		   
+		   //Robot
+		   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();
+		   robot.setName("test");
+
+		   // Topology l1 -> l2 -> l3
+		   // Topology l1 -> l4 -> l5
+		   
+		   Topology parent = eINSTANCE.createTopology();
+		   Link l1 = eINSTANCE.createLink();
+		   l1.setName("l1");
+		   parent.setParent(l1);
+
+		   Topology child1 = eINSTANCE.createTopology();
+		   Link l2 = eINSTANCE.createLink();
+		   l2.setName("l2");
+		   child1.setParent(l2);
+
+		   parent.setChild(child1);
+
+		   Topology child2 = eINSTANCE.createTopology();
+		   Link l3 = eINSTANCE.createLink();
+		   l3.setName("l3");
+		   child2.setParent(l3);
+
+		   child1.setChild(child2);
+		   
+//////////////////////////////////////////
+		   
+		   Topology parent2 = eINSTANCE.createTopology();
+		   parent2.setParent(l1);
+		   
+		   Topology child4 = eINSTANCE.createTopology();
+		   Link l4 = eINSTANCE.createLink();
+		   l4.setName("l4");
+		   child4.setParent(l4);
+
+		   parent2.setChild(child4);
+
+		   Topology child5 = eINSTANCE.createTopology();
+		   Link l5 = eINSTANCE.createLink();
+		   l5.setName("l5");
+		   child5.setParent(l5);
+
+		   child4.setChild(child5);
+		   
+		   robot.getTopologies().add(parent);
+		   robot.getTopologies().add(parent2);
+		   
+		   return robot;
+
+		   
+		   
+		}
 	
 }

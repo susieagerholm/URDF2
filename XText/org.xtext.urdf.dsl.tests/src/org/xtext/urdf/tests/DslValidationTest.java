@@ -3,13 +3,9 @@ package org.xtext.urdf.tests;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.junit.Assert;
 import org.junit.Test;
-import org.xtext.urdf.myURDF.Link;
-import org.xtext.urdf.myURDF.MyURDFFactory;
 import org.xtext.urdf.myURDF.Robot;
-import org.xtext.urdf.myURDF.Topology;
-import org.xtext.urdf.myURDF.impl.MyURDFFactoryImpl;
-import org.xtext.urdf.myURDF.impl.RobotImpl;
 import org.xtext.urdf.validation.CyclesValidator;
+import org.xtext.urdf.validation.RootCheck;
 
 @InjectWith(DslInjectorProvider.class)
 
@@ -33,57 +29,25 @@ public class DslValidationTest{
 	@Test 
 	public void oneRoot() {
 		/*
-			1.	Topology l1 -> l2 
-			2.	Topology l1 -> l3   1. and 2. together are valid 
-			3.	Topology l2 -> l4   1. 2. 3. together are not valid
+			1.	Topology l1 -> l2 -> l3 
+			2.	Topology l1 -> l4 -> l5 
 		*/
-		Robot robo = TestAdapter.createTestUrdf();
-		//if validation returns false - there is a root problem. The topologies created in the adapter
-		//contains multiple roots, so we expect false
-		Assert.assertFalse("Houston - we have a problem", new CyclesValidator().oneRoot(robo));
+		Robot robo = TestUtil.createOneRootTestUrdf();
+		RootCheck result = new CyclesValidator().oneRoot(robo.getTopologies());
+		Assert.assertTrue("only one root detected", result.isValidationError()==false);
 	}
 	
 	@Test 
 	public void cycles() {
-		Robot robo = TestAdapter.createTestUrdf();
-		String[] result = new CyclesValidator().cycles(robo);
-		Assert.assertTrue("cycle detected - but not expected", result[0]=="FALSE");
+		Robot robo = TestUtil.createCycleTestUrdf();
+		String result = new CyclesValidator().cycles(robo,false);
+		Assert.assertTrue("no cycle detected", result==null);
 	}
 	
 	@Test 
 	public void cyclesFound() {
-		/*
-				Topology l1 -> l2 
-				Topology l2 -> l1   
-		*/
-		   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
-		   Topology topo = eINSTANCE.createTopology();
-		   Topology child = eINSTANCE.createTopology();
-		   Link l2 = eINSTANCE.createLink();
-		   l2.setName("l2");
-		   child.setParent(l2);
-
-		   topo.setChild(child);
-		   Link l1 = eINSTANCE.createLink();
-		   l1.setName("l1");
-		   topo.setParent(l1);
-
-		   Topology topo2 = eINSTANCE.createTopology();
-		   topo2.setParent(l2);
-		   Topology child2 = eINSTANCE.createTopology();
-		   topo2.setChild(child2);
-		   child2.setParent(l1);
-
-		   RobotImpl robot = (RobotImpl)eINSTANCE.createRobot();
-		   robot.setName("test");
-		   robot.getTopologies().add(topo);
-		   robot.getTopologies().add(child);
-		   robot.getTopologies().add(topo2);
-		   robot.getTopologies().add(child2);
-		
-		   //The cycle method in validation returns true if a cycle is detected
-		   //Here we expect a cycle
-		   String[] result = new CyclesValidator().cycles(robot);
-		   Assert.assertTrue("cycle not detected, but was expected", result[0]=="TRUE");
+		Robot robo = TestUtil.createCycleFoundTestUrdf();
+		String result = new CyclesValidator().cycles(robo,false);
+		Assert.assertTrue("cycle detected", result!=null);
 	}
 }

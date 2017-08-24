@@ -16,7 +16,7 @@ class DslFormatterTest{
 	
 	@Test 
 	def void createLink() {
-		val rob = TestAdapter.createTestUrdf
+		val rob = TestUtil.createCycleFoundTestUrdf
 		val myLink = rob.links.get(0)
 		Assert.assertEquals("URDFLink1Testname", myLink.name)
 	}
