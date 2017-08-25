@@ -20,9 +20,9 @@ public class URDFQualifiedNameProvider extends DefaultDeclarativeQualifiedNamePr
 		}
 		else {
 		    EReference myfeature = x.eContainmentFeature();
-		    Object refff = x.eContainer().eGet(x.eContainmentFeature());
-		    if (refff instanceof EObjectContainmentEList) {
-				int no = ((EObjectContainmentEList) refff).indexOf(x);
+		    Object ref = x.eContainer().eGet(x.eContainmentFeature());
+		    if (ref instanceof EObjectContainmentEList<?>) {
+				int no = ((EObjectContainmentEList<?>) ref).indexOf(x);
 				return QualifiedName.create(myfeature.getName() + "_" + no);
 		    }
 			else return QualifiedName.create(myfeature.getName());
