@@ -3,8 +3,6 @@ grammar org.xtext.urdf.Dsl with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.itu.dk/uRDF"
-//import "http://www.example.org/uRDF" as uRDF
-//generate myURDF "http://www.itu.dk/uRDF"
 
 
 /*
@@ -23,7 +21,7 @@ import "http://www.itu.dk/uRDF"
  * DONE: Origin xyz/rpy values + axis values - vector and single defs. Kill one of the definitions?
  * DONE: Origin values should be ('-')? INT or FLOAT or SCIENTIFIC - get SIGNED_NUMERIC class from metamodel...
  */
-
+ 
 Robot:
 	'Robot' name=ID
 	 ('Topology' topologies+=Topology | 
@@ -41,26 +39,30 @@ JointRef:
 	 fix = '->' | rev = 'r->' | pris = 'p->' | cont = 'c->'  
 ;
 
-AssignReUseAble returns ReUseAble:
-	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController | URDFAttrSignedNumeric
-;
-
 ReUseAble: 
- 	Link | Joint // Visual | Inertial | Collision //| Joint | Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+ 	Link | Joint 
 ;
 
-ReUseAbleReduced returns ReUseAble:
+ReUseAbleLink returns ReUseAble:
 	Visual | Inertial | Collision
 ;
 
-ReUseAbleReduce returns ReUseAble:
+ReUseAbleJoint returns ReUseAble:
 	Origin | Axis | Limit | Calibration | Dynamics | SafetyController
+;
+
+AssignReUseAble returns ReUseAble:
+	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController 
+;
+
+AssignReUseAbleInclAttr returns ReUseAble:
+	Visual | Inertial | Collision | Origin | Axis | Limit | Calibration | Dynamics | SafetyController | URDFAttrSignedNumeric | URDFAttrSTRING
 ;
   
 Link:
 	{Link} 'Link' name=ID
-	(('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+)	 
-		| ('reuse' isReuseOf=[Link] (->reuse+=Reuse)*)
+	('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+	 
+		| 'reuse' isReuseOf=[Link] (->reuse+=Reuse)*
 	)?
 ;
 
@@ -68,19 +70,16 @@ Link:
 //Make sure user can add Visuals, Inertial or Collisions to Link stub made from Topology 
 //Make sure user can add Origin, Axis, Limit, Calibration, Dynamics or SafetyController to Joint stub made from Topology
 AddTo:
-	(AddToLink link=[Link] 
-		add = ReUseAbleReduced ) | 
-	(AddToJoint joint=[Joint]
-		add = ReUseAbleReduce   
-	)
+	AddToLink link=[Link] add = ReUseAbleLink  | 
+	AddToJoint joint=[Joint] add = ReUseAbleJoint   
 ;
 
 AddToLink:
-	'add' 'item' 'to' 'existing' 'link'
+	'Add' 'to' 'link' 'from' 'Topology'
 ;
 
 AddToJoint:
-	'add' 'item' 'to' 'existing' 'joint'
+	'Add' 'to' 'joint' 'from' 'Topology'
 ;
 
 Reuse:
@@ -89,16 +88,16 @@ Reuse:
 ;
 
 AddToReuse:
-	'add' 'item' 'to' 'reuse'
+	'add' 'to' 'this' 'reuse'
 ;
 
 EditReuse:
-	'edit' 'item' 'from' 'reuse'
+	'edit' 'from' 'this' 'reuse'
 ;
 
 
 AssignNewValue:
-	{AssignNewValue} getRef=DotExpression '=' newReuseable=AssignReUseAble
+	{AssignNewValue} getRef=DotExpression '=' newReuseable=AssignReUseAbleInclAttr
 ;
 
 
@@ -207,16 +206,16 @@ Color:
 
 Joint:
 	'Joint' name=ID
-	(('def'  'ChildOf' childOf=[Link] 
+	('def'  'ChildOf' childOf=[Link] 
 			 'ParentOf' parentOf=[Link] 
-			 'Type' type=JointType) 
+			 'Type' type=JointType
 			 ( origin=Origin | axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 
 	 //HOW TO REUSE: CHANGE PARENT AND CHILD LINKS??
-	 ('reuse' isReuseOf=[Joint] 
+	 'reuse' isReuseOf=[Joint] 
 	 	'ChildOf' childOf=[Link] 
 		'ParentOf' parentOf=[Link] 
 	 	(->reuse+=Reuse)*
-	 )
+	 
 	)
 ;
 
@@ -260,15 +259,6 @@ SafetyController:
 ;
 
 
-//Should we cut Mimic from the spec - NEED TO GET INTERPRETATION OF ATTRS??
-/*Mimic:
-	'Mimic' (name=ID)?
-	'mimics' mimics=[Joint]
-	('multiplier' multiplier=URDFAttrSignedNumeric)?
-	('offSet' offSet=URDFAttrSignedNumeric)?
-;*/
-
-
 URDFAttrSignedNumeric:
 	value = SIGNED_NUMERIC
 ;
@@ -304,5 +294,3 @@ SIGNED_NUMERIC:
 NUMERIC:
 	INT | FLOAT | SCIENTIFIC
 ;
-
- 

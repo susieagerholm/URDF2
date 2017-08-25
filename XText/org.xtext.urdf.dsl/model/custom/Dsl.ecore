@@ -23,7 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="collision" upperBound="-1"
         eType="#//Collision" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromTopo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Reuse">
     <eStructuralFeatures xsi:type="ecore:EReference" name="add" eType="#//ReUseAble"
@@ -166,7 +166,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="safetycontroller" eType="#//SafetyController"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromTopo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true"/>
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JointType">
     <eLiterals name="fixed" literal="fixed"/>
