@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -78,22 +79,8 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 	
-	private Robot getRobot(DerivedStateAwareResource resource) {
-//		EcoreUtil2.getAllContentsOfType(resource.getContents().get(0), Robot.class);
-		Robot rob = null;
-		TreeIterator<EObject> temp = resource.getAllContents();
-		while (temp.hasNext()) {
-			EObject obj = temp.next();
-			if (obj instanceof Robot) {
-				rob = (Robot)obj;
-				break;
-			}
-		}
-		return rob;
-	}
-	
 	public void installTopology(DerivedStateAwareResource resource) {
-				Robot rob = getRobot(resource);
+				Robot rob = (Robot)EcoreUtil2.getObjectByType(resource.getContents(),MyURDFPackage.eINSTANCE.getRobot());
 				if(rob==null) {
 					return;
 				}
@@ -249,13 +236,18 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		//We use the 'isTopoFlag' to filter relevant joints
 		
 		String ruleName = getRuleName(joint);
-		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") && !joint.isFromTopo()) {
+		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") /* && !joint.isFromTopo() */) {
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
-			topoParent.setParent(joint.getChildOf());
+			// Cyclic resolution of lazy links : Joint.childOf->Joint.childOf
+			// Vi sætter link objectet på et topologi object, og linket er i forvejen knyttet til et joint
+//			topoParent.setParent(joint.getChildOf());
+			
 			topoParent.setJoint(getJointRef(joint));
 
 			Topology topoChild = MyURDFFactory.eINSTANCE.createTopology();
-			topoChild.setParent(joint.getParentOf());
+			// Cyclic resolution of lazy links : Joint.parentOf->Joint.parentOf
+//			topoChild.setParent(joint.getParentOf());
+			
 			topoParent.setChild(topoChild);
 			if(robot.getTopologies()==null) {
 				// This is experimental - don't know whether this conflicts when a topology is created in the UI
