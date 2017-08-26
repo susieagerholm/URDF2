@@ -205,7 +205,9 @@ public class CyclesValidator {
 			if(tree.getRoot() == null) {
 				tree.setRoot(node.getTopNode());;
 			} else if(tree.getRoot().equals(node.getTopNode())) {
-				tree.getRoot().addChild(node.getTopNode().getChildAt(0));;
+				if(!node.getTopNode().getChildren().isEmpty()) {
+					tree.getRoot().addChild(node.getTopNode().getChildAt(0));
+				}
 			} else {
 				System.out.println("It should not be possible to end here");
 			}

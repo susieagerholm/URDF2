@@ -19,13 +19,21 @@ import javax.xml.transform.stream.StreamResult;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.xtext.EcoreUtil2;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import org.xtext.urdf.myURDF.AssignNewValue;
+import org.xtext.urdf.myURDF.Collision;
+import org.xtext.urdf.myURDF.DotExpression;
+import org.xtext.urdf.myURDF.Inertial;
 import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.MyURDFPackage;
+import org.xtext.urdf.myURDF.NamedElement;
+import org.xtext.urdf.myURDF.ReUseAble;
+import org.xtext.urdf.myURDF.Reuse;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.Topology;
 import org.xtext.urdf.myURDF.URDFAttrFloat;
@@ -33,8 +41,7 @@ import org.xtext.urdf.myURDF.URDFAttrINT;
 import org.xtext.urdf.myURDF.URDFAttrNumeric;
 import org.xtext.urdf.myURDF.URDFAttrSTRING;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
-
-import com.google.common.html.HtmlEscapers;
+import org.xtext.urdf.myURDF.Visual;
 
 
 public class UrdfGenerator
@@ -80,7 +87,12 @@ public class UrdfGenerator
 	  
       while (it.hasNext()) {
           EObject entry = (EObject) it.next();
-          generateTag(doc, rootElement ,entry);
+          try {
+              generateTag(doc, rootElement ,entry);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 //          destination.appendChild(doc.createTextNode(entry.eContainingFeature().toString()));
       }
    
@@ -140,6 +152,22 @@ public class UrdfGenerator
 	          Element tag = null;
 	          tag = doc.createElement(type);
 	          
+	          if(entry instanceof NamedElement && ((NamedElement)entry).getName() != null && ((NamedElement)entry).getName().startsWith("_")) {
+        		 //revert to original name after renaming in derived state
+	        	  ((NamedElement)entry).setName(((NamedElement)entry).getName().substring(1));
+	          }
+	          
+	          
+             if(superType != null && superType.equalsIgnoreCase("reuseableimpl") && hasFeature(entry,"isReuseOf")) {
+            	  EStructuralFeature ft = entry.eClass().getEStructuralFeature("isReuseOf");
+	        	  EObject aReuseAble = (EObject)entry.eGet(ft);
+	        	  if(aReuseAble != null) {
+	        		  EObject merged = mergeURDFObject(entry,aReuseAble);
+	        		  generateTag(doc, destination, merged);
+	        		  return null;
+	        	  }
+	          }
+	          
 	          if(superType.equalsIgnoreCase("geometryimpl")) {
 	        	  Element supertag = doc.createElement("Geometry");
 		          destination.appendChild(supertag).appendChild(tag);
@@ -148,7 +176,7 @@ public class UrdfGenerator
 	          }
 	          
 	          for(Field f : total){
-	        	 if (f.getName().contains("_EDEFAULT") || f.getName().equals(null) ) {
+	        	 if (f.getName().contains("_EDEFAULT") || f.getName().equals(null) || f.getName().equals("fromTopo")) {
 	        		// ignore
 	        	 } else {
 	        		f.setAccessible(true);
@@ -175,7 +203,7 @@ public class UrdfGenerator
 	        					}
 	        				}
 		        		} else {
-		        			generateTag(doc, tag, (EObject)f.get(entry));
+		        				generateTag(doc, tag, (EObject)f.get(entry));
 		        		}
 	        		} else if (f.getType().isAssignableFrom(EList.class)) {
 	        			EList<EObject> list = (EList<EObject>)f.get(entry);
@@ -198,6 +226,85 @@ public class UrdfGenerator
 	          return destination;
 	}
 	
+	@SuppressWarnings("unchecked")
+	private EObject mergeURDFObject(EObject entry, EObject aReuseAble) {
+		//aReuseAble = the object to be reused from
+		//entry = the object that reuses
+
+		Link reuseCopy = null;
+		if(aReuseAble instanceof Link) {
+		  reuseCopy = (Link)EcoreUtil2.copy(aReuseAble);
+		}
+		//Avoid going into reuse mode in 'generateTag' with the new copy object - by setting null in isreuseof   
+		reuseCopy.setIsReuseOf(null);
+		((NamedElement)reuseCopy).setName(((NamedElement)entry).getName());
+	  	EStructuralFeature ft = entry.eClass().getEStructuralFeature("reuse");
+	  	  
+	  	//Now add or edit the properties/features from the entry object to the reuseCopy object
+	  	EObjectContainmentEList<Reuse> reuseList = (EObjectContainmentEList<Reuse>)entry.eGet(ft);
+   	    if(reuseList == null || reuseList.isEmpty()) {
+  		  //nothing to add or edit
+  		  return reuseCopy;
+  	    } else {
+	  		for (Reuse reuse : reuseList) {
+	  		    //Add:
+	  			ReUseAble reUseAbleAdd = reuse.getAdd();
+	  			if(reUseAbleAdd != null) { 
+	  				EObject merged = addProperties(reUseAbleAdd,reuseCopy);
+		  			return merged;
+	  			}
+	  			//Edit:  
+	  			AssignNewValue newValue = reuse.getEdit();
+	  			
+	  			//For debugging
+	  			//String value = ((URDFAttrSignedNumericImpl)newValue.getNewReuseable()).getValue();
+
+	  			DotExpression expr  = (DotExpression)newValue.getGetRef();
+	  			
+	  			//For debugging: MassInKiloGrams
+	  			//String name = expr.getTail().eContainingFeature().getName();
+
+	  			//Now we compare the object id for the container object/parent object of entry (which holds the new value that we want to assign) with the container object of in the Object we reuse from
+	  			EObject parent = expr.getTail().eContainer();
+	  			//We have to use the container object to compare with - as URDFAttr objects has different id in entry and aReUseable
+	  			List<EObject> list = (List<EObject>)EcoreUtil2.getAllContentsOfType(aReuseAble, expr.getTail().eContainer().getClass());
+	  			for (EObject obj : list) {
+	  				//Parent holds the new value
+	  				//obj holds the old value
+					if(obj == parent) {
+						//temp hold old value
+						EStructuralFeature aFeature = expr.getTail().eContainingFeature();
+						EObject oldValue = (EObject)obj.eGet(aFeature);
+						//Set new value
+						obj.eSet(aFeature, newValue.getNewReuseable());
+						
+						reuseCopy = (Link)EcoreUtil2.copy(aReuseAble);
+						reuseCopy.setIsReuseOf(null);
+						((NamedElement)reuseCopy).setName(((NamedElement)entry).getName());
+						
+						//Put the old value back
+						obj.eSet(aFeature, oldValue);
+						return reuseCopy;
+					}
+				} 
+ 	  		}
+  	    }
+	    return null;
+	}
+
+
+	private EObject addProperties(ReUseAble addProperties, Link baseObject) {
+		if(addProperties instanceof Inertial) {
+			baseObject.setInertial((Inertial)addProperties);	
+		} else if(addProperties instanceof Visual) {
+			baseObject.getVisual().add((Visual)addProperties);	
+		} else if(addProperties instanceof Collision) {
+			baseObject.getCollision().add((Collision)addProperties);	
+		} 
+		return baseObject;
+	}
+
+
 	private void manageOriginFields(Element tag, Field f, EObject entry) {
 		// consider using entry.hashCode() to make sure we work on the same origin object. 
 		// it should not be a problem since this method only is called from generateTag which deals with one EObject at a time
@@ -270,5 +377,14 @@ public class UrdfGenerator
 		} 
 		
 		return gv;
+	}
+	
+	private boolean hasFeature(EObject obj, String featureName) {
+		for(EStructuralFeature feature : obj.eClass().getEAllStructuralFeatures()) {
+			if(feature.getName().equalsIgnoreCase(featureName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

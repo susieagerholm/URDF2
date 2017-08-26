@@ -74,7 +74,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 		//Calling resource.isLoaded() seems to fix the invalid start validation state issue - mentioned in the cycles method in CyclesValidation
-		if  (!preLinkingPhase && resource.isLoaded()) {   
+		if  (!preLinkingPhase && resource.isLoaded() ) {   
 			installTopology(resource);
 		}
 	}
@@ -114,44 +114,101 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		
 	}
 	
-	private void addTopoLinkToRobot(Topology topo, Robot robo) {
+	private void addTopoLinkToRobot(String name, Robot robo) {
 		Link newLink = MyURDFFactory.eINSTANCE.createLink();
-		newLink.setName(getNodeText(topo, 1));
+		newLink.setName(name);
 		robo.getLinks().add(newLink);
 	}
 	
-	private boolean isNameFound(EList<Link> links, Topology topo) {
-		boolean temp = false;
-		for (Link l : links) {
-			if(l.getName().equals(getNodeText(topo, 1))) {
-				temp = true;
-				break;
-			}
+	private boolean isLinkInRobot(Robot robot, Link link) {
+		if(link == null) 
+			return true;  //we return true to avoid creation of a 'null-link'
+		
+		EList<Link> list = robot.getLinks();
+
+		for (Link aLink : list) {
+			if(aLink.getName().equals(link.getName())) {
+				return true;
+			} 
 		}
-		return temp;
+		return false;
 	}
 	
-	private void manageTopology(Robot rob, Topology topo) {
-		//We receive one call per Topology object, so we don't need to traverse the whole topology chain
-		
-		if(!isNameFound(rob.getLinks(),topo)) {
-			addTopoLinkToRobot(topo, rob);
+	private boolean isJointInRobot(EList<Joint> list, Link parent, Link child) {
+		//We have to check for existing joints based on links
+		for (Joint aJoint : list) {
+			if(aJoint.getChildOf() != null
+				&& aJoint.getChildOf().getName() != null	
+				&& aJoint.getChildOf().getName().equals(parent.getName())
+				&& aJoint.getParentOf() != null
+				&& aJoint.getParentOf().getName() != null	
+				&& aJoint.getParentOf().getName().equals(child.getName())) {
+				return true;
+			} 
 		}
+		return false;
+	}
+	
+	private void checkAndCreateLinks(Robot robot, Topology topo) {
 		
-		if(!isNameFound(rob.getLinks(),topo.getChild())) {
-			addTopoLinkToRobot(topo.getChild(), rob);
+		
+		
+		if(!isLinkInRobot(robot, topo.getParent())) {
+			addTopoLinkToRobot(topo.getParent().getName(), robot);
 		}
-		
+		if(topo.getChild() != null) {
+			checkAndCreateLinks(robot, topo.getChild());
+		}
+	}
+
+	private void checkAndCreateJoints(Robot robot, Topology topo) {
+		if(topo.getParent() == null || topo.getChild() == null || topo.getChild().getParent() == null) {
+			return;
+		}
+		if(!isJointInRobot(robot.getJoint(), topo.getParent(), topo.getChild().getParent())) {
+			addTopoJointToRobot(robot, topo.getParent(), topo.getChild().getParent(),topo.getJoint());
+		}
+		checkAndCreateJoints(robot, topo.getChild());
+	}
+	
+	private void addTopoJointToRobot(Robot rob, Link parent, Link child, JointRef ref) {
 		Joint aJoint = MyURDFFactory.eINSTANCE.createJoint();
 		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
 		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
-		aJoint.setName(topo.getParent().getName() + "_" + getNodeText(topo.getChild(), 1));
+		aJoint.setName(parent.getName() + "_" + child.getName());
 		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
 		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
-		aJoint.setChildOf(topo.getParent());
-		aJoint.setParentOf(topo.getChild().getParent());
-		aJoint.setType(getJointType(topo.getJoint()));
+		aJoint.setChildOf(parent);
+		aJoint.setParentOf(child);
+		aJoint.setType(getJointType(ref));
 		rob.getJoint().add(aJoint);
+	}
+	
+	
+	private void manageTopology(Robot rob, Topology topo) {
+		//Here we add links and joints based on Topology chains
+	
+		handleProxies(topo);
+		
+		checkAndCreateLinks(rob, topo);
+		
+		//When we previously have created Topology objects (method createStandardJointsInTopology)
+		//for example due to creation af classic joints in the ui we will start receiving calls in
+		//this method due to the topology object.
+		//Scenario: define 2 classic joints in the UI. When the second joint is entered we would create
+		//a new Joint based on an existing topology object - a Joint which is already created automatically
+		//in the AST. Therefore we have to filter out these Joints and test whether they are already in the AST
+		checkAndCreateJoints(rob, topo);
+	}
+
+	private Topology handleProxies(Topology topo) {
+		if(topo.getParent() != null && topo.getParent().eIsProxy()) {
+			topo.getParent().setName(getNodeText(topo, 1));
+		} 
+		if (topo.getChild() != null){
+			topo = handleProxies(topo.getChild());
+		}
+		return topo;
 	}
 
 	private EObject rename(EObject root) {
@@ -235,8 +292,15 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		//Here we create Topology objects based on standard joints. 
 		//We use the 'isTopoFlag' to filter relevant joints
 		
+		if(joint == null || joint.getParentOf() == null || joint.getChildOf() == null) {
+			return;
+		}
+		
 		String ruleName = getRuleName(joint);
-		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") /* && !joint.isFromTopo() */) {
+		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") && !joint.isFromTopo()) {
+			
+			
+			
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
 			
 			// Previously this error has ocurred: Cyclic resolution of lazy links : Joint.childOf->Joint.childOf
