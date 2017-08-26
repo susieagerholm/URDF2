@@ -238,15 +238,16 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		String ruleName = getRuleName(joint);
 		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") /* && !joint.isFromTopo() */) {
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
-			// Cyclic resolution of lazy links : Joint.childOf->Joint.childOf
-			// Vi sætter link objectet på et topologi object, og linket er i forvejen knyttet til et joint
-//			topoParent.setParent(joint.getChildOf());
+			
+			// Previously this error has ocurred: Cyclic resolution of lazy links : Joint.childOf->Joint.childOf
+			topoParent.setParent(joint.getChildOf());
 			
 			topoParent.setJoint(getJointRef(joint));
 
 			Topology topoChild = MyURDFFactory.eINSTANCE.createTopology();
-			// Cyclic resolution of lazy links : Joint.parentOf->Joint.parentOf
-//			topoChild.setParent(joint.getParentOf());
+			
+			// Previously this error has ocurred: Cyclic resolution of lazy links : Joint.parentOf->Joint.parentOf
+			topoChild.setParent(joint.getParentOf());
 			
 			topoParent.setChild(topoChild);
 			if(robot.getTopologies()==null) {
