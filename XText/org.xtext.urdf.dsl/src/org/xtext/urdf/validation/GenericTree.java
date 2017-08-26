@@ -5,6 +5,7 @@ import java.util.*;
 
 public class GenericTree<T> {
 
+	//Forklar funktionalitet
    public enum GenericTreeTraversalOrderEnum {PRE_ORDER,POST_ORDER}
 
    private GenericTreeNode<T> root;
@@ -103,7 +104,10 @@ public class GenericTree<T> {
    }
 
    private void buildPreOrder(GenericTreeNode<T> node, List<GenericTreeNode<T>> traversalResult) {
-       traversalResult.add(node);
+	   //When building the tree pre order - we start by adding the node to the result and then  
+	   //step down the tree. This means we will add nodes starting from the top
+
+	   traversalResult.add(node);
 
        for(GenericTreeNode<T> child : node.getChildren()) {
            buildPreOrder(child, traversalResult);
@@ -111,6 +115,9 @@ public class GenericTree<T> {
    }
 
    private void buildPostOrder(GenericTreeNode<T> node, List<GenericTreeNode<T>> traversalResult) {
+	   //When building the tree post order - run through all the nodes until leaf and then add the node to 
+	   //traversalresult. This means we will start from the bottom
+	   
        for(GenericTreeNode<T> child : node.getChildren()) {
            buildPostOrder(child, traversalResult);
        }
