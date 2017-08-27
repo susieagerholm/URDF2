@@ -19,7 +19,7 @@ import org.xtext.urdf.myURDF.Link;
 import org.xtext.urdf.myURDF.Robot;
 import org.xtext.urdf.myURDF.impl.RobotImpl;
 import org.xtext.urdf.tests.DslInjectorProvider;
-import org.xtext.urdf.tests.TestAdapter;
+import org.xtext.urdf.tests.TestUtil;
 
 @RunWith(XtextRunner.class)
 @InjectWith(DslInjectorProvider.class)
@@ -51,7 +51,7 @@ public class DslParsingTest {
   
   @Test
   public void createLink() {
-    final RobotImpl rob = TestAdapter.createTestUrdf();
+    final RobotImpl rob = TestUtil.createOneRootTestUrdf();
     EList<Link> _links = rob.getLinks();
     final Link myLink = _links.get(0);
     String _name = myLink.getName();
@@ -60,7 +60,7 @@ public class DslParsingTest {
   
   @Test
   public void createJoint() {
-    final RobotImpl roboto = TestAdapter.createTestUrdf();
+    final RobotImpl roboto = TestUtil.createOneRootTestUrdf();
     EList<Joint> _joint = roboto.getJoint();
     final Joint myJoint = _joint.get(0);
     String _name = myJoint.getName();
