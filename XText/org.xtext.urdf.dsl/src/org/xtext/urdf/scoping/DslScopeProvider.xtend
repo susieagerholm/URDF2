@@ -33,20 +33,20 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList
  * 
  * SPECIFICATION:
  * 
- * a. Topology (parent): Able to see links defined below in document (default?)			TODO
- * b. Topology (parent): Not see links already used in this topology chain?				TODO 
- * c. Link (isReuse): Only see links that are not already made from reuse or self		DONE
- * d. Link (isReuse): Also see links defined below in document (default?)				TODO
- * e. Link (isReuse): Also see links made from Topology (default)						DONE
- * f. AddToLink (link): Should only see links made from Topology?						TODO
- * g. AddToJoint (joint): Should only suggest joints made from Topology?				TODO
- * h. DotExpr (tail): Only available in context											? 
- * i. ReUseAble (reuseable): Only current being reused									? 
- * j. Joint (isReuseOf): Only see joints that are not already made from reuse or self	DONE
- * k. Joint childOf: Any further restrictions needed?									?
- * l. Joint (parentOf): Should only see links that do not already have a parent 		TODO   VALIDATION???
- * m. Joint (parentOf): Should only see links that is not already child of this 		DONE
- * o. SHOULD WE LIMIT VISIBILITY OF VISUAL TO LINK (reuse name)
+ * Topology (parent): Able to see links defined below in document (default?)		?
+ * Topology (parent): Not see links already used in this topology chain?			? 
+ * Link (isReuse): Only see links that are not already made from reuse or self		DONE
+ * Link (isReuse): Also see links defined below in document (default?)				?
+ * Link (isReuse): Also see links made from Topology (default)						DONE
+ * AddToLink (link): Should only see links made from Topology?						TODO
+ * AddToJoint (joint): Should only suggest joints made from Topology?				TODO
+ * DotExpr (tail): Only available in context										? 
+ * ReUseAble (reuseable): Only current being reused									? 
+ * Joint (isReuseOf): Only see joints that are not already made from reuse or self	DONE
+ * Joint childOf: Any further restrictions needed?									?	THIS IS VALIDATION/PROPOSAL PROVIDER
+ * Joint (parentOf): Should only see links that do not already have a parent 		?   THIS IS VALIDATION/PROPOSAL PROVIDER
+ * Joint (parentOf): Should only see links that is not already child of this 		DONE
+ * SHOULD WE LIMIT VISIBILITY OF VISUAL TO LINK (reuse name)
  * 
  */
  
@@ -60,31 +60,18 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 		val robot = EcoreUtil2.getContainerOfType(context, Robot)
 		
 		//FIRST TIME PARENT REF IN TOPOLOGY IS TRIGGERED IT WILL BE FROM THE CONTEXT OF ROBOT!
-		//a. Topology (parent): Able to see links defined below in document (default?)
+		//Topology (parent): Able to see links defined below in document (default?)
 		if (context instanceof Robot) {
 			val test = context 
 			if(reference.name.equals("parent")) {
-				Scopes.scopeFor(robot.links)
+				if (robot.links.empty) return IScope::NULLSCOPE
+				else Scopes.scopeFor(robot.links)
 			}
 			else super.getScope(context, reference)
 			
 		}
-		
-		//VIRKER IKKE!!!!
-		if (context instanceof Topology) {
-			//a. Topology (parent): Able to see links defined below in document (default?)
-			//b. Topology (parent): Not see links already used in this topology chain?
-			val areweintopo = context
-			if(reference.name.equals("parent")) {
-				val test = context 
-				val previous = EcoreUtil2.getAllContainers(context).filter(Topology).map[x | x.parent].toList
-				val links_except_previous = robot.links.filter[x | !previous.contains(x)]
-				Scopes.scopeFor(links_except_previous)
-			}
-		}
-		
-				
-		// C. LINK (isReuse): ONLY SEE LINKS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF		
+
+		// LINK (isReuse): ONLY SEE LINKS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF		
 		if (context instanceof Link) {
 			if (reference.name.equals("isReuseOf")) {
 				return Scopes.scopeFor(robot.links.
@@ -96,7 +83,7 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 			}
 		}
 		
-		//J. JOINT (isReuseOf): ONLY SEE JOINTS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF
+		//JOINT (isReuseOf): ONLY SEE JOINTS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF
 		if (context instanceof Joint) {
 			//ONLY SUGGEST JOINTS FOR REUSE THAT IS NOT SELF OR MADE FROM REUSE
 			if (reference.name.equals("isReuseOf")) {
@@ -109,8 +96,6 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 			}
 			//ONLY SUGGEST VALID LINKS FOR CHILD / PARENT 
 			if (reference.name.equals("parentOf")) {
-				//val ggmmm = robot.joint.map[z | z.parentOf].toSet
-				//val gg = robot.joint.map[z | z.parentOf].toSet
 				return Scopes.scopeFor(robot.links.
 					//MAKE SURE CHILDOF IS NOT LATER SUGGESTED AS PARENTOF TO SAME JOINT			
 					filter[x | x != context.childOf].
@@ -122,9 +107,8 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 			
 		}
 		
+		//RETURN PROPER SCOPE FOR EDIT REUSE	= THE LINK OR JOINT CURRENTLY REUSED
 		if (context instanceof Reuse) {		
-			//RETURN SCOPE FOR EDIT	
-			val yy = "inside reuse"
 			if (context.eContainer instanceof Link) {
 				val curr = EcoreUtil2.getContainerOfType(context, Link)
 				return Scopes.scopeFor(newArrayList(curr.isReuseOf).toList)
