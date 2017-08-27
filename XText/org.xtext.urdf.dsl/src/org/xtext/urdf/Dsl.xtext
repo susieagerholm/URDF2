@@ -62,7 +62,7 @@ AssignReUseAbleInclAttr returns ReUseAble:
 Link:
 	{Link} 'Link' name=ID
 	('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+	 
-		| 'reuse' isReuseOf=[Link] (->reuse+=Reuse)*
+		| 'reuse' isReuseOf=[Link] (reuse+=Reuse)*
 	)?
 ;
 
@@ -214,7 +214,7 @@ Joint:
 	 'reuse' isReuseOf=[Joint] 
 	 	'ChildOf' childOf=[Link] 
 		'ParentOf' parentOf=[Link] 
-	 	(->reuse+=Reuse)*
+	 	(reuse+=Reuse)*
 	 
 	)
 ;

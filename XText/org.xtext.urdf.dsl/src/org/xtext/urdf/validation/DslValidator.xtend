@@ -12,6 +12,9 @@ import org.xtext.urdf.myURDF.Joint
 import org.xtext.urdf.myURDF.Link
 import org.xtext.urdf.myURDF.MyURDFPackage
 import org.xtext.urdf.myURDF.Robot
+import org.xtext.urdf.myURDF.URDFAttrFloat
+import org.xtext.urdf.myURDF.URDFAttrINT
+import org.xtext.urdf.myURDF.URDFAttrNumeric
 
 /**
  * This class contains custom validation rules. 
@@ -80,14 +83,17 @@ class DslValidator extends AbstractDslValidator {
 	}
 	
 	@Check
-    //Check that assigned value in Reuse - edit is of same type as edited
+    //Check that assigned value in Reuse - edit is of same type as edited (URDFAttr excempt)
 	def allAssignmentOfNewValueMustMatch(AssignNewValue assign) {
 		val mytail = (assign.getRef as DotExpression).tail
 		if (mytail != null) {
 			if (mytail.class != assign.newReuseable.class) {
-				error("The item chosen for edit is of type " + mytail.class.name + " which is not of the same type as the assigned value, which is of type" + assign.newReuseable.class.name, 
-        		MyURDFPackage.Literals.ASSIGN_NEW_VALUE__NEW_REUSEABLE)
-			} 
+				val guard = mytail instanceof URDFAttrFloat || mytail instanceof URDFAttrINT || mytail instanceof URDFAttrNumeric
+				if (!guard) {
+					error("The item chosen for edit is of type " + mytail.class.name + " which is not of the same type as the assigned value, which is of type" + assign.newReuseable.class.name, 
+        			MyURDFPackage.Literals.ASSIGN_NEW_VALUE__NEW_REUSEABLE)
+				} 
+			}
 		}
 		
 	}
