@@ -3,12 +3,11 @@
  */
 package org.xtext.urdf.scoping
 
-import org.eclipse.emf.common.util.BasicEList
-import org.eclipse.emf.common.util.EList
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.xtext.urdf.myURDF.DotExpression
@@ -18,12 +17,6 @@ import org.xtext.urdf.myURDF.ReUsableRef
 import org.xtext.urdf.myURDF.ReUseAble
 import org.xtext.urdf.myURDF.Reuse
 import org.xtext.urdf.myURDF.Robot
-import org.xtext.urdf.myURDF.Topology
-import org.xtext.urdf.myURDF.URDFAttrSignedNumeric
-import org.xtext.urdf.myURDF.Origin
-import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.emf.ecore.util.EObjectContainmentEList
 
 /**
  * This class contains custom scoping description.
@@ -92,15 +85,6 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 				filter[x | !x.name.equals(context.name)].
 				//REMEMBER ALSO TO EXCLUDE JOINTS MADE FROM REUSE
 				filter[y | y.isReuseOf == null]
-				)
-			}
-			//ONLY SUGGEST VALID LINKS FOR CHILD / PARENT 
-			if (reference.name.equals("parentOf")) {
-				return Scopes.scopeFor(robot.links.
-					//MAKE SURE CHILDOF IS NOT LATER SUGGESTED AS PARENTOF TO SAME JOINT			
-					filter[x | x != context.childOf].
-					//MAKE SURE ONLY LINKS WITHOUT A PARENT ARE SUGGESTED...
-					filter[y | !robot.joint.map[z | z.parentOf].toSet.contains(y)]
 				)
 			}
 			else super.getScope(context, reference)
