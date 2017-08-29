@@ -94,6 +94,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	private void addTopoLinkToRobot(String name, Robot robo) {
 		Link newLink = MyURDFFactory.eINSTANCE.createLink();
 		newLink.setName(name);
+		newLink.setFromTopo(true);
 		robo.getLinks().add(newLink);
 	}
 	
