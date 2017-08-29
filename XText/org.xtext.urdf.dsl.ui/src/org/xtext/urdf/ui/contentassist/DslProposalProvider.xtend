@@ -22,6 +22,20 @@ import org.xtext.urdf.myURDF.Visual
 import org.xtext.urdf.services.DslGrammarAccess
 import org.xtext.urdf.myURDF.Robot
 import org.eclipse.xtext.EcoreUtil2
+import org.xtext.urdf.myURDF.AddTo
+import org.xtext.urdf.myURDF.Inertial
+import org.xtext.urdf.myURDF.Collision
+import org.xtext.urdf.myURDF.Axis
+import org.xtext.urdf.myURDF.Limit
+import org.xtext.urdf.myURDF.Dynamics
+import org.xtext.urdf.myURDF.Calibration
+import org.xtext.urdf.myURDF.SafetyController
+import org.xtext.urdf.myURDF.ReUseAble
+import org.xtext.urdf.myURDF.URDFAttrSignedNumeric
+import org.xtext.urdf.myURDF.URDFAttrFloat
+import org.xtext.urdf.myURDF.URDFAttrINT
+import org.xtext.urdf.myURDF.URDFAttrNumeric
+import org.xtext.urdf.myURDF.URDFAttrSTRING
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#content-assist
@@ -35,8 +49,8 @@ import org.eclipse.xtext.EcoreUtil2
  * Optional containments in Visual - should only be suggested, if not already defined		 DONE
  * Should only suggest add of relevant type when reusing a Link or Joint					 DONE
  * Should only suggest reuse if other Link/Joint exists                                      DONE
- * Only suggest to edit a reuse if reused Link/Joint has any attributes to edit				 TODO
- * Should only suggest another dot, if we have a tail node									 TODO
+ * Only suggest to edit a reuse if reused Link/Joint has any attributes to edit				 DONE
+ * Should only suggest another dot, if we are end of line									 DONE
  * Should not suggest self again after reuseable ref in DotExpression 						 TODO
  */
  
@@ -66,7 +80,7 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 						}
 					}
 				}
-				//else super.completeKeyword(object, context, acceptor) 	
+				 	
 			}
 			
 			else super.completeKeyword(object, context, acceptor)
@@ -99,28 +113,18 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 			else super.completeKeyword(object, context, acceptor)
 		}
 		
-		//Make sure reuse is not suggested if there is none to reuse from...
-		/*else if(context.currentModel instanceof Robot) {
-			val myrobot = (context.currentModel) as Robot
-			val myTag = object.getValue
 			
-			val last_node = NodeModelUtils.findActualSemanticObjectFor(context.lastCompleteNode)
-			val isLink = last_node instanceof Link
-			val avail_for_reuse = if (isLink) myrobot.links.size else myrobot.joint.size
-			if (avail_for_reuse < 2) {
-				
-				if(!myTag.equals('reuse')) super.completeKeyword(object, context, acceptor)
-			}
-			else super.completeKeyword(object, context, acceptor)
-		}*/
-		
-		//Make sure reuse is not suggested if there is none to reuse from...
 		else if(context.currentModel instanceof Link) {
 			val mylink = (context.currentModel) as Link
 			val myrobot = EcoreUtil2.getContainerOfType(mylink, Robot)
 			val myTag = object.getValue
 			
-			if(myTag.equals("reuse")) {
+			//Make sure Inertial is only suggested if not already defined
+			if(myTag.equals("Inertial")) {
+				if (mylink.inertial == null) super.completeKeyword(object, context, acceptor)
+			}
+			//Make sure reuse is not suggested if there is none to reuse from...
+			else if(myTag.equals("reuse")) {
 				if (myrobot.links.size > 1) super.completeKeyword(object, context, acceptor)
 			}
 			else super.completeKeyword(object, context, acceptor)
@@ -144,11 +148,23 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 			}
 		}
 		
-		
-		/*else if (context.currentModel instanceof DotExpression) {
-			ONLY SUGGEST DOT IF EXTENSION IS AVAILABLE...
+		//Only suggest dot if tail has contents to dot into...
+		else if (context.currentModel instanceof DotExpression) {
+			val mydot = (context.currentModel) as DotExpression
+			val myTag = object.getValue
+			val ref = mydot.ref
+			
+			if(myTag.equals('.')) {
+				if ( !(mydot.tail instanceof URDFAttrSignedNumeric ||
+					   mydot.tail instanceof URDFAttrFloat ||	
+					   mydot.tail instanceof URDFAttrINT ||
+					   mydot.tail instanceof URDFAttrNumeric ||
+					   mydot.tail instanceof URDFAttrSTRING
+					
+				)) super.completeKeyword(object, context, acceptor)
+			}
 		}
-		*/
+		
 		
 		//Make sure, that all optional, single containment decorations in Visual are only suggested if not already defined
 		else if (context.currentModel instanceof Visual) {
@@ -179,23 +195,53 @@ class DslProposalProvider extends AbstractDslProposalProvider {
 		
 	  }	
 		
-	//} 
+	
 	
 	//MULTIPLE WORDS - KEYWORDS...
 	override complete_AddToLink(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-    	addToLinkAccess.group.createKeywordProposalMultiple(context,acceptor, Link, true)
+    	
+    	//Only suggest Add to Link from Topology if any Links instantiated from Topology 
+    	if(model.eAllContents.filter(Link).filter[x | x.eGet(x.eClass().getEStructuralFeature("fromTopo")) == true].size > 0 ) {
+    		addToLinkAccess.group.createKeywordProposalMultiple(context,acceptor, Link, true)
+    	}
 	}
 	
 	override complete_AddToJoint(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		addToJointAccess.group.createKeywordProposalMultiple(context,acceptor, Joint, true)
+		
+    	//Only suggest Add to Joint from Topology if any Joints instantiated from Topology
+		if(model.eAllContents.filter(Joint).filter[x | x.eGet(x.eClass().getEStructuralFeature("fromTopo")) == true].size > 0 ) {
+			addToJointAccess.group.createKeywordProposalMultiple(context,acceptor, Joint, true)
+		}
 	}
 	
 	override complete_AddToReuse(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		
 		addToReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
 	}
 	
 	override complete_EditReuse(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		editReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
+		//Only suggest edit reuse if reused has decoration to edit...
+		val curr = context.currentModel 
+		if (curr instanceof Link) {
+			if(curr.isReuseOf.eAllContents.filter[x | 
+				//test if x interfaces toset contains ReUseAble fails - why would that not work?
+				x instanceof Visual || 
+				x instanceof Inertial || 
+				x instanceof Collision
+			].size > 0) editReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
+		}
+		if(curr instanceof Joint) {
+			if(curr.isReuseOf.eAllContents.filter[x | 
+				x instanceof Origin || 
+				x instanceof Axis || 
+				x instanceof Limit ||
+				x instanceof Dynamics ||
+				x instanceof Calibration ||
+				x instanceof SafetyController
+				
+			].size > 0) editReuseAccess.group.createKeywordProposalMultiple(context,acceptor, Reuse, false)
+		}
+		
 	}
 	
 	//make sure consecutive keywords are presented as one string by content assist
