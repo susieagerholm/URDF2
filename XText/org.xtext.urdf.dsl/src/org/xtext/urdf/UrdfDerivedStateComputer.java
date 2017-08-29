@@ -38,80 +38,57 @@ import org.xtext.urdf.myURDF.impl.RobotImpl;
 
 class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	
-	
 	@Override
 	public void discardDerivedState(DerivedStateAwareResource resource) {
-		//throw new UnsupportedOperationException("TODO: auto-generated method stub")
-		//how to discard: remove all ref to demanded links and edges from topo?
-		TreeIterator<EObject> temp = resource.getAllContents();
-		while (temp.hasNext()) {
-			EObject obj = temp.next();
-			if (obj instanceof Topology) {
-//				obj.eContents().clear(); //Topology object does not support clear()
-
-				//When we set the objects below to null it impacts the topology objects in the resourceset when 
-				//derivedstate is called based on a SAVE event. Parent and child are null and therefore derivedstate
-				//is not installed as expected. Validation is dependent on derivedState (uses the topology chains)  
-				//which means validations fails. The generator is only called when validation succeeds. 
-				
-				//When we receive a change event - discard is not called and therefore derivedstate works as expected
-
-				//For transient objects (those not to be persisted) like Topology the intention with discard is probably to
-				//remove them before the generator persists. However that is not viable in our case as that would make validation
-				//fail. The question is whether 'disabling' discard has other sideeffects.
-				
-//				Topology topo = (Topology)obj;
-//				topo.setParent(null);
-//				topo.setChild(null);
-//				topo.setJoint(null);
-			}
-			if (obj instanceof AddTo) {
-				//Should we set the object null - what happens in the UI?
-			}			
-		}
+//		TreeIterator<EObject> temp = resource.getAllContents();
+		//Only uninstall those objects we have installed as derived
+//		while (temp.hasNext()) {
+//			EObject obj = temp.next();
+//			if(obj instanceof Joint && ((Joint) obj).getName().contains("__")) {
+//				obj = null;
+//			}
+//			if (obj instanceof Topology) {
+//				obj = null;
+//			} 
+//		}
 	}
 	
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 		//Calling resource.isLoaded() seems to fix the invalid start validation state issue - mentioned in the cycles method in CyclesValidation
+		//On save we get 2 calls to install derived state. Between the calls state is discarded. 
+		//We uninstall/discard topology. Topology objects are available after validation in the generator
+		
+		//On change we get 1 call
+		
 		if  (!preLinkingPhase && resource.isLoaded() ) {   
 			installTopology(resource);
 		}
 	}
 	
 	public void installTopology(DerivedStateAwareResource resource) {
-				Robot rob = (Robot)EcoreUtil2.getObjectByType(resource.getContents(),MyURDFPackage.eINSTANCE.getRobot());
-				if(rob==null) {
-					return;
-				}
-				TreeIterator<EObject> eo = rob.eAllContents();
-				while(eo.hasNext()) {
-					EObject top = eo.next();
-					if( top instanceof Joint) {
-						createStandardJointsInTopology((Joint)top,rob);
-					}
-					if( top instanceof AddTo) {
-						manageAddToProperties((AddTo)top,rob);
-					}
+		Robot rob = (Robot)EcoreUtil2.getObjectByType(resource.getContents(),MyURDFPackage.eINSTANCE.getRobot());
+		if(rob==null) {
+			return;
+		}
+		TreeIterator<EObject> eo = rob.eAllContents();
+		while(eo.hasNext()) {
+			EObject top = eo.next();
+			if( top instanceof Joint) {
+				createTopologyFromStandardJoints((Joint)top,rob);
+			}
+			if( top instanceof AddTo) {
+				manageAddToProperties((AddTo)top,rob);
+			}
 
-					if (top instanceof Topology) {
-						Topology topo = (Topology)top;
-						//When saving - parent/child is null, and therefore we don't install topology as expected -> solution: we don't use discard derived state
-						if(topo.getChild() != null && topo.getParent() != null) {
-//							switch (getLastEntry(top)) {
-//							case " ": // we havent finished writing
-//								return;  //careful - we end installTopology
-//							case "\n": //ok
-//								break;
-//							default:
-//								break;
-//							}
-							manageTopology(rob,topo);
-						}
-					}
+			if (top instanceof Topology) {
+				Topology topo = (Topology)top;
+				//When saving - parent/child is null, and therefore we don't install topology as expected -> solution: we don't use discard derived state
+				if(topo.getChild() != null && topo.getParent() != null) {
+					manageTopology(rob,topo);
 				}
-			
-		
+			}
+		}
 	}
 	
 	private void addTopoLinkToRobot(String name, Robot robo) {
@@ -150,9 +127,6 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	private void checkAndCreateLinks(Robot robot, Topology topo) {
-		
-		
-		
 		if(!isLinkInRobot(robot, topo.getParent())) {
 			addTopoLinkToRobot(topo.getParent().getName(), robot);
 		}
@@ -166,18 +140,34 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 			return;
 		}
 		if(!isJointInRobot(robot.getJoint(), topo.getParent(), topo.getChild().getParent())) {
+			robot = workAroundJointCheck(robot, topo.getParent(), topo.getChild().getParent());
 			addTopoJointToRobot(robot, topo.getParent(), topo.getChild().getParent(),topo.getJoint());
 		}
 		checkAndCreateJoints(robot, topo.getChild());
 	}
 	
+	private Robot workAroundJointCheck(Robot robot,Link parent,Link child) {
+		EList<Joint> newList = new BasicEList<Joint>();
+		boolean found = false;
+		for (Joint aJoint : robot.getJoint()) {
+			//Sometimes parent/child ref. are 'lost' while saving which is causing a duplicate joint -> suspect this
+			//is a sync problem. 
+			if(aJoint.getName().equals(parent.getName()+"_"+child.getName())) {
+				found = true;
+			} else {
+				newList.add(aJoint);
+			}
+		}
+		if(found) {
+			EStructuralFeature ft = robot.eClass().getEStructuralFeature("joint");
+	    	robot.eSet(ft,newList);
+		}
+		return robot;
+	}
+	
 	private void addTopoJointToRobot(Robot rob, Link parent, Link child, JointRef ref) {
 		Joint aJoint = MyURDFFactory.eINSTANCE.createJoint();
-		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
-		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
 		aJoint.setName(parent.getName() + "_" + child.getName());
-		//MAYBE CHILD AND PARENT SHOULD CHANGE SIDE!!
-		//Vi skal være super obs paa at bruge child/parent på samme maade alle steder!! 
 		aJoint.setChildOf(parent);
 		aJoint.setParentOf(child);
 		aJoint.setType(getJointType(ref));
@@ -231,7 +221,6 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	private void manageAddToProperties(AddTo add, Robot robot) {
-		
 		Link parentLink = null;
 		Joint parentJoint = null;
 		if(add.getAdd() == null) {
@@ -288,7 +277,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		}
 	}
 	
-	private void createStandardJointsInTopology(Joint joint, Robot robot) {
+	private void createTopologyFromStandardJoints(Joint joint, Robot robot) {
 		//Here we create Topology objects based on standard joints. 
 		//We use the 'isTopoFlag' to filter relevant joints
 		
@@ -298,21 +287,11 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		
 		String ruleName = getRuleName(joint);
 		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") && !joint.isFromTopo()) {
-			
-			
-			
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
-			
-			// Previously this error has ocurred: Cyclic resolution of lazy links : Joint.childOf->Joint.childOf
 			topoParent.setParent(joint.getChildOf());
-			
 			topoParent.setJoint(getJointRef(joint));
-
 			Topology topoChild = MyURDFFactory.eINSTANCE.createTopology();
-			
-			// Previously this error has ocurred: Cyclic resolution of lazy links : Joint.parentOf->Joint.parentOf
 			topoChild.setParent(joint.getParentOf());
-			
 			topoParent.setChild(topoChild);
 			if(robot.getTopologies()==null) {
 				// This is experimental - don't know whether this conflicts when a topology is created in the UI

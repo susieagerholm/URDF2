@@ -42,6 +42,9 @@ import org.xtext.urdf.myURDF.URDFAttrNumeric;
 import org.xtext.urdf.myURDF.URDFAttrSTRING;
 import org.xtext.urdf.myURDF.URDFAttrSignedNumeric;
 import org.xtext.urdf.myURDF.Visual;
+import org.xtext.urdf.validation.CyclesValidator;
+import org.xtext.urdf.validation.GenericTree;
+import org.xtext.urdf.validation.GenericTreeNode;
 
 
 public class UrdfGenerator
@@ -115,15 +118,16 @@ public class UrdfGenerator
 	      GraphViz gv = new GraphViz();
 	      gv.addln(gv.start_graph());
 
-	      for (int i = 0; i < topologies.size(); i++) {
-			Topology topo = topologies.get(i);
-			gv = getGraphVizFormat(topo, gv,gv.getLastJointNumber());
+	      GenericTree<String> tree = getTree(topologies);
+	      for (GenericTreeNode<String> node : tree.getAllNodes()) {
+	  		gv.addln((node.getParent() == null ? "Robot" : node.getParent())  + " -> " + node.getData() + ";");
 		  }
 	      gv.addln(gv.end_graph());
-		  System.out.println(gv.getDotSource());
+
+	      System.out.println(gv.getDotSource());
 
 	      String type = "png";
-	      File out = new File(GraphViz.TEMP_DIR + "\\graphTest." + type);   
+	      File out = new File(GraphViz.TEMP_DIR + "\\urdfGraph." + type);   
 	      gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
 	}
 
@@ -152,11 +156,7 @@ public class UrdfGenerator
 	          Element tag = null;
 	          tag = doc.createElement(type);
 	          
-	          if(entry instanceof NamedElement && ((NamedElement)entry).getName() != null && ((NamedElement)entry).getName().startsWith("_")) {
-        		 //revert to original name after renaming in derived state
-	        	  ((NamedElement)entry).setName(((NamedElement)entry).getName().substring(1));
-	          }
-	          
+	          entry = revertToOriginalName(entry);
 	          
              if(superType != null && superType.equalsIgnoreCase("reuseableimpl") && hasFeature(entry,"isReuseOf")) {
             	  EStructuralFeature ft = entry.eClass().getEStructuralFeature("isReuseOf");
@@ -168,20 +168,18 @@ public class UrdfGenerator
 	        	  }
 	          }
 	          
-	          if(superType.equalsIgnoreCase("geometryimpl")) {
-	        	  Element supertag = doc.createElement("Geometry");
-		          destination.appendChild(supertag).appendChild(tag);
-	          } else {
-	        	  destination.appendChild(tag);
-	          }
+              manageInterfaceTypes(doc,superType,destination,tag);
 	          
 	          for(Field f : total){
-	        	 if (f.getName().contains("_EDEFAULT") || f.getName().equals(null) || f.getName().equals("fromTopo")) {
+	        	 if (f.getName().contains("_EDEFAULT") || 
+	        		 f.getName().equals(null) ||
+	        		 f.getName().equals("fromTopo")) {
 	        		// ignore
 	        	 } else {
 	        		f.setAccessible(true);
-		        	if(/* f.getType().isAssignableFrom(EObject.class) || */ checkType(f, entry)!=null) {
-		        		 //A link does not know whether it is a parent or child link - therefore parent/child tags has to be handled while traversing the joint
+		        	if(checkType(f, entry)!=null) {
+		        		 //A link does not know whether it is a parent or child link - therefore parent/child
+		        		 // tags has to be handled while traversing the joint
 		        		if(type.equalsIgnoreCase("joint") && f.getType().isAssignableFrom(Link.class)) {
 		        			Element e = null;
 		        			if(f.getName().equalsIgnoreCase("childof")) {
@@ -226,6 +224,28 @@ public class UrdfGenerator
 	          return destination;
 	}
 	
+	private EObject revertToOriginalName(EObject entry) {
+        if(entry instanceof NamedElement && ((NamedElement)entry).getName() != null && ((NamedElement)entry).getName().startsWith("_")) {
+  		 //revert to original name after renaming in derived state
+      	  ((NamedElement)entry).setName(((NamedElement)entry).getName().substring(1));
+        }
+		return entry;
+	}
+
+
+	private void manageInterfaceTypes(Document doc, String superType, Element destination, Element tag) {
+		String pureName = superType.toLowerCase().replace("impl", "");
+		List<String> interfaceList = Arrays.asList("geometry","material");
+		if(interfaceList.contains(pureName)) {
+			pureName = Character.toString(pureName.charAt(0)).toUpperCase()+pureName.substring(1);
+     	    Element supertag = doc.createElement(pureName);
+	        destination.appendChild(supertag).appendChild(tag);
+		} else {
+	       	destination.appendChild(tag);
+		}
+	}
+
+
 	@SuppressWarnings("unchecked")
 	private EObject mergeURDFObject(EObject entry, EObject aReuseAble) {
 		//aReuseAble = the object to be reused from
@@ -364,21 +384,6 @@ public class UrdfGenerator
 			return temp;
 	}
 
-	private static GraphViz getGraphVizFormat(Topology topo, GraphViz gv, int count) {
-		if(topo == null || topo.getParent() == null || topo.getChild() == null) {
-			return gv;
-		}
-		
-		gv.addln("Joint" + count + " -> " + topo.getParent().getName() + ";");
-		
-		if(topo.getChild() != null) {
-			gv.addln("Joint" + count + " -> " + topo.getChild().getParent().getName() + ";");			
-			gv = getGraphVizFormat(topo.getChild(), gv, count+=1);
-		} 
-		
-		return gv;
-	}
-	
 	private boolean hasFeature(EObject obj, String featureName) {
 		for(EStructuralFeature feature : obj.eClass().getEAllStructuralFeatures()) {
 			if(feature.getName().equalsIgnoreCase(featureName)) {
@@ -387,4 +392,44 @@ public class UrdfGenerator
 		}
 		return false;
 	}
+	
+	public GenericTree<String> getTree(EList<Topology> topoList) {
+	    GenericTree<String> tree = new GenericTree<String>();
+	    CyclesValidator validator = new CyclesValidator(); 
+	    
+	    //Start to get the root topologies
+	    EList<Topology> rootList = validator.getRootTopologies(topoList, false);
+	    if(rootList == null) {
+	    	return null;
+	    }
+	    
+		for (Topology topo : rootList) {
+			GenericTreeNode<String> node = validator.buildNodeChainFromTopology(topo, null);
+			if(tree.getRoot() == null) {
+				tree.setRoot(node.getTopNode());;
+			} else if(tree.getRoot().equals(node.getTopNode())) {
+				if(!node.getTopNode().getChildren().isEmpty()) {
+					tree.getRoot().addChild(node.getTopNode().getChildAt(0));
+				}
+			} else {
+				System.out.println("It should not be possible to end here");
+			}
+			System.out.println(tree.toStringWithDepth());
+		}
+		
+		topoList.removeAll(rootList);
+
+		//build rest of the tree
+		for (Topology topo : topoList) {
+			GenericTreeNode<String> parentNode = tree.find(topo.getParent().getName());
+			validator.buildNodeChainFromTopology(topo.getChild(), parentNode);
+			System.out.println(tree.toStringWithDepth());
+		}
+		
+		return tree;
+	}
+
+	
+	
+	
 }

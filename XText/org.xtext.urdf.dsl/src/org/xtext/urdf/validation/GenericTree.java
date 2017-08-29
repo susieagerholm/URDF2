@@ -5,7 +5,6 @@ import java.util.*;
 
 public class GenericTree<T> {
 
-	//Forklar funktionalitet
    public enum GenericTreeTraversalOrderEnum {PRE_ORDER,POST_ORDER}
 
    private GenericTreeNode<T> root;
@@ -173,6 +172,15 @@ public class GenericTree<T> {
        return stringRepresentation;
    }
 
+   public List<GenericTreeNode<T>> getAllNodes() {
+	   List<GenericTreeNode<T>> temp = null;
+       if(root != null) {
+           temp = build(GenericTreeTraversalOrderEnum.PRE_ORDER);
+
+       }
+       return temp;
+   }
+  
    public String toStringWithDepth() {
        String stringRepresentation = "";
 

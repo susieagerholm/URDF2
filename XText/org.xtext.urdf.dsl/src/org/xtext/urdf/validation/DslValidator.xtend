@@ -29,15 +29,18 @@ class DslValidator extends AbstractDslValidator {
 	}
 
 	@Check
-	def oneRoot (Robot robot) {
-		val test = new CyclesValidator().oneRoot(robot.topologies);
-
-		if(test!==null && test.validationError) {
-			error("Multiple roots problem. These topologies qualify as roots, but their starting link is not unique: " + test.toString,
-					MyURDFPackage.Literals.ROBOT__TOPOLOGIES)
-		} 
+	def oneRoot(Robot robot) {
+		var RootCheck test = new CyclesValidator().oneRoot(robot.getTopologies())
+		if (test !== null && test.isValidationError()) {
+			var String displayLine = null
+			if (test.toString().contains("->")) {
+					displayLine = '''Multiple roots problem. These topologies qualify as roots, but their starting link is not unique: «test.toString()»'''
+				} else {
+					displayLine = '''Multiple roots problem. «test.toString()»'''
+				}
+				error(displayLine, MyURDFPackage.Literals.ROBOT__TOPOLOGIES)
+			}
 	}
-	
 
 	@Check
 	def checkNoCyclicReferences(Robot robot) {
@@ -79,7 +82,7 @@ class DslValidator extends AbstractDslValidator {
 				MyURDFPackage.Literals.NAMED_ELEMENT__NAME)	
 	}
 	
-	@Check
+//	@Check
     //Check that assigned value in Reuse - edit is of same type as edited
 	def allAssignmentOfNewValueMustMatch(AssignNewValue assign) {
 		val mytail = (assign.getRef as DotExpression).tail
@@ -125,34 +128,60 @@ class DslValidator extends AbstractDslValidator {
 	}	
 	
 	@Check
+	def overwriteAttributeWarning(Link reuser) {
+		val overwrite = new OverwriteValidator().overwrite(reuser);
+		if(overwrite) {
+			warning("You are overwriting an existing value - are you nuts!", 
+    		MyURDFPackage.Literals.LINK__REUSE)
+		}
+	}
+
+	@Check
+	def overwriteInertial(Link reuser) {
+		val overwrite = new OverwriteValidator().overwriteInertial(reuser);
+		if(overwrite) {
+			warning("There can only be one inertial in a link, and you have added a new inertial. The previously defined value is overwritten", 
+    		MyURDFPackage.Literals.LINK__REUSE)
+		}
+	}
+
+	@Check
+	def overwriteJoint(Joint joint) { 
+		val overwrite = new OverwriteValidator().overwriteJoint(joint);
+		if(overwrite) {
+			warning("A joint can max have one of each of the types: Origin, Limit, Axis, Dynamics, Calibration and SafetyController.
+					 You are now trying to add a new of one of these types, so the previous type will be overwritten", 
+    		MyURDFPackage.Literals.JOINT__TYPE)
+		}
+	}
+
+	@Check
+	def overwriteInertialFromTopo(Robot robot) { 
+		val overwrite = new OverwriteValidator().overwriteInertialFromTopo(robot);
+		if(overwrite) {
+			warning("There can only be one inertial in a link, and you have added a new inertial. The previously defined value is overwritten", 
+    		MyURDFPackage.Literals.ROBOT__ADDTO)
+		}
+	}
+
+	@Check
+	def overwriteJointFromTopo(Robot robot) { 
+		val overwrite = new OverwriteValidator().overwriteJointTypesFromTopo(robot);
+		if(overwrite) {
+			warning("A joint can max have one of each of the types: Origin, Limit, Axis, Dynamics, Calibration and SafetyController.
+					 You are now trying to add another of one of these types, so the previous definition will be overwritten", 
+    		MyURDFPackage.Literals.ROBOT__ADDTO)
+		}
+	}
+
+
+	@Check
 	def onlyPossibleToReuseIfNotAlreadyReused(Joint reuser) {
 		if(reuser.isReuseOf.isReuseOf != null) 
 			error("Not legal to reuse from a joint, that is already made from reuse", 
         		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
 	}	
 	
-	@Check
-	def onlyPossibleToReuseIfLink(Link reuser) {
-		if(reuser.eClass != reuser.isReuseOf.eClass) 
-			error("Not legal to reuse from instance, that is not of the same type", 
-        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
-	}
-	
-	@Check
-	def onlyPossibleToReuseIfJoint(Joint reuser) {
-		if(reuser.eClass != reuser.isReuseOf.eClass) 
-			error("Not legal to reuse from instance, that is not of the same type", 
-        		MyURDFPackage.Literals.NAMED_ELEMENT__NAME)
-	}
-	
-	/*1. Make sure there is unique root for the total topology = 
-	* a. all roots links - but one!! - must be non-root link in other topology
-	* b. no link must be outside of topologies
-	*/
-	
-	
-	//1.a Only one link may be true root = not child of any joint 
-	//IS THIS TEST ENOUGH TO TEST FOR ALL SCENARIOS OF MULTIPOLE ROOTS???
 
  
 /*	

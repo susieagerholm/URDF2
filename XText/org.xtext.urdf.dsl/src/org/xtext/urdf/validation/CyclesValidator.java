@@ -63,7 +63,7 @@ public class CyclesValidator {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> T getRootTopologies(EList<Topology> topoList, boolean returnPotentialCandidates) {
+	public <T> T getRootTopologies(EList<Topology> topoList, boolean returnPotentialCandidates) {
 		//Only the first link in a topology can be a potential root
 		//Therefore take the first link in a chain and check whether this link exists in one of the other chains
 		//If it does exist it cannot be root - unless if it's the first link in the chain 
@@ -103,6 +103,7 @@ public class CyclesValidator {
 	private RootCheck getRootCheck(HashMap<Topology,Boolean> map) {
 		RootCheck check = new RootCheck();
 		check.setValidationError(false);
+		boolean foundAnyCandidates = false;
 		EList<Topology> temp = new BasicEList<Topology>();
 
 		String tempLink = null;
@@ -110,6 +111,7 @@ public class CyclesValidator {
 			if(map.get(topo) == false) {
 				continue;
 			}
+			foundAnyCandidates = true;
 			temp.add(topo);
 			check.addPrettyPrintLine(printTopo(topo, null));
 			if(tempLink==null) {
@@ -118,7 +120,12 @@ public class CyclesValidator {
 					check.setValidationError(true);
 			}
 		}
-		check.setPotentialRoots(temp);
+		if(foundAnyCandidates) {
+		 check.setPotentialRoots(temp);
+		} else {
+			check.setValidationError(true);
+			check.addPrettyPrintLine("No root topology found - and no candidates");
+		}
 		return check;
 	}
 
@@ -218,9 +225,8 @@ public class CyclesValidator {
 
 		//build rest of the tree
 		for (Topology topo : topoList) {
-			GenericTreeNode<String> parentNode = tree.find(topo.getParent().getName()).getParent();
-			GenericTreeNode<String> childNode = buildNodeChainFromTopology(topo, null);
-			parentNode.addChild(childNode);
+			GenericTreeNode<String> parentNode = tree.find(topo.getParent().getName());
+			buildNodeChainFromTopology(topo.getChild(), parentNode);
 			System.out.println(tree.toStringWithDepth());
 		}
 		
@@ -242,7 +248,7 @@ public class CyclesValidator {
 	}
 
 	
-	private GenericTreeNode<String> buildNodeChainFromTopology(Topology topo, GenericTreeNode<String> node) {
+	public GenericTreeNode<String> buildNodeChainFromTopology(Topology topo, GenericTreeNode<String> node) {
 		if(topo.getParent() != null) {
 			GenericTreeNode<String> temp = new GenericTreeNode<>(topo.getParent().getName());
 			if(node != null) {
