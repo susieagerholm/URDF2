@@ -33,6 +33,13 @@ class DslValidator extends AbstractDslValidator {
 
 	@Check
 	def oneRoot(Robot robot) {
+		//If only one link is defined (topologies will be empty) but this is valid
+		//If two links (or more) not included in any topology or joints there is a root problem. 
+		//The latter situation is handled in the oneRoot method. 
+		//Only one link is a special case handled here
+		if(robot.getTopologies.empty && robot.links.size==1) {
+			return;
+		} 
 		var RootCheck test = new CyclesValidator().oneRoot(robot.getTopologies())
 		if (test !== null && test.isValidationError()) {
 			var String displayLine = null

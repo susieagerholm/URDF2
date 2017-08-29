@@ -124,7 +124,7 @@ public class CyclesValidator {
 		 check.setPotentialRoots(temp);
 		} else {
 			check.setValidationError(true);
-			check.addPrettyPrintLine("No root topology found - and no candidates");
+			check.addPrettyPrintLine("No root topology found");
 		}
 		return check;
 	}
