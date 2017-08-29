@@ -171,6 +171,7 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 		aJoint.setChildOf(parent);
 		aJoint.setParentOf(child);
 		aJoint.setType(getJointType(ref));
+		aJoint.setFromTopo(true);
 		rob.getJoint().add(aJoint);
 	}
 	
