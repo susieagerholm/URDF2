@@ -77,8 +77,6 @@ public class UrdfGenerator
 	  DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 	  Document doc = docBuilder.newDocument();
 	  
-
-	  
 	  String type = robot.eClass().getName();
 	  Element rootElement = doc.createElement(type);
 	  doc.appendChild(rootElement);
@@ -108,6 +106,7 @@ public class UrdfGenerator
       transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
       transformer.transform(source, result);
       
+      //This requires a Graphviz installation on the OS. 
       generateGraphViz(robot.getTopologies());      
 
 	  return source.toString();
@@ -117,11 +116,23 @@ public class UrdfGenerator
 	private void generateGraphViz(EList<Topology> topologies) {
 	      GraphViz gv = new GraphViz();
 	      gv.addln(gv.start_graph());
-
+	      //gv.addln("rankdir=LR"); this gives a horizontal graph. Display is better top-down. 
+	      
 	      GenericTree<String> tree = getTree(topologies);
 	      for (GenericTreeNode<String> node : tree.getAllNodes()) {
-	  		gv.addln((node.getParent() == null ? "Robot" : node.getParent())  + " -> " + node.getData() + ";");
+	    	  if(tree.getRoot().equals(node)) {
+	    		  continue;
+	    	  } else {
+	    		  gv.addln(node.getParent() + " [shape=box, color=black]");
+	    		  gv.addln(node.getParent() + "_" + node.getData() + " [shape=ellipse, color=blue]");
+	    		  gv.addln(node.getParent()  + " -> " + node.getParent()+"_"+node.getData() + ";");
+	    		  if(tree.isLeafNode(node)) {
+		    		  gv.addln(node.getData() + " [shape=box, color=black]");
+	    		  } 
+	    		  gv.addln(node.getParent()+"_"+node.getData()  + " -> " + node.getData() + ";");	    		  
+	    	  }
 		  }
+
 	      gv.addln(gv.end_graph());
 
 	      System.out.println(gv.getDotSource());
@@ -428,8 +439,5 @@ public class UrdfGenerator
 		
 		return tree;
 	}
-
-	
-	
 	
 }

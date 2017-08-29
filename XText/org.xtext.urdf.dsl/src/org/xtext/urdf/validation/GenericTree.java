@@ -180,6 +180,16 @@ public class GenericTree<T> {
        }
        return temp;
    }
+   
+   public boolean isLeafNode(GenericTreeNode<T> node) {
+	   Set<GenericTreeNode<T>> aSet = getRoot().getAllLeafNodes();
+	   for (GenericTreeNode<T> aNode : aSet) {
+		   if(node.equals(aNode)) {
+			   return true;
+		   }
+	   }
+	   return false;
+   }
   
    public String toStringWithDepth() {
        String stringRepresentation = "";
