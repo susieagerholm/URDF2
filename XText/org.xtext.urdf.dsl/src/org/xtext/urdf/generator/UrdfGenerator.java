@@ -107,13 +107,17 @@ public class UrdfGenerator
       transformer.transform(source, result);
       
       //This requires a Graphviz installation on the OS. 
-      generateGraphViz(robot.getTopologies());      
+      generateGraphViz(robot.getTopologies());
 
 	  return source.toString();
 	
 	}
 	
 	private void generateGraphViz(EList<Topology> topologies) {
+		  if(topologies == null || topologies.isEmpty()) {
+			  return;
+		  }
+		  
 	      GraphViz gv = new GraphViz();
 	      gv.addln(gv.start_graph());
 	      //gv.addln("rankdir=LR"); this gives a horizontal graph. Display is better top-down. 
