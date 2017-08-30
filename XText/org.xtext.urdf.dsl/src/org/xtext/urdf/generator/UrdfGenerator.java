@@ -46,7 +46,6 @@ import org.xtext.urdf.validation.CyclesValidator;
 import org.xtext.urdf.validation.GenericTree;
 import org.xtext.urdf.validation.GenericTreeNode;
 
-
 public class UrdfGenerator
 {
 	
@@ -79,6 +78,7 @@ public class UrdfGenerator
 	  
 	  String type = robot.eClass().getName();
 	  Element rootElement = doc.createElement(type);
+	  rootElement.setAttribute("name", robot.getName());
 	  doc.appendChild(rootElement);
 	
 	  EList<EObject> totalList = new BasicEList<EObject>(); 
@@ -208,6 +208,8 @@ public class UrdfGenerator
 		        		} else if(isAttr(f)) { 
 	        				if(f.getName().equalsIgnoreCase("pathToFile")) {
 	        					tag.setAttribute("filename", getAttributeValue(f,entry).replace("\t", "\\t"));
+	        				} else if(f.getName().equalsIgnoreCase("massKilogram")) { 
+	        					tag.setAttribute("value", getAttributeValue(f,entry));
 	        				} else {
 	        					if(type.equalsIgnoreCase("origin")) {
 	        						manageOriginFields(tag,f,entry);

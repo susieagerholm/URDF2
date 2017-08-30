@@ -206,7 +206,9 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	private EObject rename(EObject root) {
 		EStructuralFeature ft = root.eClass().getEStructuralFeature("name");
 		String rootName = (String)root.eGet(ft);
-    	root.eSet(ft,"_"+rootName);
+	    if(rootName != null) {
+	    	root.eSet(ft,"_"+rootName);	    
+	    }
 
 		TreeIterator<EObject> allContents = root.eAllContents();
 		while(allContents.hasNext()) {
