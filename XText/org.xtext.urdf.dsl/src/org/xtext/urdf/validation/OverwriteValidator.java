@@ -104,6 +104,9 @@ public class OverwriteValidator {
 		  EList<AddTo> addToList = robot.getAddto();
 		  HashMap<EObject, EObject> map = new HashMap<>();
 		  for (AddTo anAdd : addToList) {
+			  if(anAdd.getLink() != null && anAdd.getAdd() instanceof Inertial && anAdd.getLink().getInertial() != null) {
+				  return true;
+			  }
 			  if(anAdd.getLink() != null && anAdd.getAdd() instanceof Inertial && !map.containsKey(anAdd.getLink())) {
 				  map.put(anAdd.getLink(), anAdd.getAdd());
 			  } else if(anAdd.getLink() != null && map.containsKey(anAdd.getLink())) {
