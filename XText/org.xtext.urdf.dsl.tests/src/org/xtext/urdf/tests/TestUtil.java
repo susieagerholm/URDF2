@@ -1,7 +1,6 @@
 package org.xtext.urdf.tests;
 
 
-import org.junit.Assert;
 import org.xtext.urdf.myURDF.AddTo;
 import org.xtext.urdf.myURDF.Box;
 import org.xtext.urdf.myURDF.Cylinder;
@@ -105,7 +104,7 @@ public class TestUtil {
 	}
 
 //	@Test
-	public void testAddToVisual() {
+	public static void testAddToVisual() {
 		//Draft - for testing AddTo - consider calling DerivedState and check that object are created as expected
 		
 		   MyURDFFactory eINSTANCE = MyURDFFactoryImpl.init();
@@ -170,8 +169,8 @@ public class TestUtil {
 			parentLink.setName("Parent");
 			parentLink.getVisual().add(newVis);
 			
-			//Not test - just inspiration for a testcase
-			Assert.assertEquals(parentLink.getVisual().get(0), newVis);
+			//inspiration for a testcase
+	//		Assert.assertEquals(parentLink.getVisual().get(0), newVis);
 			
 	}
 
@@ -227,9 +226,6 @@ public class TestUtil {
 		   robot.getTopologies().add(parent2);
 		   
 		   return robot;
-
-		   
-		   
 		}
 	
 }

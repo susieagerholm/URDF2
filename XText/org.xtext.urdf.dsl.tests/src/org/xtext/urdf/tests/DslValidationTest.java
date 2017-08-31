@@ -11,21 +11,6 @@ import org.xtext.urdf.validation.RootCheck;
 
 public class DslValidationTest{
 	
-	//Ideas for test cases:
-	//Can we test parser rules?
-	//Test - A Joint of type revolute or prismatic must have Limit defined
-	//Test - Not legal to reuse from a joint, that is already made from reuse
-	//Constants??
-	//Test addTo joint/links - see TestAdapter, testAddToVisual() - to get some of the necessary objects
-
-
-	//Test Expressions - all 4 operators
-//	@Test 
-	public void testAddition() {
-		Assert.assertEquals("Addition ok", 4, 4 /* An expression generating 4 as result - using Expression objects */  ); 
-	}
-
-	
 	@Test 
 	public void oneRoot() {
 		/*

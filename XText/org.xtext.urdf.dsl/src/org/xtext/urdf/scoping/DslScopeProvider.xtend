@@ -111,14 +111,14 @@ class DslScopeProvider extends AbstractDslScopeProvider {
 				)
 			}
 			//Only suggest links that do not already have parent  
-			if (reference.name.equals("parentOf")) {
-				val available = robot.links.			
-					filter[x | x != context.childOf].
-					filter[y | !robot.joint.map[z | z.parentOf].toSet.contains(y)]
-				
-				if (!available.empty) Scopes.scopeFor(available)
-				else return IScope::NULLSCOPE
-			}
+//			if (reference.name.equals("parentOf")) {
+//				val available = robot.links.			
+//					filter[x | x != context.childOf].
+//					filter[y | !robot.joint.map[z | z.parentOf].toSet.contains(y)]
+//				
+//				if (!available.empty) Scopes.scopeFor(available)
+//				else return IScope::NULLSCOPE
+//			}
 			else super.getScope(context, reference)
 			
 		}

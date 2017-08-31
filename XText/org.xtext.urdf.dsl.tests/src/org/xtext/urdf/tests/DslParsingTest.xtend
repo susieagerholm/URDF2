@@ -29,16 +29,9 @@ class DslParsingTest  {
 	 */
 
 
-//	@Test 
-//	def void loadModel2() {
-//		val result = parseHelper.parse('''
-//			Hello Xtext!
-//		''')
-//		Assert.assertNotNull(result)
-//	}
-
 	@Test
-	def void loadRobot() {
+	def void loadRobot() {   
+		
 		val result = '''
 			Robot r1
 				Link l1 def Inertial in Inertia it ixx 6 ixy 4 ixz 7 iyy 2 iyz 1 izz 4 Mass massKilogram 6 Visual v1 Geometry Sphere s1 radius 2
