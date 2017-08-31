@@ -39,25 +39,12 @@ import org.xtext.urdf.myURDF.impl.RobotImpl;
 class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	
 	@Override
-	public void discardDerivedState(DerivedStateAwareResource resource) {
-//		TreeIterator<EObject> temp = resource.getAllContents();
-		//Only uninstall those objects we have installed as derived
-//		while (temp.hasNext()) {
-//			EObject obj = temp.next();
-//			if(obj instanceof Joint && ((Joint) obj).getName().contains("__")) {
-//				obj = null;
-//			}
-//			if (obj instanceof Topology) {
-//				obj = null;
-//			} 
-//		}
-	}
+	public void discardDerivedState(DerivedStateAwareResource resource) {}
 	
 	@Override
 	public void installDerivedState(DerivedStateAwareResource resource, boolean preLinkingPhase) {
 		//Calling resource.isLoaded() seems to fix the invalid start validation state issue - mentioned in the cycles method in CyclesValidation
 		//On save we get 2 calls to install derived state. Between the calls state is discarded. 
-		//We uninstall/discard topology. Topology objects are available after validation in the generator
 		
 		//On change we get 1 call
 		
@@ -177,20 +164,28 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 	}
 	
 	
-	private void manageTopology(Robot rob, Topology topo) {
+	private void manageTopology(Robot robot, Topology topo) {
 		//Here we add links and joints based on Topology chains
 	
 		handleProxies(topo);
+		checkAndCreateLinks(robot, topo);
+		checkAndCreateJoints(robot, topo);
 		
-		checkAndCreateLinks(rob, topo);
-		
-		//When we previously have created Topology objects (method createStandardJointsInTopology)
-		//for example due to creation af classic joints in the ui we will start receiving calls in
-		//this method due to the topology object.
-		//Scenario: define 2 classic joints in the UI. When the second joint is entered we would create
-		//a new Joint based on an existing topology object - a Joint which is already created automatically
-		//in the AST. Therefore we have to filter out these Joints and test whether they are already in the AST
-		checkAndCreateJoints(rob, topo);
+		//When we previously have created Topology objects (method createTopologyFromStandardJoints)
+		//due to creation af classic joints in the ui we will start receiving calls in
+		//this method due to the newly created topology object and potentially trigger to many object creations.
+		//Scenario:
+		// 1. define a classic joint j1 in the UI.
+		// 2. a Topology object based on j1 is created in derived state
+		// 3. create another joint j2 the classic way
+		// 4. another Topology object based on j2 is created in derived state
+		// 5. in the same sequence as step 4 a 'derived joint' is created based on the topology object in step 2
+		//    in the method checkAndCreateJoints. This would be a flaw since this Joint already exist because
+		//    it's defined in the AST from step 1 
+		//    Therefore we have to filter out these Joints and test whether they are already in the AST
+
+		//    For joints it's easy to find out whether they are derived using the isTopoJoint flag. However, this not
+		//    possible for Topology objects. The check is therefore done using the link names as they are a unique combination
 	}
 
 	private Topology handleProxies(Topology topo) {
@@ -289,6 +284,10 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 			return;
 		}
 		
+		if(topologyExistInRobot(joint,robot)) {
+			return;
+		}
+		
 		String ruleName = getRuleName(joint);
 		if(ruleName != null && ruleName.equalsIgnoreCase("Joint") && !joint.isFromTopo()) {
 			Topology topoParent = MyURDFFactory.eINSTANCE.createTopology();
@@ -304,6 +303,22 @@ class UrdfDerivedStateComputer implements IDerivedStateComputer {
 			} 
 			robot.getTopologies().add(topoParent);
 		}
+	}
+
+	private boolean topologyExistInRobot(Joint joint, Robot robot) {
+		if(joint==null) {
+			return false;
+		}
+		EList<Topology> list = robot.getTopologies();
+		for (Topology aTopo : list) {
+			if(aTopo !=null && aTopo.getParent() != null && aTopo.getChild() != null
+					&& aTopo.getChild().getParent() != null && joint.getParentOf().getName() != null 
+					&& joint.getParentOf().getName().equals(aTopo.getParent().getName()) 
+					&& joint.getChildOf().getName().equals(aTopo.getChild().getParent().getName())) { 
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@SuppressWarnings("unused")

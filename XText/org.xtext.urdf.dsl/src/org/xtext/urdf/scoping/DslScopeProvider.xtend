@@ -3,12 +3,11 @@
  */
 package org.xtext.urdf.scoping
 
-import org.eclipse.emf.common.util.BasicEList
-import org.eclipse.emf.common.util.EList
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.naming.QualifiedName
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.Scopes
 import org.xtext.urdf.myURDF.DotExpression
@@ -19,11 +18,6 @@ import org.xtext.urdf.myURDF.ReUseAble
 import org.xtext.urdf.myURDF.Reuse
 import org.xtext.urdf.myURDF.Robot
 import org.xtext.urdf.myURDF.Topology
-import org.xtext.urdf.myURDF.URDFAttrSignedNumeric
-import org.xtext.urdf.myURDF.Origin
-import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.emf.ecore.util.EObjectContainmentEList
 
 /**
  * This class contains custom scoping description.
@@ -33,98 +27,104 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList
  * 
  * SPECIFICATION:
  * 
- * a. Topology (parent): Able to see links defined below in document (default?)			TODO
- * b. Topology (parent): Not see links already used in this topology chain?				TODO 
- * c. Link (isReuse): Only see links that are not already made from reuse or self		DONE
- * d. Link (isReuse): Also see links defined below in document (default?)				TODO
- * e. Link (isReuse): Also see links made from Topology (default)						DONE
- * f. AddToLink (link): Should only see links made from Topology?						TODO
- * g. AddToJoint (joint): Should only suggest joints made from Topology?				TODO
- * h. DotExpr (tail): Only available in context											? 
- * i. ReUseAble (reuseable): Only current being reused									? 
- * j. Joint (isReuseOf): Only see joints that are not already made from reuse or self	DONE
- * k. Joint childOf: Any further restrictions needed?									?
- * l. Joint (parentOf): Should only see links that do not already have a parent 		TODO   VALIDATION???
- * m. Joint (parentOf): Should only see links that is not already child of this 		DONE
- * o. SHOULD WE LIMIT VISIBILITY OF VISUAL TO LINK (reuse name)
+ * Topology (parent): Able to see links defined below in document (default?)		TODO
+ * Topology (parent): Not see links already used in this topology chain?			TODO 
+ * Link (isReuse): Only see links that are not already made from reuse or self		DONE
+ * Link (isReuse): Also see links defined below in document (default?)				TODO
+ * Link (isReuse): Also see links made from Topology (default)						DONE
+ * AddToLink (link): Should only see links made from Topology?						TODO
+ * AddToJoint (joint): Should only suggest joints made from Topology?				TODO
+ * DotExpr (tail): Only available in context										? 
+ * ReUseAble (reuseable): Only current being reused									? 
+ * Joint (isReuseOf): Only see joints that are not already made from reuse or self	DONE
+ * Joint childOf: Any further restrictions needed?									?
+ * Joint (parentOf): Should only see links that do not already have a parent 		?   
+ * Joint (parentOf): Should only see links that is not already child of this 		DONE
+ * SHOULD WE LIMIT VISIBILITY OF VISUAL TO LINK (reuse name)
  * 
  */
  
 class DslScopeProvider extends AbstractDslScopeProvider {
 	@Inject IQualifiedNameProvider URDFQualifiedNameProvider;
+	//@Inject IResourceSetProvider resourceSetProvider;
 	
 	override IScope getScope(EObject context, EReference reference) {
 	
 		
-		//GET ROBOT REFERENCE FOR FURTHER USE BELOW
+		//Get Robot for further ref below
 		val robot = EcoreUtil2.getContainerOfType(context, Robot)
 		
-		//FIRST TIME PARENT REF IN TOPOLOGY IS TRIGGERED IT WILL BE FROM THE CONTEXT OF ROBOT!
-		//a. Topology (parent): Able to see links defined below in document (default?)
+		//Make sure all links are visible... 
 		if (context instanceof Robot) {
-			val test = context 
+//			val test = context 
 			if(reference.name.equals("parent")) {
-				Scopes.scopeFor(robot.links)
+				if (!robot.links.empty) Scopes.scopeFor(robot.links)
+				else return IScope::NULLSCOPE
 			}
 			else super.getScope(context, reference)
 			
 		}
 		
-		//VIRKER IKKE!!!!
+		//If we are inside Topology Chain - check upstream links for cyclic ref (to not suggest invalid)
 		if (context instanceof Topology) {
-			//a. Topology (parent): Able to see links defined below in document (default?)
-			//b. Topology (parent): Not see links already used in this topology chain?
-			val areweintopo = context
-			if(reference.name.equals("parent")) {
-				val test = context 
+//			val topo = reference.name.equals("parent")
+//			val cont = context.eContainer
+			if(context.eContainer instanceof Topology && reference.name.equals("parent")) {
+				
+//				val me = context.parent
+//				val parent = context.eContainer as Topology 
+//				val test = parent.parent.name
 				val previous = EcoreUtil2.getAllContainers(context).filter(Topology).map[x | x.parent].toList
-				val links_except_previous = robot.links.filter[x | !previous.contains(x)]
-				Scopes.scopeFor(links_except_previous)
+				val with_parents = robot.joint.map[z | z.parentOf].toSet
+				
+				if (with_parents == null || with_parents.isEmpty)
+					  return IScope::NULLSCOPE
+				
+				
+				val links_no_previous = robot.links.filter[x | !previous.contains(x)].
+													filter[y | !y.name.equals(context.parent.name)].
+													filter[z | !with_parents.contains(z)]
+				
+				if (links_no_previous.empty) return IScope::NULLSCOPE
+				else return Scopes.scopeFor(links_no_previous)
 			}
+			else super.getScope(context, reference)
 		}
 		
 				
-		// C. LINK (isReuse): ONLY SEE LINKS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF		
+		//Link (isReuse): Only see links that are not self - or already reuse of
 		if (context instanceof Link) {
-			if (reference.name.equals("isReuseOf")) {
+			if (reference.name.equals ("isReuseOf")) {
 				return Scopes.scopeFor(robot.links.
-					//EXCLUDE CURRENT LINK
 					filter[x | !x.name.equals(context.name)].
-					//REMEMBER ALSO TO EXCLUDE LINKS MADE FROM REUSE
 					filter[y | y.isReuseOf == null]
 				)
 			}
 		}
 		
-		//J. JOINT (isReuseOf): ONLY SEE JOINTS THAT ARE NOT ALREADY MADE FROM REUSE OR SELF
+		//Jont (isReuseOf): Only see links that are not self - or already reuse of
 		if (context instanceof Joint) {
-			//ONLY SUGGEST JOINTS FOR REUSE THAT IS NOT SELF OR MADE FROM REUSE
 			if (reference.name.equals("isReuseOf")) {
 				return Scopes.scopeFor(robot.joint.
-				//EXCLUDE CURRENT JOINT
 				filter[x | !x.name.equals(context.name)].
-				//REMEMBER ALSO TO EXCLUDE JOINTS MADE FROM REUSE
 				filter[y | y.isReuseOf == null]
 				)
 			}
-			//ONLY SUGGEST VALID LINKS FOR CHILD / PARENT 
+			//Only suggest links that do not already have parent  
 			if (reference.name.equals("parentOf")) {
-				//val ggmmm = robot.joint.map[z | z.parentOf].toSet
-				//val gg = robot.joint.map[z | z.parentOf].toSet
-				return Scopes.scopeFor(robot.links.
-					//MAKE SURE CHILDOF IS NOT LATER SUGGESTED AS PARENTOF TO SAME JOINT			
+				val available = robot.links.			
 					filter[x | x != context.childOf].
-					//MAKE SURE ONLY LINKS WITHOUT A PARENT ARE SUGGESTED...
 					filter[y | !robot.joint.map[z | z.parentOf].toSet.contains(y)]
-				)
+				
+				if (!available.empty) Scopes.scopeFor(available)
+				else return IScope::NULLSCOPE
 			}
 			else super.getScope(context, reference)
 			
 		}
 		
 		if (context instanceof Reuse) {		
-			//RETURN SCOPE FOR EDIT	
-			val yy = "inside reuse"
+			//Return scope for edit inside dot expression = currently reused
 			if (context.eContainer instanceof Link) {
 				val curr = EcoreUtil2.getContainerOfType(context, Link)
 				return Scopes.scopeFor(newArrayList(curr.isReuseOf).toList)
@@ -138,9 +138,8 @@ class DslScopeProvider extends AbstractDslScopeProvider {
  		else if (context instanceof DotExpression) {
 			val head = context.ref
 		 	switch (head) {
-		 		//FIRST ITERATION ON DOT - JUST RETURN CONTENTS OF REUSED
+		 		//Iteration on dot - just return contents of reused
             	ReUsableRef : {
-            		val iii = head.reuseable.eContents.toList
             	Scopes::scopeFor(head.reuseable.eContents, URDFQualifiedNameProvider 
                 					, IScope::NULLSCOPE)
                 }		               					
@@ -160,7 +159,7 @@ class DslScopeProvider extends AbstractDslScopeProvider {
         	}   
  		}
 		
-		//IF NO CUSTOM RULE APPLIES - DELEGATE TO DEFAULT IMPL....
+		//if no custom rule applies - delegate to default scope impl....
 		else super.getScope(context, reference)
 
 	}

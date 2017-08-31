@@ -1,5 +1,8 @@
 package org.xtext.urdf.validation;
 
+// Base implementation credits to https://github.com/vivin/GenericTree 
+// Added utility methods to fit purpose in this context
+
 
 import java.util.*;
 
