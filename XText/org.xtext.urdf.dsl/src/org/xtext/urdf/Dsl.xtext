@@ -12,12 +12,11 @@ import "http://www.itu.dk/uRDF"
  * TODO: Add reflect as alternative in relevant places...
  * TODO: Create ValueConverter to convert scale values to Box?
  * DONE: Add reuse grammar with reference to reused Link/Joint (eg. dot_expr example from christian)
- * DONE: Topology of Link and Joint: How to specify?
- * DONE: Create Constants datatype - signed numeric or string (incl concatenation with String)
+ * DONE: Add Topology for Link and Joint
  * DONE: Change interface to abstract class in metamodel
  * DONE: ReUse - add reference in the metamodel
- * DONE: Origin required should possibly be adjusted in metamodel?
- * DONE: Scientific notation - how to implement?
+ * DONE: Origin required should be adjusted in metamodel
+ * DONE: Scientific notation implemented as type?
  * DONE: Origin xyz/rpy values + axis values - vector and single defs. Kill one of the definitions?
  * DONE: Origin values should be ('-')? INT or FLOAT or SCIENTIFIC - get SIGNED_NUMERIC class from metamodel...
  */
@@ -62,7 +61,7 @@ AssignReUseAbleInclAttr returns ReUseAble:
 Link:
 	{Link} 'Link' name=ID
 	('def' (inertial=Inertial | visual+=Visual | collision+=Collision)+	 
-		| 'reuse' isReuseOf=[Link] (->reuse+=Reuse)*
+		| 'reuse' isReuseOf=[Link] (reuse+=Reuse)*
 	)?
 ;
 
@@ -130,7 +129,7 @@ Inertia:
 Visual:
 	{Visual} 'Visual' (name=ID)? 
 	'Geometry' geometry=Geometry
-	(origin=Origin | 'Material' material=Material)* //problem: Kan ikke definere material uden origin pt
+	(origin=Origin | 'Material' material=Material)* 
 	
 ;
 
@@ -158,7 +157,6 @@ Geometry:
 	
 ;
 
-//Tjek spec: order listing of dimensions?
 Box:
 	'Box' (name=ID)?
 	'height' height=URDFAttrNumeric 
@@ -210,11 +208,11 @@ Joint:
 			 'ParentOf' parentOf=[Link] 
 			 'Type' type=JointType
 			 ( origin=Origin | axis=Axis | limit=Limit | calibration=Calibration | dynamics=Dynamics | safetycontroller=SafetyController)* | 
-	 //HOW TO REUSE: CHANGE PARENT AND CHILD LINKS??
+	
 	 'reuse' isReuseOf=[Joint] 
 	 	'ChildOf' childOf=[Link] 
 		'ParentOf' parentOf=[Link] 
-	 	(->reuse+=Reuse)*
+	 	(reuse+=Reuse)*
 	 
 	)
 ;
@@ -223,7 +221,9 @@ enum JointType:
 		fixed = 'fixed' |revolute = 'revolute' |  prismatic = 'prismatic' | continuous = 'continuous'
 ;
 
-/* Binary values must be 0 or 1 - digitsum must be 1, WHY NEED TO DEFINE ALL THREE?? */
+/* Binary values must be 0 or 1 - digitsum must be 1, 
+ * No need to define all tree - can be fixed if we have time
+ */
 //keyword aliases: 'xyz' or 'x', 'y', 'z'
 Axis:
 	'Axis' (name=ID)?
